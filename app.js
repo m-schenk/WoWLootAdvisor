@@ -1,36 +1,51 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const path = require('path');
+var createError = require('http-errors');
+var express = require('express');
+var path = require('path');
+var cookieParser = require('cookie-parser');
+var logger = require('morgan');
+const mongoose = require('mongoose');
 
+var indexRouter = require('./routes/index');
+var usersRouter = require('./routes/users');
+let itemsRouter = require('./routes/items');
 
-const app = express();
-const port = process.env.PORT || "8000";
+var app = express();
+var cors = require('cors');
 
+if (process.env.NODE_ENV === 'development') {
+    
+    app.use(cors());
+}
+console.log(process.env.NODE_ENV);
 
-app.set('view engine', 'ejs');
+// view engine setup
 app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'react');
 
-
-const adminRoutes = require('./routes/admin');
-
-
-
+app.use(logger('dev'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(bodyParser.urlencoded({ extended: false }));
 
-app.use('/', (req, res, next) => {
-    console.log('root');
-    next();
+app.use('/', indexRouter);
+app.use('/users', cors(), usersRouter);
+app.use('/items', cors(), itemsRouter);
+
+// catch 404 and forward to error handler
+app.use(function(req, res, next) {
+  next(createError(404));
 });
 
-app.use(adminRoutes);
+// error handler
+app.use(function(err, req, res, next) {
+  // set locals, only providing error in development
+  res.locals.message = err.message;
+  res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-
-
-
-app.listen(port, () => {
-  console.log('Listening to requests on http://localhost:${port}');
+  // render the error page
+  res.status(err.status || 500);
+  res.render('error');
 });
 
-
-
+module.exports = app;

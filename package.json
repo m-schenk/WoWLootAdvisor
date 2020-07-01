@@ -1,29 +1,18 @@
 {
-  "name": "wowlootadvisor",
-  "version": "1.0.0",
-  "description": "WoWLootAdvisor - A WoW Lootconcil Helper, measures/tracks Raidattendance, Performance and Lootdistribution. Acknowledges/includes wishlists from the players.",
-  "main": "index.js",
+  "name": "express-react",
+  "version": "0.0.0",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js",
-    "start-server": "nodemon app.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/m-schenk/WoWLootAdvisor.git"
-  },
-  "author": "",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/m-schenk/WoWLootAdvisor/issues"
-  },
-  "homepage": "https://github.com/m-schenk/WoWLootAdvisor#readme",
-  "devDependencies": {
-    "nodemon": "^2.0.4"
+    "start": "node ./bin/www",
+    "dev": "concurrently \"SET NODE_ENV=development && SET PORT=3000 && nodemon\" \"cd react-spa && SET PORT=3001 && yarn start\""
   },
   "dependencies": {
-    "body-parser": "^1.19.0",
-    "ejs": "^3.1.3",
-    "express": "^4.17.1"
+    "cookie-parser": "~1.4.4",
+    "cors": "^2.8.5",
+    "debug": "~2.6.9",
+    "express": "~4.16.1",
+    "http-errors": "~1.6.3",
+    "mongoose": "^5.9.20",
+    "morgan": "~1.9.1"
   }
 }
