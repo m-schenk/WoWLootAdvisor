@@ -1,8 +1,6 @@
 const mongoose = require('mongoose');
 
-const Schema = mongoose.Schema;
-
-const WishlistSchema = new Schema({
+const WishlistSchema = new mongoose.Schema({
     bracket1: [{type: Number, required: true, validate: {
         validator: bracketLimitChecker(v),
         message: props => `${props.value} is not a valid bracket 1!`
@@ -19,7 +17,7 @@ const WishlistSchema = new Schema({
         validator: bracketLimitChecker(v),
         message: props => `${props.value} is not a valid bracket 4!` 
     } }],
-    bracketless: [{type: Number, required: true}]
+    bracketless: [{type: Number, required: true}],
 });
 
 function bracketLimitChecker(v) {
