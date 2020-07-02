@@ -1,9 +1,12 @@
+const mongoDb = require('./private/mongoDbUri');
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
 var logger = require('morgan');
 const mongoose = require('mongoose');
+
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -47,5 +50,10 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+mongoose.set('useUnifiedTopology', true);
+mongoose.set('useNewUrlParser', true);
+
+mongoose.connect(mongoDb.getURI());
 
 module.exports = app;
