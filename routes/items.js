@@ -22,23 +22,23 @@ router.get('', function(req, res, next) {
 router.get('/test', function(req, res, next) {
     const item = new Item({
 
-        id: 123,
-        name: 'name',
-        itemType: 'sword',
-        itemCategory: 'limited',
-        raid: 'aq30',
-        encounters: ['wserghiou'],
-        sdfghjk: 'lalala',
+        id: 12345,
+        name: 'Blade of Abortion',
+        itemType: 'Pole',
+        itemCategory: 'Limited',
+        raid: 'AQ40',
+        encounters: ['Boss1', 'Trash1', 'Trash2'],
         priority: [
-            {classes: ['serghuil']}
+            {classes: ['Mage', 'Warlock']},
+            {classes: ['Warrior', 'Paladin']}
         ],
 
     })
 
     item.save()
-    .then(result => {
+    .then(item => {
         console.log('Object saved');
-        res.status(200);
+        res.status(200).json({message: 'success', item: item});
     })
     .catch(err => {
         const error = new Error(err);
@@ -46,6 +46,8 @@ router.get('/test', function(req, res, next) {
         return next(error);
       });
 });
+
+
 
 
 
