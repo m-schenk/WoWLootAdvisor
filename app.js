@@ -14,6 +14,8 @@ let itemsRouter = require('./routes/items');
 
 var app = express();
 var cors = require('cors');
+const { Server } = require('http');
+const { exit } = require('process');
 
 if (process.env.NODE_ENV === 'development') {
     
@@ -35,6 +37,13 @@ app.use('/', indexRouter);
 app.use('/users', cors(), usersRouter);
 app.use('/items', cors(), itemsRouter);
 
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*'); //the wildcard stands for the domain which should be allowed to access the API
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE') //define allowed operations
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization') //this allows to set the content type in client side javascript -> necessary because content-type needs to be set to json, in order to properly communicate with the API
+  next();
+});
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
@@ -54,6 +63,14 @@ app.use(function(err, req, res, next) {
 mongoose.set('useUnifiedTopology', true);
 mongoose.set('useNewUrlParser', true);
 
-mongoose.connect(mongoDb.getURI());
+mongoose.connect(mongoDb.getURI())
+.then(result => {
+  console.log('successfully connected to db!');
+})
+.catch(err => {
+  console.log(err);
+  process.exit(0);
+})
+
 
 module.exports = app;
