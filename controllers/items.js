@@ -1,0 +1,91 @@
+const Item = require('../models/Item');
+
+const mongoose = require('mongoose');
+
+exports.getMockData = (req, res, next) => {
+    const item = new Item({
+
+        id: 12345,
+        name: 'Blade of Abortion',
+        itemType: 'Pole',
+        itemCategory: 'Limited',
+        raid: 'AQ40',
+        encounters: ['Boss1', 'Trash1', 'Trash2'],
+        priority: [
+            {classes: ['Mage', 'Warlock']},
+            {classes: ['Warrior', 'Paladin']}
+        ],
+
+    })
+
+    item.save()
+    .then(item => {
+        console.log('Object saved');
+        res.status(200).json({message: 'success', item: item});
+    })
+    .catch(err => {
+        const error = new Error(err);
+        error.httpStatusCode = 500;
+        return next(error);
+      });
+}
+
+exports.modify = (req, res, next) => {
+
+    const item = req.body;
+
+    console.log(item);
+    
+    if (item.itemCategory) {
+
+        Item.update({id: req.body.id}, {
+            $set: {
+                itemCategory: req.body.itemCategory
+            }
+        })
+        .then(item => {
+            res.status(201).json({
+                message: 'new category has been set',
+                value: req.body.itemCategory
+            });
+        })
+        .catch(err => {
+            const error = new Error(err);
+            error.httpStatusCode = 500;
+            return next(error);
+        });
+    }
+
+    if (item.priority) {
+        Item.update({id: req.body.id}, {
+            $set: {
+                priority: req.body.priority
+            }
+        })
+        .then(item => {
+            res.status(201).json({
+                message: 'new priority has been set',
+                value: req.body.itemCategory
+            });
+        })
+        .catch(err => {
+            const error = new Error(err);
+            error.httpStatusCode = 500;
+            return next(error);
+        });
+    }
+}
+
+exports.getQuery = (req, res, next) => {
+
+    query = req.query.query;
+
+    Item.find({$text: { $search: query }})
+    .then(item => {
+        console.log(item);
+        
+    })
+
+
+}
+

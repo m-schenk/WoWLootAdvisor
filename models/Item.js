@@ -8,7 +8,8 @@ const ItemSchema = new mongoose.Schema({
     raid: { type: String, required: true },
     encounters: [{ type: String, required: true }],
     priority: [{
-        classes: [{ type: String, require: true}],
+        _id : false,
+        classes: [{ type: String, require: true }],
     }],
 });
 
