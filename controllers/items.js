@@ -1,7 +1,5 @@
 const Item = require('../models/Item');
 
-const mongoose = require('mongoose');
-
 exports.getMockData = (req, res, next) => {
     const item = new Item({
 
@@ -78,14 +76,21 @@ exports.modify = (req, res, next) => {
 
 exports.getQuery = (req, res, next) => {
 
-    query = req.query.query;
-
-    Item.find({$text: { $search: query }})
+    let query = req.query.query;
+    let regex = new RegExp(query, "i");
+    
+    Item.find({name: regex})
+    .sort({ name: 1})
+    .limit(25)
     .then(item => {
-        console.log(item);
-        
+        res.status(200).json({
+            results: item,
+            statusText: "OK"
+        })
     })
-
-
+    .catch(err => {
+        const error = new Error(err);
+        error.httpStatusCode = 500;
+        return next(error);
+    });
 }
-
