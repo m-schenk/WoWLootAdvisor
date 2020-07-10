@@ -11,6 +11,7 @@ const ItemSchema = new mongoose.Schema({
         _id : false,
         classes: [{ type: String, require: true }],
     }],
+    deName: [{ type: String, required: true }]
 });
 
 module.exports = mongoose.model('Item', ItemSchema);

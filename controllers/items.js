@@ -78,6 +78,7 @@ exports.getQuery = (req, res, next) => {
 
     let query = req.query.query;
     let regex = new RegExp(query, "i");
+
     
     Item.find({name: regex})
     .sort({ name: 1})
