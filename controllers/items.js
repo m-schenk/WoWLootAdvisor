@@ -81,7 +81,7 @@ exports.getQuery = (req, res, next) => {
     
     Item.find({name: regex})
     .sort({ name: 1})
-    .limit(25)
+    .limit(16)
     .then(item => {
         res.status(200).json({
             results: item,

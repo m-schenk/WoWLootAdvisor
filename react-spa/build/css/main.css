@@ -1,0 +1,11 @@
+body {
+    background-color: #303136;
+    color: white;
+}
+#root {
+    background-color: inherit;
+}
+
+.title {
+    padding: 20px;
+}

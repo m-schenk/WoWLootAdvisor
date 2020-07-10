@@ -1,0 +1,34 @@
+import React from 'react';
+import Navbar from 'react-bootstrap/navbar';
+import NavbarBrand from 'react-bootstrap/navbarbrand';
+import Container from 'react-bootstrap/Container'
+
+export default class Footer extends React.Component {
+    render() {
+        return(
+            <Navbar bg="dark" variant="dark" expand="lg">
+                <Container>
+                    <NavbarBrand>
+                        <h5 className="midText">disclaimer - &copy; 2020 RäGä Eww...</h5>
+                    </NavbarBrand>   
+                    <p className="smallText">&copy; 2004 Blizzard Entertainment, Inc. All rights reserved. 
+                    World of Warcraft, Warcraft and Blizzard Entertainment are 
+                    trademarks or registered trademarks of Blizzard Entertainment, 
+                    Inc. in the U.S. and/or other countries.</p>
+                </Container>
+            </Navbar>
+        )
+    }
+}
+
+/*
+
+
+                        <footer>
+                <h5 className="midText">disclaimer - &copy; 2020 RäGä Eww...</h5>
+                <p className="smallText">&copy; 2004 Blizzard Entertainment, Inc. All rights reserved. 
+                World of Warcraft, Warcraft and Blizzard Entertainment are 
+                trademarks or registered trademarks of Blizzard Entertainment, 
+                Inc. in the U.S. and/or other countries.</p>
+            </footer>
+            */
