@@ -1,6 +1,6 @@
 import React from 'react';
 import { Droppable } from 'react-beautiful-dnd';
-import Item from './item';
+import Item from './Item';
 import { connect } from '../overmind';
 
 class ItemListContainer extends React.Component {

@@ -1,5 +1,5 @@
 import React from 'react';
-import ItemListContainer from './itemListContainer';
+import ItemListContainer from './ItemListContainer';
 import Spinner from 'react-bootstrap/Spinner'
 import Form from 'react-bootstrap/Form'
 import { connect } from '../overmind';
