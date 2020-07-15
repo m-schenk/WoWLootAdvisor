@@ -2,9 +2,9 @@ import React from 'react';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import LiveSearch from './LiveSearch';
+import ItemLiveSearch from './ItemLiveSearch';
+import Wishlist from './Wishlist';
 import { DragDropContext } from 'react-beautiful-dnd/';
-import './userContentCSS.css';
 
 export default class UserContent extends React.Component {
     state = {
@@ -82,14 +82,14 @@ export default class UserContent extends React.Component {
 
     render() {
         return(
-            <Container fluid bsPrefix="darkTheme">
+            <Container>
                 <DragDropContext onDragEnd={this.onDragEnd}>
-                    <Row>
-                        <Col sm={8}>
-                            Wishlist
+                    <Row className="row-centered">
+                        <Col className="col-centered" sm={7}>
+                            <Wishlist />
                         </Col>
-                        <Col sm={4}>
-                            <LiveSearch id={this.state.containers['container-1'].id} />
+                        <Col className="col-centered" sm={5}>
+                            <ItemLiveSearch id={this.state.containers['container-1'].id} />
                         </Col>
                     </Row>
                 </DragDropContext>

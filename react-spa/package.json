@@ -11,6 +11,8 @@
     "axios": "^0.19.2",
     "bootstrap": "^4.5.0",
     "lodash.debounce": "^4.0.8",
+    "overmind": "^24.1.1",
+    "overmind-react": "^25.1.1",
     "react": "^16.13.1",
     "react-beautiful-dnd": "^13.0.0",
     "react-bootstrap": "^1.0.1",

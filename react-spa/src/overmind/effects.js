@@ -2,10 +2,10 @@ import axios from 'axios';
 
 const cache = {};
 
-const makeRequestCreator = () => {
-    let cancel;
+export const api = {
+    async searchItems(query) {
+        let cancel;
 
-    return async query => {
         //check if there is currently an open request
         if(cancel) {
             //cancels perv. request
@@ -20,9 +20,10 @@ const makeRequestCreator = () => {
             //create a new token
             cancel = axios.CancelToken.source();
             //send request with cancelToken
-            const response = await axios(query, {cancelToken: cancel.token}); 
+            const response = await axios('http://localhost:3000/items?query='+query, {cancelToken: cancel.token});
+            console.log('http://localhost:3000/items?query='+query)
             const result = await response.data.results;
-
+            console.log(result)
             //store query for caching
             cache[query] = result;
 
@@ -36,7 +37,5 @@ const makeRequestCreator = () => {
                 console.log('Something went bad: ', error.message);
             }
         }
-    };
+    }
 };
-
-export const search = makeRequestCreator();
