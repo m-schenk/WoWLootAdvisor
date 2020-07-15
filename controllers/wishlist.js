@@ -21,10 +21,11 @@ exports.saveWishlist = (req, res, next) => {
         bracket2: req.body.bracket2,
         bracket3: req.body.bracket3
     })
-
+    //console.log('hwefwef');
+    
     wishlist.save()
     .then(wishlist => {
-        console.log(wishlist);
+        //console.log(wishlist);
         console.log('wishlist has been saved');
         res.status(201).json({ message: 'wishlist has been saved' });
     })

@@ -23,3 +23,18 @@ exports.addPlayer = (req, res, next) => {
         return next(error);
     });
 }
+
+
+exports.getPlayerById = (req, res, next) => {
+    const playerId = req.params.id;
+
+    console.log('id', playerId);
+    
+
+    Player.findOne({ id: playerId })
+    .then(player => {
+        console.log(player);
+        
+        res.status(200).json({ player: player });
+    })
+}

@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
 const WishlistSchema = new mongoose.Schema({
+    locked: { type: Boolean },
     bracket1: [{
         type: Number,
         required: true
@@ -10,6 +11,14 @@ const WishlistSchema = new mongoose.Schema({
         required: true
     }],
     bracket3: [{
+        type: Number,
+        required: true
+    }],
+    bracket4: [{
+        type: Number,
+        required: true
+    }],
+    bracketLess: [{
         type: Number,
         required: true
     }]
