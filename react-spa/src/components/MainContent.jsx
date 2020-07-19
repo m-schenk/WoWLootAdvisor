@@ -5,79 +5,13 @@ import Col from 'react-bootstrap/Col';
 import ItemLiveSearch from './ItemLiveSearch';
 import Wishlist from './Wishlist';
 import { DragDropContext } from 'react-beautiful-dnd/';
+import { connect } from '../overmind';
 
-export default class UserContent extends React.Component {
-    state = {
-        containers: {
-            'container-1': {
-                id: 'container-1',
-                itemIds: [],
-            },
-            'wishlist': {
-                id: 'wishlist',
-                itemIds: [],
-            }
-        },
-        containerOrder: ['container-1', 'wishlist']
-    };
-
-    addItemToContainers = ({containerId, itemId}) => {
-        const container = this.state.containers[containerId];
-        const itemIds = container.itemIds;
-        const newContainer = {
-            ...container,
-            itemIds: itemIds.push(itemId),
-        };
-
-        const newState = {
-            ...this.state,
-            containers: {
-                ...this.state.containers,
-                [newContainer.id]: newContainer,
-            },
-        };
-        this.setState(newState);
-    }
-    
+class MainContent extends React.Component {
 
     onDragEnd = result => {
         console.log("this was called")
-        const { destination, source, draggableId } = result;
-
-        console.log(destination)
-        console.log(source)
-        console.log(draggableId)
-
-        if(!destination) {
-            return;
-        }
-
-        if(
-            destination.droppableId === source.droppableId &&
-            destination.index === source.index
-        ) {
-            return;
-        }
-
-        const container = this.state.containers[source.droppableId];
-        const newItemIds = Array.from(container.itemIds);
-        newItemIds.splice(source.index, 1);
-        newItemIds.splice(destination.index, 0, draggableId);
-
-        const newContainer = {
-            ...container,
-            itemIds: newItemIds,
-        };
-
-        const newState = {
-            ...this.state,
-            containers: {
-                ...this.state.containers,
-                [newContainer.id]: newContainer,
-            },
-        };
-
-        this.setState(newState);
+        this.props.overmind.actions.dragHandler(result);
     };
 
     render() {
@@ -89,7 +23,7 @@ export default class UserContent extends React.Component {
                             <Wishlist />
                         </Col>
                         <Col className="col-centered" sm={5}>
-                            <ItemLiveSearch id={this.state.containers['container-1'].id} />
+                            <ItemLiveSearch id={this.props.overmind.state.liveSearch['id']} />
                         </Col>
                     </Row>
                 </DragDropContext>
@@ -97,3 +31,5 @@ export default class UserContent extends React.Component {
         )
     }
 }
+
+export default connect(MainContent);

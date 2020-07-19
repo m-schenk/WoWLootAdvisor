@@ -10,44 +10,129 @@ export const state = {
         wishlist: null,
     },
     wishlist: {
-        locked: false,
+        'locked': false,
         'bracket-1': {
-            'slot-1': null,
-            'slot-2': null,
-            'slot-3': null,
-            'slot-4': null,
-            'slot-5': null,
-            'slot-6': null,
+            'slot-1': {
+                id: '1-1',
+                item: null,
+            },
+            'slot-2': {
+                id: '1-2',
+                item: null,
+            },
+            'slot-3': {
+                id: '1-3',
+                item: null,
+            },
+            'slot-4': {
+                id: '1-4',
+                item: null,
+            },
+            'slot-5': {
+                id: '1-5',
+                item: null,
+            },
+            'slot-6': {
+                id: '1-6',
+                item: null,
+            },
+            'points': 3,
+            'prio-start': 50,
         },
         'bracket-2': {
-            'slot-1': null,
-            'slot-2': null,
-            'slot-3': null,
-            'slot-4': null,
-            'slot-5': null,
-            'slot-6': null,
+            'slot-1': {
+                id: '2-1',
+                item: null,
+            },
+            'slot-2': {
+                id: '2-2',
+                item: null,
+            },
+            'slot-3': {
+                id: '2-3',
+                item: null,
+            },
+            'slot-4': {
+                id: '2-4',
+                item: null,
+            },
+            'slot-5': {
+                id: '2-5',
+                item: null,
+            },
+            'slot-6': {
+                id: '2-6',
+                item: null,
+            },
+            'points': 3,
+            'prio-start': 47,
         },
         'bracket-3': {
-            'slot-1': null,
-            'slot-2': null,
-            'slot-3': null,
-            'slot-4': null,
-            'slot-5': null,
-            'slot-6': null,
+            'slot-1': {
+                id: '3-1',
+                item: null,
+            },
+            'slot-2': {
+                id: '3-2',
+                item: null,
+            },
+            'slot-3': {
+                id: '3-3',
+                item: null,
+            },
+            'slot-4': {
+                id: '3-4',
+                item: null,
+            },
+            'slot-5': {
+                id: '3-5',
+                item: null,
+            },
+            'slot-6': {
+                id: '3-6',
+                item: null,
+            },
+            'points': 3,
+            'prio-start': 44,
         },
         'bracket-4': {
-            'slot-1': null,
-            'slot-2': null,
-            'slot-3': null,
-            'slot-4': null,
-            'slot-5': null,
-            'slot-6': null,
+            'slot-1': {
+                id: '4-1',
+                item: null,
+            },
+            'slot-2': {
+                id: '4-2',
+                item: null,
+            },
+            'slot-3': {
+                id: '4-3',
+                item: null,
+            },
+            'slot-4': {
+                id: '4-4',
+                item: null,
+            },
+            'slot-5': {
+                id: '4-5',
+                item: null,
+            },
+            'slot-6': {
+                id: '4-6',
+                item: null,
+            },
+            'points': 3,
+            'prio-start': 41,
         },
         'bracketless': {
             'slots': [],
+            'points': Infinity,
+            'prio-start': 38,
         },
     },
-    itemSearchResult: {},
-    query: '',
-    isSearchingItems: false,
+    liveSearch: {
+        'id': 'live-search-id',
+        'result': {},
+        'query': '',
+        'isSearching': false,
+    },
 }
