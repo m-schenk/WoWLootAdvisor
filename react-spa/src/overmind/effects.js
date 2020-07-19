@@ -21,9 +21,8 @@ export const api = {
             cancel = axios.CancelToken.source();
             //send request with cancelToken
             const response = await axios('http://localhost:3000/items?query='+query, {cancelToken: cancel.token});
-            console.log('http://localhost:3000/items?query='+query)
             const result = await response.data.results;
-            console.log(result)
+
             //store query for caching
             cache[query] = result;
 
@@ -32,9 +31,9 @@ export const api = {
 
         } catch(error) {
             if(axios.isCancel(error)) {
-                console.log('Request cancelled', error.message);
+                console.error('Request cancelled', error.message);
             } else {
-                console.log('Something went bad: ', error.message);
+                console.error('Something went bad: ', error.message);
             }
         }
     }

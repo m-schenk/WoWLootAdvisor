@@ -20,15 +20,3 @@ export default class Footer extends React.Component {
         )
     }
 }
-
-/*
-
-
-                        <footer>
-                <h5 className="midText">disclaimer - &copy; 2020 RäGä Eww...</h5>
-                <p className="smallText">&copy; 2004 Blizzard Entertainment, Inc. All rights reserved. 
-                World of Warcraft, Warcraft and Blizzard Entertainment are 
-                trademarks or registered trademarks of Blizzard Entertainment, 
-                Inc. in the U.S. and/or other countries.</p>
-            </footer>
-            */
