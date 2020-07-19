@@ -95,3 +95,15 @@ exports.getQuery = (req, res, next) => {
         return next(error);
     });
 }
+
+exports.getItemById = (req, res, next) => {
+
+    const itemId = req.params.id;
+
+    Item.findOne({ id: itemId })
+    .then(item => {
+        //console.log(item);
+        
+        res.status(200).json({ item: item });
+    })
+}
