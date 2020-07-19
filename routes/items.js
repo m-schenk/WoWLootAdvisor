@@ -9,7 +9,7 @@ router.get('/test', itemsController.getMockData);
 
 router.put('/modifyItem', itemsController.modify);
 
-
+router.get('/id::id', itemsController.getItemById);
 
 
 

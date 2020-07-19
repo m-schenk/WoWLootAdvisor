@@ -7,7 +7,7 @@ exports.saveWishlist = (req, res, next) => {
 
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-        console.log(errors.array());
+        console.log('ERRORS ARRAY', errors.array());
         return res.status(406).json({ message: errors});
     }
     //const wishlist = new Wishlist({
@@ -25,6 +25,7 @@ exports.saveWishlist = (req, res, next) => {
     
     wishlist.save()
     .then(wishlist => {
+
         //console.log(wishlist);
         console.log('wishlist has been saved');
         res.status(201).json({ message: 'wishlist has been saved' });

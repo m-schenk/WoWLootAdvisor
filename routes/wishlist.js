@@ -9,53 +9,100 @@ const router = express.Router();
 router.post('/save', [
     body()
     .custom((value, { req }) => {
-        let result = isDuplicate(req.body.bracket1);
 
-        //console.log('result:', result);
-        
-        if (result == true) {
-            console.log('true');
-        } else {
-            console.log('false');
-        }
-        
-        Item.findOne({ id: 21608 })
-        .then(item => {
-            //console.log('say someting', item);
-        })
-        
-        
-        return false;
-    })
-
-
-
-  
+            const p = Promise.all([
+                checkBracket(value.bracket1),
+                checkBracket(value.bracket2),
+                checkBracket(value.bracket3),
+                checkBracket(value.bracket4),
+                checkBracket(value.bracketLess)
+            ])
     
+            return p.then(result => {
+                console.log(result);
+    
+            })
+        
+
+        
+    })
 ], wishlistController.saveWishlist);
 
 
 module.exports = router;
 
 
-function isDuplicate(bracket) {
 
-    
-    
-    Item.find({ id: { $in: bracket } })
-    .then(items => {
-        items.forEach(element => {
-            for (let i = 0; i < items.length; i++) {
-                for (let j = 0; j < i; j++) {
-                    if (items[i] == items[j]) {
-                        return false;
-                    } 
-                    return true;
+
+
+function checkBracket(bracket) {  
+
+    return new Promise((resolve, reject) => {
+        
+        Item.find({
+            'id': { $in: [
+                bracket[0],
+                bracket[1],
+                bracket[2],
+                bracket[3],
+                bracket[4],
+                bracket[5],
+                bracket[6]
+            ]}
+        })
+        .then(result => {
+            //console.log('bracket result', result);
+
+            if (result === undefined || result.length == 0) {
+                reject('No items were added to at least one bracket')                
+            }
+
+                
+            let allocationPoints = 0;   // should not exceed 3
+            let itemSlots = 0;          // should not exceed 2
+            let occupiedSlots = 0;      // should not exceed 6
+
+            for (i = 0; i < result.length; i ++) {
+                for (j = 0; j < i; j++) {
+                    if (i == j) continue;
+                    if (result[i].itemType == result[j].itemType) {
+                        //console.log(result[i].itemType, '==', result[j].itemType);
+                            reject('Bracket has duplicate item types');
+                    }
+                }
+                
+                if (result[i].itemCategory == 'Reserved' || result[i].itemCategory == 'Limited') {
+                    allocationPoints++;
+                    if (result[i].itemCategory == 'Reserved') {
+                        itemSlots++;
+                        if (itemSlots > 2) {
+                            reject('Maximum amount of reserved items(2) exceeded');
+                        }
+                    }
+                    if (allocationPoints > 3) {
+                        reject('Maximum allocation points(3) exceeded');
+                    }
+                }
+                if (occupiedSlots > 6) {
+                    reject('Maximum item slots(6) exceeded')
+                }
+                if (result[i].id == 23548 || result[i].id == 23545 || result[i].id == 22726) {
+                    reject('Might of the Scourge, Power of the Storm and Splinter of Atiesh are forbidden items');
                 }
             }
-        });
+            
+            
+            resolve('Wishlist is valid!');
+        })
+        .catch(err => {
+            console.log(err);
+        })
     })
 }
+
+
+
+
 
 // dont allow 3 items at the very bottom
 
