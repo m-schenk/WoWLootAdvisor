@@ -10,11 +10,11 @@ export default class UserNavbar extends React.Component {
             <Navbar sticky="top" bg="dark" variant="dark" expand="lg">
                 <Image src={require("./assets/logo128x64.png")} />
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <Navbar.Brand href="#profil">$playername</Navbar.Brand>
+                <Navbar.Brand href="#profile">$playername</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="mr-auto">
-                    <Nav.Link href="#profil">Profil</Nav.Link>
+                    <Nav.Link href="#profil">Profile</Nav.Link>
                     <Nav.Link href="#wishlist">Wishlist</Nav.Link>
                     <NavDropdown title="Council" id="basic-nav-dropdown">
                         <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>

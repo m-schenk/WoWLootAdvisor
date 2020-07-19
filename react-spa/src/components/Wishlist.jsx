@@ -10,7 +10,7 @@ const ItemContainerDrop = styled.div`
     margin: unset;
     background-color: #d9d9d9;
     width: 300px;
-    height: 32px;
+    height: 36px;
     box-shadow: 2px 2px 4px 0px rgba(25,25,25,1);
     vertical-align: middle;
 `;
@@ -18,21 +18,26 @@ const ItemContainerDrop = styled.div`
 const ItemContainer = styled.div`
     display: flex;
     font-weight: bold;
-    border: 1px solid #3d3d3d; /*;*/
+    border: 1px solid #3d3d3d;
     border-radius: 4px;
     padding: 4px;
-    margin-bottom: 6px;
+    margin: unset;
     background-color: ${props => (props.isDragging ? '#50505f' : '#262626')}; /*262626*/
     box-shadow: 2px 2px 4px 0px rgba(25,25,25,1);
+    height: 36px;
     width: 300px;
     justify-content: space-between;
 `;
 
-//{ this.renderBracket('bracketless', hunter)}
+//
 
 const BASE_URL = "https://classic.wowhead.com/item=";
 
 class Wishlist extends React.Component {
+
+    shouldComponentUpdate(nextProps) {
+        return this.props.overmind !== nextProps.overmind
+    }
 
     componentDidUpdate() {
         window.$WowheadPower.refreshLinks();
@@ -49,6 +54,7 @@ class Wishlist extends React.Component {
                     {this.renderBracket('bracket-2', hunter)}
                     {this.renderBracket('bracket-3', hunter)}
                     {this.renderBracket('bracket-4', hunter)}
+                    {this.renderBracket('bracketless', hunter)}
                 </>
             )
             
@@ -163,11 +169,3 @@ class Wishlist extends React.Component {
 }
 
 export default connect(Wishlist);
-
-
-{/*                                     { Object.keys(this.props.overmind.state.liveSearch['result']).map((objectId, index) => {
-
-                                    { if(this.props.overmind.state.wishlist[bracketId]['slot-'+(r+1)] !== null) {
-                                        <Item></Item>
-                                    }
-                                    } */}

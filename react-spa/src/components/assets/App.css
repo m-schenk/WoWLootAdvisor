@@ -162,6 +162,10 @@ td.styled-table:first-child, th.styled-table:first-child {
      border-left: none;
 }
 
+td {
+    padding: 12px;
+}
+
 tbody {
     border: none;
     padding: none;

@@ -13,7 +13,11 @@ class ItemListContainer extends React.Component {
                 {provided => (
                     <div ref={provided.innerRef} {...provided.droppableProps}>
                         { Object.keys(this.props.overmind.state.liveSearch['result']).map((objectId, index) => {
-                                return (<Item objectId={objectId} key={this.props.overmind.state.liveSearch['result'][objectId].id} index={index}/>)
+                                if(index > 15) {
+                                    
+                                } else {
+                                    return (<Item objectId={objectId} key={this.props.overmind.state.liveSearch['result'][objectId].id} index={index}/>)
+                                } 
                             })
                         }
                         {provided.placeholder}

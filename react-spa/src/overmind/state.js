@@ -124,7 +124,30 @@ export const state = {
             'prio-start': 41,
         },
         'bracketless': {
-            'slots': [],
+            'slot-1': {
+                id: '5-1',
+                item: null,
+            },
+            'slot-2': {
+                id: '5-2',
+                item: null,
+            },
+            'slot-3': {
+                id: '5-3',
+                item: null,
+            },
+            'slot-4': {
+                id: '5-4',
+                item: null,
+            },
+            'slot-5': {
+                id: '5-5',
+                item: null,
+            },
+            'slot-6': {
+                id: '5-6',
+                item: null,
+            },
             'points': Infinity,
             'prio-start': 38,
         },
