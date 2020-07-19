@@ -1,26 +1,22 @@
 import React from 'react';
-import UserApp from './apps/UserApp.jsx';
 import '@atlaskit/css-reset';
-import './App.css';
+import Navbar from './Navbar';
+import MainContent from './MainContent';
+import Footer from  './Footer';
+import './assets/App.css';
+import { connect } from '../overmind'
 
-class App extends React.Component {
-    render() {
-        return (
-            <UserApp />
-        );
-    }
+const App = ({ overmind }) => {
+    return(
+        <div className="justify-content-center align-items-center" id="wrapper">
+            <div className="justify-content-center align-items-center" id="header"><Navbar /></div>
+            <div className="justify-content-center align-items-center" id="main-content"><MainContent /></div>
+            <div className="justify-content-center align-items-center" id="footer"><Footer /></div>
+        </div>
+    )
 }
 
-export default App;
-
-
-
-
-
-
-
-
-
+export default connect(App);
 
 /* import React, { Component } from 'react';
 import GetAllItems from './components/GetAllItems';

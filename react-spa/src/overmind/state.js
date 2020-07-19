@@ -1,0 +1,53 @@
+export const state = {
+    player: {
+        id: null,
+        name: null,
+        class: null,
+        race: null,
+        talent: null,
+        aq_attendance: null,
+        naxx_attendance: null,
+        wishlist: null,
+    },
+    wishlist: {
+        locked: false,
+        'bracket-1': {
+            'slot-1': null,
+            'slot-2': null,
+            'slot-3': null,
+            'slot-4': null,
+            'slot-5': null,
+            'slot-6': null,
+        },
+        'bracket-2': {
+            'slot-1': null,
+            'slot-2': null,
+            'slot-3': null,
+            'slot-4': null,
+            'slot-5': null,
+            'slot-6': null,
+        },
+        'bracket-3': {
+            'slot-1': null,
+            'slot-2': null,
+            'slot-3': null,
+            'slot-4': null,
+            'slot-5': null,
+            'slot-6': null,
+        },
+        'bracket-4': {
+            'slot-1': null,
+            'slot-2': null,
+            'slot-3': null,
+            'slot-4': null,
+            'slot-5': null,
+            'slot-6': null,
+        },
+        'bracketless': {
+            'slots': [],
+        },
+    },
+    itemSearchResult: {},
+    query: '',
+    isSearchingItems: false,
+}
