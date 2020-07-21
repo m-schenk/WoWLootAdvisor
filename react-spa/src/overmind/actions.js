@@ -13,33 +13,77 @@ export const searchItems = pipe(
     })
 )
 
-export const dragHandler = pipe( //just for now, will become an effect i guess later
+export const dragHandler = pipe( //just for now, will become an effect I guess.. later
     mutate(({ state }, result) => {
         const { destination, source, draggableId } = result;
 
-        if(!destination) {
+        //when destination null => draggable was not over any droppable, so we are done.
+        if( !destination ) {
             return;
         }
 
-        console.log(source)
-
-
-        if( source['droppableId'] === state.liveSearch['id'] ) {
-            //dragging from livesearch
-            console.log('from live search')
-            if( destination['droppableId'] === 'delete-zone') {
-                //to remove
-                console.log('to remove')
+        /* when destination 'delete-zone' => we have to remove the item by case, if it's from the 
+        live search we don't do anything, if it's from inside the wishlist we have to remove the 
+        item and check for allocation points */
+        if( destination['droppableId'] === 'delete-zone' ) {
+            if( source['droppableId'] === state.liveSearch['id'] ) {
+                return;
+            } else { //item is from wishlist
+                const [ sourceBracketId, sourceSlotId ] = source['droppableId'].split("_");
+                /* when the item to remove is reserved or limited, we need to give back one allocation point */
+                if( (state.wishlist[sourceBracketId][sourceSlotId].item.itemCategory === "Reserved") || 
+                    (state.wishlist[sourceBracketId][sourceSlotId].item.itemCategory === "Limited") ) {
+                    state.wishlist[sourceBracketId]['points']++;
+                }
+                state.wishlist[sourceBracketId][sourceSlotId].item = null;
                 return;
             }
-            //to wishlist
-            console.log('to wishlist')
-            const [ bracketId, slotId ] = destination['droppableId'].split("_")
-            const [, slotIdInt ] = slotId.split("-")
+        }
 
-            const stateItem = state.liveSearch.result[source.index]
+        //destination can only be wishlist from now, so we can savely use string split on destination to recieve bracketId and slotId
+        const [ destinationBracketId, destinationSlotId ] = destination['droppableId'].split("_");
+        const [, destinationSlotIdInt ] = destinationSlotId.split("-");
 
-            const item = {
+        //when dropping to back slot, checking if front slot is occupied by reserved item
+        if( (destinationSlotIdInt % 2 === 0) && 
+            (state.wishlist[destinationBracketId]['slot-'+(parseInt(destinationSlotIdInt)-1)].item !== null ) && 
+            (state.wishlist[destinationBracketId]['slot-'+(parseInt(destinationSlotIdInt)-1)].item.itemCategory === "Reserved") ) {
+            return;
+        }
+
+        let stateItem;
+        let [ sourceBracketId, sourceSlotId ] = [ null, null ];
+        let [, sourceSlotIdInt ] = [, null ];
+
+        //decide where the item is from live-search or wishlist, read item to stateItem
+        if( source['droppableId'] === state.liveSearch['id'] ) {
+            stateItem = state.liveSearch.result[source.index];
+        } else {
+            [ sourceBracketId, sourceSlotId ] = source['droppableId'].split("_");
+            [, sourceSlotIdInt ] = sourceSlotId.split("-");
+            stateItem = state.wishlist[sourceBracketId][sourceSlotId].item;
+        }
+
+        //clone source item from overmind state to memory
+        const sourceItem = {
+            id: stateItem.id,
+            name: stateItem.name,
+            itemType: stateItem.itemType,
+            itemCategory: stateItem.itemCategory,
+            raid: stateItem.raid,
+            encounters: stateItem.encounters,
+            priority: stateItem.priority,
+            deName: stateItem.deName,
+        };
+
+        //clone destination item from overmind state to memory if it exists
+        let destinationItem;
+
+        if( state.wishlist[destinationBracketId][destinationSlotId].item === null ) {
+            destinationItem = null;
+        } else {
+            stateItem = state.wishlist[destinationBracketId][destinationSlotId].item
+            destinationItem = {
                 id: stateItem.id,
                 name: stateItem.name,
                 itemType: stateItem.itemType,
@@ -48,138 +92,67 @@ export const dragHandler = pipe( //just for now, will become an effect i guess l
                 encounters: stateItem.encounters,
                 priority: stateItem.priority,
                 deName: stateItem.deName
-            }
+            };
+        }
 
-            if( (slotIdInt % 2 === 0) && (state.wishlist[bracketId]['slot-'+(parseInt(slotIdInt)-1)].item !== null ) && (state.wishlist[bracketId]['slot-'+(parseInt(slotIdInt)-1)].item.itemCategory === "Reserved") ) {
-                return
-            }
+        //source item is reserved => should only be able to go to front slots and if it goes to front, backslot must be clear
+        if( (sourceItem.itemCategory === "Reserved") && (destinationSlotIdInt%2 !== 1 ) ) {
+            return;
+        } else if( (sourceItem.itemCategory === "Reserved") && (state.wishlist[destinationBracketId]['slot-'+(parseInt(destinationSlotIdInt)+1)].item !== null) ) {
+            return;
+        }
 
-            if( (item.itemCategory === "Reserved") && (slotIdInt%2 !== 1) ) {
-                return
-            }
+        //destination item is reserved => should only be able to go to front slots and if it goes to front, backslot must be clear
+        if( ( destinationItem !== null ) && (destinationItem.itemCategory === "Reserved") && (sourceSlotIdInt%2 !== 1) ) {
+            return;
+        } else if( ( destinationItem !== null ) && (destinationItem.itemCategory === "Reserved") && 
+            (state.wishlist[sourceBracketId]['slot-'+(parseInt(sourceSlotIdInt)+1)].item !== null) ) {
+            return;
+        }
 
-            if( (item.itemCategory === "Reserved") || (item.itemCategory === "Limited") ) {
-                if(state.wishlist[bracketId]['points'] === 0) {
-                    return
-                }
-                state.wishlist[bracketId]['points']--
-            }
-            
-            if(state.wishlist[bracketId][slotId].item !== null) {
-                if(state.wishlist[bracketId][slotId].item.itemCategory === "Reserved" || state.wishlist[bracketId][slotId].item.itemCategory === "Limited") {
-                    state.wishlist[bracketId]['points']++
-                }
-            }
-
-            state.wishlist[bracketId][slotId].item = item
-
-        } else {
-            //dragging from wishlist into wishlist or remove¨
-            console.log('from wishlist')
-            if( destination['droppableId'] === 'delete-zone') {
-                console.log('to remove')
-                //remove item from wishlist
-                const [ bracketId, slotId ] = source['droppableId'].split("_")
-                if(state.wishlist[bracketId][slotId].item.itemCategory === "Reserved" || state.wishlist[bracketId][slotId].item.itemCategory === "Limited") {
-                    state.wishlist[bracketId]['points']++
-                }
-                state.wishlist[bracketId][slotId].item = null
-                return
-
-            }
-            console.log('to wishlist')
-            //move item inside wishlist
-            const [ sourceBracketId, sourceSlotId ] = source['droppableId'].split("_")
-            const [ destinationBracketId, destinationSlotId ] = destination['droppableId'].split("_")
-            const [, sourceSlotIdInt ] = sourceSlotId.split("-")
-            const [, destinationSlotIdInt ] = destinationSlotId.split("-")
-
-            if( state.wishlist[destinationBracketId][destinationSlotId].item === null ) {
-                    
-                const stateItem = state.wishlist[sourceBracketId][sourceSlotId].item
-
-                const item = {
-                    id: stateItem.id,
-                    name: stateItem.name,
-                    itemType: stateItem.itemType,
-                    itemCategory: stateItem.itemCategory,
-                    raid: stateItem.raid,
-                    encounters: stateItem.encounters,
-                    priority: stateItem.priority,
-                    deName: stateItem.deName
-                }
-
-                if( (item.itemCategory === "Reserved") && (destinationSlotIdInt%2 !== 1) ) {
-                    return
-                }
-
-                if( item.itemCategory === "Reserved" || item.itemCategory === "Limited" && destinationBracketId !== sourceBracketId ) {
-                    if(state.wishlist[destinationBracketId]['points'] === 0) {
-                        return
-                    } else {
-                        state.wishlist[destinationBracketId]['points']--
-                        state.wishlist[sourceBracketId]['points']++
-                    }
-                }
-
-                state.wishlist[destinationBracketId][destinationSlotId].item = item
-                state.wishlist[sourceBracketId][sourceSlotId].item = null
+        //ONLY wishlist to wishlist swap reserved or limited source item with empty slot or unlimited destination item from different brackets
+        if( ( (sourceItem.itemCategory === "Reserved") || (sourceItem.itemCategory === "Limited") ) && 
+            ( (destinationItem === null) || (destinationItem.itemCategory === "Unlimited") ) && 
+            ( (sourceBracketId !== null) && destinationBracketId !== sourceBracketId) ) {
+            if(state.wishlist[destinationBracketId]['points'] === 0) {
+                return;
             } else {
-                let stateItem = state.wishlist[sourceBracketId][sourceSlotId].item
-                const sourceItem = {
-                    id: stateItem.id,
-                    name: stateItem.name,
-                    itemType: stateItem.itemType,
-                    itemCategory: stateItem.itemCategory,
-                    raid: stateItem.raid,
-                    encounters: stateItem.encounters,
-                    priority: stateItem.priority,
-                    deName: stateItem.deName
-                }
-                stateItem = state.wishlist[destinationBracketId][destinationSlotId].item
-                const destinationItem = {
-                    id: stateItem.id,
-                    name: stateItem.name,
-                    itemType: stateItem.itemType,
-                    itemCategory: stateItem.itemCategory,
-                    raid: stateItem.raid,
-                    encounters: stateItem.encounters,
-                    priority: stateItem.priority,
-                    deName: stateItem.deName
-                }
-
-                if(sourceItem.itemCategory === "Reserved" && destinationSlotIdInt%2 !== 1) {
-                    return
-                } else if( (sourceItem.itemCategory === "Reserved") && (state.wishlist[destinationBracketId]['slot-'+(parseInt(destinationSlotIdInt)+1)].item !== null) ) {
-                    return
-                }
-
-                if( (sourceItem.itemCategory === "Reserved" || sourceItem.itemCategory === "Limited") && (destinationItem.itemCategory === "Unlimited") && destinationBracketId !== sourceBracketId) {
-                    if(state.wishlist[destinationBracketId]['points'] === 0) {
-                        return
-                    } else {
-                        state.wishlist[destinationBracketId]['points']--
-                        state.wishlist[sourceBracketId]['points']++
-                    }
-                }
-                if(destinationItem.itemCategory === "Reserved" && sourceSlotIdInt%2 !== 1) {
-                    return
-                } else if( (destinationItem.itemCategory === "Reserved") && (state.wishlist[sourceBracketId]['slot-'+(parseInt(sourceSlotIdInt)+1)].item !== null) ) {
-                    return
-                }
-                console.log('slot-'+(parseInt(sourceSlotIdInt)+1))
-                if( (destinationItem.itemCategory === "Reserved" || destinationItem.itemCategory === "Limited") && (sourceItem.itemCategory === "Unlimited") && destinationBracketId !== sourceBracketId) {
-                    if(state.wishlist[sourceBracketId]['points'] === 0) {
-                        return
-                    } else {
-                        state.wishlist[sourceBracketId]['points']--
-                        state.wishlist[destinationBracketId]['points']++
-                    }
-                }
-                state.wishlist[destinationBracketId][destinationSlotId].item = sourceItem
-                state.wishlist[sourceBracketId][sourceSlotId].item = destinationItem
+                state.wishlist[destinationBracketId]['points']--;
+                state.wishlist[sourceBracketId]['points']++;
             }
-         }
+        }
+
+        /* ONLY for items from live search: item costs allocation points check if bracket has enought, if so deduce by one. */
+        if( ((sourceItem.itemCategory === "Reserved") || (sourceItem.itemCategory === "Limited")) && (sourceBracketId === null)) {
+            if(state.wishlist[destinationBracketId]['points'] === 0) {
+                return;
+            }
+            state.wishlist[destinationBracketId]['points']--;
+        }
+
+        /* swap reserved or limited destination item with empty slot or unlimited source item from 
+        different brackets OR live search => special case for items from live search 
+        (swap out a reserved or limited item should give one allocation point back) */
+        if( ( destinationItem !== null ) && ( (destinationItem.itemCategory === "Reserved") || (destinationItem.itemCategory === "Limited") ) && 
+            (sourceItem.itemCategory === "Unlimited") && 
+            (destinationBracketId !== sourceBracketId) ) {
+            if( source['droppableId'] === state.liveSearch['id'] ) {
+                state.wishlist[destinationBracketId]['points']++;
+            } else {
+                if(state.wishlist[sourceBracketId]['points'] === 0) {
+                    return;
+                } else {
+                    state.wishlist[sourceBracketId]['points']--;
+                    state.wishlist[destinationBracketId]['points']++;
+                }
+            }
+        }
+        
+        //set state if items
+        state.wishlist[destinationBracketId][destinationSlotId].item = sourceItem;
+        if( sourceBracketId !== null ) {
+            state.wishlist[sourceBracketId][sourceSlotId].item = destinationItem;
+        }
     }),
 )
 

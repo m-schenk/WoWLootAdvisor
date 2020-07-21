@@ -26,6 +26,7 @@ const ItemContainer = styled.div`
     box-shadow: 2px 2px 4px 0px rgba(25,25,25,1);
     height: 36px;
     width: 300px;
+    vertical-align: middle;
     justify-content: space-between;
 `;
 
@@ -37,7 +38,7 @@ class Wishlist extends React.Component {
 
     shouldComponentUpdate(nextProps) {
         return this.props.overmind !== nextProps.overmind
-    }
+    };
 
     componentDidUpdate() {
         window.$WowheadPower.refreshLinks();
@@ -124,7 +125,12 @@ class Wishlist extends React.Component {
     }
 
     renderItem(bracketId, slotId) {
-        if (this.props.overmind.state.wishlist[bracketId][slotId].item === null) {
+
+        const [, slotIdInt] = slotId.split('-');
+        if( (parseInt(slotIdInt) > 1) && this.props.overmind.state.wishlist[bracketId]['slot-'+(parseInt(slotIdInt)-1)].item !== null &&
+            this.props.overmind.state.wishlist[bracketId]['slot-'+(parseInt(slotIdInt)-1)].item.itemCategory === "Reserved" ) {
+            return (<ItemContainer><p>Locked</p></ItemContainer>)
+        } else if( this.props.overmind.state.wishlist[bracketId][slotId].item === null ) {
             return <></>
         }
         return (
