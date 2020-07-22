@@ -44,6 +44,10 @@ class Wishlist extends React.Component {
         window.$WowheadPower.refreshLinks();
     };
 
+    onExit = () => {
+        this.props.overmind.actions.tutorial();
+    }
+    
     renderWishlist() {
         if(this.props.overmind.state.wishlist['locked']) {
             return (<p>Your Wishlist is locked! No more changes for you ¯\_(ツ)_/¯</p>)
@@ -168,6 +172,7 @@ class Wishlist extends React.Component {
     render() {
         return (
             <div className="bracketsContainer">
+
                 {this.renderWishlist()}
             </div>
         )

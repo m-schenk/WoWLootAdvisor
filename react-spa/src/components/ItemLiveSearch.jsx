@@ -2,22 +2,49 @@ import React from 'react';
 import ItemListContainer from './ItemListContainer';
 import Spinner from 'react-bootstrap/Spinner'
 import Form from 'react-bootstrap/Form'
+import Button from 'react-bootstrap/Button'
 import { Droppable } from 'react-beautiful-dnd';
 import { connect } from '../overmind';
+import { ShepherdTour, ShepherdTourContext } from 'react-shepherd'
+import { tutorialSteps } from './tutorialSteps'
+
+import 'shepherd.js/dist/css/shepherd.css'
+
+const tourOptions = {
+    defaultStepOptions: {
+      cancelIcon: {
+        enabled: true
+      }
+    },
+    useModalOverlay: true
+  };
+
+function TButton() {
+    const tour = React.useContext(ShepherdTourContext)
+    return(
+        <Button variant="info" as="input" type="button" value="Tutorial" onClick={tour.start}/>
+    )
+}
 
 class ItemLiveSearch extends React.Component {
-    
+
     shouldComponentUpdate(nextProps) {
         return this.props.overmind !== nextProps.overmind
     }
 
     onChangeHandler = async e => {
         this.props.overmind.actions.searchItems(e.target.value)
-    };
+    }
 
     componentDidUpdate() {
-        window.$WowheadPower.refreshLinks();
-    };
+        if(window.$WowheadPower) {
+            window.$WowheadPower.refreshLinks()
+        }
+    }
+
+    triggerTutorial = () => {
+        this.props.overmind.actions.tutorial()
+    }
 
     get renderItems() {
         let itemList = <h3>0 Items found.</h3>;
@@ -33,6 +60,13 @@ class ItemLiveSearch extends React.Component {
     render() {
         return (
             <div className="live-search">
+                <div className="control">
+                    <Button variant="info" as="input" type="submit" value="Submit" />
+                    <Button variant="info" as="input" type="reset" value="Reset" />  
+                    <ShepherdTour steps={tutorialSteps} tourOptions={tourOptions}>
+                        <TButton />
+                    </ShepherdTour>
+                </div>
                 <label>Remove Item:</label>
                 <Droppable droppableId="delete-zone">
                     {provided => (

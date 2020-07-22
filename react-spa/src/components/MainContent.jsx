@@ -9,7 +9,7 @@ import { connect } from '../overmind';
 
 class MainContent extends React.Component {
 
-    onDragEnd = result => {
+    onDragEnd = (result) => {
         console.log("this was called")
         this.props.overmind.actions.dragHandler(result);
         window.$WowheadPower.refreshLinks();

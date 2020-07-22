@@ -15,7 +15,7 @@ export const searchItems = pipe(
 
 export const dragHandler = pipe( //just for now, will become an effect I guess.. later
     mutate(({ state }, result) => {
-        const { destination, source, draggableId } = result;
+        const { destination, source } = result;
 
         //when destination null => draggable was not over any droppable, so we are done.
         if( !destination ) {
@@ -53,7 +53,7 @@ export const dragHandler = pipe( //just for now, will become an effect I guess..
 
         let stateItem;
         let [ sourceBracketId, sourceSlotId ] = [ null, null ];
-        let [, sourceSlotIdInt ] = [, null ];
+        let sourceSlotIdInt = null;
 
         //decide where the item is from live-search or wishlist, read item to stateItem
         if( source['droppableId'] === state.liveSearch['id'] ) {
@@ -148,7 +148,7 @@ export const dragHandler = pipe( //just for now, will become an effect I guess..
             }
         }
         
-        //set state if items
+        //set state of items
         state.wishlist[destinationBracketId][destinationSlotId].item = sourceItem;
         if( sourceBracketId !== null ) {
             state.wishlist[sourceBracketId][sourceSlotId].item = destinationItem;
