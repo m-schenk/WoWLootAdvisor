@@ -1,3 +1,5 @@
+const dotenv = require("dotenv");
+dotenv.config();
 const mongoDb = require('./private/mongoDbUri');
 var createError = require('http-errors');
 var express = require('express');
@@ -7,7 +9,7 @@ const bodyParser = require('body-parser');
 var logger = require('morgan');
 const mongoose = require('mongoose');
 
-
+const discordRouter = require('./routes/discord')
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const itemsRouter = require('./routes/items');
@@ -36,10 +38,13 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
+app.use('/discord', cors(), discordRouter);
 app.use('/users', cors(), usersRouter);
 app.use('/items', cors(), itemsRouter);
 app.use('/wishlist', cors(), wishlistRouter);
 app.use('/player', cors(), playerRouter);
+
+
 
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*'); //the wildcard stands for the domain which should be allowed to access the API
