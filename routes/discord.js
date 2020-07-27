@@ -79,8 +79,10 @@ router.get('/success', catchAsync(async (req, res) => {
 
 module.exports = router;
 
-//check if user belongs to guild discord server
-//check if first time login. does userId exist already?
-//if userId doesnt exist => create new user
-//send profile to frontend (the whole player object)
+
+/*
+TODO check if user belongs to guild discord server
+TODO if userId doesnt exist => create new user
+TODO send profile to frontend (the whole player object)
+*/
 
