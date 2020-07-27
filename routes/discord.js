@@ -39,10 +39,9 @@ router.get('/success', catchAsync(async (req, res) => {
   console.log('CODESHIT', code);
   
   
-  const creds = btoa(`${process.env.CLIENT_ID}:${process.env.CLIENT_SECRET}`);
   const data = {
-    client_id: process.env.CLIENT_ID,
-    client_secret: process.env.CLIENT_SECRET,
+    client_id: process.env.CLIENT_ID, // replace with new discord app from wow channel
+    client_secret: process.env.CLIENT_SECRET, // replace with new discord app from wow channel
     grant_type: 'authorization_code',
     redirect_uri: redirect,
     code: code,
@@ -79,3 +78,9 @@ router.get('/success', catchAsync(async (req, res) => {
 
 
 module.exports = router;
+
+//check if user belongs to guild discord server
+//check if first time login. does userId exist already?
+//if userId doesnt exist => create new user
+//send profile to frontend (the whole player object)
+
