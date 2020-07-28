@@ -8,6 +8,7 @@ var cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 var logger = require('morgan');
 const mongoose = require('mongoose');
+const session = require('express-session');
 
 const discordRouter = require('./routes/discord')
 const indexRouter = require('./routes/index');
@@ -30,6 +31,14 @@ console.log(process.env.NODE_ENV);
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
+
+
+app.use(
+  session({
+    secret: '!&@#$%349t7834h7u9',
+    resave: false,
+    saveUninitialized: false,
+}));
 
 app.use(logger('dev'));
 app.use(express.json());
