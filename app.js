@@ -37,21 +37,20 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// app.use((req, res, next) => {
+//   res.setHeader('Access-Control-Allow-Origin:', '*'); //the wildcard stands for the domain which should be allowed to access the API
+//   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE') //define allowed operations
+//   res.setHeader('Access-Control-Allow-Headers', 'application/x-www-form-urlencoded') //this allows to set the content type in client side javascript -> necessary because content-type needs to be set to json, in order to properly communicate with the API
+
+//   next();
+// });
+
 app.use('/', indexRouter);
 app.use('/discord', cors(), discordRouter);
 app.use('/users', cors(), usersRouter);
 app.use('/items', cors(), itemsRouter);
 app.use('/wishlist', cors(), wishlistRouter);
 app.use('/player', cors(), playerRouter);
-
-
-
-app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', '*'); //the wildcard stands for the domain which should be allowed to access the API
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE') //define allowed operations
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization') //this allows to set the content type in client side javascript -> necessary because content-type needs to be set to json, in order to properly communicate with the API
-  next();
-});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

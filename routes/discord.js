@@ -2,10 +2,7 @@ const express = require('express');
 const discordController = require('../controllers/discord');
 const router = express.Router();
 
-const DiscordOauth2 = require("discord-oauth2");
-const oauth = new DiscordOauth2();
 const fetch = require('node-fetch');
-const btoa = require('btoa');
 const redirect = 'http://localhost:3000/discord/success';
 const { catchAsync } = require('../utils');
 
@@ -85,4 +82,3 @@ TODO check if user belongs to guild discord server
 TODO if userId doesnt exist => create new user
 TODO send profile to frontend (the whole player object)
 */
-

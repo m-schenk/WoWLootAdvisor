@@ -13,6 +13,13 @@ export const searchItems = pipe(
     })
 )
 
+export const login = pipe(
+    mutate(({ effects }) => {
+        console.log("FUCK YOU")
+        effects.api.login();
+    })
+)
+
 export const dragHandler = pipe( //just for now, will become an effect I guess.. later
     mutate(({ state }, result) => {
         const { destination, source } = result;
@@ -35,6 +42,10 @@ export const dragHandler = pipe( //just for now, will become an effect I guess..
                     (state.wishlist[sourceBracketId][sourceSlotId].item.itemCategory === "Limited") ) {
                     state.wishlist[sourceBracketId]['points']++;
                 }
+                console.log(state.wishlist[sourceBracketId][sourceSlotId].item.id)
+                console.log(state.wishlist.filterList.indexOf(state.wishlist[sourceBracketId][sourceSlotId].item.id))
+                const sliceid = state.wishlist.filterList.indexOf(state.wishlist[sourceBracketId][sourceSlotId].item.id)
+                state.wishlist.filterList.splice(sliceid, 1)
                 state.wishlist[sourceBracketId][sourceSlotId].item = null;
                 return;
             }
@@ -62,6 +73,11 @@ export const dragHandler = pipe( //just for now, will become an effect I guess..
             [ sourceBracketId, sourceSlotId ] = source['droppableId'].split("_");
             [, sourceSlotIdInt ] = sourceSlotId.split("-");
             stateItem = state.wishlist[sourceBracketId][sourceSlotId].item;
+        }
+
+        //item already in wishlist
+        if( state.wishlist.filterList.includes(stateItem.id) ) {
+            return;
         }
 
         //clone source item from overmind state to memory
@@ -147,7 +163,9 @@ export const dragHandler = pipe( //just for now, will become an effect I guess..
                 }
             }
         }
-        
+        if( source['droppableId'] === state.liveSearch['id'] ) {
+            state.wishlist.filterList.push(sourceItem.id)
+        }
         //set state of items
         state.wishlist[destinationBracketId][destinationSlotId].item = sourceItem;
         if( sourceBracketId !== null ) {

@@ -3,6 +3,12 @@ import axios from 'axios';
 const cache = {};
 
 export const api = {
+    async login() {
+
+        await axios.get('http://localhost:3000/discord/login', {
+            crossdomain: true
+        })
+    },
     async searchItems(query) {
         let cancel;
 

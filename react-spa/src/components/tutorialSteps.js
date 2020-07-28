@@ -26,8 +26,9 @@ export const tutorialSteps = [
         highlightClass: 'highlight',
         scrollTo: false,
         cancelIcon: {
-        enabled: true,
+            enabled: true,
         },
+        title: 'Rägä Wishlist Tutorial',
         text: ['React-Shepherd is a JavaScript library for guiding users through your React app.'],
         when: {
         show: () => {

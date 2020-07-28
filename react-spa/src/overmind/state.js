@@ -151,6 +151,7 @@ export const state = {
             'points': Infinity,
             'prio-start': 38,
         },
+        filterList: [],
     },
     liveSearch: {
         'id': 'live-search-id',
