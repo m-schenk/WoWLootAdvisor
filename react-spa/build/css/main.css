@@ -1,11 +1,6 @@
-body {
-    background-color: #303136;
-    color: white;
-}
+body, 
+html,
 #root {
-    background-color: inherit;
-}
-
-.title {
-    padding: 20px;
+  position: relative;
+  min-height: 100vh;   
 }

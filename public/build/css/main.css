@@ -1,8 +1,6 @@
-body {
-    background-color: #303136;
-    color: white;
-}
-
-.title {
-    padding: 20px;
+body, 
+html,
+#root {
+  position: relative;
+  min-height: 100vh;   
 }
