@@ -18,15 +18,19 @@ const wishlistRouter = require('./routes/wishlist');
 const playerRouter = require('./routes/player');
 
 var app = express();
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
+
 var cors = require('cors');
 const { Server } = require('http');
 const { exit } = require('process');
 
-if (process.env.NODE_ENV === 'development') {
-    
-    app.use(cors());
-}
-console.log(process.env.NODE_ENV);
+
+//app.use(cors());
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -40,26 +44,21 @@ app.use(
     saveUninitialized: false,
 }));
 
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// app.use((req, res, next) => {
-//   res.setHeader('Access-Control-Allow-Origin:', '*'); //the wildcard stands for the domain which should be allowed to access the API
-//   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE') //define allowed operations
-//   res.setHeader('Access-Control-Allow-Headers', 'application/x-www-form-urlencoded') //this allows to set the content type in client side javascript -> necessary because content-type needs to be set to json, in order to properly communicate with the API
-
-//   next();
-// });
-
 app.use('/', indexRouter);
 app.use('/discord', cors(), discordRouter);
-app.use('/users', cors(), usersRouter);
-app.use('/items', cors(), itemsRouter);
-app.use('/wishlist', cors(), wishlistRouter);
-app.use('/player', cors(), playerRouter);
+app.use('/users',  usersRouter);
+app.use('/items',  itemsRouter);
+app.use('/wishlist', cors(),  wishlistRouter);
+app.use('/player',  playerRouter);
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -4,6 +4,7 @@ const router = express.Router();
 
 router.get('/login', discordAPI.getDiscordAuthUrl);
 router.get('/success', discordAPI.getDiscordUserObject);
+router.get('/test', discordAPI.test);
 
 module.exports = router;
 

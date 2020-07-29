@@ -13,6 +13,10 @@ exports.getDiscordAuthUrl = (req, res, next) => {
     res.redirect(url);
 };
 
+exports.test = (req, res, next)  => {
+    res.status(200).json({ value: "HUREHESEHIW=E=?" })
+};
+
 exports.getDiscordUserObject = catchAsync(async (req, res) => {
   if (!req.query.code) throw new Error('NoCodeProvided');
   const code = req.query.code;
@@ -28,14 +32,17 @@ exports.getDiscordUserObject = catchAsync(async (req, res) => {
     scope: 'identify guilds email'
   };
   const response = await fetch('https://discordapp.com/api/oauth2/token', {
-      method: 'POST',
-      body: new URLSearchParams(data),
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
+        method: 'POST',
+        body: new URLSearchParams(data),
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
     });
   const json = await response.json();
-  // console.log('fuckyou', json);
+  if(json.error) {
+      throw new Error(json.error)
+  }
+  console.log('fuckyou', json);
 
   // console.log('ACCESS TOKEN:', json.access_token);
   
@@ -43,24 +50,27 @@ exports.getDiscordUserObject = catchAsync(async (req, res) => {
   const userObject = await fetch('http://discordapp.com/api/users/@me', {
     method: 'GET',
     headers: {
-      'Authorization': `Bearer ${json.access_token}`,
+        'Access-Control-Allow-Origin': '*',
+        'Authorization': `Bearer ${json.access_token}`,
     },
 
   });
   const user = await userObject.json();
   
-  // console.log('user object:', user);
+  console.log('user object:', user);
 
 
 
   const userGuilds = await fetch('http://discordapp.com/api/users/@me/guilds', {
     method: 'GET',
     headers: {
-      'Authorization': `Bearer ${json.access_token}`,
+        'Access-Control-Allow-Origin': '*',
+        'Authorization': `Bearer ${json.access_token}`,
     },
 
   });
-  const guilds = await userGuilds.json();
+  let guilds = []
+  guilds = await userGuilds.json();
   
   // console.log('guild object:', guilds);
 
