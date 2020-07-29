@@ -1,3 +1,4 @@
+const Player = require('../models/Player');
 const fetch = require('node-fetch');
 const btoa = require('btoa');
 const redirect = 'http://localhost:3000/discord/success';
@@ -49,7 +50,7 @@ exports.getDiscordUserObject = catchAsync(async (req, res) => {
   });
   const user = await userObject.json();
   
-  // console.log('user object:', user);
+  console.log('user object:', user);
 
 
 
@@ -64,25 +65,32 @@ exports.getDiscordUserObject = catchAsync(async (req, res) => {
   
   // console.log('guild object:', guilds);
 
-
+  let belongsToGuild = false;
 
   guilds.forEach(guild => {
     if (guild.id === process.env.DISCORD_SERVER_ID) {
-      
+      belongsToGuild = true;
       req.session.isLoggedIn = true;
-      console.log('session:', req.session.isLoggedIn);
-      
-      return res.status(200).json({ access_token: json.access_token }).end();
+      Player.findOne({ id: user.id })
+      .then(player => {
+        if (!player) {
+          const newPlayer = new Player ({
+            id: user.id,
+            name: user.username
+          });
+          newPlayer.save();
+          return res.status(200).json({ access_token: json.access_token, player: newPlayer }).end();
+        } else {
+          return res.status(200).json({ access_token: json.access_token, player: player }).end();
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      });
     }
   });
-
-  return res.status(401).end();
-
-
-  // res.redirect(401, '/login');
-
-  
-  
-  
+  if (!belongsToGuild) {
+      return res.status(401).json({ message: 'Access denied, does not belong to guild!' }).end();
+  }
 });
 
