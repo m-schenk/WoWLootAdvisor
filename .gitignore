@@ -119,6 +119,7 @@ dist
 /coverage
 
 # production
+/react-spa/build/build
 /build
 
 # misc
