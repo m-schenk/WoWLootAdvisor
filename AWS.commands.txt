@@ -1,5 +1,0 @@
-to build react app:
-
-cd react-spa
-yarn build
-cp -rfl build/ ../public

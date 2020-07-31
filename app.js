@@ -27,19 +27,21 @@ var cors = require('cors');
 const { Server } = require('http');
 const { exit } = require('process');
 
+
 //app.use(cors());
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
+
 app.use(
-    session( {
-        secret: '!&@#$%349t7834h7u9',
-        resave: false,
-        saveUninitialized: false,
-    } )
-);
+  session({
+    secret: '!&@#$%349t7834h7u9',
+    resave: false,
+    saveUninitialized: false,
+}));
 
 
 app.use(logger('dev'));
@@ -58,9 +60,9 @@ app.use('/player',  playerRouter);
 
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
-    next(createError(404));
-});
+//app.use(function(req, res, next) {
+//  next(createError(404));
+//});
 
 // error handler
 app.use(function(err, req, res, next) {
@@ -85,11 +87,12 @@ mongoose.set('useNewUrlParser', true);
 
 mongoose.connect(mongoDb.getURI())
 .then(result => {
-    console.log('successfully connected to db!');
+  console.log('successfully connected to db!');
 })
 .catch(err => {
-    console.log(err);
-    process.exit(0);
+  console.log(err);
+  process.exit(0);
 })
+
 
 module.exports = app;
