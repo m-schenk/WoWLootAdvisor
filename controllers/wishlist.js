@@ -1,7 +1,5 @@
-const Item = require('../models/Wishlist');
 const Wishlist = require('../models/Wishlist');
 const Player = require('../models/Player');
-const bodyParser = require('body-parser');
 const { validationResult } = require('express-validator');
 
 exports.saveWishlist = (req, res, next) => {
@@ -26,16 +24,6 @@ exports.saveWishlist = (req, res, next) => {
           bracket4: req.body.bracket4,
           bracketLess: req.body.bracketLess,
       })
-    
-      //  //CODE FOR DEBUGGING PURPOSES
-      //  const wishlist = new Wishlist({
-      //     bracket1: [21699, 22800, 21611, 23242, 21689, 22938],
-      //     bracket2: [21699, 22800, 21611, 23242, 21689, 22938],
-      //     bracket3: [21699, 22800, 21611, 23242, 21689, 22938],
-      //     bracket4: [21699, 22800, 21611, 23242, 21689, 22938],
-      //     bracketLess: [21699, 22800, 21611, 23242, 21689, 22938]
-      //  })
-      //   console.log('wishlist', wishlist);
         
       wishlist.save()
       .then(wishlist => {

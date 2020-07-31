@@ -1,13 +1,12 @@
-const dotenv = require("dotenv").config();
-const mongoDb = require('./private/mongoDbUri');
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-const bodyParser = require('body-parser');
-var logger = require('morgan');
+//const mongoDb = require('./private/mongoDbUri');
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const logger = require('morgan');
 const mongoose = require('mongoose');
 const session = require('express-session');
+
+require("dotenv").config();
 
 const discordRouter = require('./routes/discord')
 const indexRouter = require('./routes/index');
@@ -16,7 +15,8 @@ const itemsRouter = require('./routes/items');
 const wishlistRouter = require('./routes/wishlist');
 const playerRouter = require('./routes/player');
 
-var app = express();
+const app = express();
+
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -24,10 +24,9 @@ app.use(function(req, res, next) {
 });
 
 var cors = require('cors');
-const { Server } = require('http');
-const { exit } = require('process');
-
-//app.use(cors());
+if(process.env.NODE_ENV === 'development') {
+    app.use(cors());
+}
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -46,7 +45,6 @@ console.log(process.env.NODE_ENV);
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
@@ -56,10 +54,10 @@ app.use('/items',  itemsRouter);
 app.use('/wishlist', cors(),  wishlistRouter);
 app.use('/player',  playerRouter);
 
-// // catch 404 and forward to error handler
-// app.use(function(req, res, next) {
-//     next(createError(404));
-// });
+// catch 404 and forward to error handler
+app.use(function(req, res, next) {
+    next(createError(404));
+});
 
 // error handler
 app.use(function(err, req, res, next) {
@@ -79,7 +77,7 @@ app.use(function(err, req, res, next) {
 mongoose.set('useUnifiedTopology', true);
 mongoose.set('useNewUrlParser', true);
 
-mongoose.connect(mongoDb.getURI())
+mongoose.connect(process.env.MONGODB_URI)
 .then(result => {
     console.log('successfully connected to db!');
 })
