@@ -1,4 +1,5 @@
 const Player = require('../models/Player');
+const Wishlist = require('../models/Wishlist');
 
 exports.addPlayer = (req, res, next) => {
     
@@ -32,6 +33,7 @@ exports.getPlayerById = (req, res, next) => {
     
 
     Player.findOne({ id: playerId })
+    .populate({ path: 'wishlist', model: Wishlist})
     .then(player => {
         console.log(player);
         
@@ -47,5 +49,5 @@ exports.playerLogout = (req, res, next) => {
   req.session.destroy((err) => {
     console.log('logged out');
     res.redirect('https://discord.com/api/oauth2/authorize?client_id=734533006114553866&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fdiscord%2Fsuccess&response_type=code&scope=identify%20guilds%20email');
-})
+  })
 }

@@ -27,7 +27,7 @@ exports.saveWishlist = (req, res, next) => {
           bracketLess: req.body.bracketLess,
       })
     
-      //  CODE FOR DEBUGGING PURPOSES
+      //  //CODE FOR DEBUGGING PURPOSES
       //  const wishlist = new Wishlist({
       //     bracket1: [21699, 22800, 21611, 23242, 21689, 22938],
       //     bracket2: [21699, 22800, 21611, 23242, 21689, 22938],
@@ -61,6 +61,7 @@ exports.saveWishlist = (req, res, next) => {
   .catch(err => {
     const error = new Error(err);
     error.httpStatusCode = 500;
+    error.message = 'probably because the wishlist was submitted while not authenticated'
     return next(error);
   });
 }
