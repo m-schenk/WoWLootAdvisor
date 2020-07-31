@@ -1,7 +1,7 @@
 const Player = require('../models/Player');
 const fetch = require('node-fetch');
 const btoa = require('btoa');
-const redirect = 'http://localhost:3000/discord/success';
+const redirect = 'http://raegae.maarten.ch:3000/api/discord/callback';
 const { catchAsync } = require('../utils');
 
 exports.getValue = (req, res, next) => {
@@ -9,7 +9,8 @@ exports.getValue = (req, res, next) => {
 }
 
 exports.getDiscordAuthUrl = (req, res, next) => {
-    res.redirect(proccess.env.DISCORD_CALLBACK_URI);
+    console.log(process.env.DISCORD_CALLBACK_URI);
+    res.redirect(process.env.DISCORD_CALLBACK_URI);
 };
 
 exports.test = (req, res, next)  => {
