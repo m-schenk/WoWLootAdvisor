@@ -81,6 +81,7 @@ exports.getDiscordUserObject = catchAsync(async (req, res) => {
     if (guild.id === process.env.DISCORD_SERVER_ID) {
       belongsToGuild = true;
       req.session.isLoggedIn = true;
+      req.session.playerId = user.id;
       Player.findOne({ id: user.id })
       .then(player => {
         if (!player) {

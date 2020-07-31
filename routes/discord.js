@@ -1,6 +1,7 @@
 const express = require('express');
 const discordAPI = require('../api/discord');
 const router = express.Router();
+const isAuth = require('../middleware/is-auth'); //use this middleware in each route that should only be accessible when authenticated
 
 router.get('/login', discordAPI.getDiscordAuthUrl);
 router.get('/success', discordAPI.getDiscordUserObject);

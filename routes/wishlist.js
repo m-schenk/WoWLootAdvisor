@@ -4,29 +4,32 @@ const Item = require('../models/Item');
 
 const wishlistController = require('../controllers/wishlist');
 const router = express.Router();
+const isAuth = require('../middleware/is-auth'); //use this middleware in each route that should only be accessible when authenticated
 
 
-router.post('/save', [
-    body()
-    .custom((value, { req }) => {
+// router.post('/save', [
+//     body()
+//     .custom((value, { req }) => {
 
-            const p = Promise.all([
-                checkBracket(value.bracket1),
-                checkBracket(value.bracket2),
-                checkBracket(value.bracket3),
-                checkBracket(value.bracket4),
-                checkBracket(value.bracketLess, true)
-            ])
+//             const p = Promise.all([
+//                 checkBracket(value.bracket1),
+//                 checkBracket(value.bracket2),
+//                 checkBracket(value.bracket3),
+//                 checkBracket(value.bracket4),
+//                 checkBracket(value.bracketLess, true)
+//             ])
     
-            return p.then(result => {
-                console.log(result);
+//             return p.then(result => {
+//                 console.log(result);
     
-            })
+//             })
         
 
         
-    })
-], wishlistController.saveWishlist);
+//     })
+// ], wishlistController.saveWishlist);
+
+router.get('/save', wishlistController.saveWishlist);
 
 
 module.exports = router;
