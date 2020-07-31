@@ -48,7 +48,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/discord', cors(), discordRouter);
+app.use('/api/discord', cors(), discordRouter);
 app.use('/users',  usersRouter);
 app.use('/items',  itemsRouter);
 app.use('/wishlist', cors(),  wishlistRouter);

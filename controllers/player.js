@@ -53,8 +53,8 @@ exports.getSessionPlayerId = (req, res, next) => {
 }
 
 exports.playerLogout = (req, res, next) => {
-  req.session.destroy((err) => {
-    console.log('logged out');
-    res.redirect('https://discord.com/api/oauth2/authorize?client_id=734533006114553866&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fdiscord%2Fsuccess&response_type=code&scope=identify%20guilds%20email');
-  })
+    req.session.destroy((err) => {
+        console.log('logged out');
+        res.redirect(process.env.DISCORD_CALLBACK_URI);
+    })
 }

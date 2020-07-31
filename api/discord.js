@@ -9,8 +9,7 @@ exports.getValue = (req, res, next) => {
 }
 
 exports.getDiscordAuthUrl = (req, res, next) => {
-    const url = 'https://discord.com/api/oauth2/authorize?client_id=734533006114553866&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fdiscord%2Fsuccess&response_type=code&scope=identify%20guilds%20email';
-    res.redirect(url);
+    res.redirect(proccess.env.DISCORD_CALLBACK_URI);
 };
 
 exports.test = (req, res, next)  => {
