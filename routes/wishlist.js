@@ -109,8 +109,11 @@ function checkBracket(bracket, isHunter, bracketLess) {
       resolve('Wishlist is valid!');
     })
     .catch(err => {
-      console.log(err);
-    })
+      const error = new Error(err);
+      error.message = 'Failed to fetch one or more items from the submitted wishlist brackets (routes/wishlist checkBracket())'
+      error.httpStatusCode = 500;
+      return next(error);
+    });
   })
 }
 

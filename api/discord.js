@@ -91,9 +91,12 @@ exports.getDiscordUserObject = catchAsync(async (req, res) => {
                 console.log(err);
             });
         }
+    })
+    .catch(err => {
+        const error = new Error(err);
+        error.message = 'Failed to fetch player (api/discord getDiscordUserObject())';
+        error.httpStatusCode = 500;
+        return next(error);
     });
-    if (!belongsToGuild) {
-        return res.status(401).json({ message: 'Access denied, does not belong to guild!' }).end();
-    }
 });
 
