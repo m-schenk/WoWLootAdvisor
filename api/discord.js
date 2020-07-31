@@ -9,6 +9,7 @@ exports.getValue = (req, res, next) => {
 }
 
 exports.getDiscordAuthUrl = (req, res, next) => {
+    console.log(process.env.DISCORD_CALLBACK_URI);
     res.redirect(process.env.DISCORD_CALLBACK_URI);
 };
 
