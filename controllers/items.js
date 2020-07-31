@@ -23,6 +23,7 @@ exports.getMockData = (req, res, next) => {
     })
     .catch(err => {
         const error = new Error(err);
+        error.message = 'Failed to save item (controllers/items getMockData())'
         error.httpStatusCode = 500;
         return next(error);
       });
@@ -35,7 +36,6 @@ exports.modify = (req, res, next) => {
     console.log(item);
     
     if (item.itemCategory) {
-
         Item.update({id: req.body.id}, {
             $set: {
                 itemCategory: req.body.itemCategory
@@ -48,9 +48,10 @@ exports.modify = (req, res, next) => {
             });
         })
         .catch(err => {
-            const error = new Error(err);
-            error.httpStatusCode = 500;
-            return next(error);
+          const error = new Error(err);
+          error.message = 'Failed to update item (controllers/items modify())'
+          error.httpStatusCode = 500;
+          return next(error);
         });
     }
 
@@ -67,9 +68,10 @@ exports.modify = (req, res, next) => {
             });
         })
         .catch(err => {
-            const error = new Error(err);
-            error.httpStatusCode = 500;
-            return next(error);
+          const error = new Error(err);
+          error.message = 'Failed to update item (controllers/items modify())'
+          error.httpStatusCode = 500;
+          return next(error);
         });
     }
 }
@@ -90,6 +92,7 @@ exports.getQuery = (req, res, next) => {
     })
     .catch(err => {
         const error = new Error(err);
+        error.message = 'Failed to fetch item from database (controllers/items getQuery())';
         error.httpStatusCode = 500;
         return next(error);
     });
@@ -105,4 +108,11 @@ exports.getItemById = (req, res, next) => {
         
         res.status(200).json({ item: item });
     })
+    .catch(err => {
+      const error = new Error(err);
+      error.message = 'Failed to fetch player from database (controllers/items getItemById())';
+      error.httpStatusCode = 500;
+      return next(error);
+  });
 }
+

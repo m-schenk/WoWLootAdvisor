@@ -46,6 +46,7 @@ exports.saveWishlist = (req, res, next) => {
           })
           .catch(err => {
             const error = new Error(err);
+            error.message = 'Failed to update player with wishlist mongoDbId in database (controllers/wishlist saveWishlist())';
             error.httpStatusCode = 500;
             return next(error);
           });
@@ -53,6 +54,7 @@ exports.saveWishlist = (req, res, next) => {
       })
       .catch(err => {
         const error = new Error(err);
+        error.message = 'Failed to save wishlist in database (controllers/wishlist saveWishlist())'
         error.httpStatusCode = 500;
         return next(error);
       });
@@ -60,8 +62,8 @@ exports.saveWishlist = (req, res, next) => {
   })
   .catch(err => {
     const error = new Error(err);
+    error.message = 'Failed to fetch player from database, probably because player was not authenticated at the time the wishlist was submitted (controllers/wishlist saveWishlist())';
     error.httpStatusCode = 500;
-    error.message = 'probably because the wishlist was submitted while not authenticated'
     return next(error);
   });
 }

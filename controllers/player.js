@@ -20,6 +20,7 @@ exports.addPlayer = (req, res, next) => {
     })
     .catch(err => {
         const error = new Error(err);
+        error.message = 'Failed to save new player in database (controllers/player addPlayer())';
         error.httpStatusCode = 500;
         return next(error);
     });
@@ -39,6 +40,12 @@ exports.getPlayerById = (req, res, next) => {
         
         res.status(200).json({ player: player });
     })
+    .catch(err => {
+      const error = new Error(err);
+      error.message = 'Failed to fetch player from database (controllers/player getPlayerById())';
+      error.httpStatusCode = 500;
+      return next(error);
+  });
 }
 
 exports.getSessionPlayerId = (req, res, next) => {
