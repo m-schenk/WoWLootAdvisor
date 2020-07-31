@@ -52,24 +52,22 @@ class Wishlist extends React.Component {
         if(this.props.overmind.state.wishlist['locked']) {
             return (<p>Your Wishlist is locked! No more changes for you ¯\_(ツ)_/¯</p>)
         } else {
-            const hunter = (this.props.overmind.state.player.class === "hunter") 
             return(
                 <>
-                    {this.renderBracket('bracket-1', hunter)}
-                    {this.renderBracket('bracket-2', hunter)}
-                    {this.renderBracket('bracket-3', hunter)}
-                    {this.renderBracket('bracket-4', hunter)}
-                    {this.renderBracket('bracketless', hunter)}
+                    {this.renderBracket('bracket-1')}
+                    {this.renderBracket('bracket-2')}
+                    {this.renderBracket('bracket-3')}
+                    {this.renderBracket('bracket-4')}
+                    {this.renderBracket('bracketless')}
                 </>
             )
-            
-            
         }
     }
 
-    renderBracket(bracketId, hunter) {
+    renderBracket(bracketId) {
         let prioStart = this.props.overmind.state.wishlist[bracketId]['prio-start'];
         const allocPoints = this.props.overmind.state.wishlist[bracketId]['points'];
+        const hunter = (this.props.overmind.state.player.class === "hunter");
         if(hunter && bracketId === "bracket-4") return
         if(hunter && bracketId === "bracketless") {
             prioStart = prioStart+3;
