@@ -76,7 +76,7 @@ export const dragHandler = pipe( //just for now, will become an effect I guess..
         }
 
         //item already in wishlist
-        if( state.wishlist.filterList.includes(stateItem.id) && source['droppableId'] === state.liveSearch['id']) {
+        if( state.wishlist.filterList.includes(stateItem.id) && (source['droppableId'] === state.liveSearch['id'])) {
             return;
         }
 

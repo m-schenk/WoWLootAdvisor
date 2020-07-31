@@ -1,5 +1,4 @@
-const dotenv = require("dotenv");
-dotenv.config();
+const dotenv = require("dotenv").config();
 const mongoDb = require('./private/mongoDbUri');
 var createError = require('http-errors');
 var express = require('express');

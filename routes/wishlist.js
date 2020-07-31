@@ -17,17 +17,11 @@ router.post('/save', [
                 checkBracket(value.bracket4),
                 checkBracket(value.bracketLess, true)
             ])
-    
             return p.then(result => {
                 console.log(result);
-    
             })
-        
-
-        
     })
 ], wishlistController.saveWishlist);
-
 
 module.exports = router;
 
@@ -52,9 +46,6 @@ function checkBracket(bracket, bracketLess) {
     })
     .then(result => {
     //console.log('bracket result', result);
-
-      
-                
       let allocationPoints = 0;   // should not exceed 3
       let itemSlots = 0;          // should not exceed 2
       let occupiedSlots = 0;      // should not exceed 6
