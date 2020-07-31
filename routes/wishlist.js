@@ -1,27 +1,47 @@
 const express = require('express');
 const { check, body } = require('express-validator');
 const Item = require('../models/Item');
+const Player = require('../models/Player');
 
 const wishlistController = require('../controllers/wishlist');
 const router = express.Router();
+const isAuth = require('../middleware/is-auth'); //use this middleware in each route that should only be accessible when authenticated
 
 
 router.post('/save', [
     body()
     .custom((value, { req }) => {
 
-            const p = Promise.all([
-                checkBracket(value.bracket1),
-                checkBracket(value.bracket2),
-                checkBracket(value.bracket3),
-                checkBracket(value.bracket4),
-                checkBracket(value.bracketLess, true)
-            ])
-            return p.then(result => {
-                console.log(result);
-            })
+        let isHunter = false;
+        
+        // swap this block with the block below if the class property should be fetched from the db instead
+        if (value.class == 'Hunter') {
+        isHunter = true;
+        }
+        // ------------------------------------------------------------------------
+        // Player.find({ id: req.session.playerId })
+        // .then(player => {
+        //   if (player.class == 'Hunter') {
+        //     isHunter = true;
+        //   }
+        // })
+        // ------------------------------------------------------------------------
+
+        const p = Promise.all([
+            checkBracket(value.bracket1, isHunter, false),
+            checkBracket(value.bracket2, isHunter, false),
+            checkBracket(value.bracket3, isHunter, false),
+            checkBracket(value.bracket4, isHunter, false),
+            checkBracket(value.bracketLess, isHunter, true)
+        ])
+        
+        return p.then(result => {
+        console.log(result);
+        })
     })
 ], wishlistController.saveWishlist);
+
+// router.get('/save', wishlistController.saveWishlist); // use for debug
 
 module.exports = router;
 
@@ -29,23 +49,23 @@ module.exports = router;
 
 
 
-function checkBracket(bracket, bracketLess) {  
+
+function checkBracket(bracket, isHunter, bracketLess) {  
 
   return new Promise((resolve, reject) => {
         
     Item.find({
       'id': { $in: [
-        bracket[0],
-        bracket[1],
-        bracket[2],
-        bracket[3],
-        bracket[4],
-        bracket[5],
-        bracket[6]
+        ...bracket  // ... selects all elements inside the array
       ]}
     })
     .then(result => {
-    //console.log('bracket result', result);
+    // console.log('bracket result', result);
+
+      if (result.length < 6) {
+        reject('Duplicate item Id or Bracket is missing item(s)')
+      }
+                
       let allocationPoints = 0;   // should not exceed 3
       let itemSlots = 0;          // should not exceed 2
       let occupiedSlots = 0;      // should not exceed 6
@@ -54,10 +74,11 @@ function checkBracket(bracket, bracketLess) {
         for (j = 0; j < i; j++) {
           if (i == j) continue;
           if (result[i].itemType == result[j].itemType) {
-            //console.log(result[i].itemType, '==', result[j].itemType);
+            // console.log(result[i].itemType, '==', result[j].itemType);
             reject('Bracket has duplicate item types');
           }
         }
+        
         if (result[i].id && !bracketLess) {
           occupiedSlots++;
         }
@@ -69,11 +90,16 @@ function checkBracket(bracket, bracketLess) {
               reject('Maximum amount of reserved items(2) exceeded');
             }
           }
+          if (allocationPoints > 2 && isHunter) {
+            console.log('HUNTER SHITS');
+            reject('Maximum allocation points(2) exceeded -> hunter class penalty');
+          }
           if (allocationPoints > 3) {
             reject('Maximum allocation points(3) exceeded');
           }
         }
         if (occupiedSlots > 6) {
+          
           reject('Maximum item slots(6) exceeded')
         }
         if (result[i].itemCategory == 'Unlockable') {
@@ -89,12 +115,7 @@ function checkBracket(bracket, bracketLess) {
 }
 
 // if item is unlimited
-
-
-
 // dont allow unlockable items (itemCategory == 'Unlockable')
-
-
 // no duplicate item types
 // allow only 3 allocation points per bracket
 // reserved items use two items slots

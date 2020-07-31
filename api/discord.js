@@ -56,7 +56,6 @@ exports.getDiscordUserObject = catchAsync(async (req, res) => {
     console.log('user object: ', user);
 
 
-
     const userGuilds = await fetch('http://discordapp.com/api/users/@me/guilds', {
         method: 'GET',
         headers: {
@@ -66,8 +65,7 @@ exports.getDiscordUserObject = catchAsync(async (req, res) => {
     });
     let guilds = []
     guilds = await userGuilds.json();
-    
-    // console.log('guild object:', guilds);
+    console.log('guild object: ', guilds);
 
     let belongsToGuild = false;
 
@@ -75,6 +73,7 @@ exports.getDiscordUserObject = catchAsync(async (req, res) => {
         if (guild.id === process.env.DISCORD_SERVER_ID) {
             belongsToGuild = true;
             req.session.isLoggedIn = true;
+            req.session.userId = user.id;
             Player.findOne({ id: user.id })
             .then(player => {
                 if (!player) {
