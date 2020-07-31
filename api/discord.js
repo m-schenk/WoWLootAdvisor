@@ -1,7 +1,7 @@
 const Player = require('../models/Player');
 const fetch = require('node-fetch');
 const btoa = require('btoa');
-const redirect = 'http://localhost:3000/discord/success';
+const redirect = 'http://raegae.maarten.ch:3000/api/discord/callback';
 const { catchAsync } = require('../utils');
 
 exports.getValue = (req, res, next) => {
@@ -9,7 +9,7 @@ exports.getValue = (req, res, next) => {
 }
 
 exports.getDiscordAuthUrl = (req, res, next) => {
-    res.redirect(proccess.env.DISCORD_CALLBACK_URI);
+    res.redirect(process.env.DISCORD_CALLBACK_URI);
 };
 
 exports.test = (req, res, next)  => {
@@ -37,9 +37,6 @@ exports.getDiscordUserObject = catchAsync(async (req, res) => {
         },
     });
     const json = await response.json();
-    if(json.error) {
-        throw new Error(json.error)
-    }
     console.log('discord json response: ', json);
   
     // allows /users/@me/guilds to return basic information about all of a user's guilds
@@ -69,6 +66,7 @@ exports.getDiscordUserObject = catchAsync(async (req, res) => {
     let belongsToGuild = false;
 
     guilds.forEach(guild => {
+        console.log(guild.id, '==', process.env.DISCORD_SERVER_ID);
         if (guild.id === process.env.DISCORD_SERVER_ID) {
             belongsToGuild = true;
             req.session.isLoggedIn = true;
