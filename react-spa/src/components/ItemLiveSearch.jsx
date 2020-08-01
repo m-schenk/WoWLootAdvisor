@@ -65,7 +65,7 @@ class ItemLiveSearch extends React.Component {
         return (
             <div className="live-search">
                 <div className="control">
-                    <Button variant="info" as="input" type="submit" value="Submit" onClick={this.sendWishlist()} />
+                    <Button variant="info" as="input" type="submit" value="Submit" onClick={ () => { this.sendWishlist() } } />
                     <Button variant="info" as="input" type="reset" value="Reset" />  
                     <ShepherdTour steps={tutorialSteps} tourOptions={tourOptions}>
                         <TButton />
