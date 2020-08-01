@@ -7,5 +7,6 @@ router.post('/save', playerController.addPlayer);
 router.get('/id::id', playerController.getPlayerById);
 router.get('/session-player', playerController.getSessionPlayerId);
 router.get('/logout', playerController.playerLogout);
+router.get('/get-player', playerController.getPlayerSelf)
 
 module.exports = router;

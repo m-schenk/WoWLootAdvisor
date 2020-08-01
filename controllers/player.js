@@ -45,7 +45,7 @@ exports.getPlayerById = (req, res, next) => {
       error.message = 'Failed to fetch player from database (controllers/player getPlayerById())';
       error.httpStatusCode = 500;
       return next(error);
-  });
+    });
 }
 
 exports.getSessionPlayerId = (req, res, next) => {
@@ -57,4 +57,18 @@ exports.playerLogout = (req, res, next) => {
         console.log('logged out');
         res.redirect(process.env.DISCORD_CALLBACK_URI);
     })
+}
+
+exports.getPlayerSelf = (req, res, next) => {
+  Player.find({ id: req.session.playerId })
+  .then(player => {
+    res.send(200).json({ player: player })
+  })
+  .catch(err => {
+    const error = new Error(err);
+    error.message = 'Failed to fetch player from database (controllers/player getPlayerSelf())';
+    error.httpStatusCode = 500;
+    return next(error);
+  });
+  
 }
