@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components'
 import { Droppable, Draggable } from 'react-beautiful-dnd';
-import { connect } from '../overmind';
+import { connect } from './../../../overmind';
 
 const ItemContainerDrop = styled.div`
     font-weight: bold;

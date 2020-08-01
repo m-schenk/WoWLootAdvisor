@@ -83,6 +83,7 @@ exports.getQuery = (req, res, next) => {
     
     Item.find({name: regex})
     .sort({ name: 1})
+    .limit(15)
     .or([{ itemCategory: 'Reserved' }, { itemCategory: 'Limited' }, { itemCategory: 'Unlimited' }]) //dumb way to filter "Unlockable" itemCategory but couldn't find a "not" function
     .then(item => {
         res.status(200).json({

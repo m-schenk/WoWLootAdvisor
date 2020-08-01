@@ -1,13 +1,14 @@
 export const state = {
     player: {
         id: null,
-        name: null,
-        class: null,
-        race: null,
-        talent: null,
-        aq_attendance: null,
-        naxx_attendance: null,
+        name: 'Malvida',
+        class: 'Warrior',
+        race: 'Human',
+        talent: 'Fury',
+        aq_attendance: '0',
+        naxx_attendance: '0',
         wishlist: null,
+        role: 'member'
     },
     wishlist: {
         'locked': false,

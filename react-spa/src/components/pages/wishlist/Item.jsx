@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Draggable } from 'react-beautiful-dnd';
-import { connect } from '../overmind';
+import { connect } from './../../../overmind';
 
 const ItemContainer = styled.div`
     display: flex;

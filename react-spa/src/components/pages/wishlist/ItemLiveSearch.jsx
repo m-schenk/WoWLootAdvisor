@@ -4,9 +4,9 @@ import Spinner from 'react-bootstrap/Spinner'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import { Droppable } from 'react-beautiful-dnd';
-import { connect } from '../overmind';
+import { connect } from './../../../overmind';
 import { ShepherdTour, ShepherdTourContext } from 'react-shepherd'
-import { tutorialSteps } from './tutorialSteps'
+import { tutorialSteps } from '../../tutorialSteps'
 
 import 'shepherd.js/dist/css/shepherd.css'
 

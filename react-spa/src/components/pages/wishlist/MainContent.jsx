@@ -1,11 +1,17 @@
 import React from 'react';
+
+import { connect } from './../../../overmind'
+import { DragDropContext } from 'react-beautiful-dnd/';
+
+import '@atlaskit/css-reset';
+import './../../assets/App.css';
+
+import Wishlist from './Wishlist';
+import ItemLiveSearch from './ItemLiveSearch';
+
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import ItemLiveSearch from './ItemLiveSearch';
-import Wishlist from './Wishlist';
-import { DragDropContext } from 'react-beautiful-dnd/';
-import { connect } from '../overmind';
 
 class MainContent extends React.Component {
 
@@ -17,7 +23,7 @@ class MainContent extends React.Component {
 
     render() {
         return(
-            <Container>
+            <Container className="justify-content-center align-items-center" id="main-content">
                 <DragDropContext onDragEnd={this.onDragEnd}>
                     <Row className="row-centered">
                         <Col className="col-centered" sm={7}>

@@ -1,6 +1,10 @@
 import React from 'react';
-import './assets/App.css';
-import { connect } from '../overmind'
+
+import { connect } from './../../../overmind'
+
+import '@atlaskit/css-reset';
+import './../../assets/App.css';
+
 import Button from 'react-bootstrap/Button'
 
 class Login extends React.Component {
