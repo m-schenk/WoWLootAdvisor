@@ -9,13 +9,13 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-class Members extends React.Component {
+class LiveSession extends React.Component {
     render() {
         return(
             <Container className="justify-content-center align-items-center" id="main-content">
                 <Row className="row-centered">
                     <Col className="col-centered" sm={12}>
-                        <p>Council Members Page</p>
+                        <p>Council LiveSession Page</p>
                     </Col>
                 </Row>
             </Container>
@@ -23,4 +23,4 @@ class Members extends React.Component {
     }
 }
 
-export default connect(Members);
+export default connect(LiveSession);

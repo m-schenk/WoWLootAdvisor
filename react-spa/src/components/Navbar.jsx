@@ -24,7 +24,7 @@ class UserNavbar extends React.Component {
                         {(this.props.overmind.state.player.role === 'council') ? 
                         <NavDropdown title="Council" id="basic-nav-dropdown">
                             <NavDropdown.Item as={Link} to="/council/members">Members</NavDropdown.Item>
-                            <NavDropdown.Item as={Link} to="/profile">Raids</NavDropdown.Item>
+                            <NavDropdown.Item as={Link} to="/council/raidhistory">Raid History</NavDropdown.Item>
                             <NavDropdown.Divider />
                             <NavDropdown.Item as={Link} to="/profile">Raid Live Session</NavDropdown.Item>
                         </NavDropdown>

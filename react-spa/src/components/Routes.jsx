@@ -6,6 +6,9 @@ import MainContent from './pages/wishlist/MainContent';
 import Login from './pages/login/Login';
 import Profile from './pages/profile/Profile';
 import Members from './pages/council/Members';
+import RaidHistory from './pages/council/RaidHistory';
+import LiveSession from './pages/council/LiveSession';
+
 import Navbar from './Navbar';
 import Footer from './Footer';
 
@@ -24,6 +27,8 @@ class Routes extends React.Component {
                         <Route path="/profile" component={Profile} />
                         <Route path="/login" component={Login} />
                         <Route path="/council/members" component={Members} />
+                        <Route path="/council/raidhistory" component={RaidHistory} />
+                        <Route path="/council/livesession" component={LiveSession} />
                     </Switch>
                     <div className="justify-content-center align-items-center" id="footer"><Footer /></div>
                 </div>

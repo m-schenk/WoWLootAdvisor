@@ -1,6 +1,5 @@
 const Player = require('../models/Player');
 const fetch = require('node-fetch');
-const btoa = require('btoa');
 const redirect = 'http://raegae.maarten.ch:3000/api/discord/callback';
 const { catchAsync } = require('../utils');
 

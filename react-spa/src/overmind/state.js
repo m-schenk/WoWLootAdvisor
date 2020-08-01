@@ -8,7 +8,7 @@ export const state = {
         aq_attendance: '0',
         naxx_attendance: '0',
         wishlist: null,
-        role: 'member'
+        role: 'council'
     },
     wishlist: {
         'locked': false,
