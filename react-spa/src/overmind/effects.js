@@ -19,6 +19,37 @@ export const api = {
           }).then(response => {
           })
     },
+    async sendWishlist(state) {
+        const value = {
+            bracket1: 
+                [state.wishlist['bracket-1']['slot-1'].item, state.wishlist['bracket-1']['slot-2'].item,
+                 state.wishlist['bracket-1']['slot-3'].item, state.wishlist['bracket-1']['slot-4'].item, 
+                 state.wishlist['bracket-1']['slot-5'].item, state.wishlist['bracket-1']['slot-6'].item,],
+            bracket2: 
+                [state.wishlist['bracket-2']['slot-1'].item, state.wishlist['bracket-2']['slot-2'].item,
+                 state.wishlist['bracket-2']['slot-3'].item, state.wishlist['bracket-2']['slot-4'].item, 
+                 state.wishlist['bracket-2']['slot-5'].item, state.wishlist['bracket-2']['slot-6'].item,],
+            bracket3: 
+                [state.wishlist['bracket-3']['slot-1'].item, state.wishlist['bracket-3']['slot-2'].item,
+                 state.wishlist['bracket-3']['slot-3'].item, state.wishlist['bracket-3']['slot-4'].item, 
+                 state.wishlist['bracket-3']['slot-5'].item, state.wishlist['bracket-3']['slot-6'].item,],
+            bracket4: ( state.player.class === 'hunter' ? null : 
+                [state.wishlist['bracket-4']['slot-1'].item, state.wishlist['bracket-4']['slot-2'].item,
+                 state.wishlist['bracket-4']['slot-3'].item, state.wishlist['bracket-4']['slot-4'].item, 
+                 state.wishlist['bracket-4']['slot-5'].item, state.wishlist['bracket-4']['slot-6'].item,]
+            ),
+            bracketless: 
+                [state.wishlist['bracket-4']['slot-1'].item, state.wishlist['bracket-4']['slot-2'].item,
+                 state.wishlist['bracket-4']['slot-3'].item, state.wishlist['bracket-4']['slot-4'].item, 
+                 state.wishlist['bracket-4']['slot-5'].item, state.wishlist['bracket-4']['slot-6'].item,]
+        }   
+        await axios.post('http://localhost:3000/wishlist/save', value)
+        .then((response) => {
+            console.log(response);
+        }, (error) => {
+            console.log(error);
+        });
+    },
     async searchItems(query) {
         let cancel;
 

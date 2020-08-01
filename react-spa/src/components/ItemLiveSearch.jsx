@@ -38,12 +38,16 @@ class ItemLiveSearch extends React.Component {
 
     componentDidUpdate() {
         if(window.$WowheadPower) {
-            window.$WowheadPower.refreshLinks()
+            window.$WowheadPower.refreshLinks();
         }
     }
 
     triggerTutorial = () => {
-        this.props.overmind.actions.tutorial()
+        this.props.overmind.actions.tutorial();
+    }
+    
+    sendWishlist = () => {
+        this.props.overmind.actions.sendWishlist();
     }
 
     get renderItems() {
@@ -61,7 +65,7 @@ class ItemLiveSearch extends React.Component {
         return (
             <div className="live-search">
                 <div className="control">
-                    <Button variant="info" as="input" type="submit" value="Submit" />
+                    <Button variant="info" as="input" type="submit" value="Submit" onClick={this.sendWishlist()} />
                     <Button variant="info" as="input" type="reset" value="Reset" />  
                     <ShepherdTour steps={tutorialSteps} tourOptions={tourOptions}>
                         <TButton />

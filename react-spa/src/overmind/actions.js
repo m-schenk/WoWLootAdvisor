@@ -20,6 +20,12 @@ export const login = pipe(
     })
 )
 
+export const sendWishlist = pipe(
+    mutate(({ state, effects }) => {
+        effects.api.sendWishlist(state);
+    })
+)
+
 export const dragHandler = pipe( //just for now, will become an effect I guess.. later
     mutate(({ state }, result) => {
         const { destination, source } = result;

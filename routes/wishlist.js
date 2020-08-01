@@ -12,12 +12,12 @@ router.post('/save', [
     body()
     .custom((value, { req }) => {
 
-        let isHunter = false;
+        // let isHunter = false;
         
-        // swap this block with the block below if the class property should be fetched from the db instead
-        if (value.class == 'Hunter') {
-        isHunter = true;
-        }
+        // // swap this block with the block below if the class property should be fetched from the db instead
+        // if (value.class == 'Hunter') {
+        //     isHunter = true;
+        // }
         // ------------------------------------------------------------------------
         // Player.find({ id: req.session.playerId })
         // .then(player => {
@@ -28,11 +28,11 @@ router.post('/save', [
         // ------------------------------------------------------------------------
 
         const p = Promise.all([
-            checkBracket(value.bracket1, isHunter, false),
-            checkBracket(value.bracket2, isHunter, false),
-            checkBracket(value.bracket3, isHunter, false),
-            checkBracket(value.bracket4, isHunter, false),
-            checkBracket(value.bracketLess, isHunter, true)
+            checkBracket(value.bracket1, false),
+            checkBracket(value.bracket2, false),
+            checkBracket(value.bracket3, false),
+            checkBracket(value.bracket4, false),
+            checkBracket(value.bracketless, true)
         ])
         
         return p.then(result => {
@@ -50,7 +50,7 @@ module.exports = router;
 
 
 
-function checkBracket(bracket, isHunter, bracketLess) {  
+function checkBracket(bracket, bracketLess) {  
 
   return new Promise((resolve, reject) => {
         
@@ -62,9 +62,9 @@ function checkBracket(bracket, isHunter, bracketLess) {
     .then(result => {
     // console.log('bracket result', result);
 
-      if (result.length < 6) {
-        reject('Duplicate item Id or Bracket is missing item(s)')
-      }
+    //   if (result.length < 6) {
+    //     reject('Duplicate item Id or Bracket is missing item(s)')
+    //   }
                 
       let allocationPoints = 0;   // should not exceed 3
       let itemSlots = 0;          // should not exceed 2
@@ -90,10 +90,10 @@ function checkBracket(bracket, isHunter, bracketLess) {
               reject('Maximum amount of reserved items(2) exceeded');
             }
           }
-          if (allocationPoints > 2 && isHunter) {
-            console.log('HUNTER SHITS');
-            reject('Maximum allocation points(2) exceeded -> hunter class penalty');
-          }
+        //   if (allocationPoints > 2 && isHunter) {
+        //     console.log('HUNTER SHITS');
+        //     reject('Maximum allocation points(2) exceeded -> hunter class penalty');
+        //   }
           if (allocationPoints > 3) {
             reject('Maximum allocation points(3) exceeded');
           }
