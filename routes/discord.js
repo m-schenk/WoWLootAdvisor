@@ -1,8 +1,13 @@
-const express = require('express');
 const discordApi = require('../api/discord');
-const router = express.Router();
+const passport = require('passport');
 
-router.get('/login', discordApi.getDiscordAuthUrl);
-router.get('/callback', discordApi.getDiscordUserObject);
+const router = require('express').Router();
+
+router.get('/login', passport.authenticate('discord'));
+router.get('/redirect', passport.authenticate('discord', {
+    failureRedirect: '/forbidden'
+}), (req, res) => {
+    res.send(200);
+});
 
 module.exports = router;

@@ -3,6 +3,7 @@ const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
 const session = require('express-session');
+const passport = require('passport')
 
 require("dotenv").config();
 
@@ -10,6 +11,8 @@ const discordRouter = require('./routes/discord')
 const playerRouter = require('./routes/player');
 const itemsRouter = require('./routes/items');
 const wishlistRouter = require('./routes/wishlist');
+
+const discordStrategy = require('./strategies/discordStrategies');
 
 const app = express();
 
@@ -29,6 +32,9 @@ app.use(
         }
     })
 );
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 console.log(process.env.NODE_ENV);
 
@@ -69,11 +75,8 @@ app.use(function (err, req, res, next) {
     res.render('error');
 });
 
-// mongoose major update flags
-mongoose.set('useUnifiedTopology', true);
-mongoose.set('useNewUrlParser', true);
-
-mongoose.connect(process.env.MONGODB_URI)
+// set both mongoose major update flags
+mongoose.connect(process.env.MONGODB_URI, { useUnifiedTopology: true, useNewUrlParser: true })
     .then(result => {
         console.log('successfully connected to db!');
     })

@@ -7,12 +7,12 @@ exports.getValue = (req, res, next) => {
     res.status(200).json({ value: 12 });
 }
 
-exports.getDiscordAuthUrl = (req, res, next) => {
-    res.setHeader('Location', process.env.DISCORD_CALLBACK_URI)
-    res.setHeader('Content-Length', '0');
-    res.set({ 'X-Redirect': process.env.DISCORD_CALLBACK_URI })
-    res.sendStatus(200)
-}
+// exports.getDiscordAuthUrl = (req, res, next) => {
+//     res.setHeader('Location', process.env.DISCORD_CALLBACK_URI)
+//     res.setHeader('Content-Length', '0');
+//     res.set({ 'X-Redirect': process.env.DISCORD_CALLBACK_URI })
+//     res.sendStatus(200)
+// }
 
 exports.getDiscordUserObject = catchAsync(async (req, res) => {
     if (!req.query.code) throw new Error('NoCodeProvided');
