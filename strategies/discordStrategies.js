@@ -1,5 +1,6 @@
 const DiscordStrategy = require('passport-discord').Strategy;
 const passport = require('passport');
+const Player = require('../models/Player');
 
 passport.use(new DiscordStrategy({
     clientID: process.env.CLIENT_ID,
@@ -8,4 +9,5 @@ passport.use(new DiscordStrategy({
     scope: ['identify', 'guilds']
 }, (accessToken, refreshToken, profile, cb) => {
     console.log(profile.username)
+    console.log(profile.guilds)
 }));
