@@ -25,7 +25,7 @@ class Routes extends React.Component {
                     <div className="justify-content-center align-items-center" id="header"><Navbar /></div>
                     <Switch>
                         <Route path="/login" component={Login} />
-                        <ProtectedRoute exact path="/" component={MainContent} />
+                        <ProtectedRoute exact path="/" isAuthenticated={this.props.overmind.actions.isisAuthenticated} component={MainContent} />
                         <ProtectedRoute path="/wishlist" component={MainContent} />
                         <ProtectedRoute path="/profile" component={Profile} />
                         <ProtectedRoute path="/council/members" component={Members} />

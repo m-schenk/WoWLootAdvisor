@@ -25,6 +25,12 @@ export const sendWishlist = pipe(
     })
 )
 
+export const isAuthenticated = pipe(
+    mutate(({ state, effects }) => {
+        effects.api.isAuthenticated(state);
+    })
+)
+
 export const dragHandler = pipe( //just for now, will become an effect I guess.. later
     mutate(({ state }, result) => {
         const { destination, source } = result;

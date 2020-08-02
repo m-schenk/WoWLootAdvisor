@@ -33,8 +33,8 @@ console.log(process.env.NODE_ENV);
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.static(path.join(__dirname, 'react-spa/build')));
+//app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'react-spa/build/static')));
 
 // routes
 app.use('/', indexRouter);
@@ -43,6 +43,11 @@ app.use('/users', usersRouter);
 app.use('/items', itemsRouter);
 app.use('/wishlist', wishlistRouter);
 app.use('/player', playerRouter);
+app.use('/api/player', playerRouter);
+
+app.get('*', function(req, res) {
+    res.sendFile('index.html', {root: path.join(__dirname, 'react-spa/build/')});
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
