@@ -2,17 +2,17 @@ const DiscordStrategy = require('passport-discord').Strategy;
 const passport = require('passport');
 const Player = require('../models/Player');
 
-passport.serializeUser((player, done) => {
+passport.serializeUser((user, done) => {
     console.log('User serialized')
-    done(null, player._id);
+    done(null, user._id);
 });
 
 passport.deserializeUser((id, done) => {
     console.log('User deserialized')
     Player.findById(id)
-        .then(player => {
-            if (player) {
-                done(null, player);
+        .then(user => {
+            if (user) {
+                done(null, user);
             } else {
                 done(err, null);
             }
