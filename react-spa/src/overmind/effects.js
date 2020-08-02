@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { response } from 'express';
 
 const cache = {};
 
@@ -6,17 +7,25 @@ export const api = {
     async login() {
 
         const url = 'https://discord.com/api/oauth2/authorize?client_id=724982489529188352&redirect_uri=http%3A%2F%2Fraegae.maarten.ch%3A3000%2Fapi%2Fdiscord%2Fcallback&response_type=code&scope=identify%20guilds'
-        await axios(url, {
-            method: 'GET',
-            mode: 'cors',
-            headers: {
-              'Access-Control-Allow-Origin': '*',
-              'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            withCredentials: true,
-            credentials: 'same-origin',
-          }).then(response => {
-          })
+        await fetch(
+            new Request(
+                url, 
+                {
+                    method: 'GET',
+                    mode: 'no-cors',
+                    headers: {
+                        'Access-Control-Allow-Origin': '*',
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    withCredentials: true,
+                    credentials: 'same-origin',
+                }
+            )
+        ).then(response => {
+            console.log(response)
+        }).catch(error => {
+            console.log(error)
+        })
     },
     async sendWishlist(state) {
         const value = {
