@@ -21,7 +21,7 @@ class Login extends React.Component {
             <Container className="justify-content-center align-items-center" id="main-content">
                 <Row className="row-centered">
                     <Col className="col-centered" sm={12}>
-                        <Button variant="info" as="input" type="button" value="Login" onClick={this.auth()}/>
+                        <Button variant="info" as="input" type="button" value="Login" onClick={() => { this.auth() }}/>
                     </Col>
                 </Row>
             </Container>
