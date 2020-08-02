@@ -3,11 +3,11 @@ const passport = require('passport');
 const Player = require('../models/Player');
 
 passport.serializeUser((player, done) => {
-    done(null, player._id);
+    done(null, player.id);
 });
 
-passport.deserializeUser((_id, done) => {
-    User.findById(_id, (err, player) => {
+passport.deserializeUser((id, done) => {
+    User.findById(id, (err, player) => {
         done(err, player);
     });
 });
