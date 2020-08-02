@@ -10,7 +10,7 @@ exports.getValue = (req, res, next) => {
 exports.getDiscordAuthUrl = (req, res, next) => {
     res.setHeader('Location', process.env.DISCORD_CALLBACK_URI)
     res.setHeader('Content-Length', '0');
-    res.set({'redirect': process.env.DISCORD_CALLBACK_URI})
+    res.set({'X-Redirect': process.env.DISCORD_CALLBACK_URI})
     res.status(200)
 };
 

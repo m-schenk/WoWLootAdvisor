@@ -6,6 +6,8 @@ export const api = {
     async login() {
         await axios.get('http://raegae.maarten.ch:3000/api/discord/login')
         .then(response => {
+            console.log(response)
+            console.log(response.redirect)
             window.location = response.redirect
         }).catch(error => {
             console.log(error)
