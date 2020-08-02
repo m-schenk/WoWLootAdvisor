@@ -12,7 +12,7 @@ import Button from 'react-bootstrap/Button'
 
 class Login extends React.Component {
 
-    auth = () => {
+    auth() {
         window.location = 'http://raegae.maarten.ch:3000/api/discord/login'
     }
 
