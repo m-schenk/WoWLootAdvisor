@@ -36,6 +36,9 @@ exports.getDiscordUserObject = catchAsync(async (req, res) => {
     });
     const json = await response.json();
     console.log('discord json response: ', json);
+
+    req.session.token = json.access_token;
+    return res.redirect(302, 'http://raegae.maarten.ch:3000/callback')
   
     // allows /users/@me/guilds to return basic information about all of a user's guilds
     const userObject = await fetch('http://discordapp.com/api/users/@me', {
@@ -81,7 +84,7 @@ exports.getDiscordUserObject = catchAsync(async (req, res) => {
                         player: newPlayer 
                     }).end();
                 } else {
-                    //return res.redirect(302, 'http://raegae.maarten.ch:3000/callback')
+                    //
                     return res.status(200).json({ access_token: json.access_token, player: player }).end();
                 }
             })
