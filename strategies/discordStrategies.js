@@ -6,10 +6,15 @@ passport.serializeUser((player, done) => {
     done(null, player.id);
 });
 
-passport.deserializeUser((id, done) => {
-    User.findById(id, (err, player) => {
-        done(err, player);
-    });
+passport.deserializeUser(async (id, done) => {
+    const player = await User.findById(id);
+    if(player) {
+        done(null, player);
+    } else {
+        done(err, null);
+    }
+        
+
 });
 
 passport.use(new DiscordStrategy({
