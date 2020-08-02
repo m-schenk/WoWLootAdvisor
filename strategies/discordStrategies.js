@@ -6,7 +6,7 @@ passport.serializeUser((player, done) => {
     done(null, player._id);
 });
 
-passport.deserializeUser((id, done) => {
+passport.deserializeUser((_id, done) => {
     User.findById(_id, (err, player) => {
         done(err, player);
     });
@@ -18,16 +18,13 @@ passport.use(new DiscordStrategy({
     callbackURL: process.env.CLIENT_REDIRECT,
     scope: ['identify', 'guilds']
 }, (accessToken, refreshToken, profile, cb) => {
-    Player.findOne({ discordId: profile.id }).
-        then(player => {
+    Player.findOne({ discordId: profile.id })
+        .then(player => {
             if (player) {
                 cb(null, player);
             } else {
-                console.log(profile.guilds.filter(entry => (entry.id === process.env.DISCORD_SERVER_ID)))
                 if (profile.guilds.filter(entry => (entry.id === process.env.DISCORD_SERVER_ID))) {
-                    const newPlayer = new Player({
-                        discordId: profile.id
-                    })
+                    const newPlayer = new Player({ discordId: profile.id })
                     newPlayer.save();
                     cb(null, newPlayer)
                 } else {

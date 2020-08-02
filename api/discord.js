@@ -38,7 +38,6 @@ exports.getDiscordUserObject = catchAsync(async (req, res) => {
     console.log('discord json response: ', json);
 
     req.session.token = json.access_token;
-    return res.redirect(302, 'http://raegae.maarten.ch:3000/callback')
   
     // allows /users/@me/guilds to return basic information about all of a user's guilds
     const userObject = await fetch('http://discordapp.com/api/users/@me', {
@@ -65,7 +64,6 @@ exports.getDiscordUserObject = catchAsync(async (req, res) => {
     let belongsToGuild = false;
 
     guilds.forEach(guild => {
-        console.log(guild.id, '==', process.env.DISCORD_SERVER_ID);
         if (guild.id === process.env.DISCORD_SERVER_ID) {
             belongsToGuild = true;
             req.session.isLoggedIn = true;
