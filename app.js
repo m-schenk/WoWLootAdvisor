@@ -21,11 +21,11 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
 app.use(
-    session( {
+    session({
         secret: process.env.SESSION_SECRET,
         resave: false,
         saveUninitialized: false,
-    } )
+    })
 );
 
 console.log(process.env.NODE_ENV);
@@ -45,17 +45,17 @@ app.use('/wishlist', wishlistRouter);
 app.use('/player', playerRouter);
 app.use('/api/player', playerRouter);
 
-app.get('*', function(req, res) {
-    res.sendFile('index.html', {root: path.join(__dirname, 'react-spa/build/')});
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'react-spa/build/', 'index.html'));
 });
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
     next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
 
     //log error to console
     console.error(err);
@@ -65,7 +65,7 @@ app.use(function(err, req, res, next) {
     res.locals.error = req.app.get('env') === 'development' ? err : {};
 
     // render the error page
-    res.status( err.statusCode || 500 );
+    res.status(err.statusCode || 500);
     res.render('error');
 });
 
@@ -74,12 +74,12 @@ mongoose.set('useUnifiedTopology', true);
 mongoose.set('useNewUrlParser', true);
 
 mongoose.connect(process.env.MONGODB_URI)
-.then(result => {
-    console.log('successfully connected to db!');
-})
-.catch(err => {
-    console.log(err);
-    process.exit(0);
-})
+    .then(result => {
+        console.log('successfully connected to db!');
+    })
+    .catch(err => {
+        console.log(err);
+        process.exit(0);
+    })
 
 module.exports = app;
