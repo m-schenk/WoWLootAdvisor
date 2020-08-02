@@ -1,28 +1,12 @@
 import axios from 'axios';
-import { response } from 'express';
 
 const cache = {};
 
 export const api = {
     async login() {
-
-        const url = 'https://discord.com/api/oauth2/authorize?client_id=724982489529188352&redirect_uri=http%3A%2F%2Fraegae.maarten.ch%3A3000%2Fapi%2Fdiscord%2Fcallback&response_type=code&scope=identify%20guilds'
-        await fetch(
-            new Request(
-                url, 
-                {
-                    method: 'GET',
-                    mode: 'no-cors',
-                    headers: {
-                        'Access-Control-Allow-Origin': '*',
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                    },
-                    withCredentials: true,
-                    credentials: 'same-origin',
-                }
-            )
-        ).then(response => {
-            console.log(response)
+        await axios.get('http://localhost:3000/api/discord/login')
+        .then(response => {
+            window.location = response.redirect
         }).catch(error => {
             console.log(error)
         })
@@ -31,24 +15,24 @@ export const api = {
         const value = {
             bracket1: 
                 [state.wishlist['bracket-1']['slot-1'].item, state.wishlist['bracket-1']['slot-2'].item,
-                 state.wishlist['bracket-1']['slot-3'].item, state.wishlist['bracket-1']['slot-4'].item, 
+                 state.wishlist['bracket-1']['slot-3'].item, state.wishlist['bracket-1']['slot-4'].item,
                  state.wishlist['bracket-1']['slot-5'].item, state.wishlist['bracket-1']['slot-6'].item,],
             bracket2: 
                 [state.wishlist['bracket-2']['slot-1'].item, state.wishlist['bracket-2']['slot-2'].item,
-                 state.wishlist['bracket-2']['slot-3'].item, state.wishlist['bracket-2']['slot-4'].item, 
+                 state.wishlist['bracket-2']['slot-3'].item, state.wishlist['bracket-2']['slot-4'].item,
                  state.wishlist['bracket-2']['slot-5'].item, state.wishlist['bracket-2']['slot-6'].item,],
             bracket3: 
                 [state.wishlist['bracket-3']['slot-1'].item, state.wishlist['bracket-3']['slot-2'].item,
-                 state.wishlist['bracket-3']['slot-3'].item, state.wishlist['bracket-3']['slot-4'].item, 
+                 state.wishlist['bracket-3']['slot-3'].item, state.wishlist['bracket-3']['slot-4'].item,
                  state.wishlist['bracket-3']['slot-5'].item, state.wishlist['bracket-3']['slot-6'].item,],
             bracket4: ( state.player.class === 'hunter' ? null : 
                 [state.wishlist['bracket-4']['slot-1'].item, state.wishlist['bracket-4']['slot-2'].item,
-                 state.wishlist['bracket-4']['slot-3'].item, state.wishlist['bracket-4']['slot-4'].item, 
+                 state.wishlist['bracket-4']['slot-3'].item, state.wishlist['bracket-4']['slot-4'].item,
                  state.wishlist['bracket-4']['slot-5'].item, state.wishlist['bracket-4']['slot-6'].item,]
             ),
             bracketless: 
                 [state.wishlist['bracket-4']['slot-1'].item, state.wishlist['bracket-4']['slot-2'].item,
-                 state.wishlist['bracket-4']['slot-3'].item, state.wishlist['bracket-4']['slot-4'].item, 
+                 state.wishlist['bracket-4']['slot-3'].item, state.wishlist['bracket-4']['slot-4'].item,
                  state.wishlist['bracket-4']['slot-5'].item, state.wishlist['bracket-4']['slot-6'].item,]
         }   
         await axios.post('http://localhost:3000/wishlist/save', value)

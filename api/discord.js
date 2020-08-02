@@ -8,12 +8,10 @@ exports.getValue = (req, res, next) => {
 }
 
 exports.getDiscordAuthUrl = (req, res, next) => {
-    console.log(process.env.DISCORD_CALLBACK_URI);
-    res.redirect(process.env.DISCORD_CALLBACK_URI);
-};
-
-exports.test = (req, res, next)  => {
-    res.status(200).json({ value: "HUREHESEHIW=E=?" })
+    res.setHeader('Location', process.env.DISCORD_CALLBACK_URI)
+    res.setHeader('Content-Length', '0');
+    res.set({'X-Redirect': process.env.DISCORD_CALLBACK_URI})
+    res.status(200)
 };
 
 exports.getDiscordUserObject = catchAsync(async (req, res) => {

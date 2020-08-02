@@ -5,7 +5,6 @@ const isAuth = require('../middleware/is-auth'); //use this middleware in each r
 
 router.get('/login', discordAPI.getDiscordAuthUrl);
 router.get('/callback', discordAPI.getDiscordUserObject);
-router.get('/test', discordAPI.test);
 
 module.exports = router;
 

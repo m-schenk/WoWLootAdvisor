@@ -15,7 +15,6 @@ export const searchItems = pipe(
 
 export const login = pipe(
     mutate(({ effects }) => {
-        console.log("FUCK YOU")
         effects.api.login();
     })
 )
