@@ -10,11 +10,12 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button'
 
-auth = () => {
-    window.location = 'http://raegae.maarten.ch:3000/api/discord/login'
-}
-
 class Login extends React.Component {
+
+    auth = () => {
+        window.location = 'http://raegae.maarten.ch:3000/api/discord/login'
+    }
+
     render() {
         return(
             <Container className="justify-content-center align-items-center" id="main-content">
