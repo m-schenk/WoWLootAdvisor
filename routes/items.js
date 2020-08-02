@@ -1,11 +1,11 @@
 const express = require('express');
-const itemsController = require('../api/items');
+const itemsApi = require('../api/items');
 const router = express.Router();
 
 /* GET users listing. */
-router.get('',itemsController.getQuery);
-router.get('/test', itemsController.getMockData);
-router.put('/modifyItem', itemsController.modify);
-router.get('/id::id', itemsController.getItemById);
+router.get('',itemsApi.getQuery);
+router.get('/test', itemsApi.getMockData);
+router.put('/modifyItem', itemsApi.modify);
+router.get('/id::id', itemsApi.getItemById);
 
 module.exports = router;

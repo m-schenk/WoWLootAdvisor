@@ -3,7 +3,7 @@ const { check, body } = require('express-validator');
 const Item = require('../models/Item');
 const Player = require('../models/Player');
 
-const wishlistController = require('../api/wishlist');
+const wishlistApi = require('../api/wishlist');
 const router = express.Router();
 
 router.post('/save', [
@@ -37,9 +37,9 @@ router.post('/save', [
         console.log(result);
         })
     })
-], wishlistController.saveWishlist);
+], wishlistApi.saveWishlist);
 
-// router.get('/save', wishlistController.saveWishlist); // use for debug
+// router.get('/save', wishlistApi.saveWishlist); // use for debug
 
 module.exports = router;
 

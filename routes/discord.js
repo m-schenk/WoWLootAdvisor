@@ -1,8 +1,8 @@
 const express = require('express');
-const discordAPI = require('../api/discord');
+const discordApi = require('../api/discord');
 const router = express.Router();
 
-router.get('/login', discordAPI.getDiscordAuthUrl);
-router.get('/callback', discordAPI.getDiscordUserObject);
+router.get('/login', discordApi.getDiscordAuthUrl);
+router.get('/callback', discordApi.getDiscordUserObject);
 
 module.exports = router;
