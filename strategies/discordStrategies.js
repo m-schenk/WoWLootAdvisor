@@ -8,6 +8,24 @@ passport.use(new DiscordStrategy({
     callbackURL: process.env.CLIENT_REDIRECT,
     scope: ['identify', 'guilds']
 }, (accessToken, refreshToken, profile, cb) => {
-    console.log(profile.username)
-    console.log(profile.guilds)
+    Player.findOne({discordId: profile.id}).
+    then(player => {
+        if(player) {
+            cb(null, player);
+        } else {
+            console.log(profile.guilds.filter(entry => (entry.id === process.env.DISCORD_SERVER_ID)))
+            if(profile.guilds.filter(entry => (entry.id === process.env.DISCORD_SERVER_ID))) {
+                const newPlayer = new Player({
+                    discordId: profile.id
+                })
+                newPlayer.save();
+                cb(null, newPlayer)
+            } else {
+                cb(new Error('Access denied, does not belong to guild!'), null);
+            }
+        }
+    })
+    .catch(err => {
+        cb(err, null)
+    })
 }));

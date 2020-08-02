@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const WishlistSchema = require('./Wishlist')
 
 const PlayerSchema = new mongoose.Schema({
-    id: { type: Number, required: true },
+    discordId: { type: Number, required: true },
     name: { type: String, required: false },
     class: { type: String, required: false },
     race: { type: String, required: false },
