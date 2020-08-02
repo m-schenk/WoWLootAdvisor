@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { isAuthenticated } from './actions';
-import { response } from 'express';
 
 const cache = {};
 
@@ -16,9 +15,9 @@ export const api = {
     async isAuthenticated() {
         await axios.post('http://raegae.maarten.ch:3000/api/player/isauth')
         .then(response => {
-            console.log(response)
+            //console.log(response)
         }).catch(error => {
-            console.log(error)
+            //console.log(error)
         })
     },
     async sendWishlist(state) {
