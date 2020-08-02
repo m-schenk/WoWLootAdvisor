@@ -6,6 +6,8 @@ const logger = require('morgan');
 const mongoose = require('mongoose');
 const session = require('express-session');
 
+// const cors = require('cors');
+
 require("dotenv").config();
 
 const discordRouter = require('./routes/discord')
@@ -16,17 +18,16 @@ const wishlistRouter = require('./routes/wishlist');
 const playerRouter = require('./routes/player');
 
 const app = express();
+// app.use(cors({
+//     origin: 'http://localhost:3001',
+//     credentials: true
+// }));
 
-app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-});
-
-var cors = require('cors');
-if(process.env.NODE_ENV === 'development') {
-    app.use(cors());
-}
+// app.use(function(req, res, next) {
+//     res.header("Access-Control-Allow-Origin", "*");
+//     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+//     next();
+// });
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -48,10 +49,10 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/api/discord', cors(), discordRouter);
+app.use('/api/discord', discordRouter);
 app.use('/users',  usersRouter);
 app.use('/items',  itemsRouter);
-app.use('/wishlist', cors(),  wishlistRouter);
+app.use('/wishlist',  wishlistRouter);
 app.use('/player',  playerRouter);
 
 // catch 404 and forward to error handler
