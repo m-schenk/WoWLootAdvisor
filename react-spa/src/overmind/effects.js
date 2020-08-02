@@ -5,11 +5,10 @@ const cache = {};
 export const api = {
     async login() {
 
-        const url = 'https://discord.com/api/oauth2/authorize?client_id=734533006114553866&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fdiscord%2Fsuccess&response_type=code&scope=identify%20guilds%20email'
-
+        const url = 'https://discord.com/api/oauth2/authorize?client_id=724982489529188352&redirect_uri=http%3A%2F%2Fraegae.maarten.ch%3A3000%2Fapi%2Fdiscord%2Fcallback&response_type=code&scope=identify%20guilds'
         await axios(url, {
             method: 'GET',
-            mode: 'no-cors',
+            mode: 'cors',
             headers: {
               'Access-Control-Allow-Origin': '*',
               'Content-Type': 'application/x-www-form-urlencoded',
