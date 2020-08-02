@@ -23,7 +23,7 @@ exports.getDiscordUserObject = catchAsync(async (req, res) => {
         client_id: process.env.CLIENT_ID, // replace with new discord app from wow channel
         client_secret: process.env.CLIENT_SECRET, // replace with new discord app from wow channel
         grant_type: 'authorization_code',
-        redirect_uri: 'http://raegae.maarten.ch:3000/',
+        redirect_uri: process.env.DISCORD_CALLBACK_URI,
         code: code,
         scope: 'identify guilds'
     };
