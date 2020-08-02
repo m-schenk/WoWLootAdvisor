@@ -45,7 +45,7 @@ export const api = {
                  state.wishlist['bracket-4']['slot-3'].item, state.wishlist['bracket-4']['slot-4'].item,
                  state.wishlist['bracket-4']['slot-5'].item, state.wishlist['bracket-4']['slot-6'].item,]
         }   
-        await axios.post('http://raegae.maarten.ch:3000/wishlist/save', value)
+        await axios.post('http://raegae.maarten.ch:3000/api/wishlist/save', value)
         .then((response) => {
             console.log(response);
         }, (error) => {
@@ -69,7 +69,7 @@ export const api = {
             //create a new token
             cancel = axios.CancelToken.source();
             //send request with cancelToken
-            const response = await axios('http://raegae.maarten.ch:3000/items?query='+query, {cancelToken: cancel.token});
+            const response = await axios('http://raegae.maarten.ch:3000/api/items?query='+query, {cancelToken: cancel.token});
             const result = await response.data.results;
 
             //store query for caching

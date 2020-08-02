@@ -1,18 +1,15 @@
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
-const logger = require('morgan');
 const mongoose = require('mongoose');
 const session = require('express-session');
 
 require("dotenv").config();
 
 const discordRouter = require('./routes/discord')
-const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
+const playerRouter = require('./routes/player');
 const itemsRouter = require('./routes/items');
 const wishlistRouter = require('./routes/wishlist');
-const playerRouter = require('./routes/player');
 
 const app = express();
 
@@ -30,28 +27,24 @@ app.use(
 
 console.log(process.env.NODE_ENV);
 
-app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-//app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'react-spa/build/static')));
 
-// routes
-app.use('/', indexRouter);
+// api routes
 app.use('/api/discord', discordRouter);
-app.use('/users', usersRouter);
-app.use('/items', itemsRouter);
-app.use('/wishlist', wishlistRouter);
-app.use('/player', playerRouter);
 app.use('/api/player', playerRouter);
-
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'react-spa/build/', 'index.html'));
-});
+app.use('/api/items', itemsRouter);
+app.use('/api/wishlist', wishlistRouter);
 
 // catch 404 and forward to error handler
-app.use(function (req, res, next) {
+app.use('/api/*', (req, res, next) => {
     next(createError(404));
+});
+
+// front-end, every request should be resovled in react router if call is not to api endpoint
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'react-spa/build/', 'index.html'));
 });
 
 // error handler

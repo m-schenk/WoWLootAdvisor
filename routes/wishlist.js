@@ -3,10 +3,8 @@ const { check, body } = require('express-validator');
 const Item = require('../models/Item');
 const Player = require('../models/Player');
 
-const wishlistController = require('../controllers/wishlist');
+const wishlistController = require('../api/wishlist');
 const router = express.Router();
-const isAuth = require('../middleware/is-auth'); //use this middleware in each route that should only be accessible when authenticated
-
 
 router.post('/save', [
     body()
