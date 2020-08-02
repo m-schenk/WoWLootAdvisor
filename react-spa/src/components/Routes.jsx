@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import { connect } from './../overmind';
 
 import MainContent from './pages/wishlist/MainContent';
@@ -11,9 +11,11 @@ import LiveSession from './pages/council/LiveSession';
 
 import Navbar from './Navbar';
 import Footer from './Footer';
+import ProtectedRoute from './ProtectedRoute';
 
 import '@atlaskit/css-reset';
 import './assets/App.css';
+
 
 class Routes extends React.Component {
     render() {
@@ -22,13 +24,13 @@ class Routes extends React.Component {
                 <div className="justify-content-center align-items-center" id="wrapper">
                     <div className="justify-content-center align-items-center" id="header"><Navbar /></div>
                     <Switch>
-                        <Route exact path="/" component={MainContent} />
-                        <Route path="/wishlist" component={MainContent} />
-                        <Route path="/profile" component={Profile} />
                         <Route path="/login" component={Login} />
-                        <Route path="/council/members" component={Members} />
-                        <Route path="/council/raidhistory" component={RaidHistory} />
-                        <Route path="/council/livesession" component={LiveSession} />
+                        <ProtectedRoute exact path="/" component={MainContent} />
+                        <ProtectedRoute path="/wishlist" component={MainContent} />
+                        <ProtectedRoute path="/profile" component={Profile} />
+                        <ProtectedRoute path="/council/members" component={Members} />
+                        <ProtectedRoute path="/council/raidhistory" component={RaidHistory} />
+                        <ProtectedRoute path="/council/livesession" component={LiveSession} />
                     </Switch>
                     <div className="justify-content-center align-items-center" id="footer"><Footer /></div>
                 </div>
