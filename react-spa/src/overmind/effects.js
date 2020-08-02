@@ -4,7 +4,7 @@ const cache = {};
 
 export const api = {
     async login() {
-        await axios.get('http://localhost:3000/api/discord/login')
+        await axios.get('http://raegae.maarten.ch:3000/api/discord/login')
         .then(response => {
             window.location = response.redirect
         }).catch(error => {
@@ -35,7 +35,7 @@ export const api = {
                  state.wishlist['bracket-4']['slot-3'].item, state.wishlist['bracket-4']['slot-4'].item,
                  state.wishlist['bracket-4']['slot-5'].item, state.wishlist['bracket-4']['slot-6'].item,]
         }   
-        await axios.post('http://localhost:3000/wishlist/save', value)
+        await axios.post('http://raegae.maarten.ch:3000/wishlist/save', value)
         .then((response) => {
             console.log(response);
         }, (error) => {
@@ -59,7 +59,7 @@ export const api = {
             //create a new token
             cancel = axios.CancelToken.source();
             //send request with cancelToken
-            const response = await axios('http://localhost:3000/items?query='+query, {cancelToken: cancel.token});
+            const response = await axios('http://raegae.maarten.ch:3000/items?query='+query, {cancelToken: cancel.token});
             const result = await response.data.results;
 
             //store query for caching
