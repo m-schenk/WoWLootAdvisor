@@ -12,6 +12,14 @@ export const api = {
             console.log(error)
         })
     },
+    async loginCallback() {
+        await axios.get('http://raegae.maarten.ch:3000/api/discord/loginCallback')
+        .then(response => {
+            console.log(response)
+        }).catch(error => {
+            console.log(error)
+        })
+    },
     async isAuthenticated() {
         await axios.post('http://raegae.maarten.ch:3000/api/player/isauth')
         .then(response => {

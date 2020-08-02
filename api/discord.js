@@ -23,9 +23,9 @@ exports.getDiscordUserObject = catchAsync(async (req, res) => {
         client_id: process.env.CLIENT_ID, // replace with new discord app from wow channel
         client_secret: process.env.CLIENT_SECRET, // replace with new discord app from wow channel
         grant_type: 'authorization_code',
-        redirect_uri: redirect,
+        redirect_uri: 'http://raegae.maarten.ch:3000/',
         code: code,
-        scope: 'identify guilds email'
+        scope: 'identify guilds'
     };
     const response = await fetch('https://discordapp.com/api/oauth2/token', {
         method: 'POST',
@@ -45,7 +45,6 @@ exports.getDiscordUserObject = catchAsync(async (req, res) => {
             'Authorization': `Bearer ${json.access_token}`,
         },
     });
-    
     const user = await userObject.json();
     console.log('user object: ', user);
 
@@ -76,9 +75,14 @@ exports.getDiscordUserObject = catchAsync(async (req, res) => {
                         name: user.username
                     });
                     newPlayer.save();
-                    return res.status(200).json({ access_token: json.access_token, player: newPlayer }).end();
+                    return res.status(200).json({ 
+                        access_token: json.access_token,
+                        redirect, 
+                        player: newPlayer 
+                    }).end();
                 } else {
-                    return res.status(200).json({ access_token: json.access_token, player: player }).end();
+                    return res.redirect(302, 'http://raegae.maarten.ch:3000/callback')
+                    //return res.status(200).json({ access_token: json.access_token, player: player }).end();
                 }
             })
             .catch(err => {
