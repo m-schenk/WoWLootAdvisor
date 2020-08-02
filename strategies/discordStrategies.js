@@ -3,10 +3,12 @@ const passport = require('passport');
 const Player = require('../models/Player');
 
 passport.serializeUser((player, done) => {
+    console.log('User serialized')
     done(null, player._id);
 });
 
 passport.deserializeUser((id, done) => {
+    console.log('User deserialized')
     Player.findById(id)
         .then(player => {
             if (player) {
@@ -26,8 +28,10 @@ passport.use(new DiscordStrategy({
     Player.findOne({ discordId: profile.id })
         .then(player => {
             if (player) {
+                console.log('User exists')
                 cb(null, player);
             } else {
+                console.log('User doesnt exist')
                 if (profile.guilds.filter(entry => (entry.id === process.env.DISCORD_SERVER_ID))) {
                     const newPlayer = new Player({ discordId: profile.id })
                     newPlayer.save();
