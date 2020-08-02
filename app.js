@@ -4,6 +4,7 @@ const path = require('path');
 const mongoose = require('mongoose');
 const session = require('express-session');
 const passport = require('passport')
+const Discord = require('discord.js');
 
 require("dotenv").config();
 
@@ -15,6 +16,9 @@ const wishlistRouter = require('./routes/wishlist');
 const discordStrategy = require('./strategies/discordStrategies');
 
 const app = express();
+
+const client = new Discord.Client();
+client.login(process.env.DISCORD_BOT_TOKEN);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
