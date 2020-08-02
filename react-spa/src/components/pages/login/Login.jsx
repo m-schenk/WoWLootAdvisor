@@ -10,13 +10,17 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button'
 
+auth = () => {
+    window.location = 'http://raegae.maarten.ch:3000/api/discord/login'
+}
+
 class Login extends React.Component {
     render() {
         return(
             <Container className="justify-content-center align-items-center" id="main-content">
                 <Row className="row-centered">
                     <Col className="col-centered" sm={12}>
-                        <Button variant="info" as="input" type="button" value="Login" onClick={this.props.overmind.actions.login}/>
+                        <Button variant="info" as="input" type="button" value="Login" onClick={auth}/>
                     </Col>
                 </Row>
             </Container>
