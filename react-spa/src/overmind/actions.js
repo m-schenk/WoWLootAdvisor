@@ -24,8 +24,8 @@ export const sendWishlist = pipe(
 )
 
 export const isAuthenticated = pipe(
-    mutate(({ effects }) => {
-        effects.api.isAuthenticated();
+    mutate(({ state, effects }) => {
+        effects.api.isAuthenticated(state);
     })
 )
 
