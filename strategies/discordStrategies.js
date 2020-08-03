@@ -26,23 +26,23 @@ passport.use(new DiscordStrategy({
     scope: ['identify', 'guilds']
 }, (accessToken, refreshToken, profile, cb) => {
     cb(new Error('test error'), null)
-    Player.findOne({ discordId: profile.id })
-        .then(player => {
-            if (player) {
-                console.log('User exists')
-                cb(null, player);
-            } else {
-                console.log('User doesnt exist')
-                if (profile.guilds.filter(entry => (entry.id === process.env.DISCORD_SERVER_ID))) {
-                    const newPlayer = new Player({ discordId: profile.id })
-                    newPlayer.save();
-                    cb(null, newPlayer)
-                } else {
-                    cb(new Error('Access denied, does not belong to guild!'), null);
-                }
-            }
-        })
-        .catch(err => {
-            cb(err, null)
-        })
+    // Player.findOne({ discordId: profile.id })
+    //     .then(player => {
+    //         if (player) {
+    //             console.log('User exists')
+    //             cb(null, player);
+    //         } else {
+    //             console.log('User doesnt exist')
+    //             if (profile.guilds.filter(entry => (entry.id === process.env.DISCORD_SERVER_ID))) {
+    //                 const newPlayer = new Player({ discordId: profile.id })
+    //                 newPlayer.save();
+    //                 cb(null, newPlayer)
+    //             } else {
+    //                 cb(new Error('Access denied, does not belong to guild!'), null);
+    //             }
+    //         }
+    //     })
+    //     .catch(err => {
+    //         cb(err, null)
+    //     })
 }));
