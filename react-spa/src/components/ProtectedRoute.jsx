@@ -7,11 +7,10 @@ class ProtectedRoute extends React.Component {
         const isAuthenticated = this.props.overmind.actions.isAuthenticated()
         return (
             <Route
-                {...rest}
                 render={
                     props => {
                         return isAuthenticated ?
-                            <this.props.Component {...rest} {...props} /> :
+                            <this.props.Component {...props} /> :
                             <Redirect to='/login' />
                     }}
             />
