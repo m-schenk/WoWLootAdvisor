@@ -1,4 +1,5 @@
 export const state = {
+    isAuth: false,
     player: {
         id: null,
         name: 'Malvida',

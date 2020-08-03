@@ -3,18 +3,18 @@ import axios from 'axios';
 const cache = {};
 
 export const api = {
-    async isAuthenticated() {
+    async isAuthenticated(state) {
         console.log('isAuth effect')
         await axios.get('http://raegae.maarten.ch:3000/api/discord/isauth', { withCredentials: true })
         .then(response => {
             console.log(response)
             if(response.status === 200) {
-                return true
+                state.isAuth = true;
             } else {
-                return false
+                state.isAuth = false;
             }
         }).catch(error => {
-            console.log(error)
+            console.log(error);
         })
     },
     async sendWishlist(state) {

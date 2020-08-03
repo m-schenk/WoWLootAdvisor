@@ -2,6 +2,8 @@ import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { connect } from './../overmind';
 
+import { AuthContext } from './AuthContext';
+
 import MainContent from './pages/wishlist/MainContent';
 import Login from './pages/login/Login';
 import Profile from './pages/profile/Profile';
@@ -19,7 +21,7 @@ import './assets/App.css';
 
 class Routes extends React.Component {
 
-    auth() {
+    componentDidUpdate() {
         this.props.overmind.actions.isAuthenticated()
     }
 
@@ -30,12 +32,14 @@ class Routes extends React.Component {
                         <Route path="/login" component={Login} />
                         <div className="justify-content-center align-items-center" id="wrapper">
                             <div className="justify-content-center align-items-center" id="header"><Navbar /></div>
-                                <ProtectedRoute exact path="/" isAuthenticated={() => {this.auth()}} component={MainContent} />
-                                <ProtectedRoute path="/wishlist" isAuthenticated={() => {this.auth()}} component={MainContent} />
-                                <ProtectedRoute path="/profile" isAuthenticated={() => {this.auth()}} component={Profile} />
-                                <ProtectedRoute path="/council/members" isAuthenticated={() => {this.auth()}} component={Members} />
-                                <ProtectedRoute path="/council/raidhistory" isAuthenticated={() => {this.auth()}} component={RaidHistory} />
-                                <ProtectedRoute path="/council/livesession" isAuthenticated={() => {this.auth()}} component={LiveSession} />
+                                <Auth.Provider value={this.props.overmind.state.isAuth}>
+                                    <ProtectedRoute exact path="/" component={MainContent} />
+                                    <ProtectedRoute path="/wishlist" component={MainContent} />
+                                    <ProtectedRoute path="/profile" component={Profile} />
+                                    <ProtectedRoute path="/council/members" component={Members} />
+                                    <ProtectedRoute path="/council/raidhistory" component={RaidHistory} />
+                                    <ProtectedRoute path="/council/livesession" component={LiveSession} />
+                                </Auth.Provider>
                             <div className="justify-content-center align-items-center" id="footer"><Footer /></div>
                         </div>
                     </Switch>
