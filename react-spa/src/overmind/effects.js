@@ -7,6 +7,7 @@ export const api = {
         console.log('isAuth effect')
         await axios.get('http://raegae.maarten.ch:3000/api/discord/isauth', { withCredentials: true })
         .then(response => {
+            console.log(response)
             if(response.status === 200) {
                 return true
             } else {
