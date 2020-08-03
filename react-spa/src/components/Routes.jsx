@@ -32,6 +32,7 @@ class Routes extends React.Component {
     }
 
     render() {
+        console.log(this.props.overmind.state.isAuth)
         return(
             <Router>
                     <Switch>
