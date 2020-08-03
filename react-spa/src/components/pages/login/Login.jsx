@@ -20,8 +20,8 @@ class Login extends React.Component {
         return(
             <Container className="justify-content-center align-items-center" id="main-content">
                 <Row className="row-centered">
-                    <Col className="col-centered vertical-center-container" style={{ textAlign: 'center' }}sm={12}>
-                        <Button className="vertical-center-element" variant="info" as="input" type="button" value="Login with Discord" onClick={() => { this.auth() }}/>
+                    <Col className="col-centered" style={{ textAlign: 'center' }}sm={12}>
+                        <Button className="login-btn" variant="info" as="input" type="button" value="Login with Discord" onClick={() => { this.auth() }}/>
                     </Col>
                 </Row>
             </Container>

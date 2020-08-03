@@ -218,16 +218,6 @@ label {
   margin-right: 12px;
 }
 
-.vertical-center-container {
-  height: 100%;
-  position: relative;
-  border: 3px solid green;
-}
-
-.vertical-center-element {
-  margin: 0;
-  position: absolute;
-  top: 50%;
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
+.login-btn {
+    margin-top: 200px;
 }
