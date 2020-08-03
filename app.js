@@ -55,7 +55,7 @@ app.get('/forbidden', (req, res) => {
 
 // catch 404 and forward to error handler
 app.use('/api/*', (req, res, next) => {
-    next(createError(404));
+    next(createError(404, `page not found, url: ${req.originalUrl} might be invalid`));
 });
 
 // front-end, every request should be resovled in react router if call is not to api endpoint
