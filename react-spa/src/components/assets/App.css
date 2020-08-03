@@ -220,5 +220,7 @@ label {
 
 .login-btn {
     margin-top: 200px;
-    font-size: 48px;
+    font-size: 36px;
+    font-weight: bold;
+    font-family: monospace;
 }

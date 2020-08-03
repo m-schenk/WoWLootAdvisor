@@ -73,5 +73,5 @@ exports.getPlayerSelf = (req, res, next) => {
 
 }
 exports.isAuth = (req, res, next) => {
-    res.sendStatus(200)
+    res.status(200).json({ validation: true})
 }

@@ -12,16 +12,16 @@ import Button from 'react-bootstrap/Button'
 
 class Login extends React.Component {
 
-    auth() {
-        window.location = 'http://raegae.maarten.ch:3000/api/discord/login'
-    }
+    // auth() {
+    //     window.location = 'http://raegae.maarten.ch:3000/api/discord/login'
+    // }
 
     render() {
         return(
             <Container className="justify-content-center align-items-center" id="main-content">
                 <Row className="row-centered">
                     <Col className="col-centered" style={{ textAlign: 'center' }}sm={12}>
-                        <Button className="login-btn" variant="info" as="input" type="button" value="Login with Discord" onClick={() => { this.auth() }}/>
+                        <Button className="login-btn" variant="info" as="input" type="button" value="Login with Discord" onClick={() => { this.props.overmind.action.login() }}/>
                     </Col>
                 </Row>
             </Container>

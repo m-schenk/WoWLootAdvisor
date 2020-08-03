@@ -1,17 +1,8 @@
 import axios from 'axios';
-import { isAuthenticated } from './actions';
 
 const cache = {};
 
 export const api = {
-    async login() {
-        await axios.get('http://raegae.maarten.ch:3000/api/discord/login')
-        .then(response => {
-            window.location = response.headers.location
-        }).catch(error => {
-            console.log(error)
-        })
-    },
     async loginCallback() {
         await axios.get('http://raegae.maarten.ch:3000/api/discord/loginCallback')
         .then(response => {
@@ -23,7 +14,7 @@ export const api = {
     async isAuthenticated() {
         await axios.post('http://raegae.maarten.ch:3000/api/player/isauth')
         .then(response => {
-            //console.log(response)
+            console.log(response)
         }).catch(error => {
             //console.log(error)
         })

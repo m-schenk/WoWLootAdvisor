@@ -13,11 +13,9 @@ export const searchItems = pipe(
     })
 )
 
-export const login = pipe(
-    mutate(({ effects }) => {
-        effects.api.login();
-    })
-)
+export const login = () => {
+    window.location = 'http://raegae.maarten.ch:3000/api/discord/login'
+}
 
 export const sendWishlist = pipe(
     mutate(({ state, effects }) => {
