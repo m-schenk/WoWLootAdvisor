@@ -2,8 +2,6 @@ import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { connect } from './../overmind';
 
-import { AuthContext } from './AuthContext';
-
 import MainContent from './pages/wishlist/MainContent';
 import Login from './pages/login/Login';
 import Profile from './pages/profile/Profile';

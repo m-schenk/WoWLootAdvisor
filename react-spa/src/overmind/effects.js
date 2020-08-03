@@ -9,8 +9,10 @@ export const api = {
         .then(response => {
             console.log(response)
             if(response.status === 200) {
+                console.log("auth true")
                 state.isAuth = true;
             } else {
+                console.log("auth false")
                 state.isAuth = false;
             }
         }).catch(error => {
