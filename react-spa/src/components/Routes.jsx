@@ -25,6 +25,14 @@ class Routes extends React.Component {
         this.props.overmind.actions.isAuthenticated()
     }
 
+    componentDidMount() {
+        this.props.overmind.actions.isAuthenticated()
+    }
+
+    componentDidUpdate() {
+        this.props.overmind.actions.isAuthenticated()
+    }
+
     render() {
         return(
             <Router>
@@ -32,14 +40,12 @@ class Routes extends React.Component {
                         <Route path="/login" component={Login} />
                         <div className="justify-content-center align-items-center" id="wrapper">
                             <div className="justify-content-center align-items-center" id="header"><Navbar /></div>
-                                <AuthContext.Provider value={this.props.overmind.state.isAuth}>
-                                    <ProtectedRoute exact path="/" component={MainContent} />
-                                    <ProtectedRoute path="/wishlist" component={MainContent} />
-                                    <ProtectedRoute path="/profile" component={Profile} />
-                                    <ProtectedRoute path="/council/members" component={Members} />
-                                    <ProtectedRoute path="/council/raidhistory" component={RaidHistory} />
-                                    <ProtectedRoute path="/council/livesession" component={LiveSession} />
-                                </AuthContext.Provider>
+                                <ProtectedRoute exact path="/" isAuthenticated={this.props.overmind.state.isAuth} component={MainContent} />
+                                <ProtectedRoute path="/wishlist" isAuthenticated={this.props.overmind.state.isAuth} component={MainContent} />
+                                <ProtectedRoute path="/profile" isAuthenticated={this.props.overmind.state.isAuth} component={Profile} />
+                                <ProtectedRoute path="/council/members" isAuthenticated={this.props.overmind.state.isAuth} component={Members} />
+                                <ProtectedRoute path="/council/raidhistory" isAuthenticated={this.props.overmind.state.isAuth} component={RaidHistory} />
+                                <ProtectedRoute path="/council/livesession" isAuthenticated={this.props.overmind.state.isAuth} component={LiveSession} />
                             <div className="justify-content-center align-items-center" id="footer"><Footer /></div>
                         </div>
                     </Switch>
