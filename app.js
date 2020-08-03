@@ -49,6 +49,10 @@ app.use('/api/player', playerRouter);
 app.use('/api/items', itemsRouter);
 app.use('/api/wishlist', wishlistRouter);
 
+app.get('/forbidden', (req, res) => {
+    res.sendFile(path.join(__dirname+'/public/forbidden.html'))
+});
+
 // catch 404 and forward to error handler
 app.use('/api/*', (req, res, next) => {
     next(createError(404));

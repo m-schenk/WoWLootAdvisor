@@ -25,6 +25,7 @@ passport.use(new DiscordStrategy({
     callbackURL: process.env.CLIENT_REDIRECT,
     scope: ['identify', 'guilds']
 }, (accessToken, refreshToken, profile, cb) => {
+    cb(new Error('test error'), null)
     Player.findOne({ discordId: profile.id })
         .then(player => {
             if (player) {
