@@ -20,8 +20,8 @@ class Login extends React.Component {
         return(
             <Container className="justify-content-center align-items-center" id="main-content">
                 <Row className="row-centered">
-                    <Col className="col-centered" sm={12}>
-                        <Button style={{display: "flex", justifyContent: "center", alignItems: "center"}} variant="info" as="input" type="button" value="Login" onClick={() => { this.auth() }}/>
+                    <Col className="col-centered" style={{ textAlign: center }}sm={12}>
+                        <Button variant="info" as="input" type="button" value="Login" onClick={() => { this.auth() }}/>
                     </Col>
                 </Row>
             </Container>
