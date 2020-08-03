@@ -20,6 +20,11 @@ import './assets/App.css';
 
 
 class Routes extends React.Component {
+
+    componentWillUpdate() {
+        this.props.overmind.actions.isAuthenticated()
+    }
+
     render() {
         return(
             <Router>
@@ -27,7 +32,7 @@ class Routes extends React.Component {
                         <Route path="/login" component={Login} />
                         <div className="justify-content-center align-items-center" id="wrapper">
                             <div className="justify-content-center align-items-center" id="header"><Navbar /></div>
-                                <AuthContext.Provider value={() => { this.props.overmind.actions.isAuthenticated() }}>
+                                <AuthContext.Provider value={this.props.overmind.state.isAuth}>
                                     <ProtectedRoute exact path="/" component={MainContent} />
                                     <ProtectedRoute path="/wishlist" component={MainContent} />
                                     <ProtectedRoute path="/profile" component={Profile} />
