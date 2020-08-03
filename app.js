@@ -21,10 +21,6 @@ const app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
-app.get('/login', (req, res) => {
-    res.sendFile(path.join(__dirname+'/react-spa/build/index.html'));
-})
-
 console.log(process.env.NODE_ENV);
 
 app.use(
@@ -66,7 +62,9 @@ app.use('/api/wishlist', wishlistRouter);
 //     next(createError(404, `page not found, url: ${req.originalUrl} might be invalid`));
 // });
 
-
+app.get('/login', (req, res) => {
+    res.sendFile(path.join(__dirname+'/react-spa/build/index.html'));
+})
 
 // front-end, every request should be resovled in react router if call is not to api endpoint
 app.get('*', connectEnsureLogin.ensureLoggedIn('/login') ,(req, res) => {
@@ -99,4 +97,3 @@ mongoose.connect(process.env.MONGODB_URI, { useUnifiedTopology: true, useNewUrlP
     })
 
 module.exports = app;
-
