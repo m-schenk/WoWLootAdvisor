@@ -1,7 +1,11 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
+import { connect } from '../overmind';
 
-const ProtectedRoute = ({ component: Component, isAuthenticated, ...rest }) => {
+const ProtectedRoute = ({ component: Component, ...rest }) => {
+
+    const isAuthenticated = this.props.overmind.actions.isAuthenticated()
+
     return (
         <Route 
             {...rest} 
@@ -15,4 +19,4 @@ const ProtectedRoute = ({ component: Component, isAuthenticated, ...rest }) => {
     )
 }
 
-export default ProtectedRoute;
+export default connect(ProtectedRoute);

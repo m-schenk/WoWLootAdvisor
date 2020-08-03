@@ -18,11 +18,6 @@ import './assets/App.css';
 
 
 class Routes extends React.Component {
-
-    auth() {
-        this.props.overmind.actions.isAuthenticated()
-    }
-
     render() {
         return(
             <Router>
@@ -30,12 +25,12 @@ class Routes extends React.Component {
                         <Route path="/login" component={Login} />
                         <div className="justify-content-center align-items-center" id="wrapper">
                             <div className="justify-content-center align-items-center" id="header"><Navbar /></div>
-                                <ProtectedRoute exact path="/" isAuthenticated={() => {this.auth()}} component={MainContent} />
-                                <ProtectedRoute path="/wishlist" isAuthenticated={() => {this.auth()}} component={MainContent} />
-                                <ProtectedRoute path="/profile" isAuthenticated={() => {this.auth()}} component={Profile} />
-                                <ProtectedRoute path="/council/members" isAuthenticated={() => {this.auth()}} component={Members} />
-                                <ProtectedRoute path="/council/raidhistory" isAuthenticated={() => {this.auth()}} component={RaidHistory} />
-                                <ProtectedRoute path="/council/livesession" isAuthenticated={() => {this.auth()}} component={LiveSession} />
+                                <ProtectedRoute exact path="/" component={MainContent} />
+                                <ProtectedRoute path="/wishlist" component={MainContent} />
+                                <ProtectedRoute path="/profile" component={Profile} />
+                                <ProtectedRoute path="/council/members" component={Members} />
+                                <ProtectedRoute path="/council/raidhistory" component={RaidHistory} />
+                                <ProtectedRoute path="/council/livesession" component={LiveSession} />
                             <div className="justify-content-center align-items-center" id="footer"><Footer /></div>
                         </div>
                     </Switch>
