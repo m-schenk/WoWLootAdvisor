@@ -4,7 +4,6 @@ import { connect } from './../overmind';
 
 import MainContent from './pages/wishlist/MainContent';
 import Login from './pages/login/Login';
-import Callback from './pages/login/Callback';
 import Profile from './pages/profile/Profile';
 import Members from './pages/council/Members';
 import RaidHistory from './pages/council/RaidHistory';
