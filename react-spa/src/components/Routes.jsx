@@ -30,12 +30,12 @@ class Routes extends React.Component {
                         <Route path="/login" component={Login} />
                         <div className="justify-content-center align-items-center" id="wrapper">
                             <div className="justify-content-center align-items-center" id="header"><Navbar /></div>
-                                <ProtectedRoute exact path="/" isAuthenticated={this.auth()} component={MainContent} />
-                                <ProtectedRoute path="/wishlist" isAuthenticated={this.auth()} component={MainContent} />
-                                <ProtectedRoute path="/profile" isAuthenticated={this.auth()} component={Profile} />
-                                <ProtectedRoute path="/council/members" isAuthenticated={this.auth()} component={Members} />
-                                <ProtectedRoute path="/council/raidhistory" isAuthenticated={this.auth()} component={RaidHistory} />
-                                <ProtectedRoute path="/council/livesession" isAuthenticated={this.auth()} component={LiveSession} />
+                                <ProtectedRoute exact path="/" isAuthenticated={() => {() => {this.auth()}}} component={MainContent} />
+                                <ProtectedRoute path="/wishlist" isAuthenticated={() => {this.auth()}} component={MainContent} />
+                                <ProtectedRoute path="/profile" isAuthenticated={() => {this.auth()}} component={Profile} />
+                                <ProtectedRoute path="/council/members" isAuthenticated={() => {this.auth()}} component={Members} />
+                                <ProtectedRoute path="/council/raidhistory" isAuthenticated={() => {this.auth()}} component={RaidHistory} />
+                                <ProtectedRoute path="/council/livesession" isAuthenticated={() => {this.auth()}} component={LiveSession} />
                             <div className="justify-content-center align-items-center" id="footer"><Footer /></div>
                         </div>
                     </Switch>
