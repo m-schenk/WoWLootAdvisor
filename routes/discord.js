@@ -8,5 +8,12 @@ router.get('/redirect', passport.authenticate('discord', {
 }), (req, res) => {
     res.send(req.user);
 });
+router.get('/isauth', (req, res) => {
+    if(req.user) {
+        res.sendStatus(200)
+    } else {
+        res.sendStatus(403)
+    }
+})
 
 module.exports = router;

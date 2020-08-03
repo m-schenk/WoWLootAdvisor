@@ -28,11 +28,11 @@ class Routes extends React.Component {
                         <div className="justify-content-center align-items-center" id="wrapper">
                             <div className="justify-content-center align-items-center" id="header"><Navbar /></div>
                             <ProtectedRoute exact path="/" isAuthenticated={this.props.overmind.actions.isAuthenticated} component={MainContent} />
-                            <ProtectedRoute path="/wishlist" component={MainContent} />
-                            <ProtectedRoute path="/profile" component={Profile} />
-                            <ProtectedRoute path="/council/members" component={Members} />
-                            <ProtectedRoute path="/council/raidhistory" component={RaidHistory} />
-                            <ProtectedRoute path="/council/livesession" component={LiveSession} />
+                            <ProtectedRoute path="/wishlist" isAuthenticated={this.props.overmind.actions.isAuthenticated} component={MainContent} />
+                            <ProtectedRoute path="/profile" isAuthenticated={this.props.overmind.actions.isAuthenticated} component={Profile} />
+                            <ProtectedRoute path="/council/members" isAuthenticated={this.props.overmind.actions.isAuthenticated} component={Members} />
+                            <ProtectedRoute path="/council/raidhistory" isAuthenticated={this.props.overmind.actions.isAuthenticated} component={RaidHistory} />
+                            <ProtectedRoute path="/council/livesession" isAuthenticated={this.props.overmind.actions.isAuthenticated} component={LiveSession} />
                             <div className="justify-content-center align-items-center" id="footer"><Footer /></div>
                         </div>
                     </Switch>

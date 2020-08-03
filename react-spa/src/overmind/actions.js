@@ -23,12 +23,6 @@ export const sendWishlist = pipe(
     })
 )
 
-export const loginCallback = pipe(
-    mutate(({ state, effects }) => {
-        effects.api.loginCallback(state);
-    })
-)
-
 export const isAuthenticated = pipe(
     mutate(({ state, effects }) => {
         effects.api.isAuthenticated(state);
