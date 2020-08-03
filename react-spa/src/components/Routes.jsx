@@ -23,7 +23,7 @@ class Routes extends React.Component {
     }
 
     componentDidUpdate() {
-        this.loading = true
+        this.props.loading = true
         this.props.overmind.actions.isAuthenticated()
         this.props.loading = false
     }
