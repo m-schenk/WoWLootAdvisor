@@ -6,7 +6,7 @@ export const api = {
     async isAuthenticated() {
         await axios.get('http://raegae.maarten.ch:3000/api/discord/isauth', { withCredentials: true })
         .then(response => {
-            if(response.status(200)) {
+            if(response.status === 200) {
                 return true
             } else {
                 return false
