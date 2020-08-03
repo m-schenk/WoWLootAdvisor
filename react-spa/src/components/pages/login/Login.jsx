@@ -21,7 +21,7 @@ class Login extends React.Component {
             <Container className="justify-content-center align-items-center" id="main-content">
                 <Row className="row-centered">
                     <Col className="col-centered" style={{ textAlign: 'center' }}sm={12}>
-                        <Button className="login-btn" variant="info" as="input" type="button" value="Login with Discord" onClick={() => { this.props.overmind.action.login() }}/>
+                        <Button className="login-btn" variant="info" as="input" type="button" value="Login with Discord" onClick={() => { this.props.overmind.actions.login() }}/>
                     </Col>
                 </Row>
             </Container>
