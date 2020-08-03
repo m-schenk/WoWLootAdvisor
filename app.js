@@ -4,6 +4,7 @@ const path = require('path');
 const mongoose = require('mongoose');
 const session = require('express-session');
 const passport = require('passport')
+const connectEnsureLogin = require('connect-ensure-login');
 
 require("dotenv").config();
 
@@ -65,7 +66,7 @@ app.get('/login', (req, res) => {
 
 // front-end, every request should be resovled in react router if call is not to api endpoint
 app.get('*', (req, res) => {
-    console.log('route: *')
+    connectEnsureLogin('/login')
     res.sendFile(path.join(__dirname+'/react-spa/build/index.html'));
 });
 

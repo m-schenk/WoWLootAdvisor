@@ -24,7 +24,6 @@ class Routes extends React.Component {
             <Router>
                     <Switch>
                         <Route path="/login" component={Login} />
-                        <Route path="/callback" component={Callback} />
                         <div className="justify-content-center align-items-center" id="wrapper">
                             <div className="justify-content-center align-items-center" id="header"><Navbar /></div>
                             <ProtectedRoute exact path="/" isAuthenticated={this.props.overmind.actions.isAuthenticated} component={MainContent} />
