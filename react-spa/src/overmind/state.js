@@ -162,6 +162,6 @@ export const state = {
         'isSearching': false,
     },
     helper: {
-        loading_talent_selector: null
+        loading_talent_selector: true
     }
 }

@@ -84,7 +84,7 @@ class Profile extends React.Component {
                 </>);
                 break;
         }
-        this.props.overmind.state.helper.loading_talent_selector = true;
+        this.props.overmind.actions.helperChangerLoadingTalentSelector()
     }
 
 
