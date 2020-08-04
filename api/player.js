@@ -55,6 +55,7 @@ exports.playerLogout = (req, res, next) => {
 }
 
 exports.getPlayerProfile = (req, res, next) => {
+    console.log(req.user)
     Player.find({ id: req.user._id })
         .then(player => {
             res.writeHead(200, {
