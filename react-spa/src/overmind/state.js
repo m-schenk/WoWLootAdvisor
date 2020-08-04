@@ -1,6 +1,6 @@
 export const state = {
     player: {
-        id: null,
+        _id: null,
         name: null,
         class: null,
         race: null,

@@ -7,9 +7,10 @@ const PlayerSchema = new mongoose.Schema({
     class: { type: String, required: false },
     race: { type: String, required: false },
     talent: { type: String, required: false },
+    rank: { type: String, required: false },
     aq_attendance: { type: Number, required: false },
     naxx_attendance: { type: Number, required: false },
-    wishlist: {type: mongoose.Schema.Types.ObjectId, ref: 'WishlistSchema', required: false},
+    wishlist: {type: mongoose.Schema.Types.ObjectId, ref: WishlistSchema, required: false},
 });
 
 module.exports = mongoose.model('Player', PlayerSchema);

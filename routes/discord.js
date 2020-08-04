@@ -1,7 +1,5 @@
 const passport = require('passport');
 const router = require('express').Router();
-const connectEnsureLogin = require('connect-ensure-login');
-
 
 router.get('/login', passport.authenticate('discord'));
 router.get('/redirect', passport.authenticate('discord', {
@@ -10,9 +8,5 @@ router.get('/redirect', passport.authenticate('discord', {
 }), (req, res) => {
     res.send(req.user);
 });
-router.get('/isauth', connectEnsureLogin.ensureLoggedIn('http://raegae.maarten.ch:3000/forbidden'), (req, res) => {
-    console.log('auth correct')
-    res.sendStatus(200)
-})
 
 module.exports = router;

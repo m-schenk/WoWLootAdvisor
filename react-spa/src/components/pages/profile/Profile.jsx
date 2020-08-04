@@ -16,7 +16,7 @@ class Profile extends React.Component {
 
     componentDidMount() {
         if(!this.props.overmind.state.player.loaded) {
-            this.props.overmind.actions.fetchProfile()
+            this.props.overmind.actions.getPlayerProfile()
         }
     }
 

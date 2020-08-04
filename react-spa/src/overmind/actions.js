@@ -23,9 +23,9 @@ export const sendWishlist = pipe(
     })
 )
 
-export const isAuthenticated = pipe(
+export const getPlayerProfile = pipe(
     mutate(({ state, effects }) => {
-        effects.api.isAuthenticated(state);
+        effects.api.fetchProfile(state);
     })
 )
 
