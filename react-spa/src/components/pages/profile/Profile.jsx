@@ -31,15 +31,16 @@ class Profile extends React.Component {
             <Container className="justify-content-center align-items-center" id="main-content">
                 <Row className="row-centered">
                     <Col className="col-centered" sm={12}>
+                        { !this.props.overmind.state.player.isComplete && <Alert variant={'danger'}>
+                            Your profile seems not complete, please edit your profile before you start creating a wishlist
+                        </Alert>}
                         <p>{this.props.overmind.state.player._id}</p>
                         <p>{this.props.overmind.state.player.name}</p>
                         <p>{this.props.overmind.state.player.class}</p>
                         <p>{this.props.overmind.state.player.race}</p>
                         <p>{this.props.overmind.state.player.role}</p>
-                        <p>{this.props.overmind.state.player.aq_attendance}</p>
+                        <p>{this.props.overmind.state.player.aq_attendance}</p>q
                         <p>{this.props.overmind.state.player.naxx_attendance}</p>
-                        <p>{this.props.overmind.state.player.isComplete.toString()}</p>
-                        { !this.props.overmind.state.player.isComplete && <p>Your profile seems not complete, please edit your profile</p> }
                         <Accordion>
                             <Card>
                                 <Card.Header>
