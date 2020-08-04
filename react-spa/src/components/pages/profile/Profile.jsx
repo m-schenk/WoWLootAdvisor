@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { connect } from './../../../overmind'
+import { connect } from './../../../overmind';
 
 import '@atlaskit/css-reset';
 import './../../assets/App.css';
@@ -8,8 +8,9 @@ import './../../assets/App.css';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Accordion from 'react-bootstrap/Accordion'
-import Card from 'react-bootstrap/Card'
+import Accordion from 'react-bootstrap/Accordion';
+import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
 
 class Profile extends React.Component {
 
