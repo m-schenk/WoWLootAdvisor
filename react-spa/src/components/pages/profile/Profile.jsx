@@ -28,49 +28,49 @@ class Profile extends React.Component {
         const _class = event.target.value
         switch (_class) {
             case 'Druid':
-                this._class = (<>
+                this.talents = (<>
                     <option>Balance</option>
                     <option>Feral Combat</option>
                     <option>Restoration</option>
                 </>)
             case 'Hunter':
-                this._class = (<>
+                this.talents = (<>
                     <option>Beast Mastery</option>
                     <option>Marksmanship</option>
                     <option>Survival</option>
                 </>)
             case 'Mage':
-                this._class =  <>
+                this.talents =  <>
                     <option>Arcance</option>
                     <option>Fire</option>
                     <option>Frost</option>
                 </>)
             case 'Paladin':
-                this._class = (<>
+                this.talents = (<>
                     <option>Holy</option>
                     <option>Protection</option>
                     <option>Retribution</option>
                 </>)
             case 'Priest':
-                this._class = (<>
+                this.talents = (<>
                     <option>Discipline</option>
                     <option>Holy</option>
                     <option>Shadow</option>
                 </>)
             case 'Rogue':
-                this._class = (<>
+                this.talents = (<>
                     <option>Assassination</option>
                     <option>Combat</option>
                     <option>Subtlety</option>
                 </>)
             case 'Warlock':
-                this._class = (<>
+                this.talents = (<>
                     <option>Affliction</option>
                     <option>Demonology</option>
                     <option>Destruction</option>
                 </>)
             case 'Warrior':
-                this._class = (<>
+                this.talents = (<>
                     <option>Arms</option>
                     <option>Fury</option>
                     <option>Protection</option>
@@ -120,7 +120,7 @@ class Profile extends React.Component {
                                             <Form.Group controlId="profile.class">
                                                 <Form.Label>Select talent spec</Form.Label>
                                                 <Form.Control as="select">
-                                                    {re}
+                                                    {talents}
                                                 </Form.Control>
                                             </Form.Group>
                                         </Form>
