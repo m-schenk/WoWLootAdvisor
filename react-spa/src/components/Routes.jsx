@@ -41,7 +41,7 @@ class Routes extends React.Component {
     }
 
     render() {
-        console.log(isAuth)
+        console.log(this.isAuth)
         return (
             <Router>
                 <Switch>
