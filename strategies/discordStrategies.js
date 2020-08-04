@@ -24,7 +24,7 @@ passport.use(new DiscordStrategy({
         .then(player => {
             if (player) {
                 console.log(player)
-                const filteredPlayer = _.omit(player.toObject, ['discordId']);
+                const filteredPlayer = _.omit(player.toObject(), ['discordId']);
                 console.log(filteredPlayer)
                 cb(null, filteredPlayer);
             } else {
@@ -34,7 +34,7 @@ passport.use(new DiscordStrategy({
                     newPlayer.save()
                         .then( player => {
                             console.log(player)
-                            const filteredPlayer = _.omit(player.toObject, ['discordId']);
+                            const filteredPlayer = _.omit(player.toObject(), ['discordId']);
                             console.log(filteredPlayer)
                             cb(null, filteredPlayer); //should only contain _id now
                         })
