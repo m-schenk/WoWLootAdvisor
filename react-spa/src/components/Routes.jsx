@@ -18,14 +18,12 @@ import './assets/App.css';
 
 
 class Routes extends React.Component {
-    constructor() {
-        this.loading = true
-    }
+    loading = true
 
     componentDidUpdate() {
-        this.props.loading = true
+        this.loading = true
         this.props.overmind.actions.isAuthenticated()
-        this.props.loading = false
+        this.loading = false
     }
 
     render() {
@@ -34,7 +32,7 @@ class Routes extends React.Component {
             <Router>
                     <Switch>
                         <Route path="/login" component={Login} />
-                        { this.props.loading && <div className="justify-content-center align-items-center" id="wrapper">
+                        { !this.loading && <div className="justify-content-center align-items-center" id="wrapper">
                             <div className="justify-content-center align-items-center" id="header"><Navbar /></div>
                                 <ProtectedRoute exact path="/" isAuthenticated={this.props.overmind.state.isAuth} component={MainContent} />
                                 <ProtectedRoute path="/wishlist" isAuthenticated={this.props.overmind.state.isAuth} component={MainContent} />
