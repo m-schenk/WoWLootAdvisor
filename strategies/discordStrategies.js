@@ -4,7 +4,7 @@ const Player = require('../models/Player');
 const _ = require('lodash');
 
 passport.serializeUser((user, done) => {
-    done(null, user.id);
+    done(null, user._id);
 });
 
 passport.deserializeUser((id, done) => {
