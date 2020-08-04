@@ -4,7 +4,7 @@ const cache = {};
 
 export const api = {
     getPlayerProfile(state) {
-        return new Promise(resolve => {
+        return new Promise(resolve, reject => {
             axios.get('http://raegae.maarten.ch:3000/api/player/getPlayerProfile', { withCredentials: true })
                 .then( (response) => {
                     state.player._id = response.data._id;
