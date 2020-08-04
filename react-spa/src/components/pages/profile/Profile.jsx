@@ -24,9 +24,9 @@ class Profile extends React.Component {
             
             (async () => {
                 await this.props.overmind.actions.getPlayerProfile()
-            })()
-            this.props.overmind.actions.isProfileComplete();
-            console.log(this.props.overmind.state.player.isComplete)
+            })().then(
+                this.props.overmind.actions.isProfileComplete()
+            )
         }
     }
 
