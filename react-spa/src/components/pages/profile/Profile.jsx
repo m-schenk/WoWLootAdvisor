@@ -23,7 +23,6 @@ class Profile extends React.Component {
     }
 
     renderTalents() {
-        if()
     }
 
 
