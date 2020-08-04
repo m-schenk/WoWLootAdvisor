@@ -22,6 +22,7 @@ class Profile extends React.Component {
         if(!this.props.overmind.state.player.loaded) {
             this.props.overmind.actions.getPlayerProfile()
             this.props.overmind.actions.isProfileComplete();
+            console.log(this.props.overmind.state.player.isComplete)
         }
     }
 
