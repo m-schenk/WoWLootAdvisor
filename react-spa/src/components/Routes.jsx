@@ -24,6 +24,7 @@ class Routes extends React.Component {
         this.loading = true
         this.props.overmind.actions.isAuthenticated()
         this.loading = false
+        this.render()
     }
 
     render() {
