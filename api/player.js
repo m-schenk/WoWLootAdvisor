@@ -57,7 +57,11 @@ exports.playerLogout = (req, res, next) => {
 exports.getPlayerProfile = (req, res, next) => {
     Player.find({ id: req.session.playerId })
         .then(player => {
-            res.send(200).json({ player: player })
+            res.writeHead(200, {
+            'Content-Type': 'text/json'
+            });
+            res.write(JSON.stringify(player));
+            res.end();
         })
         .catch(err => {
             const error = new Error(err);
