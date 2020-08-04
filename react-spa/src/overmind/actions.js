@@ -28,6 +28,7 @@ export const getPlayerProfile = ({ state, effects }) => {
 }
 
 export const isProfileComplete = ({ state }) => {
+    console.log("me slower?")
     let complete = true;
     if(state.player._id === null) complete = false;
     if(state.player.name === null) complete = false;

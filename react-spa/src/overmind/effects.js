@@ -31,6 +31,8 @@ export const api = {
                 state.player.loaded = true
             }).catch(error => {
                 console.log(error);
+            }).then(() => {
+                console.log("getPlayerProfile is done")
             })
     },
     async sendWishlist(state) {
