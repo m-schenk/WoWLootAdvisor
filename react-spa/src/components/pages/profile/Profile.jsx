@@ -128,7 +128,7 @@ class Profile extends React.Component {
                                             <Form.Group controlId="profile.class">
                                                 <Form.Label>Select talent spec</Form.Label>
                                                 <Form.Control as="select">
-                                                    {talents}
+                                                    {this.talents}
                                                 </Form.Control>
                                             </Form.Group>
                                         </Form>
