@@ -24,39 +24,39 @@ class Routes extends React.Component {
     }
 
     componentDidUpdate() {
-        async() => {
+        (async () => {
             await axios.get('http://raegae.maarten.ch:3000/api/discord/isauth', { withCredentials: true })
-            .then(response => {
-                console.log(response)
-                if(response.status === 200) {
-                    console.log("auth true")
-                    this.isAuth = true;
-                } else {
-                    this.isAuth = false 
-                }
-            }).catch(err => {
-                console.log(err)
-            })
-        }
+                .then(response => {
+                    console.log(response)
+                    if (response.status === 200) {
+                        console.log("auth true")
+                        this.isAuth = true;
+                    } else {
+                        this.isAuth = false
+                    }
+                }).catch(err => {
+                    console.log(err)
+                })
+        })()
     }
-    
+
     render() {
         console.log(isAuth)
-        return(
+        return (
             <Router>
-                    <Switch>
-                        <Route path="/login" component={Login} />
-                        <div className="justify-content-center align-items-center" id="wrapper">
-                            <div className="justify-content-center align-items-center" id="header"><Navbar /></div>
-                                <ProtectedRoute exact path="/" isAuthenticated={this.isAuth} component={MainContent} />
-                                <ProtectedRoute path="/wishlist" isAuthenticated={this.isAuth} component={MainContent} />
-                                <ProtectedRoute path="/profile" isAuthenticated={this.isAuth} component={Profile} />
-                                <ProtectedRoute path="/council/members" isAuthenticated={this.isAuth} component={Members} />
-                                <ProtectedRoute path="/council/raidhistory" isAuthenticated={this.isAuth} component={RaidHistory} />
-                                <ProtectedRoute path="/council/livesession" isAuthenticated={this.isAuth} component={LiveSession} />
-                            <div className="justify-content-center align-items-center" id="footer"><Footer /></div>
-                        </div> 
-                    </Switch>
+                <Switch>
+                    <Route path="/login" component={Login} />
+                    <div className="justify-content-center align-items-center" id="wrapper">
+                        <div className="justify-content-center align-items-center" id="header"><Navbar /></div>
+                        <ProtectedRoute exact path="/" isAuthenticated={this.isAuth} component={MainContent} />
+                        <ProtectedRoute path="/wishlist" isAuthenticated={this.isAuth} component={MainContent} />
+                        <ProtectedRoute path="/profile" isAuthenticated={this.isAuth} component={Profile} />
+                        <ProtectedRoute path="/council/members" isAuthenticated={this.isAuth} component={Members} />
+                        <ProtectedRoute path="/council/raidhistory" isAuthenticated={this.isAuth} component={RaidHistory} />
+                        <ProtectedRoute path="/council/livesession" isAuthenticated={this.isAuth} component={LiveSession} />
+                        <div className="justify-content-center align-items-center" id="footer"><Footer /></div>
+                    </div>
+                </Switch>
             </Router>
         )
     }
