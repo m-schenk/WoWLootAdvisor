@@ -4,20 +4,13 @@ const Player = require('../models/Player');
 const _ = require('lodash');
 
 passport.serializeUser((user, done) => {
-    console.log('User serialized')
-    done(null, user._id);
+    done(null, user.id);
 });
 
 passport.deserializeUser((id, done) => {
-    console.log('User deserialized')
-    Player.findById(id)
-        .then(user => {
-            if (user) {
-                done(null, user);
-            } else {
-                done(err, null);
-            }
-        })
+    Player.findById(id, (err, user) => {
+        done(err, user);
+    });
 });
 
 passport.use(new DiscordStrategy({
