@@ -4,37 +4,36 @@ const cache = {};
 
 export const api = {
     getPlayerProfile(state) {
-        axios.get('http://raegae.maarten.ch:3000/api/player/getPlayerProfile', { withCredentials: true })
-            .then( (response) => {
-                state.player._id = response.data._id;
-                if(response.data.name) {
-                    state.player.name = response.data.name
-                }
-                if(response.data.class) {
-                    state.player.class = response.data.class
-                }
-                if(response.data.race) {
-                    state.player.race = response.data.race
-                }
-                if(response.data.role) {
-                    state.player.role = response.data.role
-                }
-                if(response.data.aq_attendance) {
-                    state.player.aq_attendance = response.data.aq_attendance
-                }
-                if(response.data.naxx_attendance) {
-                    state.player.naxx_attendance = response.data.naxx_attendance
-                }
-                if(response.data.permissions) {
-                    state.player.permissions = response.data.permissions
-                }
-                return new Promise(resolve => {
+        return new Promise(resolve => {
+            axios.get('http://raegae.maarten.ch:3000/api/player/getPlayerProfile', { withCredentials: true })
+                .then( (response) => {
+                    state.player._id = response.data._id;
+                    if(response.data.name) {
+                        state.player.name = response.data.name
+                    }
+                    if(response.data.class) {
+                        state.player.class = response.data.class
+                    }
+                    if(response.data.race) {
+                        state.player.race = response.data.race
+                    }
+                    if(response.data.role) {
+                        state.player.role = response.data.role
+                    }
+                    if(response.data.aq_attendance) {
+                        state.player.aq_attendance = response.data.aq_attendance
+                    }
+                    if(response.data.naxx_attendance) {
+                        state.player.naxx_attendance = response.data.naxx_attendance
+                    }
+                    if(response.data.permissions) {
+                        state.player.permissions = response.data.permissions
+                    }
                     resolve();
+                }).catch(error => {
+                    console.log(error);
+                    reject();
                 })
-            }).catch(error => {
-                console.log(error);
-            }).then(() => {
-                console.log("getPlayerProfile is done")
             })
     },
     async sendWishlist(state) {
