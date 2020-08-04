@@ -6,7 +6,7 @@ export const api = {
     getPlayerProfile(state) {
         axios.get('http://raegae.maarten.ch:3000/api/player/getPlayerProfile', { withCredentials: true })
             .then( (response) => {
-                state.player._id = response.data.player._id;
+                state.player.id = response.data.player.id;
                 if(response.data.player.name) {
                     state.player.name = response.data.player.name
                 }
