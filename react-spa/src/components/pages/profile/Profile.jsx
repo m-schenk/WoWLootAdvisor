@@ -15,7 +15,8 @@ import Form from 'react-bootstrap/Form';
 
 class Profile extends React.Component {
 
-    talents = <><option>Spec 1</option><option>Spec 2</option><option>Spec 3</option></>
+    talents = <><option>Spec 1</option><option>Spec 2</option><option>Spec 3</option></>;
+    talent_ready = false;
 
     componentDidMount() {
         if(!this.props.overmind.state.player.loaded) {
@@ -84,6 +85,7 @@ class Profile extends React.Component {
                 </>);
                 break;
         }
+        this.talent_ready = true;
     }
 
 
@@ -125,12 +127,12 @@ class Profile extends React.Component {
                                                     <option>Warrior</option>
                                                 </Form.Control>
                                             </Form.Group>
-                                            <Form.Group controlId="profile.class">
+                                            { this.talent_ready && <Form.Group controlId="profile.class">
                                                 <Form.Label>Select talent spec</Form.Label>
                                                 <Form.Control as="select">
                                                     {this.talents}
                                                 </Form.Control>
-                                            </Form.Group>
+                                            </Form.Group>}
                                         </Form>
                                     </Card.Body>
                                 </Accordion.Collapse>
