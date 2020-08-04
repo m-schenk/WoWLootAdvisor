@@ -53,7 +53,7 @@ class Profile extends React.Component {
                     <option>Holy</option>
                     <option>Protection</option>
                     <option>Retribution</option>
-                </>));
+                </>);
                 break;
             case 'Priest':
                 this.talents = (<>
