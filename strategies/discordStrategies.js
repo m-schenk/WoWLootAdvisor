@@ -27,6 +27,7 @@ passport.use(new DiscordStrategy({
                 cb(null, filteredPlayer);
             } else {
                 console.log('User doesnt exist');
+                console.log(profile.guilds.filter(entry => (entry.id === process.env.DISCORD_SERVER_ID)))
                 if (profile.guilds.filter(entry => (entry.id === process.env.DISCORD_SERVER_ID))) {
                     const newPlayer = new Player({ discordId: profile.id });
                     newPlayer.save()
