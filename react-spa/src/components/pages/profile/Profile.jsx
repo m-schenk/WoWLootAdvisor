@@ -14,6 +14,9 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
 class Profile extends React.Component {
+    shouldComponentUpdate(nextProps) {
+        return this.props.overmind !== nextProps.overmind
+    }
 
     componentDidMount() {
         if(!this.props.overmind.state.player.loaded) {
