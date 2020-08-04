@@ -29,18 +29,15 @@ export const getPlayerProfile = pipe(
     })
 )
 
-export const helperChangerLoadingTalentSelector = ({ state }) => {
-    state.helper = !state.helper;
-}
-
 export const isProfileComplete = ({ state }) => {
-    if(state.player._id === null) return false;
-    if(state.player.name === null) return false;
-    if(state.player.class === null) return false;
-    if(state.player.race === null) return false;
-    if(state.player.talent === null) return false;
-    if(state.player.role === null) return false;
-    return true;
+    let complete = true;
+    if(state.player._id === null) complete = false;
+    if(state.player.name === null) complete = false;
+    if(state.player.class === null) complete = false;
+    if(state.player.race === null) complete = false;
+    if(state.player.talent === null) complete = false;
+    if(state.player.role === null) complete = false;
+    state.player.isComplete = complete;
 }
 
 export const dragHandler = pipe( //just for now, will become an effect I guess.. later

@@ -10,6 +10,7 @@ export const state = {
         wishlist: null,
         role: null,
         loaded: false,
+        isComplete: false,
     },
     wishlist: {
         'locked': false,
