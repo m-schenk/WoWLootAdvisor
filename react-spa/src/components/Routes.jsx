@@ -18,13 +18,9 @@ import './assets/App.css';
 
 
 class Routes extends React.Component {
-    loading = true
-
+    
     componentDidUpdate() {
-        this.loading = true
         this.props.overmind.actions.isAuthenticated()
-        this.loading = false
-        this.render()
     }
 
     render() {
@@ -33,7 +29,7 @@ class Routes extends React.Component {
             <Router>
                     <Switch>
                         <Route path="/login" component={Login} />
-                        { !this.loading && <div className="justify-content-center align-items-center" id="wrapper">
+                        <div className="justify-content-center align-items-center" id="wrapper">
                             <div className="justify-content-center align-items-center" id="header"><Navbar /></div>
                                 <ProtectedRoute exact path="/" isAuthenticated={this.props.overmind.state.isAuth} component={MainContent} />
                                 <ProtectedRoute path="/wishlist" isAuthenticated={this.props.overmind.state.isAuth} component={MainContent} />
@@ -42,7 +38,7 @@ class Routes extends React.Component {
                                 <ProtectedRoute path="/council/raidhistory" isAuthenticated={this.props.overmind.state.isAuth} component={RaidHistory} />
                                 <ProtectedRoute path="/council/livesession" isAuthenticated={this.props.overmind.state.isAuth} component={LiveSession} />
                             <div className="justify-content-center align-items-center" id="footer"><Footer /></div>
-                        </div> }
+                        </div> 
                     </Switch>
             </Router>
         )
