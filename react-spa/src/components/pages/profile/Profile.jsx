@@ -21,7 +21,10 @@ class Profile extends React.Component {
 
     componentDidMount() {
         if(!this.props.overmind.state.player.loaded) {
-            this.props.overmind.actions.getPlayerProfile()
+            
+            (async () => {
+                await this.props.overmind.actions.getPlayerProfile()
+            })()
             this.props.overmind.actions.isProfileComplete();
             console.log(this.props.overmind.state.player.isComplete)
         }
