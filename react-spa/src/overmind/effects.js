@@ -4,7 +4,7 @@ const cache = {};
 
 export const api = {
     getPlayerProfile(state) {
-        axios.get('http://raegae.maarten.ch:3000/api/player/getProfile', { withCredentials: true })
+        axios.get('http://raegae.maarten.ch:3000/api/player/getPlayerProfile', { withCredentials: true })
             .then( (response) => {
                 state.player._id = response.data.player._id;
                 if(response.data.player.name) {
