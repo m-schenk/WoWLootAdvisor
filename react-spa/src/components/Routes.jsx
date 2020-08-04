@@ -19,9 +19,8 @@ import './assets/App.css';
 
 
 class Routes extends React.Component {
-    constructor() {
-        this.auth = false
-    }
+    
+    isAuth = false
 
     componentDidUpdate() {
         (async () => {
