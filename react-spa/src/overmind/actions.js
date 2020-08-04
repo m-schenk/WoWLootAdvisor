@@ -29,6 +29,16 @@ export const getPlayerProfile = pipe(
     })
 )
 
+export const isProfileComplete = ({ state }) => {
+    if(state.player._id === null) return false;
+    if(state.player.name === null) return false;
+    if(state.player.class === null) return false;
+    if(state.player.race === null) return false;
+    if(state.player.talent === null) return false;
+    if(state.player.role === null) return false;
+    return true;
+}
+
 export const dragHandler = pipe( //just for now, will become an effect I guess.. later
     mutate(({ state }, result) => {
         const { destination, source } = result;
