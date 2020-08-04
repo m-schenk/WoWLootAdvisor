@@ -20,7 +20,7 @@ import './assets/App.css';
 
 class Routes extends React.Component {
     
-    isAuth = false
+    isAuth = true
 
     componentDidUpdate() {
         (async () => {
