@@ -12,47 +12,26 @@ import axios from 'axios';
 
 import Navbar from './Navbar';
 import Footer from './Footer';
-import ProtectedRoute from './ProtectedRoute';
+import Route from './Route';
 
 import '@atlaskit/css-reset';
 import './assets/App.css';
 
 
 class Routes extends React.Component {
-    
-    isAuth = true
-
-    componentDidUpdate() {
-        (async () => {
-            await axios.get('http://raegae.maarten.ch:3000/api/discord/isauth', { withCredentials: true })
-                .then(response => {
-                    console.log(response)
-                    if (response.status === 200) {
-                        console.log("auth true")
-                        this.isAuth = true;
-                    } else {
-                        this.isAuth = false
-                    }
-                }).catch(err => {
-                    console.log(err)
-                })
-        })()
-    }
-
     render() {
-        console.log(this.isAuth)
         return (
             <Router>
                 <Switch>
                     <Route path="/login" component={Login} />
                     <div className="justify-content-center align-items-center" id="wrapper">
                         <div className="justify-content-center align-items-center" id="header"><Navbar /></div>
-                        <ProtectedRoute exact path="/" isAuthenticated={this.isAuth} component={MainContent} />
-                        <ProtectedRoute path="/wishlist" isAuthenticated={this.isAuth} component={MainContent} />
-                        <ProtectedRoute path="/profile" isAuthenticated={this.isAuth} component={Profile} />
-                        <ProtectedRoute path="/council/members" isAuthenticated={this.isAuth} component={Members} />
-                        <ProtectedRoute path="/council/raidhistory" isAuthenticated={this.isAuth} component={RaidHistory} />
-                        <ProtectedRoute path="/council/livesession" isAuthenticated={this.isAuth} component={LiveSession} />
+                        <Route exact path="/" component={MainContent} />
+                        <Route path="/wishlist" component={MainContent} />
+                        <Route path="/profile" component={Profile} />
+                        <Route path="/council/members" component={Members} />
+                        <Route path="/council/raidhistory" component={RaidHistory} />
+                        <Route path="/council/livesession" component={LiveSession} />
                         <div className="justify-content-center align-items-center" id="footer"><Footer /></div>
                     </div>
                 </Switch>
