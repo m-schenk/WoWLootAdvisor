@@ -10,6 +10,13 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 class Profile extends React.Component {
+
+    componentDidMount() {
+        if(!this.props.overmind.player.loaded) {
+            this.props.overmind.actions.fetchProfile()
+        }
+    }
+
     render() {
         return(
             <Container className="justify-content-center align-items-center" id="main-content">
@@ -22,6 +29,18 @@ class Profile extends React.Component {
                         <p>{this.props.overmind.state.player.aq_attendance}</p>
                         <p>{this.props.overmind.state.player.naxx_attendance}</p>
                         <p>{this.props.overmind.state.player.wishlist}</p>
+                        <Accordion>
+                            <Card>
+                                <Card.Header>
+                                    <Accordion.Toggle as={Button} variant="link" eventKey="0">
+                                        Click me!
+                                    </Accordion.Toggle>
+                                </Card.Header>
+                                <Accordion.Collapse eventKey="0">
+                                    <Card.Body>Hello! I'm the body</Card.Body>
+                                </Accordion.Collapse>
+                            </Card>
+                        </Accordion>
                     </Col>
                 </Row>
             </Container>
