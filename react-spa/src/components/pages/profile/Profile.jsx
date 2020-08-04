@@ -31,7 +31,7 @@ class Profile extends React.Component {
             <Container className="justify-content-center align-items-center" id="main-content">
                 <Row className="row-centered">
                     <Col className="col-centered" sm={12}>
-                        <p>{this.props.overmind.state.player.profile}</p>
+                        <p>{this.props.overmind.state.player._id}</p>
                         <p>{this.props.overmind.state.player.name}</p>
                         <p>{this.props.overmind.state.player.class}</p>
                         <p>{this.props.overmind.state.player.race}</p>
