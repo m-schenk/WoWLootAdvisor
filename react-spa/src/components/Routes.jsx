@@ -24,18 +24,20 @@ class Routes extends React.Component {
     }
 
     componentDidUpdate() {
-        await axios.get('http://raegae.maarten.ch:3000/api/discord/isauth', { withCredentials: true })
-        .then(response => {
-            console.log(response)
-            if(response.status === 200) {
-                console.log("auth true")
-                this.isAuth = true;
-            } else {
-                this.isAuth = false 
-            }
-        }).catch(err => {
-            console.log(err)
-        })
+        async() => {
+            await axios.get('http://raegae.maarten.ch:3000/api/discord/isauth', { withCredentials: true })
+            .then(response => {
+                console.log(response)
+                if(response.status === 200) {
+                    console.log("auth true")
+                    this.isAuth = true;
+                } else {
+                    this.isAuth = false 
+                }
+            }).catch(err => {
+                console.log(err)
+            })
+        }
     }
     
     render() {
