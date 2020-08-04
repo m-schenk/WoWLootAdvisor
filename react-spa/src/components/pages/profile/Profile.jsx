@@ -15,7 +15,7 @@ import Button from 'react-bootstrap/Button';
 class Profile extends React.Component {
 
     componentDidMount() {
-        if(!this.props.overmind.player.loaded) {
+        if(!this.props.overmind.state.player.loaded) {
             this.props.overmind.actions.fetchProfile()
         }
     }
