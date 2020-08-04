@@ -24,6 +24,7 @@ passport.use(new DiscordStrategy({
         .then(player => {
             if (player) {
                 const filteredPlayer = _.omit(player.toObject, ['discordId']);
+                console.log(filteredPlayer)
                 cb(null, filteredPlayer);
             } else {
                 console.log('User doesnt exist');
@@ -32,6 +33,7 @@ passport.use(new DiscordStrategy({
                     newPlayer.save()
                         .then( player => {
                             const filteredPlayer = _.omit(player.toObject, ['discordId']);
+                            console.log(filteredPlayer)
                             cb(null, filteredPlayer); //should only contain _id now
                         })
                         .catch( err => {
