@@ -40,7 +40,7 @@ class Profile extends React.Component {
                         <p>{this.props.overmind.state.player.class}</p>
                         <p>{this.props.overmind.state.player.race}</p>
                         <p>{this.props.overmind.state.player.role}</p>
-                        <p>{this.props.overmind.state.player.aq_attendance}</p>q
+                        <p>{this.props.overmind.state.player.aq_attendance}</p>
                         <p>{this.props.overmind.state.player.naxx_attendance}</p>
                         <Accordion>
                             <Card>
