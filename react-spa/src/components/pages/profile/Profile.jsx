@@ -32,49 +32,57 @@ class Profile extends React.Component {
                     <option>Balance</option>
                     <option>Feral Combat</option>
                     <option>Restoration</option>
-                </>)
+                </>);
+                break;
             case 'Hunter':
                 this.talents = (<>
                     <option>Beast Mastery</option>
                     <option>Marksmanship</option>
                     <option>Survival</option>
-                </>)
+                </>);
+                break;
             case 'Mage':
-                this.talents =  <>
+                this.talents = (<>
                     <option>Arcance</option>
                     <option>Fire</option>
                     <option>Frost</option>
-                </>)
+                </>);
+                break;
             case 'Paladin':
                 this.talents = (<>
                     <option>Holy</option>
                     <option>Protection</option>
                     <option>Retribution</option>
-                </>)
+                </>));
+                break;
             case 'Priest':
                 this.talents = (<>
                     <option>Discipline</option>
                     <option>Holy</option>
                     <option>Shadow</option>
-                </>)
+                </>);
+                break;
             case 'Rogue':
                 this.talents = (<>
                     <option>Assassination</option>
                     <option>Combat</option>
                     <option>Subtlety</option>
-                </>)
+                </>);
+                break;
             case 'Warlock':
                 this.talents = (<>
                     <option>Affliction</option>
                     <option>Demonology</option>
                     <option>Destruction</option>
-                </>)
+                </>);
+                break;
             case 'Warrior':
                 this.talents = (<>
                     <option>Arms</option>
                     <option>Fury</option>
                     <option>Protection</option>
-                </>)
+                </>);
+                break;
         }
     }
 
