@@ -29,7 +29,7 @@ export const api = {
                     state.player.permissions = response.data.permissions
                 }
                 return new Promise(resolve => {
-                    resolve;
+                    resolve();
                 })
             }).catch(error => {
                 console.log(error);
