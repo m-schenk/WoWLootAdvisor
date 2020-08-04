@@ -34,6 +34,7 @@ class Profile extends React.Component {
                         <p>{this.props.overmind.state.player.role}</p>
                         <p>{this.props.overmind.state.player.aq_attendance}</p>
                         <p>{this.props.overmind.state.player.naxx_attendance}</p>
+                        <p>{this.props.overmind.state.player.isComplete}</p>
                         { this.props.overmind.state.player.isComplete && <p>Your profile seems not complete, please edit your profile</p> }
                         <Accordion>
                             <Card>
