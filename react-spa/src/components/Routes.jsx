@@ -8,11 +8,9 @@ import Profile from './pages/profile/Profile';
 import Members from './pages/council/Members';
 import RaidHistory from './pages/council/RaidHistory';
 import LiveSession from './pages/council/LiveSession';
-import axios from 'axios';
 
 import Navbar from './Navbar';
 import Footer from './Footer';
-import Route from './Route';
 
 import '@atlaskit/css-reset';
 import './assets/App.css';
