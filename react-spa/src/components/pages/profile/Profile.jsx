@@ -31,10 +31,10 @@ class Profile extends React.Component {
                         <p>{this.props.overmind.state.player.name}</p>
                         <p>{this.props.overmind.state.player.class}</p>
                         <p>{this.props.overmind.state.player.race}</p>
-                        <p>{this.props.overmind.state.player.talent}</p>
+                        <p>{this.props.overmind.state.player.role}</p>
                         <p>{this.props.overmind.state.player.aq_attendance}</p>
                         <p>{this.props.overmind.state.player.naxx_attendance}</p>
-                        { this.props.overmind.state.player.isComplete && <p>Your profile seems not complete, please edit your profile</p>}
+                        { this.props.overmind.state.player.isComplete && <p>Your profile seems not complete, please edit your profile</p> }
                         <Accordion>
                             <Card>
                                 <Card.Header>
@@ -60,6 +60,15 @@ class Profile extends React.Component {
                                                     <option>Rogue</option>
                                                     <option>Warlock</option>
                                                     <option>Warrior</option>
+                                                </Form.Control>
+                                            </Form.Group>
+                                            <Form.Group controlId="profile.class">
+                                                <Form.Label>Select your role:</Form.Label>
+                                                <Form.Control as="select">
+                                                    <option>Dwarf</option>
+                                                    <option>Gnome</option>
+                                                    <option>Human</option>
+                                                    <option>Night Elf</option>
                                                 </Form.Control>
                                             </Form.Group>
                                             <Form.Group controlId="profile.class">
