@@ -80,6 +80,9 @@ class Profile extends React.Component {
                                                     <option>Tank</option>
                                                 </Form.Control>
                                             </Form.Group>
+                                            <Button variant="primary" type="submit">
+                                                Submit
+                                            </Button>
                                         </Form>
                                     </Card.Body>
                                 </Accordion.Collapse>
