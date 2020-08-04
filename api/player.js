@@ -55,7 +55,7 @@ exports.playerLogout = (req, res, next) => {
 }
 
 exports.getPlayerProfile = (req, res, next) => {
-    Player.find({ id: req.session._id })
+    Player.find({ id: req.user._id })
         .then(player => {
             res.writeHead(200, {
             'Content-Type': 'text/json'
