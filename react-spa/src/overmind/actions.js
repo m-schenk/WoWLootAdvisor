@@ -35,8 +35,8 @@ export const isProfileComplete = ({ state }) => {
     if(state.player.name === null) complete = false;
     if(state.player.class === null) complete = false;
     if(state.player.race === null) complete = false;
-    if(state.player.talent === null) complete = false;
     if(state.player.role === null) complete = false;
+    if(state.player.permissions === null) complete = false;
     state.player.isComplete = complete;
 }
 

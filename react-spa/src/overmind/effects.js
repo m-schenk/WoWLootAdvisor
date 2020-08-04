@@ -19,12 +19,12 @@ export const api = {
                 if(response.data.role) {
                     state.player.role = response.data.role
                 }
-                // if(response.data.aq_attendance) {
-                //     state.player.aq_attendance = response.data.aq_attendance
-                // }
-                // if(response.data.naxx_attendance) {
-                //     state.player.naxx_attendance = response.data.naxx_attendance
-                // }
+                if(response.data.aq_attendance) {
+                    state.player.aq_attendance = response.data.aq_attendance
+                }
+                if(response.data.naxx_attendance) {
+                    state.player.naxx_attendance = response.data.naxx_attendance
+                }
                 if(response.data.permissions) {
                     state.player.permissions = response.data.permissions
                 }
