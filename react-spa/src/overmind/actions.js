@@ -23,11 +23,9 @@ export const sendWishlist = pipe(
     })
 )
 
-export const getPlayerProfile = pipe(
-    mutate(({ state, effects }) => {
-        effects.api.getPlayerProfile(state);
-    })
-)
+export const getPlayerProfile = ({ state, effects }) => {
+    effects.api.getPlayerProfile(state);
+}
 
 export const isProfileComplete = ({ state }) => {
     let complete = true;
