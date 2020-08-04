@@ -161,4 +161,7 @@ export const state = {
         'query': '',
         'isSearching': false,
     },
+    helper: {
+        loading_talent_selector: null
+    }
 }

@@ -16,7 +16,6 @@ import Form from 'react-bootstrap/Form';
 class Profile extends React.Component {
 
     talents = <><option>Spec 1</option><option>Spec 2</option><option>Spec 3</option></>;
-    talent_ready = false;
 
     componentDidMount() {
         if(!this.props.overmind.state.player.loaded) {
@@ -85,7 +84,7 @@ class Profile extends React.Component {
                 </>);
                 break;
         }
-        this.talent_ready = true;
+        this.props.overmind.state.helper.loading_talent_selector = true;
     }
 
 
@@ -127,7 +126,7 @@ class Profile extends React.Component {
                                                     <option>Warrior</option>
                                                 </Form.Control>
                                             </Form.Group>
-                                            { this.talent_ready && <Form.Group controlId="profile.class">
+                                            { this.props.overmind.state.helper.loading_talent_selector && <Form.Group controlId="profile.class">
                                                 <Form.Label>Select talent spec</Form.Label>
                                                 <Form.Control as="select">
                                                     {this.talents}
