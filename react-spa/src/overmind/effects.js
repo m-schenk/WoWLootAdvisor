@@ -28,7 +28,9 @@ export const api = {
                 if(response.data.permissions) {
                     state.player.permissions = response.data.permissions
                 }
-                state.player.loaded = true
+                return new Promise(resolve => {
+                    resolve;
+                })
             }).catch(error => {
                 console.log(error);
             }).then(() => {
