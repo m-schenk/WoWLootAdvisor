@@ -49,25 +49,25 @@ app.use(express.static(path.join(__dirname, 'react-spa/build/static')));
 // api routes
 app.use('/api/discord/', discordRouter);
 
-app.use('/api/player', playerRouter);
-app.use('/api/items', itemsRouter);
-app.use('/api/wishlist', wishlistRouter);
+app.use('/api/player', connectEnsureLogin.ensureLoggedIn('/forbidden'), playerRouter);
+app.use('/api/items', connectEnsureLogin.ensureLoggedIn('/forbidden'), itemsRouter);
+app.use('/api/wishlist', connectEnsureLogin.ensureLoggedIn('/forbidden'), wishlistRouter);
 
-// app.get('/forbidden', (req, res) => {
-//     res.sendFile(path.join(__dirname+'/public/forbidden.html'))
-// });
+app.get('/forbidden', (req, res) => {
+    res.sendFile(path.join(__dirname+'/public/forbidden.html'))
+});
 
 // catch 404 and forward to error handler
-// app.use('/api/*', (req, res, next) => {
-//     next(createError(404, `page not found, url: ${req.originalUrl} might be invalid`));
-// });
+app.use('/api/*', (req, res, next) => {
+    next(createError(404, `page not found, url: ${req.originalUrl} might be invalid`));
+});
 
 app.get('/login', (req, res) => {
     res.sendFile(path.join(__dirname+'/react-spa/build/index.html'));
 })
 
 // front-end, every request should be resovled in react router if call is not to api endpoint
-app.get('*', connectEnsureLogin.ensureLoggedIn('/login') ,(req, res) => {
+app.get('/*', connectEnsureLogin.ensureLoggedIn('/forbidden') ,(req, res) => {
     res.sendFile(path.join(__dirname+'/react-spa/build/index.html'));
 });
 
