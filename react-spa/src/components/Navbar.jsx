@@ -20,7 +20,7 @@ class UserNavbar extends React.Component {
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="mr-auto">
                         <Nav.Link as={Link} to="/wishlist">Wishlist</Nav.Link>
-                        {(this.props.overmind.state.player.role === 'council') ? 
+                        {(this.props.overmind.state.player.permissions === 'council') ? 
                         <NavDropdown title="Council" id="basic-nav-dropdown">
                             <NavDropdown.Item as={Link} to="/council/members">Members</NavDropdown.Item>
                             <NavDropdown.Item as={Link} to="/council/raidhistory">Raid History</NavDropdown.Item>
