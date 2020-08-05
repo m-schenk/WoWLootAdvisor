@@ -7,7 +7,5 @@ router.get('/getPlayerProfile', playerApi.getPlayerProfile)
 router.get('/logout', playerApi.logout);
 
 router.get('/id::id', playerApi.getPlayerById);
-router.get('/session-player', playerApi.getSessionPlayerId);
-
 
 module.exports = router;
