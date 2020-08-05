@@ -20,7 +20,6 @@ class Profile extends React.Component {
         this.state = {
             error: null,
             isLoaded: false,
-            items: []
         };
     }
 
@@ -42,7 +41,6 @@ class Profile extends React.Component {
                     error
                 });
             }
-
         )
     }
 
