@@ -5,7 +5,7 @@ export const state = {
         class: 'Warrior',
         race: 'Human',
         role: 'DPS',
-        permissions: 'Council',
+        permissions: 'council',
         aq_attendance: null,
         naxx_attendance: null,
         wishlist: null,
