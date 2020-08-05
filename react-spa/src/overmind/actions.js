@@ -44,6 +44,7 @@ const isProfileComplete = async (state) => {
     if (state.player.role === null) complete = false;
     if (state.player.permissions === null) complete = false;
     state.player.isComplete = complete;
+    return:
 }
 
 export const dragHandler = pipe( //just for now, will become an effect I guess.. later
