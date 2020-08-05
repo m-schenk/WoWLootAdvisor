@@ -11,7 +11,7 @@ import LiveSession from './pages/council/LiveSession';
 import Navbar from './Navbar';
 import Footer from './Footer';
 
-import Container from 'react-bootstrap';
+import Container from 'react-bootstrap/Container';
 
 import '@atlaskit/css-reset';
 import './assets/App.css';
