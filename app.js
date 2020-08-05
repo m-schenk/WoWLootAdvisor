@@ -82,7 +82,7 @@ app.use(function (err, req, res, next) {
     res.locals.error = req.app.get('env') === 'development' ? err : {};
 
     if(err.statusCode === 403) {
-        res.sendFile(path.join(__dirname+'/public/forbidden.html'))
+        res.redirect('http://raegae.maarten.ch:3000/forbbiden')
     } else {
         // render the error page
         res.status(err.statusCode || 500);
