@@ -22,7 +22,7 @@ const app = express();
 // print mode Production or Dev
 console.log(process.env.NODE_ENV);
 
-// Connect to mongodb - set both mongoose major update flags
+// connect to mongodb - set both mongoose major update flags
 mongoose.connect(process.env.MONGODB_URI, { useUnifiedTopology: true, useNewUrlParser: true })
     .then(result => {
         console.log('successfully connected to db!');
@@ -57,6 +57,10 @@ app.use(passport.session());
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }));
 
+
+// routes
+
+// public routes
 app.get('/login', (req, res) => {
     res.sendFile(path.join(__dirname+'/public/login.html'))
 })
@@ -65,10 +69,15 @@ app.get('/forbidden', (req, res) => {
     res.sendFile(path.join(__dirname+'/public/forbidden.html'))
 });
 
-// api discord  login route
+app.get('/pagenotfound', (req, res) => {
+    res.sendFile(path.join(__dirname+'/public/pagenotfound.html'))
+});
+
+// api discord, used for login route
 app.use('/api/discord/', discordRouter);
 
-// from here on all routes are protected
+
+// protected routes
 app.use('', connectEnsureLogin.ensureLoggedIn('/forbidden'), express.static(path.join(__dirname, 'react-spa/build/')));
 app.use('', connectEnsureLogin.ensureLoggedIn('/forbidden'), express.static(path.join(__dirname, 'react-spa/build/static')));
 
@@ -77,14 +86,13 @@ app.use('/api/player', connectEnsureLogin.ensureLoggedIn('/forbidden'), playerRo
 app.use('/api/items', connectEnsureLogin.ensureLoggedIn('/forbidden'), itemsRouter);
 app.use('/api/wishlist', connectEnsureLogin.ensureLoggedIn('/forbidden'), wishlistRouter);
 
-
-
+// error routes
 // catch 404 and forward to error handler
 app.use('/api/*', (req, res, next) => {
     next(createError(404, `page not found, url: ${req.originalUrl} might be invalid`));
 });
 
-// front-end, every request should be resovled in react router if call is not to api endpoint
+// front-end route, every request should be resovled in react router if call is not to api endpoint
 app.get('*', connectEnsureLogin.ensureLoggedIn('/forbidden') ,(req, res) => {
     res.sendFile(path.join(__dirname+'/react-spa/build/index.html'));
 });
@@ -101,7 +109,9 @@ app.use(function (err, req, res, next) {
 
     if(err.statusCode === 403) {
         res.redirect('http://raegae.maarten.ch:3000/forbbiden')
-    } else {
+    } else if(err.statusCode === 404) {
+        res.redirect('http://raegae.maarten.ch:3000/pagenotfound')
+    }
         // render the error page
         res.status(err.statusCode || 500);
         res.render('error');
