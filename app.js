@@ -59,7 +59,7 @@ app.use(express.urlencoded({ extended: false }));
 
 
 // routes
-app.use('', express.static(path.join(__dirname, '/public')))
+app.use(express.static(path.join(__dirname, '/public')))
 
 // public routes
 app.get('/login', (req, res) => {
@@ -70,19 +70,16 @@ app.get('/forbidden', (req, res) => {
     res.sendFile(path.join(__dirname + '/public/forbidden.html'))
 });
 
-
+app.get('/pagenotfound', (req, res) => {
+    res.sendFile(path.join(__dirname + '/public/pagenotfound.html'))
+});
 
 // api discord, used for login route
 app.use('/api/discord/', discordRouter);
 
-
 // protected routes
 app.use('', connectEnsureLogin.ensureLoggedIn('/forbidden'), express.static(path.join(__dirname, 'react-spa/build/')));
 app.use('', connectEnsureLogin.ensureLoggedIn('/forbidden'), express.static(path.join(__dirname, 'react-spa/build/static')));
-
-app.get('/pagenotfound', (req, res) => {
-    res.sendFile(path.join(__dirname + '/public/pagenotfound.html'))
-});
 
 //api routes
 app.use('/api/player', connectEnsureLogin.ensureLoggedIn('/forbidden'), playerRouter);
