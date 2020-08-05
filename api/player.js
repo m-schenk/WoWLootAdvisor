@@ -58,9 +58,8 @@ exports.getPlayerProfile = (req, res, next) => {
     console.log(req.user)
     Player.findById(req.user._id)
         .then(player => {
-            res.writeHead(200, {
-            'Content-Type': 'text/json'
-            });
+            res.stats(200);
+            res.set({'Content-Type': 'text/json'});
             res.json({ isComplete: true, player: JSON.stringify(player)});
             res.end();
         })
