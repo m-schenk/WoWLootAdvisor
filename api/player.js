@@ -61,7 +61,7 @@ exports.getPlayerProfile = (req, res, next) => {
             res.writeHead(200, {
             'Content-Type': 'text/json'
             });
-            res.write({ isComplete: true, player: JSON.stringify(player)});
+            res.json({ isComplete: true, player: JSON.stringify(player)});
             res.end();
         })
         .catch(err => {
