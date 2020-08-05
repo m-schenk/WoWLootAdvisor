@@ -3,7 +3,7 @@
 }
 
 body {
-  background-color: #303136; /*#303136;*/
+  background-color: #54565f; /*#303136;*/
   color: white;
 }
 
@@ -19,7 +19,7 @@ body {
 
 #wrapper {
   min-height: 100%;
-  background-color: #54565f;
+  background-color: #303136;
 }
 #header {
   padding-bottom: 20px;
