@@ -26,21 +26,21 @@ class Profile extends React.Component {
 
     componentDidMount() {
         this.props.overmind.actions.loadProfile()
-        .then(
-            (result) => {
-                console.log(this.props.overmind.state.player.isComplete)
-                this.setState({
-                    isComplete: this.props.overmind.state.player.isComplete,
-                    isLoaded: true,
-                });
-            },
-            (error) => {
-                this.setState({
-                    isLoaded: true,
-                    error
-                });
-            }
-        )
+            .then(
+                (result) => {
+                    console.log(this.props.overmind.state.player.isComplete)
+                    this.setState({
+                        isComplete: this.props.overmind.state.player.isComplete,
+                        isLoaded: true,
+                    });
+                },
+                (error) => {
+                    this.setState({
+                        isLoaded: true,
+                        error
+                    });
+                }
+            )
     }
 
     render() {
@@ -54,9 +54,19 @@ class Profile extends React.Component {
                 <Container className="justify-content-center align-items-center" id="main-content">
                     <Row className="row-centered">
                         <Col className="col-centered" sm={12}>
-                            { !isComplete && <Alert variant={'danger'}>
+                            {!isComplete && <Alert variant={'danger'}>
                                 Your profile seems not complete, please edit your profile before you start creating a wishlist
                             </Alert>}
+                            <Card>
+                                <Card.Header>Featured</Card.Header>
+                                <Card.Body>
+                                    <Card.Title>Special title treatment</Card.Title>
+                                    <Card.Text>
+                                        With supporting text below as a natural lead-in to additional content.
+                                    </Card.Text>
+                                    <Button variant="primary">Go somewhere</Button>
+                                </Card.Body>
+                            </Card>
                             <p>{this.props.overmind.state.player._id}</p>
                             <p>{this.props.overmind.state.player.name}</p>
                             <p>{this.props.overmind.state.player.class}</p>
