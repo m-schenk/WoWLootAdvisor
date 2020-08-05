@@ -23,8 +23,11 @@ export const sendWishlist = pipe(
     })
 )
 
-export const loadProfile = async ({ state, effects }) => {
-    return await ((state) => {
+export const loadProfile = pipe(
+    mutate( async ({ state, effects }) => {
+        effects.api.getPlayerProfile(state);
+    }),
+    mutate(async ({ state }) => {
         let complete = true;
         if (state.player._id === null) complete = false;
         if (state.player.name === null) complete = false;
@@ -34,8 +37,8 @@ export const loadProfile = async ({ state, effects }) => {
         if (state.player.permissions === null) complete = false;
         state.player.isComplete = complete;
         return complete;
-    })(await effects.api.getPlayerProfile(state))
-}
+    }),
+)
 
 const isProfileComplete = (state) => {
     let complete = true;
