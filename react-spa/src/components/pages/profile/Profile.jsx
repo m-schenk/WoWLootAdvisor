@@ -52,7 +52,7 @@ class Profile extends React.Component {
                 <Container className="justify-content-center align-items-center" id="main-content">
                     <Row className="row-centered">
                         <Col className="col-centered" sm={12}>
-                            { !this.props.overmind.player.isComplete && <Alert variant={'danger'}>
+                            { !this.props.overmind.state.player.isComplete && <Alert variant={'danger'}>
                                 Your profile seems not complete, please edit your profile before you start creating a wishlist
                             </Alert>}
                             <p>{this.props.overmind.state.player._id}</p>
