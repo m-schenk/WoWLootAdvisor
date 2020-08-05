@@ -43,14 +43,12 @@ exports.getPlayerById = (req, res, next) => {
         });
 }
 
-exports.getSessionPlayerId = (req, res, next) => {
-    res.status(200).json({ playerId: req.session.playerId })
-}
-
-exports.playerLogout = (req, res, next) => {
+exports.logout = (req, res, next) => {
     req.session.destroy((err) => {
-        console.log('logged out');
-        res.redirect(process.env.DISCORD_CALLBACK_URI);
+        if(err) {
+            next(err);
+        }
+        res.redirect('http://raegae.maarten.ch:3000/login');
     })
 }
 
