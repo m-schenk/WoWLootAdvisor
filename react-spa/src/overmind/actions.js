@@ -25,7 +25,7 @@ export const sendWishlist = pipe(
 
 export const loadProfile = async ({ state, effects }) => {
     console.log("entered")
-    await effects.api.getPlayerProfile(state);
+    _state = await effects.api.getPlayerProfile(state);
     console.log("got data")
     return await ((state) => {
         console.log("started")
@@ -38,7 +38,7 @@ export const loadProfile = async ({ state, effects }) => {
         if (state.player.permissions === null) complete = false;
         state.player.isComplete = complete;
         return complete;
-    })(state)
+    })(_state)
 }
 
 const isProfileComplete = (state) => {
