@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { connect } from './../overmind';
 
 import MainContent from './pages/wishlist/MainContent';
-import Login from './pages/login/Login';
 import Profile from './pages/profile/Profile';
 import Members from './pages/council/Members';
 import RaidHistory from './pages/council/RaidHistory';
@@ -21,7 +20,6 @@ class Routes extends React.Component {
         return (
             <Router>
                 <Switch>
-                    <Route path="/login" component={Login} />
                     <div className="justify-content-center align-items-center" id="wrapper">
                         <div className="justify-content-center align-items-center" id="header"><Navbar /></div>
                         <Route exact path="/" component={MainContent} />
