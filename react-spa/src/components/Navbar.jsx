@@ -30,7 +30,7 @@ class UserNavbar extends React.Component {
                          : <></>}
                         </Nav>
                     </Navbar.Collapse>
-                    <Navbar className="justify-content-end" href="http://raegae.maarten.ch:3000/api/player/logout">Logout</Navbar>
+                    <Navbar.Link className="justify-content-end" href="http://raegae.maarten.ch:3000/api/player/logout">Logout</Navbar.Link>
                 </Navbar>
             </React.Fragment>
         )
