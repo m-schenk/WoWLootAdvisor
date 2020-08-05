@@ -22,11 +22,7 @@ class Profile extends React.Component {
             isLoaded: false,
         };
     }
-
-    shouldComponentUpdate(nextProps) {
-        return this.props.overmind !== nextProps.overmind
-    }
-
+    
     componentDidMount() {
         this.props.overmind.actions.loadProfile()
         .then(
