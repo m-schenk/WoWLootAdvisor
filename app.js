@@ -86,12 +86,6 @@ app.use('/api/player', connectEnsureLogin.ensureLoggedIn('/forbidden'), playerRo
 app.use('/api/items', connectEnsureLogin.ensureLoggedIn('/forbidden'), itemsRouter);
 app.use('/api/wishlist', connectEnsureLogin.ensureLoggedIn('/forbidden'), wishlistRouter);
 
-// error routes
-// catch 404 and forward to error handler
-app.use('/api/*', (req, res, next) => {
-    next(createError(404, `page not found, url: ${req.originalUrl} might be invalid`));
-});
-
 // front-end route, every request should be resovled in react router if call is not to api endpoint
 app.get('/profile', connectEnsureLogin.ensureLoggedIn('/forbidden'), (req, res) => {
     res.sendFile(path.join(__dirname + '/react-spa/build/index.html'));
@@ -101,6 +95,11 @@ app.get('/wishlist', connectEnsureLogin.ensureLoggedIn('/forbidden'), (req, res)
 });
 app.get('/council/*', connectEnsureLogin.ensureLoggedIn('/forbidden'), (req, res) => {
     res.sendFile(path.join(__dirname + '/react-spa/build/index.html'));
+});
+
+// catch 404 and forward to error handler
+app.use('*', (req, res, next) => {
+    next(createError(404, `page not found, url: ${req.originalUrl} might be invalid`));
 });
 
 // error handler
