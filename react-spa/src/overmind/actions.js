@@ -37,10 +37,12 @@ export const loadProfile = pipe(
         if (state.player.permissions === null) complete = false;
         state.player.isComplete = complete;
     }),
-    test = ({ state }) => {
-        return state.player.isComplete;
-    }
+    test({ state })
 )
+
+const test = (state) => {
+    return state.player.isComplete;
+}
 
 export const dragHandler = pipe( //just for now, will become an effect I guess.. later
     mutate(({ state }, result) => {
