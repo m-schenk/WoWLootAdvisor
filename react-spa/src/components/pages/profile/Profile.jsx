@@ -24,7 +24,7 @@ class Profile extends React.Component {
         };
     }
 
-    componentDidMount() {
+    componentDidMount = () => {
         this.props.overmind.actions.loadProfile()
             .then(
                 (result) => {
@@ -42,7 +42,7 @@ class Profile extends React.Component {
                 }
             )
     }
-
+    
     render() {
         const { error, isLoaded, isComplete } = this.state;
         if (error) {
