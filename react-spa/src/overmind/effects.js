@@ -28,7 +28,6 @@ export const api = {
                 if (response.data.permissions) {
                     state.player.permissions = response.data.permissions
                 }
-                return state;
             }).catch(error => {
                 console.log(error);
             })
