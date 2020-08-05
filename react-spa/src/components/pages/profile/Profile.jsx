@@ -29,13 +29,21 @@ class Profile extends React.Component {
     }
 
     componentDidMount() {
-        this.props.overmind.actions.loadProfile();
-        // if (!this.props.overmind.state.player.loaded) {
-        //     this.props.overmind.actions.getPlayerProfile()
-        //         .then(
-        //             this.props.overmind.actions.isProfileComplete()
-        //         )
-        // }
+        this.props.overmind.actions.loadProfile()
+        .then(
+            (result) => {
+                this.setState({
+                    isLoaded: true
+                });
+            },
+            (error) => {
+                this.setState({
+                    isLoaded: true,
+                    error
+                });
+            }
+
+        )
     }
 
     render() {
