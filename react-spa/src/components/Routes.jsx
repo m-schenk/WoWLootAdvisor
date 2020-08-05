@@ -25,9 +25,12 @@ class Routes extends React.Component {
                         <Route exact path="/" component={MainContent} />
                         <Route path="/wishlist" component={MainContent} />
                         <Route path="/profile" component={Profile} />
-                        <Route path="/council/members" component={Members} />
-                        <Route path="/council/raidhistory" component={RaidHistory} />
-                        <Route path="/council/livesession" component={LiveSession} />
+                        {(this.props.overmind.state.player.permissions === 'council')
+                            ? <><Route path="/council/members" component={Members} />
+                                <Route path="/council/raidhistory" component={RaidHistory} />
+                                <Route path="/council/livesession" component={LiveSession} />
+                              </>
+                            : <></>}
                         <div className="justify-content-center align-items-center" id="footer"><Footer /></div>
                     </div>
                 </Switch>
