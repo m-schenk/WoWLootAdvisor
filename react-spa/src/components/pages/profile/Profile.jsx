@@ -28,6 +28,7 @@ class Profile extends React.Component {
         this.props.overmind.actions.loadProfile()
         .then(
             (result) => {
+                console.log(result)
                 this.setState({
                     isLoaded: true,
                     isComplete: result
