@@ -83,7 +83,7 @@ export const api = {
             cancel = axios.CancelToken.source();
             //send request with cancelToken
             const response = await axios('http://raegae.maarten.ch:3000/api/items?query=' + query, { cancelToken: cancel.token });
-            const result = await response.data.player.results;
+            const result = await response.data.results;
 
             //store query for caching
             cache[query] = result;
