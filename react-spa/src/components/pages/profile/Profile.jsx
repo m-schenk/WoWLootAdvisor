@@ -57,21 +57,17 @@ class Profile extends React.Component {
                             <Card>
                                 <Card.Header>Featured</Card.Header>
                                 <Card.Body>
-                                    <Card.Title>Special title treatment</Card.Title>
                                     <Card.Text>
-                                        With supporting text below as a natural lead-in to additional content.
+                                        <Col md={6}>_id:</Col><Col md={6}>{this.props.overmind.state.player._id}</Col>
+                                        <Col md={6}>Character Name:</Col><Col md={6}>{this.props.overmind.state.player.name}</Col>
+                                        <Col md={6}>Race:</Col><Col md={6}>{this.props.overmind.state.player.race}</Col>
+                                        <Col md={6}>Class:</Col><Col md={6}>{this.props.overmind.state.player.class}</Col>
+                                        <Col md={6}>Role:</Col><Col md={6}>{this.props.overmind.state.player.role}</Col>
+                                        <Col md={6}>aq_attendance:</Col><Col md={6}>{this.props.overmind.state.player.aq_attendance}</Col>
+                                        <Col md={6}>naxx_attendance:</Col><Col md={6}>{this.props.overmind.state.player.naxx_attendance}</Col>
                                     </Card.Text>
-                                    <Button variant="primary">Go somewhere</Button>
                                 </Card.Body>
-                            </Card>
-                            <p>{this.props.overmind.state.player._id}</p>
-                            <p>{this.props.overmind.state.player.name}</p>
-                            <p>{this.props.overmind.state.player.class}</p>
-                            <p>{this.props.overmind.state.player.race}</p>
-                            <p>{this.props.overmind.state.player.role}</p>
-                            <p>{this.props.overmind.state.player.aq_attendance}</p>
-                            <p>{this.props.overmind.state.player.naxx_attendance}</p>
-                            <Accordion>
+                                <Accordion>
                                 <Card>
                                     <Card.Header>
                                         <Accordion.Toggle as={Button} variant="link" eventKey="0">
@@ -123,6 +119,7 @@ class Profile extends React.Component {
                                     </Accordion.Collapse>
                                 </Card>
                             </Accordion>
+                            </Card>
                         </Col>
                     </Row>
                 </Container>
