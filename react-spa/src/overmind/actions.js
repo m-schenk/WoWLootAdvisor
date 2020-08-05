@@ -28,6 +28,7 @@ export const loadProfile = async ({ state, effects }) => {
     await effects.api.getPlayerProfile(state);
     console.log("got data")
     return await ((state) => {
+        console.log("started")
         let complete = true;
         if (state.player._id === null) complete = false;
         if (state.player.name === null) complete = false;
