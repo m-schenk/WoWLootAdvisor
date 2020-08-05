@@ -99,7 +99,7 @@ app.get('/council/*', connectEnsureLogin.ensureLoggedIn('/forbidden'), (req, res
 });
 
 // catch 404 and forward to error handler
-app.use('*', (req, res, next) => {
+app.use('/*', (req, res, next) => {
     next(createError(404, `page not found, url: ${req.originalUrl} might be invalid`));
 });
 
