@@ -22,7 +22,7 @@ const tourOptions = {
 function TButton() {
     const tour = React.useContext(ShepherdTourContext)
     return(
-        <Button variant="warning" as="input" type="button" value="Tutorial" onClick={tour.start}/>
+        <Button variant="light" as="input" type="button" value="Tutorial" onClick={tour.start}/>
     )
 }
 
@@ -65,8 +65,8 @@ class ItemLiveSearch extends React.Component {
         return (
             <div className="live-search">
                 <div className="control">
-                    <Button variant="warning" as="input" type="submit" value="Submit" onClick={ () => { this.sendWishlist() } } />
-                    <Button variant="warning" as="input" type="reset" value="Reset" />  
+                    <Button variant="light" as="input" type="submit" value="Submit" onClick={ () => { this.sendWishlist() } } />
+                    <Button variant="light" as="input" type="reset" value="Reset" />  
                     <ShepherdTour steps={tutorialSteps} tourOptions={tourOptions}>
                         <TButton />
                     </ShepherdTour>
