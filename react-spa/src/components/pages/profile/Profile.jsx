@@ -20,7 +20,7 @@ class Profile extends React.Component {
         this.state = {
             error: null,
             isLoaded: false,
-            isComplete: false
+            isComplete: this.props.overmind.state.player.isComplete
         };
     }
 
@@ -30,7 +30,7 @@ class Profile extends React.Component {
             (result) => {
                 this.setState({
                     isLoaded: true,
-                    isComplete: result
+                    isComplete: this.props.overmind.state.player.isComplete
                 });
             },
             (error) => {
