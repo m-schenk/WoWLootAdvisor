@@ -57,10 +57,10 @@ exports.playerLogout = (req, res, next) => {
 exports.getPlayerProfile = (req, res, next) => {
     console.log(req.user)
     Player.findById(req.user._id)
-        .then(player => {
-            res.stats(200);
+        .then(_player => {
+            res.status(200);
             res.set({'Content-Type': 'text/json'});
-            res.json({ isComplete: true, player: JSON.stringify(player)});
+            res.json({ isComplete: true, player: JSON.stringify(_player)});
             res.end();
         })
         .catch(err => {
