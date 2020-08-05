@@ -60,7 +60,7 @@ exports.getPlayerProfile = (req, res, next) => {
         .then(_player => {
             res.status(200);
             res.set({'Content-Type': 'text/json'});
-            res.json({ "isComplete": "true", "player": JSON.stringify(_player)});
+            res.json({ isComplete: true, player: _player});
             res.end();
         })
         .catch(err => {
