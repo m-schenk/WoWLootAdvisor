@@ -29,8 +29,8 @@ class Profile extends React.Component {
         .then(
             (result) => {
                 this.setState({
+                    isComplete: this.props.overmind.state.player.isComplete,
                     isLoaded: true,
-                    isComplete: this.props.overmind.state.player.isComplete
                 });
             },
             (error) => {
