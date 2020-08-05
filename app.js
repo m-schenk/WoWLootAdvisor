@@ -2,9 +2,11 @@ const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
+
 const session = require('express-session');
 const passport = require('passport')
 const connectEnsureLogin = require('connect-ensure-login');
+const MongoStore = require('connect-mongo')(session);
 
 require("dotenv").config();
 
@@ -17,12 +19,24 @@ const discordStrategy = require('./strategies/discordStrategies');
 
 const app = express();
 
+// print mode Production or Dev
+console.log(process.env.NODE_ENV);
+
+// Connect to mongodb - set both mongoose major update flags
+mongoose.connect(process.env.MONGODB_URI, { useUnifiedTopology: true, useNewUrlParser: true })
+    .then(result => {
+        console.log('successfully connected to db!');
+    })
+    .catch(err => {
+        console.log(err);
+        process.exit(0);
+    })
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
-console.log(process.env.NODE_ENV);
-
+// session & middlewares
 app.use(
     session({
         secret: process.env.SESSION_SECRET,
@@ -32,7 +46,8 @@ app.use(
             secure: 'auto',
             httpOnly: true,
             maxAge: 3600000
-        }
+        },
+        store: new MongoStore({ mongooseConnection: mongoose.connection })
     })
 );
 
@@ -92,15 +107,5 @@ app.use(function (err, req, res, next) {
         res.render('error');
         }
 });
-
-// set both mongoose major update flags
-mongoose.connect(process.env.MONGODB_URI, { useUnifiedTopology: true, useNewUrlParser: true })
-    .then(result => {
-        console.log('successfully connected to db!');
-    })
-    .catch(err => {
-        console.log(err);
-        process.exit(0);
-    })
 
 module.exports = app;
