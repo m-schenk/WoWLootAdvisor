@@ -27,7 +27,7 @@ export const loadProfile = async ({ state, effects }) => {
     console.log("entered")
     await effects.api.getPlayerProfile(state);
     console.log("got data")
-    await ((state) => {
+    return await ((state) => {
         let complete = true;
         if (state.player._id === null) complete = false;
         if (state.player.name === null) complete = false;
@@ -36,14 +36,9 @@ export const loadProfile = async ({ state, effects }) => {
         if (state.player.role === null) complete = false;
         if (state.player.permissions === null) complete = false;
         state.player.isComplete = complete;
+        return complete;
     })(state)
-
-    console.log("done")
 }
-
-// export const getPlayerProfile = ({ state, effects }) => {
-//     effects.api.getPlayerProfile(state);
-// }
 
 const isProfileComplete = (state) => {
     let complete = true;
