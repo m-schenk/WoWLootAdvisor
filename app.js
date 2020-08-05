@@ -67,7 +67,7 @@ app.get('/login', (req, res) => {
 })
 
 // front-end, every request should be resovled in react router if call is not to api endpoint
-app.get('/*', connectEnsureLogin.ensureLoggedIn('/forbidden') ,(req, res) => {
+app.get('*', connectEnsureLogin.ensureLoggedIn('/forbidden') ,(req, res) => {
     res.sendFile(path.join(__dirname+'/react-spa/build/index.html'));
 });
 
