@@ -43,7 +43,7 @@ class Profile extends React.Component {
     }
 
     render() {
-        const { error, isLoaded } = this.state;
+        const { error, isLoaded, isComplete } = this.state;
         if (error) {
             return <div>Error: {error.message}</div>;
         } else if (!isLoaded) {
