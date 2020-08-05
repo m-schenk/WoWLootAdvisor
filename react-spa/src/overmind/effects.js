@@ -6,27 +6,28 @@ export const api = {
     getPlayerProfile(state) {
         axios.get('http://raegae.maarten.ch:3000/api/player/getPlayerProfile', { withCredentials: true })
             .then((response) => {
-                state.player._id = response.data._id;
-                if (response.data.name) {
-                    state.player.name = response.data.name
+                state.player._id = response.data.player._id;
+                state.player.isComplete = response.data.isComplete;
+                if (response.data.player.name) {
+                    state.player.name = response.data.player.name
                 }
-                if (response.data.class) {
-                    state.player.class = response.data.class
+                if (response.data.player.class) {
+                    state.player.class = response.data.player.class
                 }
-                if (response.data.race) {
-                    state.player.race = response.data.race
+                if (response.data.player.race) {
+                    state.player.race = response.data.player.race
                 }
-                if (response.data.role) {
-                    state.player.role = response.data.role
+                if (response.data.player.role) {
+                    state.player.role = response.data.player.role
                 }
-                if (response.data.aq_attendance) {
-                    state.player.aq_attendance = response.data.aq_attendance
+                if (response.data.player.aq_attendance) {
+                    state.player.aq_attendance = response.data.player.aq_attendance
                 }
-                if (response.data.naxx_attendance) {
-                    state.player.naxx_attendance = response.data.naxx_attendance
+                if (response.data.player.naxx_attendance) {
+                    state.player.naxx_attendance = response.data.player.naxx_attendance
                 }
-                if (response.data.permissions) {
-                    state.player.permissions = response.data.permissions
+                if (response.data.player.permissions) {
+                    state.player.permissions = response.data.player.permissions
                 }
             }).catch(error => {
                 console.log(error);
@@ -81,7 +82,7 @@ export const api = {
             cancel = axios.CancelToken.source();
             //send request with cancelToken
             const response = await axios('http://raegae.maarten.ch:3000/api/items?query=' + query, { cancelToken: cancel.token });
-            const result = await response.data.results;
+            const result = await response.data.player.results;
 
             //store query for caching
             cache[query] = result;

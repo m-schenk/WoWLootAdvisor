@@ -26,23 +26,20 @@ export const sendWishlist = pipe(
 export const loadProfile = pipe(
     mutate( async ({ state, effects }) => {
         effects.api.getPlayerProfile(state);
-    }),
-    mutate( async ({ state }) => {
-        let complete = true;
-        if (state.player._id === null) complete = false;
-        if (state.player.name === null) complete = false;
-        if (state.player.class === null) complete = false;
-        if (state.player.race === null) complete = false;
-        if (state.player.role === null) complete = false;
-        if (state.player.permissions === null) complete = false;
-        state.player.isComplete = complete;
-    }),
-    test({ state })
+    })//,
+    // mutate( async ({ state }) => {
+    //     let complete = true;
+    //     if (state.player._id === null) complete = false;
+    //     if (state.player.name === null) complete = false;
+    //     if (state.player.class === null) complete = false;
+    //     if (state.player.race === null) complete = false;
+    //     if (state.player.role === null) complete = false;
+    //     if (state.player.permissions === null) complete = false;
+    //     state.player.isComplete = complete;
+    // }),
+    // test({ state })
 )
 
-const test = (state) => {
-    return state.player.isComplete;
-}
 
 export const dragHandler = pipe( //just for now, will become an effect I guess.. later
     mutate(({ state }, result) => {
