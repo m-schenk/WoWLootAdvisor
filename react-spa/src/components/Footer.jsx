@@ -7,7 +7,7 @@ export default class Footer extends React.Component {
     render() {
         return(
             <Navbar className="justify-content-center align-items-center" bg="dark" variant="dark" expand="lg">
-                <div className="reset">
+                <div>
                     <NavbarBrand>
                         <h5 className="midText">disclaimer - &copy; 2020 RäGä Eww...</h5>
                     </NavbarBrand>   
