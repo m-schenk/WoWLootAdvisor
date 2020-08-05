@@ -10,7 +10,7 @@ export const state = {
         naxx_attendance: null,
         wishlist: null,
         loaded: false,
-        isComplete: false,
+        isComplete: null,
     },
     wishlist: {
         'locked': false,
