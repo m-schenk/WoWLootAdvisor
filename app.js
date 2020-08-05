@@ -43,7 +43,12 @@ app.use(passport.session());
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }));
-//app.use(express.static(path.join(__dirname, 'react-spa/build/')));
+
+app.get('/login', (req, res) => {
+    res.sendFile(path.join(__dirname+'/react-spa/build/index.html'));
+})
+app.use(connectEnsureLogin.ensureLoggedIn('/forbidden'))
+app.use('', express.static(path.join(__dirname, 'react-spa/build/')));
 app.use(express.static(path.join(__dirname, 'react-spa/build/static')));
 
 // api routes
