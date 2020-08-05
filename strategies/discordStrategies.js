@@ -1,6 +1,7 @@
 const DiscordStrategy = require('passport-discord').Strategy;
 const passport = require('passport');
 const Player = require('../models/Player');
+const createError = require('http-errors');
 const _ = require('lodash');
 
 passport.serializeUser((user, done) => {
@@ -27,7 +28,6 @@ passport.use(new DiscordStrategy({
                 cb(null, filteredPlayer);
             } else {
                 console.log('User doesnt exist');
-                console.log(profile.guilds.filter(entry => (entry.id === process.env.DISCORD_SERVER_ID)))
                 if (profile.guilds.filter(entry => (entry.id === process.env.DISCORD_SERVER_ID)).length > 0) {
                     const newPlayer = new Player({ discordId: profile.id });
                     newPlayer.save()
@@ -40,7 +40,7 @@ passport.use(new DiscordStrategy({
                         })
                     
                 } else {
-                    cb(new Error('Access denied, does not belong to guild!'), null);
+                    cb(new createError(403, 'Access denied, does not belong to guild!'), null);
                 }
             }
         })

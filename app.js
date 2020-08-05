@@ -81,9 +81,13 @@ app.use(function (err, req, res, next) {
     res.locals.message = err.message;
     res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-    // render the error page
-    res.status(err.statusCode || 500);
-    res.render('error');
+    if(err.statusCode === 403) {
+        res.sendFile(path.join(__dirname+'/public/forbidden.html'))
+    } else {
+        // render the error page
+        res.status(err.statusCode || 500);
+        res.render('error');
+        }
 });
 
 // set both mongoose major update flags
