@@ -62,15 +62,15 @@ app.use(express.urlencoded({ extended: false }));
 
 // public routes
 app.get('/login', (req, res) => {
-    res.sendFile(path.join(__dirname+'/public/login.html'))
+    res.sendFile(path.join(__dirname + '/public/login.html'))
 })
 
 app.get('/forbidden', (req, res) => {
-    res.sendFile(path.join(__dirname+'/public/forbidden.html'))
+    res.sendFile(path.join(__dirname + '/public/forbidden.html'))
 });
 
 app.get('/pagenotfound', (req, res) => {
-    res.sendFile(path.join(__dirname+'/public/pagenotfound.html'))
+    res.sendFile(path.join(__dirname + '/public/pagenotfound.html'))
 });
 
 // api discord, used for login route
@@ -93,8 +93,8 @@ app.use('/api/*', (req, res, next) => {
 });
 
 // front-end route, every request should be resovled in react router if call is not to api endpoint
-app.get('*', connectEnsureLogin.ensureLoggedIn('/forbidden') ,(req, res) => {
-    res.sendFile(path.join(__dirname+'/react-spa/build/index.html'));
+app.get('*', connectEnsureLogin.ensureLoggedIn('/forbidden'), (req, res) => {
+    res.sendFile(path.join(__dirname + '/react-spa/build/index.html'));
 });
 
 // error handler
@@ -107,15 +107,15 @@ app.use(function (err, req, res, next) {
     res.locals.message = err.message;
     res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-    if(err.statusCode === 403) {
+    if (err.statusCode === 403) {
         res.redirect('http://raegae.maarten.ch:3000/forbbiden')
-    } else if(err.statusCode === 404) {
+    } else if (err.statusCode === 404) {
         res.redirect('http://raegae.maarten.ch:3000/pagenotfound')
-    }
+    } else {
         // render the error page
         res.status(err.statusCode || 500);
         res.render('error');
-        }
+    }
 });
 
 module.exports = app;
