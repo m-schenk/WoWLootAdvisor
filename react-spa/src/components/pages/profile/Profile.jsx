@@ -20,15 +20,17 @@ class Profile extends React.Component {
         this.state = {
             error: null,
             isLoaded: false,
+            isComplete: false
         };
     }
-    
+
     componentDidMount() {
         this.props.overmind.actions.loadProfile()
         .then(
             (result) => {
                 this.setState({
-                    isLoaded: true
+                    isLoaded: true,
+                    isComplete: result
                 });
             },
             (error) => {
@@ -51,7 +53,7 @@ class Profile extends React.Component {
                 <Container className="justify-content-center align-items-center" id="main-content">
                     <Row className="row-centered">
                         <Col className="col-centered" sm={12}>
-                            {!this.props.overmind.state.player.isComplete && <Alert variant={'danger'}>
+                            { !isComplete && <Alert variant={'danger'}>
                                 Your profile seems not complete, please edit your profile before you start creating a wishlist
                             </Alert>}
                             <p>{this.props.overmind.state.player._id}</p>
