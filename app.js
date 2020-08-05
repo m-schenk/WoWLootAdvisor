@@ -93,7 +93,13 @@ app.use('/api/*', (req, res, next) => {
 });
 
 // front-end route, every request should be resovled in react router if call is not to api endpoint
-app.get('*', connectEnsureLogin.ensureLoggedIn('/forbidden'), (req, res) => {
+app.get('/profile', connectEnsureLogin.ensureLoggedIn('/forbidden'), (req, res) => {
+    res.sendFile(path.join(__dirname + '/react-spa/build/index.html'));
+});
+app.get('/wishlist', connectEnsureLogin.ensureLoggedIn('/forbidden'), (req, res) => {
+    res.sendFile(path.join(__dirname + '/react-spa/build/index.html'));
+});
+app.get('/council/*', connectEnsureLogin.ensureLoggedIn('/forbidden'), (req, res) => {
     res.sendFile(path.join(__dirname + '/react-spa/build/index.html'));
 });
 
