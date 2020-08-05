@@ -25,14 +25,14 @@ export const sendWishlist = pipe(
 
 export const loadProfile = async ({ state, effects }) => {
     await effects.api.getPlayerProfile(state);
-    await isProfileComplete()
+    await isProfileComplete();
 }
 
 // export const getPlayerProfile = ({ state, effects }) => {
 //     effects.api.getPlayerProfile(state);
 // }
 
-isProfileComplete = async (state) => {
+const isProfileComplete = async (state) => {
     let complete = true;
     if (state.player._id === null) complete = false;
     if (state.player.name === null) complete = false;
