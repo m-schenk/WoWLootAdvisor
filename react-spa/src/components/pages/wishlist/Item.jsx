@@ -10,7 +10,7 @@ const ItemContainer = styled.div`
     border-radius: 4px;
     padding: 4px;
     margin-bottom: 8px;
-    background-color: ${props => (props.isDragging ? '#50505f' : '#262626')};
+    background-color: ${props => (props.isDragging ? '#505050' : '#242424')};
     box-shadow: 2px 2px 4px 0px rgba(25,25,25,1);
     width: 300px;
     justify-content: space-between;
