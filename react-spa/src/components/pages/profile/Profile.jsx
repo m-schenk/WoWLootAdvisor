@@ -31,7 +31,6 @@ class Profile extends React.Component {
                 console.log(result)
                 this.setState({
                     isLoaded: true,
-                    isComplete: result
                 });
             },
             (error) => {
