@@ -19,7 +19,7 @@ body {
 
 #wrapper {
   min-height: 100%;
-  background-color: #3d3d3d;
+  background-color: #303030;
   border: 1px solid black;
   border-radius: 4px !important;
   box-shadow: 2px 2px 3px 1px rgba(30, 30, 30, 1);
