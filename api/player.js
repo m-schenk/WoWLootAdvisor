@@ -17,7 +17,7 @@ exports.postPlayerProfile = (req, res, next) => {
     player.save()
         .then(player => {
             const filteredPlayer = _.omit(player.toObject(), ['discordId'])
-            res.status(201).json({ player: player });
+            res.status(201).json({ player: filteredPlayer });
         })
         .catch(err => {
             const error = new Error(err);
@@ -58,9 +58,10 @@ exports.getPlayerProfile = (req, res, next) => {
     console.log(req.user)
     Player.findById(req.user._id)
         .then(player => {
+            const filteredPlayer = _.omit(player.toObject(), ['discordId'])
             res.status(200);
             res.set({'Content-Type': 'text/json'});
-            res.json({ isComplete: true, player: player});
+            res.json({ isComplete: true, player: filteredPlayer});
             res.end();
         })
         .catch(err => {
