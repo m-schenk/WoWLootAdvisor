@@ -11,6 +11,8 @@ import LiveSession from './pages/council/LiveSession';
 import Navbar from './Navbar';
 import Footer from './Footer';
 
+import Container from 'react-bootstrap';
+
 import '@atlaskit/css-reset';
 import './assets/App.css';
 
@@ -20,7 +22,7 @@ class Routes extends React.Component {
         return (
             <Router>
                 <Switch>
-                    <div className="justify-content-center align-items-center" id="wrapper">
+                    <Container className="justify-content-center align-items-center" id="wrapper">
                         <div className="justify-content-center align-items-center" id="header"><Navbar /></div>
                         <Route exact path="/" component={MainContent} />
                         <Route path="/wishlist" component={MainContent} />
@@ -32,7 +34,7 @@ class Routes extends React.Component {
                               </>
                             : <></>}
                         <div className="justify-content-center align-items-center" id="footer"><Footer /></div>
-                    </div>
+                    </Container>
                 </Switch>
             </Router>
         )
