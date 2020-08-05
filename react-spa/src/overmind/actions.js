@@ -37,8 +37,8 @@ export const loadProfile = pipe(
         if (state.player.permissions === null) complete = false;
         state.player.isComplete = complete;
     }),
-    () => {
-        return true
+    ({ state }) => {
+        return state.player.isComplete
     }
 )
 
