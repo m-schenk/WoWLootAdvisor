@@ -8,7 +8,7 @@ body {
 }
 
 .smallText {
-  font-size: 12px;
+  font-size: 10px;
 }
 
 .midText {
@@ -19,7 +19,7 @@ body {
 
 #wrapper {
   min-height: 100%;
-  background-color: #666666;
+  background-color: #54565f;
 }
 #header {
   padding-bottom: 20px;
