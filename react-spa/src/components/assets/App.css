@@ -12,17 +12,18 @@ body {
 }
 
 .midText {
-  margin: 4px;
   font-size: 12px;
-  color: white;
 }
 
 #wrapper {
   min-height: 100%;
-  background-color: #303030;
-  border: 1px solid black;
+  background-color: rgb(48, 48, 48);
+  border: 1px solid rgb(12, 12, 12);
   border-radius: 4px !important;
-  box-shadow: 2px 2px 3px 1px rgba(30, 30, 30, 1);
+  box-shadow: 2px 2px 3px 1px rgb(30, 30, 30);
+  margin-top: auto;
+  position: absolute;
+  bottom: 0;
 }
 #header {
   padding-bottom: 20px;
@@ -38,6 +39,7 @@ body {
   position: absolute;
   bottom: 0;
   height: 65px; /* Height of the footer */
+  color: white;
 }
 
 .darkTheme {
