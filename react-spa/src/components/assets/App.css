@@ -21,7 +21,6 @@ body {
   border-radius: 4px !important;
   box-shadow: 2px 2px 3px 1px rgb(30, 30, 30);
   margin-top: auto;
-  position: absolute;
   bottom: 0;
 }
 #header {

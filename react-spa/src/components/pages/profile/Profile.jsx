@@ -55,7 +55,7 @@ class Profile extends React.Component {
                                 Your profile seems not complete, please edit your profile before you start creating a wishlist
                             </Alert>}
                             <Card>
-                                <Card.Header>Featured</Card.Header>
+                                <Card.Header>Player Profile</Card.Header>
                                 <Card.Body>
                                     <Card.Text>
                                         <Col md={6}>_id:</Col><Col md={6}>{this.props.overmind.state.player._id}</Col>
