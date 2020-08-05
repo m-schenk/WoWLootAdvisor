@@ -27,7 +27,7 @@ export const loadProfile = pipe(
     mutate( async ({ state, effects }) => {
         effects.api.getPlayerProfile(state);
     }),
-    mutate(async ({ state }) => {
+    mutate( async ({ state }) => {
         let complete = true;
         if (state.player._id === null) complete = false;
         if (state.player.name === null) complete = false;
@@ -36,21 +36,8 @@ export const loadProfile = pipe(
         if (state.player.role === null) complete = false;
         if (state.player.permissions === null) complete = false;
         state.player.isComplete = complete;
-        return complete;
     }),
 )
-
-const isProfileComplete = (state) => {
-    let complete = true;
-    if (state.player._id === null) complete = false;
-    if (state.player.name === null) complete = false;
-    if (state.player.class === null) complete = false;
-    if (state.player.race === null) complete = false;
-    if (state.player.role === null) complete = false;
-    if (state.player.permissions === null) complete = false;
-    state.player.isComplete = complete;
-    return;
-}
 
 export const dragHandler = pipe( //just for now, will become an effect I guess.. later
     mutate(({ state }, result) => {
