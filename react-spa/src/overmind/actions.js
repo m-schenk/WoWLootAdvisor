@@ -36,7 +36,7 @@ export const loadProfile = async ({ state, effects }) => {
         if (state.player.role === null) complete = false;
         if (state.player.permissions === null) complete = false;
         state.player.isComplete = complete;
-    })()
+    })(state)
 
     console.log("done")
 }
