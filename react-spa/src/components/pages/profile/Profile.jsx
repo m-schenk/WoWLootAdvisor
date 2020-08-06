@@ -157,18 +157,18 @@ class Profile extends React.Component {
                                                 <Form.Group>
                                                     <Form.Label>Select your role:</Form.Label>
                                                     <Form.Control as="select" value="race">
-                                                        <option>Dwarf</option>
-                                                        <option>Gnome</option>
-                                                        <option>Human</option>
-                                                        <option>Night Elf</option>
+                                                        <option value="Dwarf">Dwarf</option>
+                                                        <option value="Gnome">Gnome</option>
+                                                        <option value="Human">Human</option>
+                                                        <option value="Night Elf">Night Elf</option>
                                                     </Form.Control>
                                                 </Form.Group>
                                                 <Form.Group>
                                                     <Form.Label>Select your role:</Form.Label>
                                                     <Form.Control as="select" value="role">
-                                                        <option>DPS</option>
-                                                        <option>Heal</option>
-                                                        <option>Tank</option>
+                                                        <option value="DPS">DPS</option>
+                                                        <option value="Heal">Heal</option>
+                                                        <option value="Tank">Tank</option>
                                                     </Form.Control>
                                                 </Form.Group>
                                                 <Button variant="warning" type="submit">
