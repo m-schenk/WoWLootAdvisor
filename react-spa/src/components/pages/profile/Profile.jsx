@@ -25,7 +25,8 @@ class Profile extends React.Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
-        const data = new FormData(event.target);
+        const data = JSON.stringify(new JSONFormData(event.target).formData);
+        console.log(data)
         this.props.overmind.actions.sendProfile(data);
     }
 
