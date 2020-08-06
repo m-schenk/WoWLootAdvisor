@@ -36,11 +36,7 @@
   box-shadow: 2px 2px 3px 1px rgb(30, 30, 30);
 }
 #footer {
-    text-align: center;
   width: 100%;
-  bottom: 1px;
-  height: 65px; /* Height of the footer */
-  color: white;
   position: absolute;
 }
 
