@@ -63,7 +63,7 @@ class Profile extends React.Component {
                                                 <label>(remove $dev) _id:</label>
                                             </Col>
                                             <Col md={6}>
-                                                <b>{this.props.overmind.state.player._id}</b>
+                                                <p>{this.props.overmind.state.player._id}</p>
                                             </Col>
                                         </Row>
                                         <Row>
