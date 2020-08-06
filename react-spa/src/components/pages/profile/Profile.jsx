@@ -132,7 +132,7 @@ class Profile extends React.Component {
                                         </Card.Header>
                                         <Accordion.Collapse eventKey="0">
                                             <Card.Body>
-                                                <Form onSubmit={() => { this.handleSubmit() }}>
+                                                <Form onSubmit={(e) => { this.handleSubmit(e) }}>
                                                     <Form.Group controlId="profile.name">
                                                         <Form.Label>Character name:</Form.Label>
                                                         <Form.Control type="text" />
