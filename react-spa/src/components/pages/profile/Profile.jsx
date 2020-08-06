@@ -23,8 +23,8 @@ class Profile extends React.Component {
         };
     }
 
-    sendProfile = async (e) => {
-        e.Form
+    sendProfile = async (event) => {
+        event.preventDefault();
 
     }
 
