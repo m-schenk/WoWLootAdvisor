@@ -133,13 +133,13 @@ class Profile extends React.Component {
                                         <Accordion.Collapse eventKey="0">
                                             <Card.Body>
                                                 <Form onSubmit={(e) => { this.handleSubmit(e) }}>
-                                                    <Form.Group controlId="profile.name">
+                                                    <Form.Group>
                                                         <Form.Label>Character name:</Form.Label>
-                                                        <Form.Control type="text" />
+                                                        <Form.Control type="text" value="name"/>
                                                     </Form.Group>
                                                     <Form.Group controlId="profile.class" onChange={this.classChange}>
                                                         <Form.Label>Select class:</Form.Label>
-                                                        <Form.Control as="select">
+                                                        <Form.Control as="select" value="class">
                                                             <option>Druid</option>
                                                             <option>Hunter</option>
                                                             <option>Mage</option>
@@ -150,18 +150,18 @@ class Profile extends React.Component {
                                                             <option>Warrior</option>
                                                         </Form.Control>
                                                     </Form.Group>
-                                                    <Form.Group controlId="profile.class">
+                                                    <Form.Group>
                                                         <Form.Label>Select your role:</Form.Label>
-                                                        <Form.Control as="select">
+                                                        <Form.Control as="select" value="race">
                                                             <option>Dwarf</option>
                                                             <option>Gnome</option>
                                                             <option>Human</option>
                                                             <option>Night Elf</option>
                                                         </Form.Control>
                                                     </Form.Group>
-                                                    <Form.Group controlId="profile.class">
+                                                    <Form.Group>
                                                         <Form.Label>Select your role:</Form.Label>
-                                                        <Form.Control as="select">
+                                                        <Form.Control as="select" value="role">
                                                             <option>DPS</option>
                                                             <option>Heal</option>
                                                             <option>Tank</option>
