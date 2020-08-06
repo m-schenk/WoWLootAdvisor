@@ -71,7 +71,7 @@ class ItemLiveSearch extends React.Component {
                         <TButton />
                     </ShepherdTour>
                 </div>
-                <label>Remove Item:</label>
+                <label className="label-livesearch">Remove Item:</label>
                 <Droppable droppableId="delete-zone">
                     {provided => (
                         <div className="delete-item-zone" ref={provided.innerRef} {...provided.droppableProps}>
@@ -80,7 +80,7 @@ class ItemLiveSearch extends React.Component {
                     )}
                 </Droppable>
                 <br />
-                <label>Item Search:</label>
+                <label className="label-livesearch">Item Search:</label>
                 <Form.Control size="sm"
                     value={this.props.overmind.state.liveSearch['query']}
                     onChange={e => this.onChangeHandler(e)}
