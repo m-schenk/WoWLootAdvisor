@@ -34,6 +34,12 @@ export const api = {
                 console.log(error);
             })
     },
+    sendProfile(state) {
+        axios.post('http://raegae.maarten.ch:3000/api/player/postPlayerProfile', { withCredentials: true })
+            .then((response) => {
+                console.log(response)
+        })
+    },
     async sendWishlist(state) {
         const value = {
             bracket1:

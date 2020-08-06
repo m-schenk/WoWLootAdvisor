@@ -23,9 +23,10 @@ class Profile extends React.Component {
         };
     }
 
-    sendProfile = async (event) => {
+    handleSubmit = (event) => {
         event.preventDefault();
-
+        const data = new FormData(event.target);
+        this.props.overmind.actions.sendProfile(data);
     }
 
     componentDidMount() {
@@ -46,7 +47,7 @@ class Profile extends React.Component {
     }
 
     render() {
-        const { error, isLoaded, isComplete } = this.state;
+        const { error, isLoaded } = this.state;
         if (error) {
             return <div>Error: {error.message}</div>;
         } else if (!isLoaded) {
@@ -123,7 +124,7 @@ class Profile extends React.Component {
                                     </Card.Text>
                                 </Card.Body>
                                 <Accordion>
-                                    <Card>
+                                    
                                         <Card.Header>
                                             <Accordion.Toggle as={Button} variant="link" eventKey="0">
                                                 Edit Profile
@@ -131,7 +132,7 @@ class Profile extends React.Component {
                                         </Card.Header>
                                         <Accordion.Collapse eventKey="0">
                                             <Card.Body>
-                                                <Form onSubmit={ () => { this.sendProfile() } }>
+                                                <Form onSubmit={() => { this.handleSubmit() }}>
                                                     <Form.Group controlId="profile.name">
                                                         <Form.Label>Character name:</Form.Label>
                                                         <Form.Control type="text" />
@@ -172,7 +173,7 @@ class Profile extends React.Component {
                                                 </Form>
                                             </Card.Body>
                                         </Accordion.Collapse>
-                                    </Card>
+
                                 </Accordion>
                             </Card>
                         </Col>

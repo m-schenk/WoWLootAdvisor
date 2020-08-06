@@ -29,6 +29,9 @@ export const loadProfile = pipe(
     })
 )
 
+export const sendProfile = ({ state, effects }) => {
+    effects.api.sendProfile(state);
+}
 
 export const dragHandler = pipe( //just for now, will become an effect I guess.. later
     mutate(({ state }, result) => {
