@@ -58,13 +58,63 @@ class Profile extends React.Component {
                                 <Card.Header>Player Profile</Card.Header>
                                 <Card.Body>
                                     <Card.Text>
-                                        <Col md={6}><label>_id:</label></Col><Col md={6}><p>{this.props.overmind.state.player._id}</p></Col>
-                                        <Col md={6}><label>Character Name:</label></Col><Col md={6}><p>{this.props.overmind.state.player.name}</p></Col>
-                                        <Col md={6}><label>Race:</label></Col><Col md={6}><p>{this.props.overmind.state.player.race}</p></Col>
-                                        <Col md={6}><label>Class:</label></Col><Col md={6}><p>{this.props.overmind.state.player.class}</p></Col>
-                                        <Col md={6}><label>Role:</label></Col><Col md={6}><p>{this.props.overmind.state.player.role}</p></Col>
-                                        <Col md={6}><label>aq_attendance:</label></Col><Col md={6}><p>{this.props.overmind.state.player.aq_attendance}</p></Col>
-                                        <Col md={6}><label>naxx_attendance:</label></Col><Col md={6}><p>{this.props.overmind.state.player.naxx_attendance}</p></Col>
+                                        <Row>
+                                            <Col md={6}>
+                                                <label>_id:</label>
+                                            </Col>
+                                            <Col md={6}>
+                                                <p>{this.props.overmind.state.player._id}</p>
+                                            </Col>
+                                        </Row>
+                                        <Row>
+                                            <Col md={6}>
+                                                <label>Character Name:</label>
+                                            </Col>
+
+                                            <Col md={6}>
+                                                <p>{this.props.overmind.state.player.name}</p>
+                                            </Col>
+                                        </Row>
+                                        <Row>
+                                            <Col md={6}>
+                                                <label>Race:</label>
+                                            </Col>
+                                            <Col md={6}>
+                                                <p>{this.props.overmind.state.player.race}</p>
+                                            </Col>
+                                        </Row>
+                                        <Row>
+                                            <Col md={6}>
+                                                <label>Class:</label>
+                                            </Col>
+                                            <Col md={6}>
+                                                <p>{this.props.overmind.state.player.class}</p>
+                                            </Col>
+                                        </Row>
+                                        <Row>
+                                            <Col md={6}>
+                                                <label>Role:</label>
+                                            </Col>
+                                            <Col md={6}>
+                                                <p>{this.props.overmind.state.player.role}</p>
+                                            </Col>
+                                        </Row>
+                                        <Row>
+                                            <Col md={6}>
+                                                <label>aq_attendance:</label>
+                                            </Col>
+                                            <Col md={6}>
+                                                <p>{this.props.overmind.state.player.aq_attendance}</p>
+                                            </Col>
+                                        </Row>
+                                        <Row>
+                                            <Col md={6}>
+                                                <label>naxx_attendance:</label>
+                                            </Col>
+                                            <Col md={6}>
+                                                <p>{this.props.overmind.state.player.naxx_attendance}</p>
+                                            </Col>
+                                        </Row>
                                     </Card.Text>
                                 </Card.Body>
                                 <Accordion>
