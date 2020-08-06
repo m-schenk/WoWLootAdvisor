@@ -4,27 +4,29 @@ const createError = require('http-errors');
 const _ = require('lodash');
 
 exports.postPlayerProfile = (req, res, next) => {
-    console.log(req.body)
-    const player = new Player({
-        discordId: req.body.id,
-        name: req.body.name,
-        class: req.body.class,
-        race: req.body.race,
-        talent: req.body.talent,
-        rank: req.body.rank,
-        aq_attendance: req.body.aq_attendance,
-        naxx_attendance: req.body.naxx_attendance,
-    });
-    player.save()
+    Player.findById(req.user._id)
         .then(player => {
-            const filteredPlayer = _.omit(player.toObject(), ['discordId'])
-            res.status(200);
-            res.set({ 'Content-Type': 'text/json' });
-            res.json({ isComplete: true, player: filteredPlayer });
-            res.end();
-        })
-        .catch(err => {
-            return next(createError(500, 'Failed to save new player profile in database (api/player postPlayerProfile()), error text:' + err));
+            player.updateMany({}, {
+                $set: {
+                    name: req.body.name,
+                    class: req.body.class,
+                    race: req.body.race,
+                    role: req.body.role
+                }
+            });
+            player.save()
+            .then(player => {
+                const filteredPlayer = _.omit(player.toObject(), ['discordId'])
+                res.status(200);
+                res.set({ 'Content-Type': 'text/json' });
+                res.json({ isComplete: true, player: filteredPlayer });
+                res.end();
+            })
+            .catch(err => {
+                return next(createError(500, 'Failed to save new player profile in database (api/player postPlayerProfile()), error text:' + err));
+            });
+        }).catch(err => {
+            return next(createError(500, 'Failed to fetch player from database (api/player postPlayerProfile()), error text:' + err));
         });
 }
 
