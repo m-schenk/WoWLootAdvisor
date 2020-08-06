@@ -49,7 +49,7 @@ class Profile extends React.Component {
         } else {
             return (
                 <Container className="justify-content-center" id="main-content">
-                    <Row className="row-centered">
+                    <Row>
                         <Col className="col-centered" sm={12}>
                             {!this.props.overmind.state.player.isComplete && <Alert variant={'danger'}>
                                 Your profile seems not complete, please edit your profile before you start creating a wishlist
