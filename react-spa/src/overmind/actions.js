@@ -28,7 +28,7 @@ export const loadProfile = async ({ state, effects}) => {
 }
 
 export const sendProfile = async ({ effects }, data) => {
-    effects.api.sendProfile(data);
+    effects.api.sendProfile(state, data);
 }
 
 export const dragHandler = pipe( //just for now, will become an effect I guess.. later
