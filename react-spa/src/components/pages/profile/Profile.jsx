@@ -139,7 +139,7 @@ class Profile extends React.Component {
                                             <Form onSubmit={(e) => { this.handleSubmit(e) }}>
                                                 <Form.Group>
                                                     <Form.Label>Character name:</Form.Label>
-                                                    <Form.Control type="text" value="name" />
+                                                    <Form.Control type="text" value={this.state.name} onChange={this.handleChange}/>
                                                 </Form.Group>
                                                 <Form.Group controlId="profile.class">
                                                     <Form.Label>Select class:</Form.Label>
@@ -156,7 +156,7 @@ class Profile extends React.Component {
                                                 </Form.Group>
                                                 <Form.Group>
                                                     <Form.Label>Select your role:</Form.Label>
-                                                    <Form.Control as="select" value="race">
+                                                    <Form.Control as="select" onChange={this.handleChange}>
                                                         <option value="Dwarf">Dwarf</option>
                                                         <option value="Gnome">Gnome</option>
                                                         <option value="Human">Human</option>
@@ -165,7 +165,7 @@ class Profile extends React.Component {
                                                 </Form.Group>
                                                 <Form.Group>
                                                     <Form.Label>Select your role:</Form.Label>
-                                                    <Form.Control as="select" value="role">
+                                                    <Form.Control as="select" onChange={this.handleChange}>
                                                         <option value="DPS">DPS</option>
                                                         <option value="Heal">Heal</option>
                                                         <option value="Tank">Tank</option>
