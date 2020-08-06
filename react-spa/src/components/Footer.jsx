@@ -6,7 +6,7 @@ import Container from 'react-bootstrap/Container'
 export default class Footer extends React.Component {
     render() {
         return(
-            <Navbar bg="dark" variant="dark" expand="lg">
+            <Navbar className="justify-content-center" bg="dark" variant="dark" expand="lg">
                 <div className="text-center align-items-center">
                     <h5 className="midText">disclaimer - &copy; 2020 RäGä Eww...</h5>  
                     <p className="smallText">&copy; 2004 Blizzard Entertainment, Inc. All rights reserved. 
