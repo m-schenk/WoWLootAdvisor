@@ -48,11 +48,6 @@
   box-shadow: 2px 2px 3px 1px rgb(30, 30, 30);
 }
 
-.darkTheme {
-  color: white;
-  background-color: #343434; /*#343434;*/
-}
-
 .form-control {
   width: 300px;
   margin-bottom: 10px;
@@ -76,12 +71,11 @@
   padding: 3px;
   margin-top: 10px;
   margin-bottom: 20px;
-  border: 1px solid black;
-  border-radius: 4px !important;
-  box-shadow: 2px 2px 3px 1px rgba(30, 30, 30, 1);
-  /*background: #ff800080;*/
   background-color: #2a2a2a;
   max-width: 660px;
+  border: 1px solid rgb(12, 12, 12);
+  border-radius: 4px !important;
+  box-shadow: 2px 2px 3px 1px rgb(30, 30, 30);
 }
 
 #circle-Reserved {
