@@ -48,7 +48,7 @@ class Profile extends React.Component {
             return <div>Loading...</div>;
         } else {
             return (
-                <Container className="d-flex justify-content-center align-items-center" id="main-content">
+                <Container className="justify-content-center" id="main-content">
                     <Row className="row-centered">
                         <Col className="col-centered" sm={12}>
                             {!this.props.overmind.state.player.isComplete && <Alert variant={'danger'}>
