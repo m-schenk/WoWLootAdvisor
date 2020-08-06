@@ -32,8 +32,6 @@ exports.modify = (req, res, next) => {
 
     const item = req.body;
 
-    console.log(item);
-
     if (item.itemCategory) {
 
         Item.update({ id: req.body.id }, {
