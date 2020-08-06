@@ -143,7 +143,7 @@ class Profile extends React.Component {
                                                 </Form.Group>
                                                 <Form.Group controlId="profile.class">
                                                     <Form.Label>Select class:</Form.Label>
-                                                    <Form.Control as="select" onChange={}>
+                                                    <Form.Control as="select" onChange={this.handleChange}>
                                                         <option value="Druid">Druid</option>
                                                         <option value="Hunter">Hunter</option>
                                                         <option value="Mage">Mage</option>
