@@ -28,7 +28,7 @@ function PlayerProfileForm() {
     const handleChange = (e) => {
         updateFormData({
             ...formData,
-            [e.target.name]: e.target.value.trim()
+            [e.target.name]: e.target.value
         });
     };
 
