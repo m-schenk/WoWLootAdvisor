@@ -15,8 +15,6 @@
 #wrapper {
   min-height: 100%;
   position: absolute;
-  padding: 0;
-  margin: 0;
 }
 
 #header {
@@ -40,8 +38,6 @@
 #footer {
     text-align: center;
   width: 100%;
-  padding: 0px;
-  margin: 0px;
   bottom: 1px;
   height: 65px; /* Height of the footer */
   color: white;
