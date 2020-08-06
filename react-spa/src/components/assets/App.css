@@ -13,21 +13,19 @@
 }
 
 #wrapper {
-    min-height: 100%;
-  min-width: 70%;
+  min-height: 100%;
   position: absolute;
   padding: auto;
   margin: auto;
-
 }
 
 #header {
-    width: 100%;
-    top: 1px
+  width: 100%;
+  top: 1px;
 }
 
 #main-content {
-    min-height: 100%;
+  min-height: 100%;
   width: 100%;
   padding-top: 40px;
   padding-left: 30px;
@@ -40,9 +38,9 @@
   box-shadow: 2px 2px 3px 1px rgb(30, 30, 30);
 }
 #footer {
-    width: 100%;
+  width: 100%;
   text-align: center;
-  bottom: 2px;
+  bottom: 1px;
   height: 65px; /* Height of the footer */
   color: white;
 }
