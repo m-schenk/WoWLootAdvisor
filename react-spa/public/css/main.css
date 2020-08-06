@@ -2,7 +2,7 @@ body,
 html,
 #root {
   height: 100%;
-  min-width: 80vh;
+  min-width: 80vh !important;
   background-color: #242424;
 }
 
