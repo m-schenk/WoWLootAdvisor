@@ -5,3 +5,7 @@ html,
   min-width: 80vh;
   background-color: #242424;
 }
+
+@viewport {
+    width: 100vw; /*Sets the width of the actual viewport to the device width*/
+  }
