@@ -16,9 +16,9 @@ import Alert from 'react-bootstrap/Alert';
 
 const initialFormData = Object.freeze({
     name: "",
-    race: "",
-    class: "",
-    role: ""
+    race: "Druid",
+    class: "Dwarf",
+    role: "DPS"
 });
 
 function PlayerProfileForm() {
