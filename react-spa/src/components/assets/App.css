@@ -16,17 +16,19 @@
   min-height: 100%;
   min-width: 75%;
   position:absolute;
-  background-color: rgb(48, 48, 48);
-  border: 1px solid rgb(12, 12, 12);
-  box-shadow: 2px 2px 3px 1px rgb(30, 30, 30);
 }
 #header {
   padding-bottom: 20px;
 }
 #main-content {
+    min-height: 100%;
+    min-width: 75%;
   padding: 20px;
   margin-bottom: 0px;
   padding-bottom: 85px; /* Height of the footer */
+  background-color: rgb(48, 48, 48);
+  border: 1px solid rgb(12, 12, 12);
+  box-shadow: 2px 2px 3px 1px rgb(30, 30, 30);
 }
 #footer {
   margin-top: auto;
