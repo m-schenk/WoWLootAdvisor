@@ -42,11 +42,11 @@ function PlayerProfileForm() {
             <form>
                 <Form.Group controlId="profile.name">
                     <Form.Label>Character name:</Form.Label>
-                    <Form.Control type="text" onChange={handleChange} />
+                    <Form.Control name="name" type="text" onChange={handleChange} />
                 </Form.Group>
                 <Form.Group controlId="profile.class">
                     <Form.Label>Select class:</Form.Label>
-                    <Form.Control as="select" onChange={handleChange}>
+                    <Form.Control as="select" name="class" onChange={handleChange}>
                         <option value="Druid">Druid</option>
                         <option value="Hunter">Hunter</option>
                         <option value="Mage">Mage</option>
@@ -59,7 +59,7 @@ function PlayerProfileForm() {
                 </Form.Group>
                 <Form.Group>
                     <Form.Label>Select your role:</Form.Label>
-                    <Form.Control as="select" onChange={handleChange}>
+                    <Form.Control as="select" name="race" onChange={handleChange}>
                         <option value="Dwarf">Dwarf</option>
                         <option value="Gnome">Gnome</option>
                         <option value="Human">Human</option>
@@ -68,7 +68,7 @@ function PlayerProfileForm() {
                 </Form.Group>
                 <Form.Group>
                     <Form.Label>Select your role:</Form.Label>
-                    <Form.Control as="select" onChange={handleChange}>
+                    <Form.Control as="select" name="role" onChange={handleChange}>
                         <option value="DPS">DPS</option>
                         <option value="Heal">Heal</option>
                         <option value="Tank">Tank</option>
