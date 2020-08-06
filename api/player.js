@@ -23,10 +23,10 @@ exports.postPlayerProfile = (req, res, next) => {
                 res.end();
             })
             .catch(err => {
-                return next(createError(500, 'Failed to save new player profile in database (api/player postPlayerProfile()), error text:' + err));
+                return next(createError(500, 'Failed to save new player profile in database (api/player postPlayerProfile()), error text: ' + err));
             });
         }).catch(err => {
-            return next(createError(500, 'Failed to fetch player from database (api/player postPlayerProfile()), error text:' + err));
+            return next(createError(500, 'Failed to fetch player from database (api/player postPlayerProfile()), error text: ' + err));
         });
 }
 
@@ -40,7 +40,7 @@ exports.getPlayerProfile = (req, res, next) => {
             res.end();
         })
         .catch(err => {
-            return next(createError(500, 'Failed to fetch player from database (api/player getPlayerProfile()), error text:' + err));
+            return next(createError(500, 'Failed to fetch player from database (api/player getPlayerProfile()), error text: ' + err));
         });
 }
 
@@ -56,7 +56,7 @@ exports.getPlayerById = (req, res, next) => {
             res.end();
         })
         .catch(err => {
-            return next(createError(500, 'Failed to fetch player from database (api/player getPlayerById()), error text:' + err));
+            return next(createError(500, 'Failed to fetch player from database (api/player getPlayerById()), error text: ' + err));
         });
 }
 
