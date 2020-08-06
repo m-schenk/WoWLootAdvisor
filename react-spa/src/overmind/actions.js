@@ -29,7 +29,11 @@ export const loadProfile = pipe(
     })
 )
 
-export const sendProfile = ({ effects }, data) => {
+export const loadProfile = async ({ state, effects}) => {
+    effects.api.getPlayerProfile(state);
+}
+
+export const sendProfile = async ({ effects }, data) => {
     effects.api.sendProfile(data);
 }
 

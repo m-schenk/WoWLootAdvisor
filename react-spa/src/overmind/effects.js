@@ -36,10 +36,40 @@ export const api = {
     },
     sendProfile(data) {
         console.log(data)
-        axios.post('http://raegae.maarten.ch:3000/api/player/postPlayerProfile', { withCredentials: true })
-            .then((response) => {
-                console.log(response)
+        axios.post('http://raegae.maarten.ch:3000/api/player/postPlayerProfile', { 
+            withCredentials: true,
+            name: data.get("profile.name"),
+            race: data.get("profile.race"),
+            class: data.get("profile.class"),
+            role: data.get("profile.role")
         })
+            .then((response) => {
+                state.player._id = response.data.player._id;
+                state.player.isComplete = response.data.isComplete;
+                if (response.data.player.name) {
+                    state.player.name = response.data.player.name
+                }
+                if (response.data.player.class) {
+                    state.player.class = response.data.player.class
+                }
+                if (response.data.player.race) {
+                    state.player.race = response.data.player.race
+                }
+                if (response.data.player.role) {
+                    state.player.role = response.data.player.role
+                }
+                if (response.data.player.aq_attendance) {
+                    state.player.aq_attendance = response.data.player.aq_attendance
+                }
+                if (response.data.player.naxx_attendance) {
+                    state.player.naxx_attendance = response.data.player.naxx_attendance
+                }
+                if (response.data.player.permissions) {
+                    state.player.permissions = response.data.player.permissions
+                }
+            }).catch(error => {
+                console.log(error);
+            })
     },
     async sendWishlist(state) {
         const value = {
