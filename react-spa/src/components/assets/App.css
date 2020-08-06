@@ -39,9 +39,12 @@ html, body {
   bottom: 0;
   height: 65px; /* Height of the footer */
   color: white;
-  background-color: rgb(48, 48, 48);
-  border: 1px solid rgb(12, 12, 12);
-  box-shadow: 2px 2px 3px 1px rgb(30, 30, 30);
+}
+
+.navbar {
+    background-color: rgb(48, 48, 48);
+    border: 1px solid rgb(12, 12, 12);
+    box-shadow: 2px 2px 3px 1px rgb(30, 30, 30);
 }
 
 .darkTheme {
