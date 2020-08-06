@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { connect } from './../../../overmind';
 
@@ -22,7 +22,7 @@ const initialFormData = Object.freeze({
 });
 
 function PlayerProfileForm() {
-    const [formData, updateFormData] = React.useState(initialFormData);
+    const [formData, updateFormData] = useState(initialFormData);
 
     const handleChange = (e) => {
         updateFormData({
