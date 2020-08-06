@@ -1,11 +1,11 @@
 export const state = {
     player: {
         _id: null,
-        name: 'Malvida',
-        class: 'Warrior',
-        race: 'Human',
-        role: 'DPS',
-        permissions: 'council',
+        name: null,
+        class: null,
+        race: null,
+        role: null,
+        permissions: null,
         aq_attendance: null,
         naxx_attendance: null,
         wishlist: null,
