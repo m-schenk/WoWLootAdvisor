@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { connect } from './../../../overmind';
+import { connect, useActions } from './../../../overmind';
 
 import '@atlaskit/css-reset';
 import './../../assets/App.css';
@@ -23,6 +23,7 @@ const initialFormData = Object.freeze({
 
 function PlayerProfileForm() {
     const [formData, updateFormData] = useState(initialFormData);
+    const actions = useActions()
 
     const handleChange = (e) => {
         updateFormData({
@@ -33,7 +34,7 @@ function PlayerProfileForm() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        this.props.overmind.actions.sendProfile(formData);
+        actions.sendProfile(formData);
     };
 
     return (
