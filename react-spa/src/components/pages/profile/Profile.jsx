@@ -21,7 +21,7 @@ const initialFormData = Object.freeze({
     role: ""
 });
 
-const PlayerProfileForm = () => {
+function PlayerProfileForm() {
     const [formData, updateFormData] = React.useState(initialFormData);
 
     const handleChange = (e) => {
