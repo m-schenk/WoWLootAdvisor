@@ -47,12 +47,12 @@ class Wishlist extends React.Component {
     onExit = () => {
         this.props.overmind.actions.tutorial();
     }
-    
+
     renderWishlist() {
-        if(this.props.overmind.state.wishlist['locked']) {
+        if (this.props.overmind.state.wishlist['locked']) {
             return (<p>Your Wishlist is locked! No more changes for you ¯\_(ツ)_/¯</p>)
         } else {
-            return(
+            return (
                 <>
                     {this.renderBracket('bracket-1')}
                     {this.renderBracket('bracket-2')}
@@ -68,23 +68,23 @@ class Wishlist extends React.Component {
         let prioStart = this.props.overmind.state.wishlist[bracketId]['prio-start'];
         const allocPoints = this.props.overmind.state.wishlist[bracketId]['points'];
         const hunter = (this.props.overmind.state.player.class === "hunter");
-        if(hunter && bracketId === "bracket-4") return
-        if(hunter && bracketId === "bracketless") {
-            prioStart = prioStart+3;
+        if (hunter && bracketId === "bracket-4") return
+        if (hunter && bracketId === "bracketless") {
+            prioStart = prioStart + 3;
         }
-        return(
+        return (
             <table className={"bracket styled-table"} id={bracketId}>
                 <thead>
                     <tr className="styled-table">
-                        <th className="styled-table" xl={12}>Remaining Allocation Points: {(hunter ? allocPoints-1 : allocPoints)}</th>
+                        <th className="styled-table" xl={12}>Remaining Allocation Points: {(hunter ? allocPoints - 1 : allocPoints)}</th>
                     </tr>
                 </thead>
                 <tbody className="styled-table">
                     <tr className="styled-table">
                         <td className="styled-table" xl={12}>
                             {this.renderBracketRow(bracketId, prioStart, 1)}
-                            {this.renderBracketRow(bracketId, prioStart-1, 3)}
-                            {this.renderBracketRow(bracketId, prioStart-2, 5)}
+                            {this.renderBracketRow(bracketId, prioStart - 1, 3)}
+                            {this.renderBracketRow(bracketId, prioStart - 2, 5)}
                         </td>
                     </tr>
                 </tbody>
@@ -93,7 +93,7 @@ class Wishlist extends React.Component {
     }
 
     renderBracketRow(bracketId, p, r) {
-        return(
+        return (
             <table>
                 <tbody>
                     <tr className="styled-table">
@@ -101,20 +101,20 @@ class Wishlist extends React.Component {
                             {p}
                         </td>
                         <td className="styled-table justify-content-center align-items-center" xl={5} >
-                            <Droppable droppableId={bracketId+'_slot-'+r}>
+                            <Droppable droppableId={bracketId + '_slot-' + r}>
                                 {provided => (
                                     <ItemContainerDrop ref={provided.innerRef} {...provided.droppableProps}>
-                                        {this.renderItem(bracketId, 'slot-'+r)}
+                                        {this.renderItem(bracketId, 'slot-' + r)}
                                         {provided.placeholder}
                                     </ItemContainerDrop>
                                 )}
                             </Droppable>
                         </td>
                         <td className="styled-table justify-content-center align-items-center" xl={5}>
-                            <Droppable droppableId={bracketId+'_slot-'+(r+1)}>
+                            <Droppable droppableId={bracketId + '_slot-' + (r + 1)}>
                                 {provided => (
                                     <ItemContainerDrop ref={provided.innerRef} {...provided.droppableProps}>
-                                        {this.renderItem(bracketId, 'slot-'+(r+1))}
+                                        {this.renderItem(bracketId, 'slot-' + (r + 1))}
                                         {provided.placeholder}
                                     </ItemContainerDrop>
                                 )}
@@ -129,37 +129,37 @@ class Wishlist extends React.Component {
     renderItem(bracketId, slotId) {
 
         const [, slotIdInt] = slotId.split('-');
-        if( (parseInt(slotIdInt) > 1) && this.props.overmind.state.wishlist[bracketId]['slot-'+(parseInt(slotIdInt)-1)].item !== null &&
-            this.props.overmind.state.wishlist[bracketId]['slot-'+(parseInt(slotIdInt)-1)].item.itemCategory === "Reserved" ) {
+        if ((parseInt(slotIdInt) > 1) && this.props.overmind.state.wishlist[bracketId]['slot-' + (parseInt(slotIdInt) - 1)].item !== null &&
+            this.props.overmind.state.wishlist[bracketId]['slot-' + (parseInt(slotIdInt) - 1)].item.itemCategory === "Reserved") {
             return (<ItemContainer><p>Locked</p></ItemContainer>)
-        } else if( this.props.overmind.state.wishlist[bracketId][slotId].item === null ) {
+        } else if (this.props.overmind.state.wishlist[bracketId][slotId].item === null) {
             return <></>
         }
         return (
             <>
-                <Draggable draggableId={this.props.overmind.state.wishlist[bracketId][slotId].item.id.toString()+bracketId+slotId} index={1}>
+                <Draggable draggableId={this.props.overmind.state.wishlist[bracketId][slotId].item.id.toString() + bracketId + slotId} index={1}>
                     {(provided, snapshot) => (
-                        <ItemContainer 
+                        <ItemContainer
                             ref={provided.innerRef}
                             {...provided.draggableProps}
                             {...provided.dragHandleProps}
                             isDragging={snapshot.isDragging}
                         >
                             <div>
-                                <a href={BASE_URL+this.props.overmind.state.wishlist[bracketId][slotId].item.id} target="_blank" rel="noopener noreferrer">
+                                <a href={BASE_URL + this.props.overmind.state.wishlist[bracketId][slotId].item.id} target="_blank" rel="noopener noreferrer">
                                     {this.props.overmind.state.wishlist[bracketId][slotId].item.name}
                                 </a>
                             </div>
                             {this.props.overmind.state.wishlist[bracketId][slotId].item.itemCategory === "Reserved" &&
-                                <div id={"circle-"+this.props.overmind.state.wishlist[bracketId][slotId].item.itemCategory}></div>
+                                <div id={"circle-" + this.props.overmind.state.wishlist[bracketId][slotId].item.itemCategory}></div>
                             }
                             {this.props.overmind.state.wishlist[bracketId][slotId].item.itemCategory === "Limited" &&
-                                <div id={"circle-"+this.props.overmind.state.wishlist[bracketId][slotId].item.itemCategory}></div>
+                                <div id={"circle-" + this.props.overmind.state.wishlist[bracketId][slotId].item.itemCategory}></div>
                             }
                             {this.props.overmind.state.wishlist[bracketId][slotId].item.itemCategory === "Unlimited" &&
-                                <div id={"circle-"+this.props.overmind.state.wishlist[bracketId][slotId].item.itemCategory}></div>
+                                <div id={"circle-" + this.props.overmind.state.wishlist[bracketId][slotId].item.itemCategory}></div>
                             }
-                            
+
                         </ItemContainer>
                     )}
                 </Draggable>
@@ -168,12 +168,19 @@ class Wishlist extends React.Component {
     }
 
     render() {
-        return (
-            <div className="bracketsContainer">
-
-                {this.renderWishlist()}
-            </div>
-        )
+        if (this.props.overmind.state.player.isComplete) {
+            return (
+                <Alert variant={'danger'}>
+                    Your profile seems not complete, please edit your profile before you start creating a wishlist
+                </Alert>
+            )
+        } else {
+            return (
+                <div className="bracketsContainer">
+                    {this.renderWishlist()}
+                </div>
+            )
+        }
     }
 }
 
