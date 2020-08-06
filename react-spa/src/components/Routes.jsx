@@ -22,18 +22,20 @@ class Routes extends React.Component {
         return (
             <Router>
                 <Switch>
-                    <Container className="justify-content-center align-items-center" id="wrapper">
-                        <div className="justify-content-center align-items-center" id="header"><Navbar /></div>
-                        <Route exact path="/" component={MainContent} />
-                        <Route path="/wishlist" component={MainContent} />
-                        <Route path="/profile" component={Profile} />
-                        {(this.props.overmind.state.player.permissions === 'council')
-                            ? <><Route path="/council/members" component={Members} />
-                                <Route path="/council/raidhistory" component={RaidHistory} />
-                                <Route path="/council/livesession" component={LiveSession} />
-                              </>
-                            : <></>}
-                        <div className="justify-content-center align-items-center" id="footer"><Footer /></div>
+                    <Container className="justify-content-center align-items-center">
+                        <div id="wrapper">
+                            <div className="justify-content-center align-items-center" id="header"><Navbar /></div>
+                            <Route exact path="/" component={MainContent} />
+                            <Route path="/wishlist" component={MainContent} />
+                            <Route path="/profile" component={Profile} />
+                            {(this.props.overmind.state.player.permissions === 'council')
+                                ? <><Route path="/council/members" component={Members} />
+                                    <Route path="/council/raidhistory" component={RaidHistory} />
+                                    <Route path="/council/livesession" component={LiveSession} />
+                                </>
+                                : <></>}
+                            <div className="justify-content-center align-items-center" id="footer"><Footer /></div>
+                        </div>
                     </Container>
                 </Switch>
             </Router>
