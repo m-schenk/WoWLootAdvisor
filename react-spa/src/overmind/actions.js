@@ -27,7 +27,7 @@ export const loadProfile = async ({ state, effects}) => {
     effects.api.getPlayerProfile(state);
 }
 
-export const sendProfile = async ({ effects }, data) => {
+export const sendProfile = async ({ state, effects }, data) => {
     effects.api.sendProfile(state, data);
 }
 
