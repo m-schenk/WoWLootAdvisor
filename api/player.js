@@ -4,6 +4,7 @@ const createError = require('http-errors');
 const _ = require('lodash');
 
 exports.postPlayerProfile = (req, res, next) => {
+    console.log(req.body)
     const player = new Player({
         discordId: req.body.id,
         name: req.body.name,
