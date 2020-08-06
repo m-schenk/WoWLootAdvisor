@@ -16,6 +16,9 @@
     min-height: 100%;
   min-width: 70%;
   position: absolute;
+  padding: auto;
+  margin: auto;
+
 }
 
 #header {
