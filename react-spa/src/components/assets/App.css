@@ -12,13 +12,10 @@
   color: white;
 }
 
-.container {
-    padding: 0px;
-}
-
 #wrapper {
   min-height: 100%;
   position: absolute;
+  padding: 0px !important;
 }
 
 #header {
