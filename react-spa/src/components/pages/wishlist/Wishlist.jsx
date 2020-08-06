@@ -170,7 +170,7 @@ class Wishlist extends React.Component {
     }
 
     render() {
-        if (this.props.overmind.state.player.isComplete) {
+        if (!this.props.overmind.state.player.isComplete) {
             return (
                 <Alert variant={'danger'}>
                     Your profile seems not complete, please edit your profile before you start creating a wishlist
