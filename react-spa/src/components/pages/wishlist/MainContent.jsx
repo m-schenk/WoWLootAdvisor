@@ -26,10 +26,10 @@ class MainContent extends React.Component {
             <Container className="justify-content-center align-items-center" id="main-content">
                 <DragDropContext onDragEnd={this.onDragEnd}>
                     <Row className="row-centered">
-                        <Col className="col-centered" sm={8}>
+                        <Col className="col-centered" sm={7}>
                             <Wishlist />
                         </Col>
-                        <Col className="col-centered" sm={4}>
+                        <Col className="col-centered" sm={5}>
                             <ItemLiveSearch id={this.props.overmind.state.liveSearch['id']} />
                         </Col>
                     </Row>
