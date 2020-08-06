@@ -151,11 +151,11 @@ class Profile extends React.Component {
                                             <Col md={6}><b>{this.props.overmind.state.player.role}</b></Col>
                                         </Row>
                                         <Row>
-                                            <Col md={6}><label>aq_attendance:</label></Col>
+                                            <Col md={6}><label>AQ40 Attendance:</label></Col>
                                             <Col md={6}><b>{this.props.overmind.state.player.aq_attendance}</b></Col>
                                         </Row>
                                         <Row>
-                                            <Col md={6}><label>naxx_attendance:</label></Col>
+                                            <Col md={6}><label>Naxxramas Attendance:</label></Col>
                                             <Col md={6}><b>{this.props.overmind.state.player.naxx_attendance}</b></Col>
                                         </Row>
                                     </Card.Text>
