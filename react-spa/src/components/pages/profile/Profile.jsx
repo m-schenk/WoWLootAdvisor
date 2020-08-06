@@ -15,10 +15,10 @@ import Form from 'react-bootstrap/Form';
 import Alert from 'react-bootstrap/Alert';
 
 const initialFormData = Object.freeze({
-    name: this.props.overmind.state.player.name | "",
-    race: this.props.overmind.state.player.race | "",
-    class: this.props.overmind.state.player.class | "",
-    role: this.props.overmind.state.player.role | ""
+    name: "",
+    race: "",
+    class: "",
+    role: ""
 });
 
 const PlayerProfileForm = () => {
