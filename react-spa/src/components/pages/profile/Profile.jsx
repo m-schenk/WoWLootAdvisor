@@ -163,7 +163,7 @@ class Profile extends React.Component {
                                     </Card.Footer>
                                     <Accordion.Collapse eventKey="0">
                                         <Card.Body>
-                                            {PlayerProfileForm}
+                                            {PlayerProfileForm()}
                                         </Card.Body>
                                     </Accordion.Collapse>
                                 </Accordion>
