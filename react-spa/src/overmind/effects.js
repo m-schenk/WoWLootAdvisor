@@ -40,7 +40,7 @@ export const api = {
             withCredentials: true,
             name: data.name,
             race: data.race,
-            class: data.profile,
+            class: data.class,
             role: data.role
         })
             .then((response) => {
