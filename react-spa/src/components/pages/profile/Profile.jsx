@@ -39,7 +39,7 @@ class Profile extends React.Component {
                 }
             )
     }
-    
+
     render() {
         const { error, isLoaded, isComplete } = this.state;
         if (error) {
@@ -68,57 +68,57 @@ class Profile extends React.Component {
                                     </Card.Text>
                                 </Card.Body>
                                 <Accordion>
-                                <Card>
-                                    <Card.Header>
-                                        <Accordion.Toggle as={Button} variant="link" eventKey="0">
-                                            Edit Profile
+                                    <Card>
+                                        <Card.Header>
+                                            <Accordion.Toggle as={Button} variant="link" eventKey="0">
+                                                Edit Profile
                                         </Accordion.Toggle>
-                                    </Card.Header>
-                                    <Accordion.Collapse eventKey="0">
-                                        <Card.Body>
-                                            <Form>
-                                                <Form.Group controlId="profile.name">
-                                                    <Form.Label>Character name:</Form.Label>
-                                                    <Form.Control type="text" />
-                                                </Form.Group>
-                                                <Form.Group controlId="profile.class" onChange={this.classChange}>
-                                                    <Form.Label>Select class:</Form.Label>
-                                                    <Form.Control as="select">
-                                                        <option>Druid</option>
-                                                        <option>Hunter</option>
-                                                        <option>Mage</option>
-                                                        <option>Paladin</option>
-                                                        <option>Priest</option>
-                                                        <option>Rogue</option>
-                                                        <option>Warlock</option>
-                                                        <option>Warrior</option>
-                                                    </Form.Control>
-                                                </Form.Group>
-                                                <Form.Group controlId="profile.class">
-                                                    <Form.Label>Select your role:</Form.Label>
-                                                    <Form.Control as="select">
-                                                        <option>Dwarf</option>
-                                                        <option>Gnome</option>
-                                                        <option>Human</option>
-                                                        <option>Night Elf</option>
-                                                    </Form.Control>
-                                                </Form.Group>
-                                                <Form.Group controlId="profile.class">
-                                                    <Form.Label>Select your role:</Form.Label>
-                                                    <Form.Control as="select">
-                                                        <option>DPS</option>
-                                                        <option>Heal</option>
-                                                        <option>Tank</option>
-                                                    </Form.Control>
-                                                </Form.Group>
-                                                <Button variant="primary" type="submit">
-                                                    Submit
+                                        </Card.Header>
+                                        <Accordion.Collapse eventKey="0">
+                                            <Card.Body>
+                                                <Form>
+                                                    <Form.Group controlId="profile.name">
+                                                        <Form.Label>Character name:</Form.Label>
+                                                        <Form.Control type="text" />
+                                                    </Form.Group>
+                                                    <Form.Group controlId="profile.class" onChange={this.classChange}>
+                                                        <Form.Label>Select class:</Form.Label>
+                                                        <Form.Control as="select">
+                                                            <option>Druid</option>
+                                                            <option>Hunter</option>
+                                                            <option>Mage</option>
+                                                            <option>Paladin</option>
+                                                            <option>Priest</option>
+                                                            <option>Rogue</option>
+                                                            <option>Warlock</option>
+                                                            <option>Warrior</option>
+                                                        </Form.Control>
+                                                    </Form.Group>
+                                                    <Form.Group controlId="profile.class">
+                                                        <Form.Label>Select your role:</Form.Label>
+                                                        <Form.Control as="select">
+                                                            <option>Dwarf</option>
+                                                            <option>Gnome</option>
+                                                            <option>Human</option>
+                                                            <option>Night Elf</option>
+                                                        </Form.Control>
+                                                    </Form.Group>
+                                                    <Form.Group controlId="profile.class">
+                                                        <Form.Label>Select your role:</Form.Label>
+                                                        <Form.Control as="select">
+                                                            <option>DPS</option>
+                                                            <option>Heal</option>
+                                                            <option>Tank</option>
+                                                        </Form.Control>
+                                                    </Form.Group>
+                                                    <Button variant="primary" type="submit">
+                                                        Submit
                                                 </Button>
-                                            </Form>
-                                        </Card.Body>
-                                    </Accordion.Collapse>
-                                </Card>
-                            </Accordion>
+                                                </Form>
+                                            </Card.Body>
+                                        </Accordion.Collapse>
+                                    </Card>
+                                </Accordion>
                             </Card>
                         </Col>
                     </Row>
