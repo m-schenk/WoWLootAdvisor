@@ -36,7 +36,6 @@ export const api = {
     },
     sendProfile(state, data) {
         console.log(data)
-        console.log(data.get("profile.name"))
         axios.post('http://raegae.maarten.ch:3000/api/player/postPlayerProfile', {
             withCredentials: true,
             name: data.name,
