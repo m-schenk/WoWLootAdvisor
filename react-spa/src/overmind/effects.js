@@ -39,10 +39,10 @@ export const api = {
         console.log(data.get("profile.name"))
         axios.post('http://raegae.maarten.ch:3000/api/player/postPlayerProfile', { 
             withCredentials: true,
-            name: data.get("profile.name"),
-            race: data.get("profile.race"),
-            class: data.get("profile.class"),
-            role: data.get("profile.role")
+            name: data.get(profile.name),
+            race: data.get(profile.race),
+            class: data.get(profile.class),
+            role: data.get(profile.role)
         })
             .then((response) => {
                 state.player._id = response.data.player._id;
