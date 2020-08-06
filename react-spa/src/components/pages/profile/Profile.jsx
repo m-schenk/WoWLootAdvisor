@@ -41,7 +41,7 @@ function PlayerProfileForm() {
             <form>
                 <Form.Group controlId="profile.name">
                     <Form.Label>Character name:</Form.Label>
-                    <Form.Control type="text" value={this.state.name} onChange={handleChange} />
+                    <Form.Control type="text" onChange={handleChange} />
                 </Form.Group>
                 <Form.Group controlId="profile.class">
                     <Form.Label>Select class:</Form.Label>
