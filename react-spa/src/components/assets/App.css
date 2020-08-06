@@ -14,13 +14,9 @@ body {
   font-size: 12px;
 }
 
-.row {
-    display: flex
-}
-
 #wrapper {
   min-height: 100%;
-  position:fixed;
+  position:absolute;
   background-color: rgb(48, 48, 48);
   border: 1px solid rgb(12, 12, 12);
   border-radius: 4px !important;
