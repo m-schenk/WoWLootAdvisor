@@ -58,10 +58,6 @@
   background-color: #d9d9d9;
 }
 
-.row-centered {
-  text-align: center;
-}
-
 .col-centered {
   display: inline-block;
   float: none;
