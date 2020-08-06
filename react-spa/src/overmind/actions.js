@@ -23,12 +23,6 @@ export const sendWishlist = pipe(
     })
 )
 
-export const loadProfile = pipe(
-    mutate( async ({ state, effects }) => {
-        effects.api.getPlayerProfile(state);
-    })
-)
-
 export const loadProfile = async ({ state, effects}) => {
     effects.api.getPlayerProfile(state);
 }
