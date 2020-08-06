@@ -22,7 +22,7 @@ class Routes extends React.Component {
         return (
             <Router>
                 <Switch>
-                    <Container className="justify-content-center align-items-center">
+                    <Container fluid className="justify-content-center align-items-center">
                         <div id="wrapper">
                             <div className="justify-content-center align-items-center" id="header"><Navbar /></div>
                             <Route exact path="/" component={MainContent} />
