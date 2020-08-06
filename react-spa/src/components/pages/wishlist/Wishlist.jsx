@@ -3,6 +3,8 @@ import styled from 'styled-components'
 import { Droppable, Draggable } from 'react-beautiful-dnd';
 import { connect } from './../../../overmind';
 
+import Alert from 'react-bootstrap/Alert';
+
 const ItemContainerDrop = styled.div`
     font-weight: bold;
     border: 1px solid #3d3d3d;
