@@ -63,7 +63,7 @@ class Profile extends React.Component {
                                                 <label>(remove $dev) _id:</label>
                                             </Col>
                                             <Col md={6}>
-                                                <p>{this.props.overmind.state.player._id}</p>
+                                                <b>{this.props.overmind.state.player._id}</b>
                                             </Col>
                                         </Row>
                                         <Row>
@@ -72,7 +72,7 @@ class Profile extends React.Component {
                                             </Col>
 
                                             <Col md={6}>
-                                                <p>{this.props.overmind.state.player.name}</p>
+                                                <b>{this.props.overmind.state.player.name}</b>
                                             </Col>
                                         </Row>
                                         <Row>
@@ -80,7 +80,7 @@ class Profile extends React.Component {
                                                 <label>Race:</label>
                                             </Col>
                                             <Col md={6}>
-                                                <p>{this.props.overmind.state.player.race}</p>
+                                                <b>{this.props.overmind.state.player.race}</b>
                                             </Col>
                                         </Row>
                                         <Row>
@@ -88,7 +88,7 @@ class Profile extends React.Component {
                                                 <label>Class:</label>
                                             </Col>
                                             <Col md={6}>
-                                                <p>{this.props.overmind.state.player.class}</p>
+                                                <b>{this.props.overmind.state.player.class}</b>
                                             </Col>
                                         </Row>
                                         <Row>
@@ -96,7 +96,7 @@ class Profile extends React.Component {
                                                 <label>Role:</label>
                                             </Col>
                                             <Col md={6}>
-                                                <p>{this.props.overmind.state.player.role}</p>
+                                                <b>{this.props.overmind.state.player.role}</b>
                                             </Col>
                                         </Row>
                                         <Row>
@@ -104,7 +104,7 @@ class Profile extends React.Component {
                                                 <label>aq_attendance:</label>
                                             </Col>
                                             <Col md={6}>
-                                                <p>{this.props.overmind.state.player.aq_attendance}</p>
+                                                <b>{this.props.overmind.state.player.aq_attendance}</b>
                                             </Col>
                                         </Row>
                                         <Row>
@@ -112,7 +112,7 @@ class Profile extends React.Component {
                                                 <label>naxx_attendance:</label>
                                             </Col>
                                             <Col md={6}>
-                                                <p>{this.props.overmind.state.player.naxx_attendance}</p>
+                                                <b>{this.props.overmind.state.player.naxx_attendance}</b>
                                             </Col>
                                         </Row>
                                     </Card.Text>
