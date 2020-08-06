@@ -23,6 +23,11 @@ class Profile extends React.Component {
         };
     }
 
+    sendProfile = async (e) => {
+        e.Form
+
+    }
+
     componentDidMount() {
         this.props.overmind.actions.loadProfile()
             .then(
@@ -126,7 +131,7 @@ class Profile extends React.Component {
                                         </Card.Header>
                                         <Accordion.Collapse eventKey="0">
                                             <Card.Body>
-                                                <Form>
+                                                <Form onSubmit={ () => { this.sendProfile() } }>
                                                     <Form.Group controlId="profile.name">
                                                         <Form.Label>Character name:</Form.Label>
                                                         <Form.Control type="text" />
@@ -161,9 +166,9 @@ class Profile extends React.Component {
                                                             <option>Tank</option>
                                                         </Form.Control>
                                                     </Form.Group>
-                                                    <Button variant="primary" type="submit">
+                                                    <Button variant="warning" type="submit">
                                                         Submit
-                                                </Button>
+                                                    </Button>
                                                 </Form>
                                             </Card.Body>
                                         </Accordion.Collapse>
