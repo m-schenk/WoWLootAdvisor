@@ -43,6 +43,7 @@
   bottom: 1px;
   height: 65px; /* Height of the footer */
   color: white;
+  position: absolute;
 }
 
 .navbar {
