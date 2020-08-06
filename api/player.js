@@ -4,6 +4,7 @@ const createError = require('http-errors');
 const _ = require('lodash');
 
 exports.postPlayerProfile = (req, res, next) => {
+    console.log(req.body)
     Player.findById(req.user._id)
         .then(player => {
             player.name = req.body.name;
