@@ -14,7 +14,7 @@
 
 #wrapper {
   min-height: 100%;
-  width: 80%;
+  min-width: 75%;
   position:absolute;
   background-color: rgb(48, 48, 48);
   border: 1px solid rgb(12, 12, 12);
