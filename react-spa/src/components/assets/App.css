@@ -9,10 +9,12 @@ html, body {
 
 .smallText {
   font-size: 10px;
+  color: white;
 }
 
 .midText {
   font-size: 12px;
+  color: white;
 }
 
 #wrapper {
