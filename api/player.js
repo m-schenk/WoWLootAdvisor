@@ -148,6 +148,7 @@ exports.postSaveWishlist = (req, res, next) => {
 
 const checkWishlistItems = (wishlist, hunter) => {
     return new Promise((resolve, reject) => {
+        maxAllocationPoints = hunter ? 2 : 3;
         const itemIds = [];
 
         Object.keys(wishlist).forEach(bracket => {
@@ -158,12 +159,12 @@ const checkWishlistItems = (wishlist, hunter) => {
                     if((item.itemCategory === 'Reserved') || (item.itemCategory === 'Limited'))
                     allocationPoints++;
                 }
-                if( allocationPoints > 3) {
+                if( allocationPoints > maxAllocationPoints) {
                     reject('bracket exceeds allocation points')
                 }
             });
         })
-        
+
         // check if all items are unique
         const unique = itemIds.filter((v, i, a) => a.indexOf(v) === i)
         if(itemIds.length !== unique.length) {
