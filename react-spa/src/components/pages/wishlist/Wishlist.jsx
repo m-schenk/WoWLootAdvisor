@@ -80,7 +80,6 @@ class Wishlist extends React.Component {
                 </div>
             )
         }
-
     }
 }
 
@@ -95,20 +94,20 @@ const Bracket = (props) => {
             <div>
                 <>Remaining Allocation Points: {allocPoints}</>
             </div>
-            <Row>
-                <Col className="d-flex">
+            <Col>
+                <Row className="d-flex">
                     <ItemDroppable bracketId={bracketId} slotIdInt={1} />
                     <ItemDroppable bracketId={bracketId} slotIdInt={2} />
-                </Col>
-                <Col className="d-flex">
+                </Row>
+                <Row className="d-flex">
                     <ItemDroppable bracketId={bracketId} slotIdInt={3} />
                     <ItemDroppable bracketId={bracketId} slotIdInt={4} />
-                </Col>
-                <Col className="d-flex">
+                </Row>
+                <Row className="d-flex">
                     <ItemDroppable bracketId={bracketId} slotIdInt={5} />
                     <ItemDroppable bracketId={bracketId} slotIdInt={6} />
-                </Col>
-            </Row>
+                </Row>
+            </Col>
         </div>
     )
 }
