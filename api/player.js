@@ -24,10 +24,11 @@ exports.validate = (method) => {
                         isHunter = true;
                     }
                     checkWishlistItems(wishlist, isHunter)
-                    .then(() => {
+                    .then((result) => {
+                        console.log(result)
                         return
                     }, (err) => {
-                        return new Error(err)
+                        throw new Error(err)
                     })
                 })
             ]
