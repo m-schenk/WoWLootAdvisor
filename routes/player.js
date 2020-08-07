@@ -10,10 +10,10 @@ router.get('/getPlayerProfile', playerApi.getPlayerProfile);
 router.get('/logout', playerApi.logout);
 router.post('/saveWishlist', (req, res, next) => {
     console.log(req.body); 
-    req.body.wishlist.bracket1[0].itemCategory = 'Reserved';
-    req.body.wishlist.bracket1[1].itemCategory = 'Reserved';
-    req.body.wishlist.bracket1[2].itemCategory = 'Limited';
-    req.body.wishlist.bracket1[3].itemCategory = 'Limited';
+    req.body.wishlist.bracket2[0].itemCategory = 'Reserved';
+    req.body.wishlist.bracket2[1].itemCategory = 'Reserved';
+    req.body.wishlist.bracket2[2].itemCategory = 'Limited';
+    req.body.wishlist.bracket2[3].itemCategory = 'Limited';
     next();
 },playerApi.validate('postSaveWishlist'), playerApi.postSaveWishlist);
 
