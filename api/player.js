@@ -28,6 +28,7 @@ exports.validate = (method) => {
                         console.log('result: ',result)
                         return
                     }, (err) => {
+                        console.log('err: ',err)
                         throw new Error(err)
                     })
                 })
