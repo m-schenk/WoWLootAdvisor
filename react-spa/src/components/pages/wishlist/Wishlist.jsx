@@ -5,6 +5,9 @@ import { connect, useState } from './../../../overmind';
 
 import { UnlimitedIcon, LimitedIcon, ReservedIcon } from './styledAssets';
 
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+
 import Alert from 'react-bootstrap/Alert';
 
 const ItemContainerDrop = styled.div`
@@ -92,20 +95,20 @@ const Bracket = (props) => {
             <div>
                 <>Remaining Allocation Points: {allocPoints}</>
             </div>
-            <row>
-                <col className="d-flex">
+            <Row>
+                <Col className="d-flex">
                     <ItemDroppable bracketId={bracketId} slotIdInt={1} />
                     <ItemDroppable bracketId={bracketId} slotIdInt={2} />
-                </col>
-                <col className="d-flex">
+                </Col>
+                <Col className="d-flex">
                     <ItemDroppable bracketId={bracketId} slotIdInt={3} />
                     <ItemDroppable bracketId={bracketId} slotIdInt={4} />
-                </col>
-                <col className="d-flex">
+                </Col>
+                <Col className="d-flex">
                     <ItemDroppable bracketId={bracketId} slotIdInt={5} />
                     <ItemDroppable bracketId={bracketId} slotIdInt={6} />
-                </col>
-            </row>
+                </Col>
+            </Row>
         </div>
     )
 }
