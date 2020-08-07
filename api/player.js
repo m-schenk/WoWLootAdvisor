@@ -131,34 +131,20 @@ exports.postSaveWishlist = (req, res, next) => {
                 res.json({ wishlist: player.wishlist });
                 res.end();
             } else {
-                let wishlistObjectId;
-
-                const wishlist = new Wishlist({
-                    bracket1: req.body.bracket1,
-                    bracket2: req.body.bracket2,
-                    bracket3: req.body.bracket3,
-                    bracket4: req.body.bracket4,
-                    bracketLess: req.body.bracketLess,
+                player.wishlist.bracket1 = req.body.bracket1;
+                player.wishlist.bracket2 = req.body.bracket2;
+                player.wishlist.bracket3 = req.body.bracket3;
+                player.wishlist.bracket4 = req.body.bracket4;
+                player.wishlist.bracketLess = req.body.bracketLess;
+                player.save()
+                .then(player => {
+                    res.status(200);
+                    res.set({ 'Content-Type': 'text/json' });
+                    res.json({ wishlist: player.wishlist });
+                    res.end();
+                }).catch(err => {
+                    return next(createError(500, 'Failed to save wishlist in database (api/player postSaveWishlist()), error text: ' + err));
                 })
-
-                wishlist.save()
-                    .then(wishlist => {
-                        wishlistObjectId = wishlist._id;
-                        Player.findOneAndUpdate({ id: req.session.playerId }, { wishlist: wishlistObjectId }) //assign wishlist object id to player
-                            .then(player => {
-                                console.log('wishlist', wishlistObjectId, 'has been assigned to', player.name);
-                            })
-                            .catch(err => {
-                                return next(createError(500, 'Failed to update player with wishlist mongoDbId in database (controllers/wishlist saveWishlist()), error text: ' + err));
-                            });
-                        res.status(200);
-                        res.set({ 'Content-Type': 'text/json' });
-                        res.json({ wishlist: player.wishlist });
-                        res.end();
-                    })
-                    .catch(err => {
-                        return next(createError(500, 'Failed to save wishlist in database (controllers/wishlist saveWishlist()), error text: ' + err));
-                    });
             }
         })
         .catch(err => {
