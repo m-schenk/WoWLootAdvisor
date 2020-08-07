@@ -170,7 +170,8 @@ const checkWishlistItems = (wishlist, hunter) => {
     return new Promise((resolve, reject) => {
         let itemIds = []
         //get all item id's from ever bracket
-        wishlist.forEach(bracket => {
+
+        wishlist.toObject().forEach(bracket => {
             bracket.forEach(item => {
                 if (item) {
                     itemIds.push(item.id)
