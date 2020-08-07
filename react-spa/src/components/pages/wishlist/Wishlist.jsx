@@ -81,15 +81,15 @@ class Wishlist extends React.Component {
     }
 }
 
-const Bracket = () => {
+const Bracket = (props) => {
     const state = useState();
 
-    const prio = 53 - this.props.id * 3
+    const prio = 53 - props.id * 3
     const allocPoints = state.wishlist[bracketId]['points'];
-    const bracketId = 'bracket-' + this.props.id
+    const bracketId = 'bracket-' + props.id
 
     return (
-        <div className={"bracket"} id={'bracket-' + this.props.id}>
+        <div className={"bracket"} id={'bracket-' + props.id}>
             <div>
                 <>Remaining Allocation Points: {allocPoints}</>
             </div>
@@ -171,12 +171,12 @@ const Bracket = () => {
     )
 }
 
-const Item = () => {
+const Item = (props) => {
     const state = useState();
 
-    const slotId = 'slot-' + this.props.slotIdInt;
-    const bracketId = this.props.bracketId;
-    const slotIdInt = parseInt(this.props.slotIdInt);
+    const slotId = 'slot-' + props.slotIdInt;
+    const bracketId = props.bracketId;
+    const slotIdInt = parseInt(props.slotIdInt);
 
     if ((slotIdInt > 1) && state.wishlist[bracketId]['slot-' + (slotIdInt - 1)].item !== null &&
         state.wishlist[bracketId]['slot-' + (slotIdInt - 1)].item.itemCategory === "Reserved") {
