@@ -5,7 +5,7 @@ const playerApi = require('../api/player');
 
 const Item = require('../models/Item');
 
-router.post('/postPlayerProfile', playerApi.validate('postPlayerProfile'), playerApi.postPlayerProfile);
+router.post('/postPlayerProfile', (req, res, next) => {console.log(req.body); next();}, playerApi.validate('postPlayerProfile'), playerApi.postPlayerProfile);
 router.get('/getPlayerProfile', playerApi.getPlayerProfile);
 router.get('/logout', playerApi.logout);
 router.post('/saveWishlist', (req, res, next) => {console.log(req.body); next();},playerApi.validate('postSaveWishlist'), playerApi.postSaveWishlist);
