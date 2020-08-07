@@ -31,6 +31,7 @@ exports.validate = (method) => {
 
                     //checkAllocatedBracket()
                     //checkBracketless()
+                    return true
                 })
             ]
         }
