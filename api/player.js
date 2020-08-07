@@ -25,7 +25,7 @@ exports.validate = (method) => {
                     }
 
                     //checkWishlistItems() + uniqueness
-                    checkWishlistItems(wishlist, hunter);
+                    checkWishlistItems(wishlist, isHunter);
                     
                     //checkAllocatedBracket()
                     //checkBracketless()
