@@ -17,12 +17,14 @@ exports.validate = (method) => {
         case 'postSaveWishlist': {
             return [
                 body().custom((value, { req }) => {
+                    console.log(req.user)
                     let isHunter = false;
                     Player.findById(req.user._id).then(player => {
                         if (player.class === 'Hunter') {
                             isHunter = true;
                         }
                     })
+                    console.log("here 2")
                     const p = Promise.all([
                         checkBracket(value.bracket1, false),
                         checkBracket(value.bracket2, false),
@@ -170,53 +172,51 @@ function checkBracket(bracket, bracketLess) {
                     ...bracket
                 ]
             }
-        })
-            .then(items => {
-                console.log(items)
-                let allocationPoints = 0;   // should not exceed 3
-                let itemSlots = 0;          // should not exceed 2
-                let occupiedSlots = 0;      // should not exceed 6
+        }).then(items => {
+            console.log(items)
+            let allocationPoints = 0;   // should not exceed 3
+            let itemSlots = 0;          // should not exceed 2
+            let occupiedSlots = 0;      // should not exceed 6
 
-                for (i = 0; i < items.length; i++) {
-                    for (j = 0; j < i; j++) {
-                        if (i == j) continue;
-                        if (items[i].itemType == items[j].itemType) {
-                            // console.log(result[i].itemType, '==', result[j].itemType);
-                            reject('Bracket has duplicate item types');
-                        }
-                    }
-
-                    if (items[i].id && !bracketLess) {
-                        occupiedSlots++;
-                    }
-                    if (items[i].itemCategory == 'Reserved' || items[i].itemCategory == 'Limited') {
-                        allocationPoints++;
-                        if (items[i].itemCategory == 'Reserved') {
-                            itemSlots++;
-                            if (itemSlots > 2) {
-                                reject('Maximum amount of reserved items(2) exceeded');
-                            }
-                        }
-                        //   if (allocationPoints > 2 && isHunter) {
-                        //     console.log('HUNTER SHITS');
-                        //     reject('Maximum allocation points(2) exceeded -> hunter class penalty');
-                        //   }
-                        if (allocationPoints > 3) {
-                            reject('Maximum allocation points(3) exceeded');
-                        }
-                    }
-                    if (occupiedSlots > 6) {
-                        reject('Maximum item slots(6) exceeded')
-                    }
-                    if (items[i].itemCategory == 'Unlockable') {
-                        reject('Might of the Scourge, Power of the Storm and Splinter of Atiesh are forbidden items');
+            for (i = 0; i < items.length; i++) {
+                for (j = 0; j < i; j++) {
+                    if (i == j) continue;
+                    if (items[i].itemType == items[j].itemType) {
+                        // console.log(result[i].itemType, '==', result[j].itemType);
+                        reject('Bracket has duplicate item types');
                     }
                 }
-                resolve('Wishlist is valid!');
-            })
-            .catch(err => {
-                return next(createError(500, 'Failed to fetch one or more items from the submitted wishlist brackets (routes/wishlist checkBracket()), error text: ' + err));
-            });
+
+                if (items[i].id && !bracketLess) {
+                    occupiedSlots++;
+                }
+                if (items[i].itemCategory == 'Reserved' || items[i].itemCategory == 'Limited') {
+                    allocationPoints++;
+                    if (items[i].itemCategory == 'Reserved') {
+                        itemSlots++;
+                        if (itemSlots > 2) {
+                            reject('Maximum amount of reserved items(2) exceeded');
+                        }
+                    }
+                    //   if (allocationPoints > 2 && isHunter) {
+                    //     console.log('HUNTER SHITS');
+                    //     reject('Maximum allocation points(2) exceeded -> hunter class penalty');
+                    //   }
+                    if (allocationPoints > 3) {
+                        reject('Maximum allocation points(3) exceeded');
+                    }
+                }
+                if (occupiedSlots > 6) {
+                    reject('Maximum item slots(6) exceeded')
+                }
+                if (items[i].itemCategory == 'Unlockable') {
+                    reject('Might of the Scourge, Power of the Storm and Splinter of Atiesh are forbidden items');
+                }
+            }
+            resolve('Wishlist is valid!');
+        }).catch(err => {
+            return next(createError(500, 'Failed to fetch one or more items from the submitted wishlist brackets (routes/wishlist checkBracket()), error text: ' + err));
+        });
     })
 }
 
