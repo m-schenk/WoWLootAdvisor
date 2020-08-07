@@ -23,14 +23,7 @@ exports.validate = (method) => {
                     if (req.user.class === 'Hunter') {
                         isHunter = true;
                     }
-                    checkWishlistItems(wishlist, isHunter)
-                    .then((result) => {
-                        console.log('result: ',result)
-                        return
-                    }).catch( (err) => {
-                        console.log('err: ',err)
-                        throw new Error(err)
-                    })
+                    return checkWishlistItems(wishlist, isHunter);
                 })
             ]
         }
