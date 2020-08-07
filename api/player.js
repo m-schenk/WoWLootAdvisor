@@ -17,7 +17,7 @@ exports.validate = (method) => {
         }
         case 'postSaveWishlist': {
             return [
-                body().trim().escape().custom((wishlist, { req }) => {
+                body().custom((wishlist, { req }) => {
                     // hunter rule
                     let isHunter = false;
                     if (req.user.class === 'Hunter') {
