@@ -23,13 +23,13 @@ class MainContent extends React.Component {
 
     render() {
         return(
-            <Container className="justify-content-center align-items-center" id="main-content">
+            <Container className="justify-content-center" id="main-content">
                 <DragDropContext onDragEnd={this.onDragEnd}>
                     <Row className="row-centered">
-                        <Col className="col-centered" sm={8}>
+                        <Col className="justify-content-center" sm={8}>
                             <Wishlist />
                         </Col>
-                        <Col className="col-centered" sm={4}>
+                        <Col className="justify-content-center" sm={4}>
                             <ItemLiveSearch id={this.props.overmind.state.liveSearch['id']} />
                         </Col>
                     </Row>
