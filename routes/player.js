@@ -46,7 +46,6 @@ function checkBracket(bracket, bracketLess) {
             }
         })
             .then(result => {
-
                 let allocationPoints = 0;   // should not exceed 3
                 let itemSlots = 0;          // should not exceed 2
                 let occupiedSlots = 0;      // should not exceed 6
@@ -80,7 +79,6 @@ function checkBracket(bracket, bracketLess) {
                         }
                     }
                     if (occupiedSlots > 6) {
-
                         reject('Maximum item slots(6) exceeded')
                     }
                     if (result[i].itemCategory == 'Unlockable') {

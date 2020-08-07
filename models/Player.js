@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const WishlistSchema = require('./Wishlist')
 
 const PlayerSchema = new mongoose.Schema({
     discordId: { type: Number, required: false },

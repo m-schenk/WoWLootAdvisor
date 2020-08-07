@@ -3,7 +3,6 @@ const _ = require('lodash');
 const { validationResult } = require('express-validator');
 
 const Player = require('../models/Player');
-const Wishlist = require('../models/Wishlist');
 
 exports.postPlayerProfile = (req, res, next) => {
     console.log(req.body)
@@ -13,7 +12,6 @@ exports.postPlayerProfile = (req, res, next) => {
             player.class = req.body.class;
             player.race = req.body.race;
             player.role = req.body.role;
-
             player.save()
                 .then(player => {
                     const filteredPlayer = _.omit(player.toObject(), ['discordId'])
@@ -33,10 +31,15 @@ exports.postPlayerProfile = (req, res, next) => {
 exports.getPlayerProfile = (req, res, next) => {
     Player.findById(req.user._id)
         .then(player => {
+            let complete = true;
+            if (state.player.name === null) { complete = false; }
+            if (state.player.class === null) { complete = false; }
+            if (state.player.race === null) { complete = false; }
+            if (state.player.role === null) { complete = false; }
             const filteredPlayer = _.omit(player.toObject(), ['discordId'])
             res.status(200);
             res.set({ 'Content-Type': 'text/json' });
-            res.json({ isComplete: true, player: filteredPlayer });
+            res.json({ isComplete: complete, player: filteredPlayer });
             res.end();
         })
         .catch(err => {
