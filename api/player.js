@@ -28,7 +28,7 @@ exports.validate = (method) => {
                         return
                     })
                     .catch((err) => {
-                        next(new Error(err))
+                        return new Error(err)
                     })
                 })
             ]
