@@ -87,14 +87,14 @@ const Bracket = (props) => {
     const prio = 53 - props.id * 3
     const bracketId = 'bracket-' + props.id
     const allocPoints = state.wishlist[bracketId]['points'];
-    
+
     return (
         <div className={"bracket"} id={'bracket-' + props.id}>
             <div>
                 <>Remaining Allocation Points: {allocPoints}</>
             </div>
             <div>
-                <div>
+                <div className="d-flex">
                     <div>
                         {prio + '.1'}
                         <Droppable droppableId={bracketId + '_slot-1'}>
