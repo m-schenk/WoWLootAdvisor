@@ -4,35 +4,36 @@ const cache = {};
 
 export const api = {
     getPlayerProfile(state) {
-        axios.get('http://raegae.maarten.ch:3000/api/player/getPlayerProfile', { withCredentials: true })
-            .then((response) => {
-                console.log(response)
-                state.player._id = response.data.player._id;
-                state.player.isComplete = response.data.isComplete;
-                if (response.data.player.name) {
-                    state.player.name = response.data.player.name
-                }
-                if (response.data.player.class) {
-                    state.player.class = response.data.player.class
-                }
-                if (response.data.player.race) {
-                    state.player.race = response.data.player.race
-                }
-                if (response.data.player.role) {
-                    state.player.role = response.data.player.role
-                }
-                if (response.data.player.aq_attendance) {
-                    state.player.aq_attendance = response.data.player.aq_attendance
-                }
-                if (response.data.player.naxx_attendance) {
-                    state.player.naxx_attendance = response.data.player.naxx_attendance
-                }
-                if (response.data.player.permissions) {
-                    state.player.permissions = response.data.player.permissions
-                }
-            }).catch(error => {
-                console.log(error);
-            })
+        axios.get('http://raegae.maarten.ch:3000/api/player/getPlayerProfile', {
+            withCredentials: true
+        }).then((response) => {
+            console.log(response)
+            state.player._id = response.data.player._id;
+            state.player.isComplete = response.data.isComplete;
+            if (response.data.player.name) {
+                state.player.name = response.data.player.name
+            }
+            if (response.data.player.class) {
+                state.player.class = response.data.player.class
+            }
+            if (response.data.player.race) {
+                state.player.race = response.data.player.race
+            }
+            if (response.data.player.role) {
+                state.player.role = response.data.player.role
+            }
+            if (response.data.player.aq_attendance) {
+                state.player.aq_attendance = response.data.player.aq_attendance
+            }
+            if (response.data.player.naxx_attendance) {
+                state.player.naxx_attendance = response.data.player.naxx_attendance
+            }
+            if (response.data.player.permissions) {
+                state.player.permissions = response.data.player.permissions
+            }
+        }).catch(error => {
+            console.log(error);
+        })
     },
     sendProfile(state, data) {
         console.log(data)
@@ -95,12 +96,14 @@ export const api = {
                 state.wishlist['bracket-4']['slot-3'].item, state.wishlist['bracket-4']['slot-4'].item,
                 state.wishlist['bracket-4']['slot-5'].item, state.wishlist['bracket-4']['slot-6'].item,]
         }
-        await axios.post('http://raegae.maarten.ch:3000/api/player/saveWishlist', { wishlist: wishlist })
-            .then((response) => {
-                console.log(response);
-            }, (error) => {
-                console.log(error);
-            });
+        await axios.post('http://raegae.maarten.ch:3000/api/player/saveWishlist', {
+            withCredentials: true,
+            wishlist: wishlist
+        }).then((response) => {
+            console.log(response);
+        }, (error) => {
+            console.log(error);
+        });
     },
     async searchItems(query) {
         let cancel;
