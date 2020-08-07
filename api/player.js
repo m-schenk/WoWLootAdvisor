@@ -8,10 +8,10 @@ exports.validate = (method) => {
     switch (method) {
         case 'postPlayerProfile': {
             return [
-                body('name').exists().notEmpty().trim().escape(),
-                body('class').exists().isIn(['Druid', 'Hunter', 'Mage', 'Paladin', 'Priest', 'Rogue', 'Warlock', 'Warrior']).trim().escape(),
-                body('race').exists().isIn(['Dwarf', 'Gnome', 'Human', 'Night Elf']).trim().escape(),
-                body('role').exists().isIn(['DPS', 'Heal', 'Tank']).trim().escape()
+                body('name', 'error on name validation').exists().notEmpty().trim().escape(),
+                body('class', 'error on class validation').exists().isIn(['Druid', 'Hunter', 'Mage', 'Paladin', 'Priest', 'Rogue', 'Warlock', 'Warrior']).trim().escape(),
+                body('race', 'error on race validation').exists().isIn(['Dwarf', 'Gnome', 'Human', 'Night Elf']).trim().escape(),
+                body('role', 'error on role validation').exists().isIn(['DPS', 'Heal', 'Tank']).trim().escape()
             ]
         }
         case 'postSaveWishlist': {
@@ -19,12 +19,7 @@ exports.validate = (method) => {
                 body().custom((value, { req }) => {
                     console.log(req.user)
                     let isHunter = false;
-                    // Player.findById(req.user._id).then(player => {
-                    //     if (player.class === 'Hunter') {
-                    //         isHunter = true;
-                    //     }
-                    // })
-                    if(req.user.class === 'Hunter') {
+                    if (req.user.class === 'Hunter') {
                         isHunter = true;
                     }
                     console.log(isHunter)
