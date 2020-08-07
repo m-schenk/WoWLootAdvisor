@@ -12,6 +12,13 @@
   color: white;
 }
 
+@media screen and (min-width: 1200px) {
+    .container-nav {
+        min-width: 1200px;
+    }
+}
+
+
 #wrapper {
   min-height: 100%;
   position: absolute;
