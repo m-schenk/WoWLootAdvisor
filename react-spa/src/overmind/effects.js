@@ -94,9 +94,9 @@ export const api = {
                 state.wishlist['bracket-4']['slot-5'].item, state.wishlist['bracket-4']['slot-6'].item,]
             ),
             bracketless:
-                [state.wishlist['bracket-4']['slot-1'].item, state.wishlist['bracket-4']['slot-2'].item,
-                state.wishlist['bracket-4']['slot-3'].item, state.wishlist['bracket-4']['slot-4'].item,
-                state.wishlist['bracket-4']['slot-5'].item, state.wishlist['bracket-4']['slot-6'].item,]
+                [state.wishlist['bracketless']['slot-1'].item, state.wishlist['bracketless']['slot-2'].item,
+                state.wishlist['bracketless']['slot-3'].item, state.wishlist['bracketless']['slot-4'].item,
+                state.wishlist['bracketless']['slot-5'].item, state.wishlist['bracketless']['slot-6'].item,]
         }
         instance.post('saveWishlist', {
             wishlist: wishlist
