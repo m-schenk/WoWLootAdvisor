@@ -27,7 +27,7 @@ exports.validate = (method) => {
                     .then((result) => {
                         console.log('result: ',result)
                         return
-                    }, (err) => {
+                    }).catch( (err) => {
                         console.log('err: ',err)
                         throw new Error(err)
                     })
