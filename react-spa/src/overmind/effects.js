@@ -2,14 +2,6 @@ import axios from 'axios';
 
 const cache = {};
 
-const getBracketItemIdValueOrNull = (state, bracket, slot) => {
-    if (state.wishlist[bracket][slot].item !== null) {
-        return state.wishlist[bracket][slot].item.id;
-    } else {
-        return null;
-    }
-}
-
 export const api = {
     getPlayerProfile(state) {
         axios.get('http://raegae.maarten.ch:3000/api/player/getPlayerProfile', { withCredentials: true })
@@ -49,7 +41,7 @@ export const api = {
             name: data.name,
             race: data.race,
             class: data.class,
-            role: data.role,
+            role: data.role
         })
             .then((response) => {
                 state.player._id = response.data.player._id;
@@ -82,28 +74,27 @@ export const api = {
     async sendWishlist(state) {
         const value = {
             bracket1:
-                [getBracketItemIdValueOrNull(state,'bracket-1','slot-1'), getBracketItemIdValueOrNull(state,'bracket-1','slot-2'),
-                getBracketItemIdValueOrNull(state,'bracket-1','slot-3'), getBracketItemIdValueOrNull(state,'bracket-1','slot-4'),
-                getBracketItemIdValueOrNull(state,'bracket-1','slot-5'), getBracketItemIdValueOrNull(state,'bracket-1','slot-6'),],
+                [state.wishlist['bracket-1']['slot-1'].item, state.wishlist['bracket-1']['slot-2'].item,
+                state.wishlist['bracket-1']['slot-3'].item, state.wishlist['bracket-1']['slot-4'].item,
+                state.wishlist['bracket-1']['slot-5'].item, state.wishlist['bracket-1']['slot-6'].item,],
             bracket2:
-                [getBracketItemIdValueOrNull(state,'bracket-2','slot-1'), getBracketItemIdValueOrNull(state,'bracket-2','slot-2'),
-                getBracketItemIdValueOrNull(state,'bracket-2','slot-3'), getBracketItemIdValueOrNull(state,'bracket-2','slot-4'),
-                getBracketItemIdValueOrNull(state,'bracket-2','slot-5'), getBracketItemIdValueOrNull(state,'bracket-2','slot-6'),],
+                [state.wishlist['bracket-2']['slot-1'].item, state.wishlist['bracket-2']['slot-2'].item,
+                state.wishlist['bracket-2']['slot-3'].item, state.wishlist['bracket-2']['slot-4'].item,
+                state.wishlist['bracket-2']['slot-5'].item, state.wishlist['bracket-2']['slot-6'].item,],
             bracket3:
-                [getBracketItemIdValueOrNull(state,'bracket-3','slot-1'), getBracketItemIdValueOrNull(state,'bracket-3','slot-2'),
-                getBracketItemIdValueOrNull(state,'bracket-3','slot-3'), getBracketItemIdValueOrNull(state,'bracket-3','slot-4'),
-                getBracketItemIdValueOrNull(state,'bracket-3','slot-5'), getBracketItemIdValueOrNull(state,'bracket-3','slot-6'),],
+                [state.wishlist['bracket-3']['slot-1'].item, state.wishlist['bracket-3']['slot-2'].item,
+                state.wishlist['bracket-3']['slot-3'].item, state.wishlist['bracket-3']['slot-4'].item,
+                state.wishlist['bracket-3']['slot-5'].item, state.wishlist['bracket-3']['slot-6'].item,],
             bracket4: (state.player.class === 'Hunter' ? null :
-                [getBracketItemIdValueOrNull(state,'bracket-4','slot-1'), getBracketItemIdValueOrNull(state,'bracket-4','slot-2'),
-                getBracketItemIdValueOrNull(state,'bracket-4','slot-3'), getBracketItemIdValueOrNull(state,'bracket-4','slot-4'),
-                getBracketItemIdValueOrNull(state,'bracket-4','slot-5'), getBracketItemIdValueOrNull(state,'bracket-4','slot-6'),]
+                [state.wishlist['bracket-4']['slot-1'].item, state.wishlist['bracket-4']['slot-2'].item,
+                state.wishlist['bracket-4']['slot-3'].item, state.wishlist['bracket-4']['slot-4'].item,
+                state.wishlist['bracket-4']['slot-5'].item, state.wishlist['bracket-4']['slot-6'].item,]
             ),
             bracketless:
-                [getBracketItemIdValueOrNull(state,'bracket-4','slot-1'), getBracketItemIdValueOrNull(state,'bracket-4','slot-2'),
-                getBracketItemIdValueOrNull(state,'bracket-4','slot-3'), getBracketItemIdValueOrNull(state,'bracket-4','slot-4'),
-                getBracketItemIdValueOrNull(state,'bracket-4','slot-5'), getBracketItemIdValueOrNull(state,'bracket-4','slot-6'),]
+                [state.wishlist['bracket-4']['slot-1'].item, state.wishlist['bracket-4']['slot-2'].item,
+                state.wishlist['bracket-4']['slot-3'].item, state.wishlist['bracket-4']['slot-4'].item,
+                state.wishlist['bracket-4']['slot-5'].item, state.wishlist['bracket-4']['slot-6'].item,]
         }
-        console.log(value)
         await axios.post('http://raegae.maarten.ch:3000/api/player/saveWishlist', value)
             .then((response) => {
                 console.log(response);
