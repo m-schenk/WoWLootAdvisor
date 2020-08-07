@@ -98,11 +98,11 @@ const Bracket = (props) => {
                     <ItemDroppable bracketId={bracketId} slotIdInt={1} />
                     <ItemDroppable bracketId={bracketId} slotIdInt={2} />
                 </div>
-                <div>
+                <div className="d-flex">
                     <ItemDroppable bracketId={bracketId} slotIdInt={3} />
                     <ItemDroppable bracketId={bracketId} slotIdInt={4} />
                 </div>
-                <div>
+                <div className="d-flex">
                     <ItemDroppable bracketId={bracketId} slotIdInt={5} />
                     <ItemDroppable bracketId={bracketId} slotIdInt={6} />
                 </div>
