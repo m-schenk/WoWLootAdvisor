@@ -74,26 +74,26 @@ export const api = {
     async sendWishlist(state) {
         const value = {
             bracket1:
-                [state.wishlist['bracket-1']['slot-1'].item, state.wishlist['bracket-1']['slot-2'].item,
-                state.wishlist['bracket-1']['slot-3'].item, state.wishlist['bracket-1']['slot-4'].item,
-                state.wishlist['bracket-1']['slot-5'].item, state.wishlist['bracket-1']['slot-6'].item,],
+                [state.wishlist['bracket-1']['slot-1'].item.id, state.wishlist['bracket-1']['slot-2'].item.id,
+                state.wishlist['bracket-1']['slot-3'].item.id, state.wishlist['bracket-1']['slot-4'].item.id,
+                state.wishlist['bracket-1']['slot-5'].item.id, state.wishlist['bracket-1']['slot-6'].item.id,],
             bracket2:
-                [state.wishlist['bracket-2']['slot-1'].item, state.wishlist['bracket-2']['slot-2'].item,
-                state.wishlist['bracket-2']['slot-3'].item, state.wishlist['bracket-2']['slot-4'].item,
-                state.wishlist['bracket-2']['slot-5'].item, state.wishlist['bracket-2']['slot-6'].item,],
+                [state.wishlist['bracket-2']['slot-1'].item.id, state.wishlist['bracket-2']['slot-2'].item.id,
+                state.wishlist['bracket-2']['slot-3'].item.id, state.wishlist['bracket-2']['slot-4'].item.id,
+                state.wishlist['bracket-2']['slot-5'].item.id, state.wishlist['bracket-2']['slot-6'].item.id,],
             bracket3:
-                [state.wishlist['bracket-3']['slot-1'].item, state.wishlist['bracket-3']['slot-2'].item,
-                state.wishlist['bracket-3']['slot-3'].item, state.wishlist['bracket-3']['slot-4'].item,
-                state.wishlist['bracket-3']['slot-5'].item, state.wishlist['bracket-3']['slot-6'].item,],
+                [state.wishlist['bracket-3']['slot-1'].item.id, state.wishlist['bracket-3']['slot-2'].item.id,
+                state.wishlist['bracket-3']['slot-3'].item.id, state.wishlist['bracket-3']['slot-4'].item.id,
+                state.wishlist['bracket-3']['slot-5'].item.id, state.wishlist['bracket-3']['slot-6'].item.id,],
             bracket4: (state.player.class === 'Hunter' ? null :
-                [state.wishlist['bracket-4']['slot-1'].item, state.wishlist['bracket-4']['slot-2'].item,
-                state.wishlist['bracket-4']['slot-3'].item, state.wishlist['bracket-4']['slot-4'].item,
-                state.wishlist['bracket-4']['slot-5'].item, state.wishlist['bracket-4']['slot-6'].item,]
+                [state.wishlist['bracket-4']['slot-1'].item.id, state.wishlist['bracket-4']['slot-2'].item.id,
+                state.wishlist['bracket-4']['slot-3'].item.id, state.wishlist['bracket-4']['slot-4'].item.id,
+                state.wishlist['bracket-4']['slot-5'].item.id, state.wishlist['bracket-4']['slot-6'].item.id,]
             ),
             bracketless:
-                [state.wishlist['bracket-4']['slot-1'].item, state.wishlist['bracket-4']['slot-2'].item,
-                state.wishlist['bracket-4']['slot-3'].item, state.wishlist['bracket-4']['slot-4'].item,
-                state.wishlist['bracket-4']['slot-5'].item, state.wishlist['bracket-4']['slot-6'].item,]
+                [state.wishlist['bracket-4']['slot-1'].item.id, state.wishlist['bracket-4']['slot-2'].item.id,
+                state.wishlist['bracket-4']['slot-3'].item.id, state.wishlist['bracket-4']['slot-4'].item.id,
+                state.wishlist['bracket-4']['slot-5'].item.id, state.wishlist['bracket-4']['slot-6'].item.id,]
         }
         await axios.post('http://raegae.maarten.ch:3000/api/player/saveWishlist', value)
             .then((response) => {
