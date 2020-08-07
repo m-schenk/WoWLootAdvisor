@@ -168,6 +168,7 @@ exports.postSaveWishlist = (req, res, next) => {
 
 //validationm helper function
 function checkBracket(bracket, bracketLess) {
+    console.log(bracket)
     return new Promise((resolve, reject) => {
         Item.find({
             'id': {
