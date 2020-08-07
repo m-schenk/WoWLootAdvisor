@@ -5,7 +5,7 @@ const cache = {};
 const getBracketItemIdValueOrNull = (state, bracket, slot) => {
     console.log(state.wishlist[bracket][slot].item)
     if (state.wishlist[bracket][slot].item !== null) {
-        return state.wishlist[bracket][slot].item.id;
+        return '123' //state.wishlist[bracket][slot].item.id;
     } else {
         return null;
     }
