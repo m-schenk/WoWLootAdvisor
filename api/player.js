@@ -13,7 +13,7 @@ exports.validate = (method) => {
                 body('race').exists().isIn(['Dwarf', 'Gnome', 'Human', 'Night Elf']).trim().escape(),
                 body('role').exists().isIn(['DPS', 'Heal', 'Tank']).trim().escape()
             ]
-        };
+        }
         case 'postSaveWishlist': {
             return [
                 body().custom((value, { req }) => {
@@ -40,7 +40,7 @@ exports.validate = (method) => {
                     })
                 })
             ]
-        };
+        }
     }
 }
 
