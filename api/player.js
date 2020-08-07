@@ -1,11 +1,51 @@
 const createError = require('http-errors');
 const _ = require('lodash');
-const { validationResult } = require('express-validator');
+const { validationResult, body } = require('express-validator/check')
 
 const Player = require('../models/Player');
 
+exports.validate = (method) => {
+    switch (method) {
+        case 'postPlayerProfile': {
+            return [
+                body('name').exists(),
+                body('class').exists().isIn(['Druid', 'Hunter', 'Mage', 'Paladin', 'Priest', 'Rogue', 'Warlock', 'Warrior']),
+                body('race').exists().isIn(['Dwarf', 'Gnome', 'Human', 'Night Elf']),
+                body('class').exists().isIn(['DPS', 'Heal', 'Tank'])
+            ]
+        };
+        case 'postSaveWishlist': {
+            return [
+                body()
+                    .custom((value, { req }) => {
+                        let isHunter = false;
+                        Player.findById(req.user._id)
+                            .then(player => {
+                                if (player.class === 'Hunter') {
+                                    isHunter = true;
+                                }
+                            })
+                        const p = Promise.all([
+                            checkBracket(value.bracket1, false),
+                            checkBracket(value.bracket2, false),
+                            checkBracket(value.bracket3, false),
+                            checkBracket(value.bracket4, false),
+                            checkBracket(value.bracketless, true)
+                        ])
+                        return p.then(result => {
+                            console.log(result);
+                        })
+                    })
+            ]
+        };
+    }
+}
+
 exports.postPlayerProfile = (req, res, next) => {
-    console.log(req.body)
+    const err = validationResult(req);
+    if (!err.isEmpty()) {
+        return next(createError(422, 'Failed to validate player (api/player postPlayerProfile()), error text: ' + err));
+    }
     Player.findById(req.user._id)
         .then(player => {
             player.name = req.body.name;
@@ -48,14 +88,17 @@ exports.getPlayerProfile = (req, res, next) => {
 }
 
 exports.getPlayerById = (req, res, next) => {
-    const playerId = req.params.id;
-    Player.findOne({ id: playerId })
-        .populate({ path: 'wishlist', model: Wishlist })
+    Player.findById(req.params.id)
         .then(player => {
+            let complete = true;
+            if (!player.name) { complete = false; }
+            if (!player.class) { complete = false; }
+            if (!player.race) { complete = false; }
+            if (!player.role) { complete = false; }
             const filteredPlayer = _.omit(player.toObject(), ['discordId'])
             res.status(200);
             res.set({ 'Content-Type': 'text/json' });
-            res.json({ isComplete: true, player: filteredPlayer });
+            res.json({ isComplete: complete, player: filteredPlayer });
             res.end();
         })
         .catch(err => {
@@ -73,12 +116,10 @@ exports.logout = (req, res, next) => {
 }
 
 exports.postSaveWishlist = (req, res, next) => {
-
     const err = validationResult(req);
     if (!err.isEmpty()) {
-        return next(createError(406, 'Failed to validate wishlist (api/wishlist postSaveWishlist()), error text: ' + err));
+        return next(createError(422, 'Failed to validate wishlist (api/player postSaveWishlist()), error text: ' + err));
     }
-
     Player.findById(req.user._id)
         .then(player => {
             if (player.wishlist.locked) {
@@ -121,3 +162,69 @@ exports.postSaveWishlist = (req, res, next) => {
             return next(createError(500, 'Failed to fetch player from database, probably because player was not authenticated at the time the wishlist was submitted (controllers/wishlist saveWishlist()), error text: ' + err));
         });
 }
+
+//validationm helper function
+function checkBracket(bracket, bracketLess) {
+    return new Promise((resolve, reject) => {
+        Item.find({
+            'id': {
+                $in: [
+                    ...bracket
+                ]
+            }
+        })
+            .then(items => {
+                console.log(items)
+                let allocationPoints = 0;   // should not exceed 3
+                let itemSlots = 0;          // should not exceed 2
+                let occupiedSlots = 0;      // should not exceed 6
+
+                for (i = 0; i < items.length; i++) {
+                    for (j = 0; j < i; j++) {
+                        if (i == j) continue;
+                        if (items[i].itemType == items[j].itemType) {
+                            // console.log(result[i].itemType, '==', result[j].itemType);
+                            reject('Bracket has duplicate item types');
+                        }
+                    }
+
+                    if (items[i].id && !bracketLess) {
+                        occupiedSlots++;
+                    }
+                    if (items[i].itemCategory == 'Reserved' || items[i].itemCategory == 'Limited') {
+                        allocationPoints++;
+                        if (items[i].itemCategory == 'Reserved') {
+                            itemSlots++;
+                            if (itemSlots > 2) {
+                                reject('Maximum amount of reserved items(2) exceeded');
+                            }
+                        }
+                        //   if (allocationPoints > 2 && isHunter) {
+                        //     console.log('HUNTER SHITS');
+                        //     reject('Maximum allocation points(2) exceeded -> hunter class penalty');
+                        //   }
+                        if (allocationPoints > 3) {
+                            reject('Maximum allocation points(3) exceeded');
+                        }
+                    }
+                    if (occupiedSlots > 6) {
+                        reject('Maximum item slots(6) exceeded')
+                    }
+                    if (items[i].itemCategory == 'Unlockable') {
+                        reject('Might of the Scourge, Power of the Storm and Splinter of Atiesh are forbidden items');
+                    }
+                }
+                resolve('Wishlist is valid!');
+            })
+            .catch(err => {
+                return next(createError(500, 'Failed to fetch one or more items from the submitted wishlist brackets (routes/wishlist checkBracket()), error text: ' + err));
+            });
+    })
+}
+
+// if item is unlimited
+// dont allow unlockable items (itemCategory == 'Unlockable')
+// no duplicate item types
+// allow only 3 allocation points per bracket
+// reserved items use two items slots
+// check maxiumum bracket size -> 6

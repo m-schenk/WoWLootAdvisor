@@ -2,6 +2,7 @@ const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
+const expressValidator = require('express-validator')
 
 const session = require('express-session');
 const passport = require('passport')
@@ -50,6 +51,7 @@ app.use(
     })
 );
 
+app.use(expressValidator());
 app.use(passport.initialize());
 app.use(passport.session());
 
