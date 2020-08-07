@@ -131,11 +131,12 @@ exports.postSaveWishlist = (req, res, next) => {
                 res.json({ wishlist: player.wishlist });
                 res.end();
             } else {
-                player.wishlist.bracket1 = [ id ] = req.body.wishlist.bracket1;
-                player.wishlist.bracket2 = [ id ] = req.body.wishlist.bracket2;
-                player.wishlist.bracket3 = [ id ] = req.body.wishlist.bracket3;
-                player.wishlist.bracket4 = [ id ] = req.body.wishlist.bracket4;
-                player.wishlist.bracketLess = [ id ] = req.body.wishlist.bracketLess;
+                const bracket1 = [ {id} , ...rest ] = req.body.wishlist.bracket1
+                player.wishlist.bracket1 = bracket1;
+                // player.wishlist.bracket2 = [ id ] = req.body.wishlist.bracket2;
+                // player.wishlist.bracket3 = [ id ] = req.body.wishlist.bracket3;
+                // player.wishlist.bracket4 = [ id ] = req.body.wishlist.bracket4;
+                // player.wishlist.bracketLess = [ id ] = req.body.wishlist.bracketLess;
                 player.save()
                 .then(player => {
                     res.status(200);
