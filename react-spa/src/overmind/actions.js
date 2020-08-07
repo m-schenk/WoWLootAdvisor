@@ -34,7 +34,7 @@ export const sendProfile = async ({ state, effects }, data) => {
 export const dragHandler = pipe( //just for now, will become an effect I guess.. later
     mutate(({ state }, result) => {
         const { destination, source } = result;
-        console.log(`dragging from ${source} to ${destination}`)
+        console.log(`dragging from ${source['droppableId']} to ${destination['droppableId']}`)
 
         //when destination null => draggable was not over any droppable, so we are done.
         if (!destination) {
