@@ -183,7 +183,7 @@ const checkWishlistItems = (wishlist, hunter) => {
     //call unique or something compare lengths?
 }
 
-const checktAllocatedBracket = (bracket) => {
+const checkAllocatedBracket = (bracket) => {
 
 }
 

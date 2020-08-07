@@ -71,9 +71,9 @@ class Wishlist extends React.Component {
             return (
                 <div className="bracketsContainer justify-content-center">
                     <Bracket id={1} />
-                    <Bracket id={2} />
-                    <Bracket id={3} />
                     <Bracket id={4} />
+                    <Bracket id={3} />
+                    <Bracket id={2} />
                 </div>
             )
         }
