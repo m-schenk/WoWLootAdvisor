@@ -11,7 +11,7 @@ exports.validate = (method) => {
                 body('name').exists().notEmpty().trim().escape(),
                 body('class').exists().isIn(['Druid', 'Hunter', 'Mage', 'Paladin', 'Priest', 'Rogue', 'Warlock', 'Warrior']).trim().escape(),
                 body('race').exists().isIn(['Dwarf', 'Gnome', 'Human', 'Night Elf']).trim().escape(),
-                body('class').exists().isIn(['DPS', 'Heal', 'Tank']).trim().escape()
+                body('role').exists().isIn(['DPS', 'Heal', 'Tank']).trim().escape()
             ]
         };
         case 'postSaveWishlist': {
