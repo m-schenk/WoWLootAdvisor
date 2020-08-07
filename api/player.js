@@ -17,7 +17,7 @@ exports.validate = (method) => {
         }
         case 'postSaveWishlist': {
             return [
-                body().trim().escape().custom((wishlist, { req }) => {
+                body('wishlist').trim().escape().custom((wishlist, { req }) => {
                     // hunter rule
                     let isHunter = false;
                     if (req.user.class === 'Hunter') {
@@ -29,17 +29,6 @@ exports.validate = (method) => {
 
                     //checkAllocatedBracket()
                     //checkBracketless()
-
-                    // const p = Promise.all([
-                    //     checkBracket(wishlist.bracket1, false),
-                    //     checkBracket(wishlist.bracket2, false),
-                    //     checkBracket(wishlist.bracket3, false),
-                    //     checkBracket(wishlist.bracket4, false),
-                    //     checkBracket(wishlist.bracketless, true)
-                    // ])
-                    // return p.then(result => {
-                    //     console.log(result);
-                    // })
                 })
             ]
         }
