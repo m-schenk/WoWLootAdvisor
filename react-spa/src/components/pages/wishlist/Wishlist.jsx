@@ -85,9 +85,9 @@ const Bracket = (props) => {
     const state = useState();
 
     const prio = 53 - props.id * 3
-    const allocPoints = state.wishlist[bracketId]['points'];
     const bracketId = 'bracket-' + props.id
-
+    const allocPoints = state.wishlist[bracketId]['points'];
+    
     return (
         <div className={"bracket"} id={'bracket-' + props.id}>
             <div>
