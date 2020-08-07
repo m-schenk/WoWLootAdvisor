@@ -176,6 +176,10 @@ export const dragHandler = pipe( //just for now, will become an effect I guess..
             }
         }
         if (source['droppableId'] === state.liveSearch['id']) {
+            if(destinationItem !== null) {
+                const sliceid = state.wishlist.filterList.indexOf(state.wishlist[destinationBracketId][destinationSlotId].item.id)
+                state.wishlist.filterList.splice(sliceid, 1)
+            }
             state.wishlist.filterList.push(sourceItem.id)
         }
         //set state of items
