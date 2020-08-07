@@ -218,7 +218,7 @@ function checkBracket(bracket, bracketLess) {
             }
             resolve('Wishlist is valid!');
         }).catch(err => {
-            return next(new Error('Failed to fetch one or more items from the submitted wishlist brackets (routes/wishlist checkBracket()), error text: ' + err));
+            return new Error('Failed to fetch one or more items from the submitted wishlist brackets (routes/wishlist checkBracket()), error text: ' + err);
         });
     })
 }
