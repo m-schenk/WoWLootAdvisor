@@ -16,6 +16,8 @@
     .nav_wrapper {
         width: 1200px;
         margin: 0 auto;
+        padding-left: 35px;
+        padding-right: 35px;
         position: relative;
     }
 }
