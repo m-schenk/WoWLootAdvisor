@@ -1,17 +1,15 @@
 import axios from 'axios';
 
-import axios from 'axios'
-
 const instance = axios.create({
     withCredentials: true,
-    baseURL: 'http://raegae.maarten.ch:3000/api/player'
+    baseURL: 'http://raegae.maarten.ch:3000/api/player/'
 })
 
 const cache = {};
 
 export const api = {
     getPlayerProfile(state) {
-        instance.get('/getPlayerProfile'
+        instance.get('getPlayerProfile'
         ).then((response) => {
             console.log(response)
             state.player._id = response.data.player._id;
@@ -42,7 +40,7 @@ export const api = {
         })
     },
     sendProfile(state, data) {
-        instance.post('/postPlayerProfile', {
+        instance.post('postPlayerProfile', {
             name: data.name,
             race: data.race,
             class: data.class,
@@ -99,7 +97,7 @@ export const api = {
                 state.wishlist['bracket-4']['slot-3'].item, state.wishlist['bracket-4']['slot-4'].item,
                 state.wishlist['bracket-4']['slot-5'].item, state.wishlist['bracket-4']['slot-6'].item,]
         }
-        instance.post('http://raegae.maarten.ch:3000/api/player/saveWishlist', {
+        instance.post('saveWishlist', {
             wishlist: wishlist
         }).then((response) => {
             console.log(response);
