@@ -131,17 +131,11 @@ exports.postSaveWishlist = (req, res, next) => {
                 res.json({ wishlist: player.wishlist });
                 res.end();
             } else {
-                const bracket1 = []
-                req.body.wishlist.bracket1.forEach(item => {
-                    if(item) {
-                        bracket1.push(item.id)
-                    }
-                })
-                player.wishlist.bracket1 = bracket1;
-                // player.wishlist.bracket2 = [ id ] = req.body.wishlist.bracket2;
-                // player.wishlist.bracket3 = [ id ] = req.body.wishlist.bracket3;
-                // player.wishlist.bracket4 = [ id ] = req.body.wishlist.bracket4;
-                // player.wishlist.bracketLess = [ id ] = req.body.wishlist.bracketLess;
+                player.wishlist.bracket1 = getIdsFromBracket(req.body.wishlist.bracket1);
+                player.wishlist.bracket2 = getIdsFromBracket(req.body.wishlist.bracket2);
+                player.wishlist.bracket3 = getIdsFromBracket(req.body.wishlist.bracket3);
+                player.wishlist.bracket4 = getIdsFromBracket(req.body.wishlist.bracket4);
+                player.wishlist.bracketLess = getIdsFromBracket(req.body.wishlist.bracketless);
                 player.save()
                 .then(player => {
                     res.status(200);
@@ -243,3 +237,13 @@ function checkBracket(bracket, bracketLess) {
 // allow only 3 allocation points per bracket
 // reserved items use two items slots
 // check maxiumum bracket size -> 6
+
+const getIdsFromBracket = (bracket) => {
+    const _bracket = [];
+    bracket.forEach(item => {
+        if(item) {
+            _bracket.push(item.id);
+        }
+    });
+    return _bracket;
+}
