@@ -16,7 +16,6 @@ import Col from 'react-bootstrap/Col';
 class MainContent extends React.Component {
 
     onDragEnd = (result) => {
-        console.log("this was called")
         this.props.overmind.actions.dragHandler(result);
         window.$WowheadPower.refreshLinks();
     };

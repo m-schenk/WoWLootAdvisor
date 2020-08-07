@@ -41,7 +41,11 @@ class Wishlist extends React.Component {
     // shouldComponentUpdate(nextProps) {
     //     return this.props.overmind !== nextProps.overmind
     // };
-
+    componentDidUpdate() {
+        if(window.$WowheadPower) {
+            window.$WowheadPower.refreshLinks();
+        }
+    }
     componentDidUpdate() {
         window.$WowheadPower.refreshLinks();
     };
