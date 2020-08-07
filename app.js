@@ -8,6 +8,8 @@ const passport = require('passport')
 const connectEnsureLogin = require('connect-ensure-login');
 const MongoStore = require('connect-mongo')(session);
 
+const discordStrategy = require('./strategies/discordStrategies');
+
 require("dotenv").config();
 
 const discordRouter = require('./routes/discord')
