@@ -131,7 +131,12 @@ exports.postSaveWishlist = (req, res, next) => {
                 res.json({ wishlist: player.wishlist });
                 res.end();
             } else {
-                const bracket1 = [ {id} , ...rest ] = req.body.wishlist.bracket1
+                const bracket1 = []
+                req.body.wishlist.bracket1.forEach(item => {
+                    if(item) {
+                        bracket1.push(item.id)
+                    }
+                })
                 player.wishlist.bracket1 = bracket1;
                 // player.wishlist.bracket2 = [ id ] = req.body.wishlist.bracket2;
                 // player.wishlist.bracket3 = [ id ] = req.body.wishlist.bracket3;
