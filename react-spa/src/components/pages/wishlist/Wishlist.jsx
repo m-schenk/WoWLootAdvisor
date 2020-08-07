@@ -65,7 +65,6 @@ class Wishlist extends React.Component {
                     <Bracket id={1} />
                     <Bracket id={2} />
                     <Bracket id={3} />
-                    <Bracketless hunter={true} />
                 </div>
             )
         } else {
@@ -75,7 +74,6 @@ class Wishlist extends React.Component {
                     <Bracket id={2} />
                     <Bracket id={3} />
                     <Bracket id={4} />
-                    <Bracketless hunter={false} />
                 </div>
             )
         }
