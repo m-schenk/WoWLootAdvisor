@@ -8,7 +8,7 @@ const Item = require('../models/Item');
 router.post('/postPlayerProfile', playerApi.validate('postPlayerProfile'), playerApi.postPlayerProfile);
 router.get('/getPlayerProfile', playerApi.getPlayerProfile);
 router.get('/logout', playerApi.logout);
-router.post('/saveWishlist', playerApi.validate('postSaveWishlist'), playerApi.postSaveWishlist);
+router.post('/saveWishlist', [console.log(req)],playerApi.validate('postSaveWishlist'), playerApi.postSaveWishlist);
 
 router.get('/id::id', playerApi.getPlayerById);
 
