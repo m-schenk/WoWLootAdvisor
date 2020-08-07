@@ -12,14 +12,11 @@
   color: white;
 }
 
-.container-nav {
-    padding: 0px;
-    margin: 0px;
-}
-
 @media screen and (min-width: 1200px) {
-    .container-nav {
-        width: 1200px;
+    .nav_wrapper {
+        max-width: 1200px;
+        margin: 0 auto;
+        position: relative;
     }
 }
 

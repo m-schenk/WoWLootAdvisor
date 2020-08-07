@@ -12,8 +12,9 @@ import Container from 'react-bootstrap/Container';
 class UserNavbar extends React.Component {
     render() {
         return (
-            <Container className="container-nav">
-                <Navbar collapseOnSelect sticky="top" bg="dark" variant="dark" expand="lg">
+            
+            <Navbar collapseOnSelect sticky="top" bg="dark" variant="dark" expand="lg">
+                <div class="nav_wrapper">
                     <Image src={require("./assets/logo128x64.png")} />
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <Navbar.Brand as={Link} to="/profile">{(this.props.overmind.state.player.name != null) ? this.props.overmind.state.player.name : 'Profile'}</Navbar.Brand>
@@ -34,8 +35,9 @@ class UserNavbar extends React.Component {
                     <Nav>
                         <Nav.Link className="mr-3" href="http://raegae.maarten.ch:3000/api/player/logout">Logout</Nav.Link>
                     </Nav>
-                </Navbar>
-            </Container>
+                </div>
+            </Navbar>
+ 
         )
     }
 }
