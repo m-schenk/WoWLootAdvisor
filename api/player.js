@@ -247,5 +247,9 @@ const getIdsFromBracket = (bracket) => {
             _bracket.push(item.id);
         }
     });
-    return _bracket;
+    if(_bracket.length === 0) {
+        return null;
+    } else {
+        return _bracket;
+    }
 }
