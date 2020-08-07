@@ -149,26 +149,28 @@ exports.postSaveWishlist = (req, res, next) => {
 const checkWishlistItems = (wishlist, hunter) => {
     return new Promise((resolve, reject) => {
         const itemIds = [];
-        //get all item id's from ever bracket
 
         Object.keys(wishlist).forEach(bracket => {
+            let allocationPoints = 0;
             wishlist[bracket].forEach(item => {
                 if (item) {
                     itemIds.push(item.id);
+                    if((item.itemCategory === 'Reserved') || (item.itemCategory === 'Limited'))
+                    allocationPoints++;
+                }
+                if( allocationPoints > 3) {
+                    reject('bracket exceeds allocation points')
                 }
             });
         })
-        console.log(itemIds);
+        
+        // check if all items are unique
         const unique = itemIds.filter((v, i, a) => a.indexOf(v) === i)
         if(itemIds.length !== unique.length) {
             reject('wishlist contains duplicates')
         }
+
     })
-    //call unique or something compare lengths?
-}
-
-const checkAllocatedBracket = (bracket) => {
-
 }
 
 //validationm helper function
