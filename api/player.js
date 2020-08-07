@@ -25,7 +25,7 @@ exports.validate = (method) => {
                     }
                     checkWishlistItems(wishlist, isHunter)
                     .then((result) => {
-                        console.log(result)
+                        console.log('result: ',result)
                         return
                     }, (err) => {
                         throw new Error(err)
