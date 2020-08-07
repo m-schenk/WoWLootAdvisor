@@ -84,7 +84,6 @@ class Wishlist extends React.Component {
 const Bracket = (props) => {
     const state = useState();
 
-    const prio = 53 - props.id * 3
     const bracketId = 'bracket-' + props.id
     const allocPoints = state.wishlist[bracketId]['points'];
 
@@ -93,20 +92,20 @@ const Bracket = (props) => {
             <div>
                 <>Remaining Allocation Points: {allocPoints}</>
             </div>
-            <div>
-                <div className="d-flex">
+            <row>
+                <col className="d-flex">
                     <ItemDroppable bracketId={bracketId} slotIdInt={1} />
                     <ItemDroppable bracketId={bracketId} slotIdInt={2} />
-                </div>
-                <div className="d-flex">
+                </col>
+                <col className="d-flex">
                     <ItemDroppable bracketId={bracketId} slotIdInt={3} />
                     <ItemDroppable bracketId={bracketId} slotIdInt={4} />
-                </div>
-                <div className="d-flex">
+                </col>
+                <col className="d-flex">
                     <ItemDroppable bracketId={bracketId} slotIdInt={5} />
                     <ItemDroppable bracketId={bracketId} slotIdInt={6} />
-                </div>
-            </div>
+                </col>
+            </row>
         </div>
     )
 }
