@@ -17,7 +17,7 @@ exports.validate = (method) => {
         }
         case 'postSaveWishlist': {
             return [
-                body().custom((wishlist, { req }) => {
+                body('wishlist').custom((wishlist, { req }) => {
 
                     console.log(wishlist.wishlist)
                     // hunter rule
