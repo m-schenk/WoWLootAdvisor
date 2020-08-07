@@ -72,7 +72,7 @@ export const api = {
             })
     },
     async sendWishlist(state) {
-        const value = {
+        const wishlist = {
             bracket1:
                 [state.wishlist['bracket-1']['slot-1'].item, state.wishlist['bracket-1']['slot-2'].item,
                 state.wishlist['bracket-1']['slot-3'].item, state.wishlist['bracket-1']['slot-4'].item,
@@ -95,7 +95,7 @@ export const api = {
                 state.wishlist['bracket-4']['slot-3'].item, state.wishlist['bracket-4']['slot-4'].item,
                 state.wishlist['bracket-4']['slot-5'].item, state.wishlist['bracket-4']['slot-6'].item,]
         }
-        await axios.post('http://raegae.maarten.ch:3000/api/player/saveWishlist', value)
+        await axios.post('http://raegae.maarten.ch:3000/api/player/saveWishlist', wishlist)
             .then((response) => {
                 console.log(response);
             }, (error) => {
