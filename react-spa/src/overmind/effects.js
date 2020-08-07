@@ -40,6 +40,7 @@ export const api = {
         })
     },
     sendProfile(state, data) {
+        console.log(data)
         instance.post('postPlayerProfile', {
             name: data.name,
             race: data.race,
