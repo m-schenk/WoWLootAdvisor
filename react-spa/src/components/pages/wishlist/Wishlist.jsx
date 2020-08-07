@@ -38,9 +38,9 @@ const BASE_URL = "https://classic.wowhead.com/item=";
 
 class Wishlist extends React.Component {
 
-    shouldComponentUpdate(nextProps) {
-        return this.props.overmind !== nextProps.overmind
-    };
+    // shouldComponentUpdate(nextProps) {
+    //     return this.props.overmind !== nextProps.overmind
+    // };
 
     componentDidUpdate() {
         window.$WowheadPower.refreshLinks();
@@ -173,12 +173,12 @@ class Wishlist extends React.Component {
         if (!this.props.overmind.state.player.isComplete) {
             return (
                 <Alert variant={'danger'}>
-                    Your profile seems not complete, please edit your profile before you start creating a wishlist
+                    Your profile is not loaded, please check the profile tab before you start creating a wishlist!
                 </Alert>
             )
         } else {
             return (
-                <div className="bracketsContainer">
+                <div className="bracketsContainer justify-content-center">
                     {this.renderWishlist()}
                 </div>
             )

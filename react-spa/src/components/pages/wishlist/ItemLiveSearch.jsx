@@ -63,7 +63,7 @@ class ItemLiveSearch extends React.Component {
     
     render() {
         return (
-            <div className="live-search">
+            <div className="live-search justify-content-center">
                 <div className="control">
                     <Button variant="warning" as="input" type="submit" value="Submit" onClick={ () => { this.sendWishlist() } } />
                     <Button variant="warning" as="input" type="reset" value="Reset" />  
