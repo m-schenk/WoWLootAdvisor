@@ -23,7 +23,7 @@ class MainContent extends React.Component {
 
     render() {
         return(
-            <Container fluid className="justify-content-center" id="main-content">
+            <Container className="justify-content-center" id="main-content">
                 <DragDropContext onDragEnd={this.onDragEnd}>
                     <Row className="row-centered">
                         <Col className="justify-content-center" sm={8}>
