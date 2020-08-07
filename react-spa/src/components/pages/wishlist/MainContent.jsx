@@ -12,6 +12,7 @@ import ItemLiveSearch from './ItemLiveSearch';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Alert from 'react-bootstrap/Alert';
 
 class MainContent extends React.Component {
 
@@ -21,21 +22,29 @@ class MainContent extends React.Component {
     };
 
     render() {
-        return(
-            <Container className="justify-content-center" id="main-content">
-                <DragDropContext onDragEnd={this.onDragEnd}>
-                    <Row className="row-centered">
-                        <Col className="justify-content-center" sm={8}>
-                            <Wishlist />
-                        </Col>
-                        <Col className="justify-content-center" sm={4}>
-                            <ItemLiveSearch id={this.props.overmind.state.liveSearch['id']} />
-                        </Col>
-                    </Row>
-                </DragDropContext>
-            </Container>
-        )
+        if (!this.props.overmind.state.player.isComplete) {
+            return (
+                <Alert variant={'danger'}>
+                    Your profile is not loaded, please check the profile tab before you start creating a wishlist!
+                </Alert>
+            )
+        } else {
+            return (
+                <Container className="justify-content-center" id="main-content">
+                    <DragDropContext onDragEnd={this.onDragEnd}>
+                        <Row className="row-centered">
+                            <Col className="justify-content-center" sm={8}>
+                                <Wishlist />
+                            </Col>
+                            <Col className="justify-content-center" sm={4}>
+                                <ItemLiveSearch id={this.props.overmind.state.liveSearch['id']} />
+                            </Col>
+                        </Row>
+                    </DragDropContext>
+                </Container>
+            )
+        }
     }
 }
 
-export default connect(MainContent);
+    export default connect(MainContent);

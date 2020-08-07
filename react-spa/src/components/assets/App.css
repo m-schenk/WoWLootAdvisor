@@ -22,7 +22,6 @@
     }
 }
 
-
 #wrapper {
   min-height: 100%;
   position: absolute;
@@ -80,50 +79,6 @@
   border: 1px solid rgb(12, 12, 12);
   border-radius: 4px !important;
   box-shadow: 2px 2px 3px 1px rgb(30, 30, 30);
-}
-
-
-
-table.styled-table {
-  border-collapse: separate;
-  border: solid #252525 1px;
-  border-radius: 4px;
-}
-
-td.styled-table,
-th.styled-table {
-  border-left: solid #252525 1px;
-  border-top: solid #252525 1px;
-}
-
-th.styled-table {
-  border-top: none;
-  text-align: center;
-}
-
-td.styled-table:first-child,
-th.styled-table:first-child {
-  border-left: none;
-}
-
-td {
-  padding: 12px;
-}
-
-tbody {
-  border: none;
-  padding: none;
-}
-
-tbody.styled-table {
-  border: none;
-  padding: none;
-  margin-bottom: -6px;
-}
-
-table {
-  padding: none;
-  margin: unset;
 }
 
 .delete-item-zone {

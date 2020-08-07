@@ -23,7 +23,7 @@ const initialFormData = Object.freeze({
 
 function PlayerProfileForm() {
     const [formData, updateFormData] = useState(initialFormData);
-    const actions = useActions()
+    const actions = useActions();
 
     const handleChange = (e) => {
         updateFormData({
