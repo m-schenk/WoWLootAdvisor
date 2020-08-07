@@ -82,7 +82,7 @@ class Wishlist extends React.Component {
             <table className={"bracket styled-table"} id={bracketId}>
                 <thead>
                     <tr className="styled-table">
-                        <th className="styled-table" xl={12}>Remaining Allocation Points: {(hunter ? allocPoints - 1 : allocPoints)}</th>
+                        <th className="styled-table" xl={12}>Remaining Allocation Points: {allocPoints}</th>
                     </tr>
                 </thead>
                 <tbody className="styled-table">
