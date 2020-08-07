@@ -7,12 +7,10 @@ import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Image from 'react-bootstrap/Image';
-import Container from 'react-bootstrap/Container';
 
 class UserNavbar extends React.Component {
     render() {
         return (
-            
             <Navbar collapseOnSelect sticky="top" bg="dark" variant="dark" expand="lg">
                 <div class="d-flex nav_wrapper align-items-center">
                     <Image src={require("./assets/logo128x64.png")} />
@@ -37,7 +35,6 @@ class UserNavbar extends React.Component {
                     </Nav>
                 </div>
             </Navbar>
- 
         )
     }
 }

@@ -13,9 +13,6 @@ require("dotenv").config();
 const discordRouter = require('./routes/discord')
 const playerRouter = require('./routes/player');
 const itemsRouter = require('./routes/items');
-const wishlistRouter = require('./routes/wishlist');
-
-const discordStrategy = require('./strategies/discordStrategies');
 
 const app = express();
 
@@ -84,7 +81,6 @@ app.use('', connectEnsureLogin.ensureLoggedIn('/forbidden'), express.static(path
 //api routes
 app.use('/api/player', connectEnsureLogin.ensureLoggedIn('/forbidden'), playerRouter);
 app.use('/api/items', connectEnsureLogin.ensureLoggedIn('/forbidden'), itemsRouter);
-app.use('/api/wishlist', connectEnsureLogin.ensureLoggedIn('/forbidden'), wishlistRouter);
 
 // front-end route, every request should be resovled in react router if call is not to api endpoint
 app.get('/profile', connectEnsureLogin.ensureLoggedIn('/forbidden'), (req, res) => {
