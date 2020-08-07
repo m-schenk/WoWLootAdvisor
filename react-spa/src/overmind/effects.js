@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const cache = {};
 
-getBracketItemIdValueOrNull = (bracket, slot) => {
+const getBracketItemIdValueOrNull = (bracket, slot) => {
     if (state.wishlist[bracket][slot].item) {
         return state.wishlist[bracket][slot].item.id;
     } else {
@@ -49,7 +49,7 @@ export const api = {
             name: data.name,
             race: data.race,
             class: data.class,
-            role: data.role
+            role: data.role,
         })
             .then((response) => {
                 state.player._id = response.data.player._id;
