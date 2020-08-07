@@ -23,8 +23,13 @@ exports.validate = (method) => {
                     if (req.user.class === 'Hunter') {
                         isHunter = true;
                     }
-                    checkWishlistItems(wishlist, isHunter);
-                    return true
+                    checkWishlistItems(wishlist, isHunter)
+                    .then(() => {
+                        return
+                    })
+                    .catch((err) => {
+                        next(new Error(err))
+                    })
                 })
             ]
         }
@@ -38,7 +43,7 @@ exports.postPlayerProfile = (req, res, next) => {
     };
     const err = validationResult(req).formatWith(errorFormatter);
     if (!err.isEmpty()) {
-        return next(createError(422, 'Failed to validate wishlist (api/player postSaveWishlist()), error text: ' + err.array()));
+        return next(createError(422, 'Failed to validate player (api/player postPlayerProfile()), error text: ' + err.array()));
     }
     Player.findById(req.user._id)
         .then(player => {
