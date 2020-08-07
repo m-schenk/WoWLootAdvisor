@@ -94,16 +94,16 @@ const Bracket = (props) => {
             <div>
                 <>Remaining Allocation Points: {allocPoints}</>
             </div>
-            <Col className="justify-content-center">
-                <Row className="d-flex">
+            <Col>
+                <Row className="d-flex justify-content-center">
                     <ItemDroppable bracketId={bracketId} slotIdInt={1} />
                     <ItemDroppable bracketId={bracketId} slotIdInt={2} />
                 </Row>
-                <Row className="d-flex">
+                <Row className="d-flex justify-content-center">
                     <ItemDroppable bracketId={bracketId} slotIdInt={3} />
                     <ItemDroppable bracketId={bracketId} slotIdInt={4} />
                 </Row>
-                <Row className="d-flex">
+                <Row className="d-flex justify-content-center">
                     <ItemDroppable bracketId={bracketId} slotIdInt={5} />
                     <ItemDroppable bracketId={bracketId} slotIdInt={6} />
                 </Row>
