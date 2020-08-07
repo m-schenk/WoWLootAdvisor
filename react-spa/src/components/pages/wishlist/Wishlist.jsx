@@ -73,11 +73,11 @@ class Wishlist extends React.Component {
     renderBracket(bracketId) {
         let prioStart = this.props.overmind.state.wishlist[bracketId]['prio-start'];
         const allocPoints = this.props.overmind.state.wishlist[bracketId]['points'];
-        const hunter = (this.props.overmind.state.player.class === "Hunter");
-        if (hunter && bracketId === "bracket-4") return
-        if (hunter && bracketId === "bracketless") {
-            prioStart = prioStart + 3;
-        }
+        // const hunter = (this.props.overmind.state.player.class === "Hunter");
+        // if (hunter && bracketId === "bracket-4") return
+        // if (hunter && bracketId === "bracketless") {
+        //     prioStart = prioStart + 3;
+        // }
         return (
             <table className={"bracket styled-table"} id={bracketId}>
                 <thead>
