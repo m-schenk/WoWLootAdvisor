@@ -36,9 +36,13 @@ exports.validate = (method) => {
 }
 
 exports.postPlayerProfile = (req, res, next) => {
-    const err = validationResult(req);
+    const errorFormatter = ({ location, msg, param, value, nestedErrors }) => {
+        // Build your resulting errors however you want! String, object, whatever - it works!
+        return `${location}[${param}]: ${msg}`;
+    };
+    const err = validationResult(req).formatWith(errorFormatter);
     if (!err.isEmpty()) {
-        return next(createError(422, 'Failed to validate player (api/player postPlayerProfile()), error text: ' + err));
+        return next(createError(422, 'Failed to validate wishlist (api/player postSaveWishlist()), error text: ' + err.array()));
     }
     Player.findById(req.user._id)
         .then(player => {
