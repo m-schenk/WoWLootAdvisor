@@ -95,6 +95,7 @@ export const api = {
                 state.wishlist['bracket-4']['slot-3'].item.id, state.wishlist['bracket-4']['slot-4'].item.id,
                 state.wishlist['bracket-4']['slot-5'].item.id, state.wishlist['bracket-4']['slot-6'].item.id,]
         }
+        console.log(value)
         await axios.post('http://raegae.maarten.ch:3000/api/player/saveWishlist', value)
             .then((response) => {
                 console.log(response);
