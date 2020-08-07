@@ -1,6 +1,7 @@
 const express = require('express');
-const playerApi = require('../api/player');
 const router = express.Router();
+
+const playerApi = require('../api/player');
 
 router.post('/postPlayerProfile', playerApi.postPlayerProfile);
 router.get('/getPlayerProfile', playerApi.getPlayerProfile);
