@@ -13,7 +13,6 @@ router.post('/saveWishlist', (req, res, next) => {
     req.body.wishlist.bracket2[0].itemCategory = 'Reserved';
     req.body.wishlist.bracket2[1].itemCategory = 'Reserved';
     req.body.wishlist.bracket2[2].itemCategory = 'Limited';
-    req.body.wishlist.bracket2[3].itemCategory = 'Limited';
     next();
 },playerApi.validate('postSaveWishlist'), playerApi.postSaveWishlist);
 
