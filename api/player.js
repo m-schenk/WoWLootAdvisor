@@ -17,23 +17,29 @@ exports.validate = (method) => {
         }
         case 'postSaveWishlist': {
             return [
-                body().custom((value, { req }) => {
-                    console.log(req.user)
+                body().custom((wishlist, { req }) => {
+                    // hunter rule
                     let isHunter = false;
                     if (req.user.class === 'Hunter') {
                         isHunter = true;
                     }
-                    console.log(isHunter)
-                    const p = Promise.all([
-                        checkBracket(value.bracket1, false),
-                        checkBracket(value.bracket2, false),
-                        checkBracket(value.bracket3, false),
-                        checkBracket(value.bracket4, false),
-                        checkBracket(value.bracketless, true)
-                    ])
-                    return p.then(result => {
-                        console.log(result);
-                    })
+
+                    //checkWishlistItems() + uniqueness
+                    checkWishlistItems(wishlist, hunter);
+                    
+                    //checkAllocatedBracket()
+                    //checkBracketless()
+
+                    // const p = Promise.all([
+                    //     checkBracket(wishlist.bracket1, false),
+                    //     checkBracket(wishlist.bracket2, false),
+                    //     checkBracket(wishlist.bracket3, false),
+                    //     checkBracket(wishlist.bracket4, false),
+                    //     checkBracket(wishlist.bracketless, true)
+                    // ])
+                    // return p.then(result => {
+                    //     console.log(result);
+                    // })
                 })
             ]
         }
@@ -164,6 +170,20 @@ exports.postSaveWishlist = (req, res, next) => {
         .catch(err => {
             return next(createError(500, 'Failed to fetch player from database, probably because player was not authenticated at the time the wishlist was submitted (controllers/wishlist saveWishlist()), error text: ' + err));
         });
+}
+
+const checkWishlistItems = (wishlist, hunter) => {
+    let itemIds = []
+    //get all item id's from ever bracket
+    wishlist.bracket1.forEach(item =>
+        console.log(item)
+    )
+    
+    //call unique or something compare lengths?
+}
+
+const checktAllocatedBracket = (bracket) => {
+
 }
 
 //validationm helper function
