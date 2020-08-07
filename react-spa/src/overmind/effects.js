@@ -42,10 +42,10 @@ export const api = {
     sendProfile(state, data) {
         console.log(data)
         instance.post('postPlayerProfile', {
-            name: data._name,
-            race: data._race,
-            class: data._class,
-            role: data._role
+            _name: data._name,
+            _race: data._race,
+            _class: data._class,
+            _role: data._role
         }).then((response) => {
             state.player._id = response.data.player._id;
             state.player.isComplete = response.data.isComplete;

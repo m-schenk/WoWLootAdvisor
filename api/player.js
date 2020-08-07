@@ -9,10 +9,10 @@ exports.validate = (method) => {
     switch (method) {
         case 'postPlayerProfile': {
             return [
-                body('name', 'error on name validation').exists().notEmpty().trim().escape(),
-                body('class', 'error on class validation').exists().isIn(['Druid', 'Hunter', 'Mage', 'Paladin', 'Priest', 'Rogue', 'Warlock', 'Warrior']).trim().escape(),
-                body('race', 'error on race validation').exists().isIn(['Dwarf', 'Gnome', 'Human', 'Night Elf']).trim().escape(),
-                body('role', 'error on role validation').exists().isIn(['DPS', 'Heal', 'Tank']).trim().escape()
+                body('_name', 'error on name validation').exists().notEmpty().trim().escape(),
+                body('_class', 'error on class validation').exists().isIn(['Druid', 'Hunter', 'Mage', 'Paladin', 'Priest', 'Rogue', 'Warlock', 'Warrior']).trim().escape(),
+                body('_race', 'error on race validation').exists().isIn(['Dwarf', 'Gnome', 'Human', 'Night Elf']).trim().escape(),
+                body('_role', 'error on role validation').exists().isIn(['DPS', 'Heal', 'Tank']).trim().escape()
             ]
         }
         case 'postSaveWishlist': {
@@ -46,10 +46,10 @@ exports.postPlayerProfile = (req, res, next) => {
     }
     Player.findById(req.user._id)
         .then(player => {
-            player.name = req.body.name;
-            player.class = req.body.class;
-            player.race = req.body.race;
-            player.role = req.body.role;
+            player.name = req.body._name;
+            player.class = req.body._class;
+            player.race = req.body._race;
+            player.role = req.body._role;
             player.save()
                 .then(player => {
                     const filteredPlayer = _.omit(player.toObject(), ['discordId'])
