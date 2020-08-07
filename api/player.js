@@ -1,6 +1,6 @@
 const createError = require('http-errors');
 const _ = require('lodash');
-const { validationResult, body } = require('express-validator/check')
+const { validationResult, body } = require('express-validator')
 
 const Player = require('../models/Player');
 
@@ -8,34 +8,32 @@ exports.validate = (method) => {
     switch (method) {
         case 'postPlayerProfile': {
             return [
-                body('name').exists(),
-                body('class').exists().isIn(['Druid', 'Hunter', 'Mage', 'Paladin', 'Priest', 'Rogue', 'Warlock', 'Warrior']),
-                body('race').exists().isIn(['Dwarf', 'Gnome', 'Human', 'Night Elf']),
-                body('class').exists().isIn(['DPS', 'Heal', 'Tank'])
+                body('name').exists().notEmpty().trim().escape(),
+                body('class').exists().isIn(['Druid', 'Hunter', 'Mage', 'Paladin', 'Priest', 'Rogue', 'Warlock', 'Warrior']).trim().escape(),
+                body('race').exists().isIn(['Dwarf', 'Gnome', 'Human', 'Night Elf']).trim().escape(),
+                body('class').exists().isIn(['DPS', 'Heal', 'Tank']).trim().escape()
             ]
         };
         case 'postSaveWishlist': {
             return [
-                body()
-                    .custom((value, { req }) => {
-                        let isHunter = false;
-                        Player.findById(req.user._id)
-                            .then(player => {
-                                if (player.class === 'Hunter') {
-                                    isHunter = true;
-                                }
-                            })
-                        const p = Promise.all([
-                            checkBracket(value.bracket1, false),
-                            checkBracket(value.bracket2, false),
-                            checkBracket(value.bracket3, false),
-                            checkBracket(value.bracket4, false),
-                            checkBracket(value.bracketless, true)
-                        ])
-                        return p.then(result => {
-                            console.log(result);
-                        })
+                body().custom((value, { req }) => {
+                    let isHunter = false;
+                    Player.findById(req.user._id).then(player => {
+                        if (player.class === 'Hunter') {
+                            isHunter = true;
+                        }
                     })
+                    const p = Promise.all([
+                        checkBracket(value.bracket1, false),
+                        checkBracket(value.bracket2, false),
+                        checkBracket(value.bracket3, false),
+                        checkBracket(value.bracket4, false),
+                        checkBracket(value.bracketless, true)
+                    ])
+                    return p.then(result => {
+                        console.log(result);
+                    })
+                })
             ]
         };
     }
