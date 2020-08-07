@@ -14,7 +14,7 @@ class UserNavbar extends React.Component {
         return (
             
             <Navbar collapseOnSelect sticky="top" bg="dark" variant="dark" expand="lg">
-                <div class="nav_wrapper">
+                <div class="d-flex nav_wrapper justify-content-center align-items-center">
                     <Image src={require("./assets/logo128x64.png")} />
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <Navbar.Brand as={Link} to="/profile">{(this.props.overmind.state.player.name != null) ? this.props.overmind.state.player.name : 'Profile'}</Navbar.Brand>
