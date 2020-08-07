@@ -16,9 +16,9 @@ import Alert from 'react-bootstrap/Alert';
 
 const initialFormData = Object.freeze({
     _name: "",
-    _race: "Druid",
-    _class: "Dwarf",
-    _role: "DPS"
+    _race: "",
+    _class: "",
+    _role: ""
 });
 
 function PlayerProfileForm() {
@@ -47,6 +47,7 @@ function PlayerProfileForm() {
                 <Form.Group controlId="profile.class">
                     <Form.Label>Select class:</Form.Label>
                     <Form.Control as="select" name="_class" onChange={handleChange}>
+                        <option>select class..</option>
                         <option value="Druid">Druid</option>
                         <option value="Hunter">Hunter</option>
                         <option value="Mage">Mage</option>
@@ -60,6 +61,7 @@ function PlayerProfileForm() {
                 <Form.Group>
                     <Form.Label>Select your role:</Form.Label>
                     <Form.Control as="select" name="_race" onChange={handleChange}>
+                        <option>select race..</option>
                         <option value="Dwarf">Dwarf</option>
                         <option value="Gnome">Gnome</option>
                         <option value="Human">Human</option>
@@ -69,6 +71,7 @@ function PlayerProfileForm() {
                 <Form.Group>
                     <Form.Label>Select your role:</Form.Label>
                     <Form.Control as="select" name="_role" onChange={handleChange}>
+                        <option>select role..</option>
                         <option value="DPS">DPS</option>
                         <option value="Heal">Heal</option>
                         <option value="Tank">Tank</option>
