@@ -16,6 +16,7 @@ const ItemContainerDrop = styled.div`
     border-radius: 4px;
     margin: unset;
     background-color: #d9d9d9;
+    padding: 3px;
     width: 300px;
     height: 36px;
     box-shadow: 2px 2px 4px 0px rgba(25,25,25,1);
