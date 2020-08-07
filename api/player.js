@@ -19,12 +19,15 @@ exports.validate = (method) => {
                 body().custom((value, { req }) => {
                     console.log(req.user)
                     let isHunter = false;
-                    Player.findById(req.user._id).then(player => {
-                        if (player.class === 'Hunter') {
-                            isHunter = true;
-                        }
-                    })
-                    console.log("here 2")
+                    // Player.findById(req.user._id).then(player => {
+                    //     if (player.class === 'Hunter') {
+                    //         isHunter = true;
+                    //     }
+                    // })
+                    if(req.user.class === 'Hunter') {
+                        isHunter = true;
+                    }
+                    console.log(isHunter)
                     const p = Promise.all([
                         checkBracket(value.bracket1, false),
                         checkBracket(value.bracket2, false),
