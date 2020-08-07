@@ -90,7 +90,7 @@ const Bracket = (props) => {
     const allocPoints = state.wishlist[bracketId]['points'];
 
     return (
-        <div className={"bracket"} id={'bracket-' + props.id}>
+        <div className={"bracket justify-content-center"} id={'bracket-' + props.id}>
             <div>
                 <>Remaining Allocation Points: {allocPoints}</>
             </div>
