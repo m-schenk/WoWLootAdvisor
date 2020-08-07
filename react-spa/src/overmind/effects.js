@@ -3,7 +3,7 @@ import axios from 'axios';
 const cache = {};
 
 const getBracketItemIdValueOrNull = (state, bracket, slot) => {
-    if (state.wishlist[bracket][slot].item) {
+    if (state.wishlist[bracket][slot].item !== null) {
         return state.wishlist[bracket][slot].item.id;
     } else {
         return null;
