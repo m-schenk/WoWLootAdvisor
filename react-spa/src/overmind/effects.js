@@ -1,12 +1,18 @@
 import axios from 'axios';
 
+import axios from 'axios'
+
+const instance = axios.create({
+    withCredentials: true,
+    baseURL: 'http://raegae.maarten.ch:3000/api/player'
+})
+
 const cache = {};
 
 export const api = {
     getPlayerProfile(state) {
-        axios.get('http://raegae.maarten.ch:3000/api/player/getPlayerProfile', {
-            withCredentials: true
-        }).then((response) => {
+        instance.get('/getPlayerProfile'
+        ).then((response) => {
             console.log(response)
             state.player._id = response.data.player._id;
             state.player.isComplete = response.data.isComplete;
@@ -36,43 +42,40 @@ export const api = {
         })
     },
     sendProfile(state, data) {
-        console.log(data)
-        axios.post('http://raegae.maarten.ch:3000/api/player/postPlayerProfile', {
-            withCredentials: true,
+        instance.post('/postPlayerProfile', {
             name: data.name,
             race: data.race,
             class: data.class,
             role: data.role
+        }).then((response) => {
+            state.player._id = response.data.player._id;
+            state.player.isComplete = response.data.isComplete;
+            if (response.data.player.name) {
+                state.player.name = response.data.player.name
+            }
+            if (response.data.player.class) {
+                state.player.class = response.data.player.class
+            }
+            if (response.data.player.race) {
+                state.player.race = response.data.player.race
+            }
+            if (response.data.player.role) {
+                state.player.role = response.data.player.role
+            }
+            if (response.data.player.aq_attendance) {
+                state.player.aq_attendance = response.data.player.aq_attendance
+            }
+            if (response.data.player.naxx_attendance) {
+                state.player.naxx_attendance = response.data.player.naxx_attendance
+            }
+            if (response.data.player.permissions) {
+                state.player.permissions = response.data.player.permissions
+            }
+        }).catch(error => {
+            console.log(error);
         })
-            .then((response) => {
-                state.player._id = response.data.player._id;
-                state.player.isComplete = response.data.isComplete;
-                if (response.data.player.name) {
-                    state.player.name = response.data.player.name
-                }
-                if (response.data.player.class) {
-                    state.player.class = response.data.player.class
-                }
-                if (response.data.player.race) {
-                    state.player.race = response.data.player.race
-                }
-                if (response.data.player.role) {
-                    state.player.role = response.data.player.role
-                }
-                if (response.data.player.aq_attendance) {
-                    state.player.aq_attendance = response.data.player.aq_attendance
-                }
-                if (response.data.player.naxx_attendance) {
-                    state.player.naxx_attendance = response.data.player.naxx_attendance
-                }
-                if (response.data.player.permissions) {
-                    state.player.permissions = response.data.player.permissions
-                }
-            }).catch(error => {
-                console.log(error);
-            })
     },
-    async sendWishlist(state) {
+    sendWishlist(state) {
         const wishlist = {
             bracket1:
                 [state.wishlist['bracket-1']['slot-1'].item, state.wishlist['bracket-1']['slot-2'].item,
@@ -96,8 +99,7 @@ export const api = {
                 state.wishlist['bracket-4']['slot-3'].item, state.wishlist['bracket-4']['slot-4'].item,
                 state.wishlist['bracket-4']['slot-5'].item, state.wishlist['bracket-4']['slot-6'].item,]
         }
-        await axios.post('http://raegae.maarten.ch:3000/api/player/saveWishlist', {
-            withCredentials: true,
+        instance.post('http://raegae.maarten.ch:3000/api/player/saveWishlist', {
             wishlist: wishlist
         }).then((response) => {
             console.log(response);
