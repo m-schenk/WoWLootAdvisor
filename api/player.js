@@ -26,8 +26,7 @@ exports.validate = (method) => {
                     checkWishlistItems(wishlist, isHunter)
                     .then(() => {
                         return
-                    })
-                    .catch((err) => {
+                    }, (err) => {
                         return new Error(err)
                     })
                 })
