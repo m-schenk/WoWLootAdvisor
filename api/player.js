@@ -32,10 +32,10 @@ exports.getPlayerProfile = (req, res, next) => {
     Player.findById(req.user._id)
         .then(player => {
             let complete = true;
-            if (state.player.name === null) { complete = false; }
-            if (state.player.class === null) { complete = false; }
-            if (state.player.race === null) { complete = false; }
-            if (state.player.role === null) { complete = false; }
+            if (!player.name) { complete = false; }
+            if (!player.class) { complete = false; }
+            if (!player.race) { complete = false; }
+            if (!player.role) { complete = false; }
             const filteredPlayer = _.omit(player.toObject(), ['discordId'])
             res.status(200);
             res.set({ 'Content-Type': 'text/json' });
