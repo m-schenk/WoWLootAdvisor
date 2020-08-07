@@ -36,12 +36,12 @@ passport.use(new DiscordStrategy({
                             cb(null, filteredPlayer); //should only contain _id now
                         })
                         .catch(err => {
-                            cb(err, null);
+                            cb(new createError(500, 'Failed to save player to database (strategies/discordStrategies), error text: ' + err), null);
                         })
                 }
             })
             .catch(err => {
-                cb(err, null);
+                cb(new createError(500, 'Failed to fetch player from database (strategies/discordStrategies), error text: ' + err), null);
             })
     } else {
         cb(new createError(403, 'Access denied, does not belong to guild!'), null);
