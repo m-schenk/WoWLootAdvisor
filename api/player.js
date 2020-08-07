@@ -17,7 +17,7 @@ exports.validate = (method) => {
         }
         case 'postSaveWishlist': {
             return [
-                body().custom((wishlist, { req }) => {
+                body().trim().escape().custom((wishlist, { req }) => {
                     // hunter rule
                     let isHunter = false;
                     if (req.user.class === 'Hunter') {
@@ -26,7 +26,7 @@ exports.validate = (method) => {
 
                     //checkWishlistItems() + uniqueness
                     checkWishlistItems(wishlist, isHunter);
-                    
+
                     //checkAllocatedBracket()
                     //checkBracketless()
 
@@ -173,12 +173,17 @@ exports.postSaveWishlist = (req, res, next) => {
 }
 
 const checkWishlistItems = (wishlist, hunter) => {
-    let itemIds = []
-    //get all item id's from ever bracket
-    wishlist.bracket1.forEach(item =>
-        console.log(item)
-    )
-    
+    return new Promise((resolve, reject) => {
+        let itemIds = []
+        //get all item id's from ever bracket
+        wishlist.bracket1.forEach(item => {
+            
+            if (item) {
+                itemIds.push(item.id)
+            }
+        });
+        console.log(itemIds);
+    })
     //call unique or something compare lengths?
 }
 
