@@ -171,7 +171,7 @@ const checkWishlistItems = (wishlist, hunter) => {
         let itemIds = []
         //get all item id's from ever bracket
 
-        Object().keys(wishlist).forEach(bracket => {
+        Object.keys(wishlist).forEach(bracket => {
             bracket.forEach(item => {
                 if (item) {
                     itemIds.push(item.id)
