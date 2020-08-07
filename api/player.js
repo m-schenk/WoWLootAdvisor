@@ -170,12 +170,13 @@ const checkWishlistItems = (wishlist, hunter) => {
     return new Promise((resolve, reject) => {
         let itemIds = []
         //get all item id's from ever bracket
-        wishlist.bracket1.forEach(item => {
-            
-            if (item) {
-                itemIds.push(item.id)
-            }
-        });
+        wishlist.forEach(bracket => {
+            bracket.forEach(item => {
+                if (item) {
+                    itemIds.push(item.id)
+                }
+            });
+        })
         console.log(itemIds);
     })
     //call unique or something compare lengths?
