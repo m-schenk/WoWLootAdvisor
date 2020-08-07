@@ -90,11 +90,11 @@ const Bracket = (props) => {
     const allocPoints = state.wishlist[bracketId]['points'];
 
     return (
-        <div className={"bracket justify-content-center"} id={'bracket-' + props.id}>
+        <div className={"bracket"} id={'bracket-' + props.id}>
             <div>
                 <>Remaining Allocation Points: {allocPoints}</>
             </div>
-            <Col>
+            <Col className="justify-content-center">
                 <Row className="d-flex">
                     <ItemDroppable bracketId={bracketId} slotIdInt={1} />
                     <ItemDroppable bracketId={bracketId} slotIdInt={2} />
