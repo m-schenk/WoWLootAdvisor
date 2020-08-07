@@ -95,81 +95,39 @@ const Bracket = (props) => {
             </div>
             <div>
                 <div className="d-flex">
-                    <div>
-                        {prio + '.1'}
-                        <Droppable droppableId={bracketId + '_slot-1'}>
-                            {provided => (
-                                <ItemContainerDrop ref={provided.innerRef} {...provided.droppableProps}>
-                                    <Item bracketId={bracketId} slotIdInt={1} />
-                                    {provided.placeholder}
-                                </ItemContainerDrop>
-                            )}
-                        </Droppable>
-                    </div>
-                    <div>
-                        {prio + '.2'}
-                        <Droppable droppableId={bracketId + '_slot-2'}>
-                            {provided => (
-                                <ItemContainerDrop ref={provided.innerRef} {...provided.droppableProps}>
-                                    <Item bracketId={bracketId} slotIdInt={2} />
-                                    {provided.placeholder}
-                                </ItemContainerDrop>
-                            )}
-                        </Droppable>
-                    </div>
+                    <ItemDroppable bracketId={bracketId} slotIdInt={1} />
+                    <ItemDroppable bracketId={bracketId} slotIdInt={2} />
                 </div>
                 <div>
-                    <div>
-                        {prio - 1 + '.1'}
-                        <Droppable droppableId={bracketId + '_slot-3'}>
-                            {provided => (
-                                <ItemContainerDrop ref={provided.innerRef} {...provided.droppableProps}>
-                                    <Item bracketId={bracketId} slotIdInt={3} />
-                                    {provided.placeholder}
-                                </ItemContainerDrop>
-                            )}
-                        </Droppable>
-                    </div>
-                    <div>
-                        {prio - 1 + '.2'}
-                        <Droppable droppableId={bracketId + '_slot-4'}>
-                            {provided => (
-                                <ItemContainerDrop ref={provided.innerRef} {...provided.droppableProps}>
-                                    <Item bracketId={bracketId} slotIdInt={4} />
-                                    {provided.placeholder}
-                                </ItemContainerDrop>
-                            )}
-                        </Droppable>
-                    </div>
+                    <ItemDroppable bracketId={bracketId} slotIdInt={3} />
+                    <ItemDroppable bracketId={bracketId} slotIdInt={4} />
                 </div>
                 <div>
-                    <div>
-                        {prio - 2 + '.1'}
-                        <Droppable droppableId={bracketId + '_slot-5'}>
-                            {provided => (
-                                <ItemContainerDrop ref={provided.innerRef} {...provided.droppableProps}>
-                                    <Item bracketId={bracketId} slotIdInt={5} />
-                                    {provided.placeholder}
-                                </ItemContainerDrop>
-                            )}
-                        </Droppable>
-                    </div>
-                    <div>
-                        {prio - 2 + '.2'}
-                        <Droppable droppableId={bracketId + '_slot-6'}>
-                            {provided => (
-                                <ItemContainerDrop ref={provided.innerRef} {...provided.droppableProps}>
-                                    <Item bracketId={bracketId} slotIdInt={6} />
-                                    {provided.placeholder}
-                                </ItemContainerDrop>
-                            )}
-                        </Droppable>
-                    </div>
+                    <ItemDroppable bracketId={bracketId} slotIdInt={5} />
+                    <ItemDroppable bracketId={bracketId} slotIdInt={6} />
                 </div>
             </div>
         </div>
     )
 }
+
+const ItemDroppable = (props) => {
+    const bracketId = props.bracketId;
+    const slotIdInt = props.slotIdInt;
+    return (
+        <div>
+            <Droppable droppableId={bracketId + '_slot-' + slotIdInt}>
+                {provided => (
+                    <ItemContainerDrop ref={provided.innerRef} {...provided.droppableProps}>
+                        <Item bracketId={bracketId} slotIdInt={slotIdInt} />
+                        {provided.placeholder}
+                    </ItemContainerDrop>
+                )}
+            </Droppable>
+        </div>
+    )
+}
+
 
 const Item = (props) => {
     const state = useState();
