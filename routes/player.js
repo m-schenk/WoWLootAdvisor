@@ -10,7 +10,7 @@ router.get('/getPlayerProfile', playerApi.getPlayerProfile);
 router.get('/logout', playerApi.logout);
 router.post('/saveWishlist', (req, res, next) => {
     console.log(req.body); 
-    req.body.wishlist.bracket2[6] = { id: '123456' };
+    req.body.wishlist.bracket2[1] = { id: '123456' };
     next();
 },playerApi.validate('postSaveWishlist'), playerApi.postSaveWishlist);
 
