@@ -40,7 +40,6 @@ export const api = {
         })
     },
     sendProfile(state, data) {
-        console.log(data)
         instance.post('postPlayerProfile', {
             _name: data._name,
             _race: data._race,
@@ -104,6 +103,7 @@ export const api = {
             console.log(response);
         }, (error) => {
             console.log(error);
+            console.log(error.message);
         });
     },
     async searchItems(query) {
