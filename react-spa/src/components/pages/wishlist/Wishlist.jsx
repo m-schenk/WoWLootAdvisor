@@ -126,7 +126,7 @@ const ItemDroppable = (props) => {
         <div>
             <Droppable droppableId={bracketId + '_slot-' + slotIdInt}>
                 {provided => (
-                    <ItemContainerDrop >
+                    <ItemContainerDrop className="justify-content-center align-items-center">
                         <InvisibleSmallerDropLocation ref={provided.innerRef} {...provided.droppableProps}>
                             <Item bracketId={bracketId} slotIdInt={slotIdInt} />
                             {provided.placeholder}
