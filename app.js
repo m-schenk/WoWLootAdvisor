@@ -18,7 +18,7 @@ const playerRouter = require('./routes/player');
 const itemsRouter = require('./routes/items');
 
 
-const whitelist = [process.env.ADDR, 'http://raegae.maarten.ch:3000/']
+const whitelist = [process.env.ADDR, 'http://raegae.maarten.ch:3000']
 const corsOptions = {
   origin: function(origin, callback) {
     if (whitelist.indexOf(origin) !== -1) {
