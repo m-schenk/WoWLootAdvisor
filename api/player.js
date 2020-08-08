@@ -151,7 +151,7 @@ const checkWishlistItems = (wishlist, hunter) => {
         const maxAllocationPoints = hunter ? 2 : 3;
         const itemIds = [];
 
-        const weapons = ["Sword", "Mace", "Polearm", "Two-Hand, Sword", "Two-Hand, Axe", "Dagger", "Axt", "Two-Hand, Mace", "Staff", "Fist Weapon"];
+        const weapon = ["Sword", "Mace", "Polearm", "Two-Hand, Sword", "Two-Hand, Axe", "Dagger", "Axt", "Two-Hand, Mace", "Staff", "Fist Weapon"];
         const ranged = ["Bow", "Crossbow", "Gun", "Relic", "Wand"];
         const offhand = ["Shield", "Offhand"];
 
@@ -171,7 +171,7 @@ const checkWishlistItems = (wishlist, hunter) => {
             if (wishlist[bracket] !== null) {
                 wishlist[bracket].forEach(item => {
                     if(nextMustBeNull && item !== null) {
-                        reject('bracket invalid, after reserved item, slot must be null');
+                        reject('bracket invalid, after reserved item, slot must be empty');
                     } else {
                         nextMustBeNull = false;
                     }
@@ -183,7 +183,7 @@ const checkWishlistItems = (wishlist, hunter) => {
                             nextMustBeNull = true;
                         }
 
-                        const itemType = weapons.includes(item.itemType) ? "Weapon" : ranged.includes(itemTypes) ? "Ranged" : offhand.includes(item.itemTyped) ? "Offhand" : item.itemType;
+                        const itemType = weapon.includes(item.itemType) ? "Weapon" : ranged.includes(itemTypes) ? "Ranged" : offhand.includes(item.itemTyped) ? "Offhand" : item.itemType;
                         if (itemTypes.has(itemType)) {
                             reject('bracket has duplicate item type');
                         }
@@ -199,8 +199,8 @@ const checkWishlistItems = (wishlist, hunter) => {
                         reject('bracket has more than 6 items');
                     }
                 });
+                bracketsDone++;
             }
-            bracketsDone++;
         })
 
         // check if all items are unique
