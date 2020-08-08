@@ -19,7 +19,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 class MainContent extends React.Component {
 
-    onDragEnd = (result) => {
+    onDragEnd = async(result) => {
         await this.props.overmind.actions.dragHandler(result).then(event => {
             if(window.$WowheadPower) {
                 window.$WowheadPower.refreshLinks();
