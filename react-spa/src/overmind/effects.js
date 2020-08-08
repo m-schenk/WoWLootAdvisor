@@ -99,9 +99,8 @@ export const api = {
         }
         instance.post('saveWishlist', {
             wishlist: wishlist
-        }).then((response) => {
-            console.log(response.error);
-        }, (error) => {
+        }).then((response, error) => {
+            console.log(response.errors);
             console.log(error)
         });
     },
