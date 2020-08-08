@@ -59,7 +59,7 @@ function PlayerProfileForm() {
                     </Form.Control>
                 </Form.Group>
                 <Form.Group>
-                    <Form.Label>Select your role:</Form.Label>
+                    <Form.Label>Select your race:</Form.Label>
                     <Form.Control as="select" name="_race" onChange={handleChange}>
                         <option>select race..</option>
                         <option value="Dwarf">Dwarf</option>
