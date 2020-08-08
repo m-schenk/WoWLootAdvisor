@@ -3,8 +3,8 @@ const router = require('express').Router();
 
 router.get('/login', passport.authenticate('discord'));
 router.get('/redirect', passport.authenticate('discord', {
-    failureRedirect: 'http://raegae.maarten.ch:3000/forbidden',
-    successRedirect: 'http://raegae.maarten.ch:3000/profile'
+    failureRedirect: process.env.ADDR + 'forbidden',
+    successRedirect: process.env.ADDR + 'profile'
 }), (req, res) => {
     res.send(req.user);
 });
