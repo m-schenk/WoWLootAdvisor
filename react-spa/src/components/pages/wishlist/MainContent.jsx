@@ -24,9 +24,11 @@ class MainContent extends React.Component {
     render() {
         if (!this.props.overmind.state.player.isComplete) {
             return (
-                <Alert variant={'danger'}>
-                    Your profile is not loaded, please check the profile tab before you start creating a wishlist!
-                </Alert>
+                <Container className="justify-content-center" id="main-content">
+                    <Alert variant={'danger'}>
+                        Your profile is not loaded, please check the profile tab before you start creating a wishlist!
+                    </Alert>
+                </Container>
             )
         } else {
             return (
@@ -47,4 +49,4 @@ class MainContent extends React.Component {
     }
 }
 
-    export default connect(MainContent);
+export default connect(MainContent);
