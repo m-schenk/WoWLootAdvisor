@@ -105,6 +105,8 @@ export const api = {
             } else {
                 console.log(response.data.errors);
             }
+        }).catch(err => {
+            console.log(err.data.errors);
         });
     },
     async searchItems(query) {
