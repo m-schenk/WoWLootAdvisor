@@ -124,9 +124,9 @@ app.use(function (err, req, res, next) {
     res.locals.error = req.app.get('env') === 'development' ? err : {};
 
     if (err.statusCode === 403) {
-        res.redirect(process.env.ADDR + 'forbbiden');
+        res.redirect(process.env.ADDR + '/forbbiden');
     } else if (err.statusCode === 404) {
-        res.redirect(process.env.ADDR + 'pagenotfound');
+        res.redirect(process.env.ADDR + '/pagenotfound');
     } else {
         // render the error page
         res.status(err.statusCode || 500).send({ error: err.message });

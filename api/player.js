@@ -104,7 +104,7 @@ exports.logout = (req, res, next) => {
         if (err) {
             next(createError(500, err));
         }
-        res.redirect(process.env.ADDR + 'login');
+        res.redirect(process.env.ADDR + '/login');
     })
 }
 
