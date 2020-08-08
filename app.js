@@ -17,10 +17,17 @@ const discordRouter = require('./routes/discord')
 const playerRouter = require('./routes/player');
 const itemsRouter = require('./routes/items');
 
-const corsOptions = {
-    origin: 'Access-Control-Allow-Origin: '+ process.env.ADDR
-}
 
+const whitelist = [process.env.ADDR, 'http://raegae.maarten.ch:3000/']
+const corsOptions = {
+  origin: function(origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  }
+}
 const app = express();
 app.options('*', cors(corsOptions));
 
