@@ -148,25 +148,43 @@ exports.postSaveWishlist = (req, res, next) => {
 
 const checkWishlistItems = (wishlist, hunter) => {
     return new Promise((resolve, reject) => {
-        maxAllocationPoints = hunter ? 2 : 3;
+        const maxAllocationPoints = hunter ? 2 : 3;
         const itemIds = [];
 
         const weapons = ["Sword", "Mace", "Polearm", "Two-Hand, Sword", "Two-Hand, Axe", "Dagger", "Axt", "Two-Hand, Mace", "Staff", "Fist Weapon"];
         const ranged = ["Bow", "Crossbow", "Gun", "Relic", "Wand"];
         const offhand = ["Shield", "Offhand"];
 
+        let bracketsDone = 0;
+        let bracketless = false;
 
         Object.keys(wishlist).forEach(bracket => {
-            let allocationPoints = 0;
+
+            if (bracketsDone > 4 || hunter && bracketsDone > 3) {
+                bracketless = true;
+            }
+
+            let allocationPoints, count = 0;
             let itemTypes = new Set();
-            console.log(wishlist[bracket])
+            let nextMustBeNull = false;
+
             if (wishlist[bracket] !== null) {
                 wishlist[bracket].forEach(item => {
+                    if(nextMustBeNull && item !== null) {
+                        reject('bracket invalid, after reserved item, slot must be null');
+                    } else {
+                        nextMustBeNull = false;
+                    }
+                    count++;
                     if (item) {
                         itemIds.push(item.id);
-                        
+
+                        if (item.itemCategory === 'Reserved') {
+                            nextMustBeNull = true;
+                        }
+
                         const itemType = weapons.includes(item.itemType) ? "Weapon" : ranged.includes(itemTypes) ? "Ranged" : offhand.includes(item.itemTyped) ? "Offhand" : item.itemType;
-                        if(itemTypes.has(itemType)) {
+                        if (itemTypes.has(itemType)) {
                             reject('bracket has duplicate item type');
                         }
                         itemTypes.add(itemType);
@@ -177,8 +195,12 @@ const checkWishlistItems = (wishlist, hunter) => {
                     if (allocationPoints > maxAllocationPoints) {
                         reject('bracket exceeds allocation points');
                     }
+                    if (!bracketless && count > 6) {
+                        reject('bracket has more than 6 items');
+                    }
                 });
             }
+            bracketsDone++;
         })
 
         // check if all items are unique
@@ -190,73 +212,17 @@ const checkWishlistItems = (wishlist, hunter) => {
     })
 }
 
-//validationm helper function
-function checkBracket(bracket, bracketLess) {
-    console.log(bracket)
-    return new Promise((resolve, reject) => {
-        Item.find({
-            'id': {
-                $in: [
-                    ...bracket
-                ]
-            }
-        }).then(items => {
-            console.log(items)
-            let allocationPoints = 0;   // should not exceed 3
-            let itemSlots = 0;          // should not exceed 2
-            let occupiedSlots = 0;      // should not exceed 6
-
-            for (i = 0; i < items.length; i++) {
-                for (j = 0; j < i; j++) {
-                    if (i == j) continue;
-                    if (items[i].itemType == items[j].itemType) {
-                        // console.log(result[i].itemType, '==', result[j].itemType);
-                        reject('Bracket has duplicate item types');
-                    }
-                }
-                if (items[i].id && !bracketLess) {
-                    occupiedSlots++;
-                }
-                if (items[i].itemCategory == 'Reserved' || items[i].itemCategory == 'Limited') {
-                    allocationPoints++;
-                    if (items[i].itemCategory == 'Reserved') {
-                        itemSlots++;
-                        if (itemSlots > 2) {
-                            reject('Maximum amount of reserved items(2) exceeded');
-                        }
-                    }
-                    //   if (allocationPoints > 2 && isHunter) {
-                    //     console.log('HUNTER SHITS');
-                    //     reject('Maximum allocation points(2) exceeded -> hunter class penalty');
-                    //   }
-                    if (allocationPoints > 3) {
-                        reject('Maximum allocation points(3) exceeded');
-                    }
-                }
-                if (occupiedSlots > 6) {
-                    reject('Maximum item slots(6) exceeded')
-                }
-                if (items[i].itemCategory == 'Unlockable') {
-                    reject('Might of the Scourge, Power of the Storm and Splinter of Atiesh are forbidden items');
-                }
-            }
-            resolve('Wishlist is valid!');
-        }).catch(err => {
-            return new Error('Failed to fetch one or more items from the submitted wishlist brackets (routes/wishlist checkBracket()), error text: ' + err);
-        });
-    })
-}
 
 // if item is unlimited
 // dont allow unlockable items (itemCategory == 'Unlockable')
 // no duplicate item types
 // allow only 3 allocation points per bracket
 // reserved items use two items slots
-// check maxiumum bracket size -> 6
+
 
 const getIdsFromBracket = (bracket) => {
     const _bracket = [];
-    if(bracket === 'null') return null;
+    if (bracket === 'null') return null;
     bracket.forEach(item => {
         if (item) {
             _bracket.push(item.id);
