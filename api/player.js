@@ -18,7 +18,6 @@ exports.validate = (method) => {
         case 'postSaveWishlist': {
             return [
                 body('wishlist').custom((wishlist, { req }) => {
-                    console.log('test hello');
                     // hunter rule
                     let isHunter = false;
                     if (req.user.class === 'Hunter') {
@@ -154,7 +153,7 @@ const checkWishlistItems = (wishlist, hunter) => {
 
         Object.keys(wishlist).forEach(bracket => {
             let allocationPoints = 0;
-            if(wishlist[bracket] === null) { return; }
+            if(wishlist[bracket] === null) continue;
             wishlist[bracket].forEach(item => {
                 if (item) {
                     itemIds.push(item.id);
