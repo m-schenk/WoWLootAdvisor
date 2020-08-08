@@ -102,8 +102,7 @@ export const api = {
         }).then((response) => {
             console.log(response);
         }, (error) => {
-            console.log(error);
-            console.log(error.message);
+            console.log(error.error)
         });
     },
     async searchItems(query) {
