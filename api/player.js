@@ -151,6 +151,11 @@ const checkWishlistItems = (wishlist, hunter) => {
         maxAllocationPoints = hunter ? 2 : 3;
         const itemIds = [];
 
+        const weapons = ["Sword", "Mace", "Polearm", "Two-Hand, Sword", "Two-Hand, Axe", "Dagger", "Axt", "Two-Hand, Mace", "Staff", "Fist Weapon"];
+        const ranged = ["Bow", "Crossbow", "Gun", "Relic", "Wand"];
+        const offhand = ["Shield", "Offhand"];
+
+
         Object.keys(wishlist).forEach(bracket => {
             let allocationPoints = 0;
             let itemTypes = new Set();
@@ -160,7 +165,7 @@ const checkWishlistItems = (wishlist, hunter) => {
                     if (item) {
                         itemIds.push(item.id);
                         
-                        const itemType = ["Mace", "Fist Weapon", "Sword"].includes(item.itemType) ? "Weapon" : item.itemType;
+                        const itemType = weapons.includes(item.itemType) ? "Weapon" : ranged.includes(itemTypes) ? "Ranged" : offhand.includes(item.itemTyped) ? "Offhand" : item.itemType;
                         if(itemTypes.has(itemType)) {
                             reject('bracket has duplicate item type');
                         }
