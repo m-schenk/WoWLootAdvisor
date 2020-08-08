@@ -123,9 +123,9 @@ export const dragHandler = async ({ state }, result) => {
 
     //source item is reserved => should only be able to go to front slots and if it goes to front, backslot must be clear
     if ((sourceItem.itemCategory === "Reserved") && (destinationSlotIdInt % 2 !== 1)) {
-        return;
+        return "Reserved items go only in front slots!";
     } else if ((sourceItem.itemCategory === "Reserved") && (state.wishlist[destinationBracketId]['slot-' + (parseInt(destinationSlotIdInt) + 1)].item !== null)) {
-        return;
+        return "Slot behind Reserved items must be empty on drop!";
     }
 
     //destination item is reserved => should only be able to go to front slots and if it goes to front, backslot must be clear

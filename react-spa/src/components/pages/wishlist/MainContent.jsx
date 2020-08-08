@@ -20,10 +20,15 @@ import 'react-toastify/dist/ReactToastify.css';
 class MainContent extends React.Component {
 
     onDragEnd = async(result) => {
-        await this.props.overmind.actions.dragHandler(result).then(event => {
+        await this.props.overmind.actions.dragHandler(result)
+        .then(event => {
             if(window.$WowheadPower) {
                 window.$WowheadPower.refreshLinks();
             }
+            toast(event, {
+                className: "drag-event-response",
+                position: toast.POSITION.TOP_CENTER
+            });
         });
     };
 
@@ -39,8 +44,7 @@ class MainContent extends React.Component {
         } else {
             return (
                 <Container className="justify-content-center" id="main-content">
-                    //inject toasts here
-                    <ToastContainer />
+                    <ToastContainer draggable={false} autoClose={5000} />
                     <DragDropContext onDragEnd={this.onDragEnd}>
                         <Row className="row-centered">
                             <Col className="justify-content-center" sm={8}>
