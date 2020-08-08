@@ -212,14 +212,6 @@ const checkWishlistItems = (wishlist, hunter) => {
     })
 }
 
-
-// if item is unlimited
-// dont allow unlockable items (itemCategory == 'Unlockable')
-// no duplicate item types
-// allow only 3 allocation points per bracket
-// reserved items use two items slots
-
-
 const getIdsFromBracket = (bracket) => {
     const _bracket = [];
     if (bracket === 'null') return null;
