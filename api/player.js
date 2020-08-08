@@ -131,14 +131,14 @@ exports.postSaveWishlist = (req, res, next) => {
                 player.wishlist.bracket4 = getIdsFromBracket(req.body.wishlist.bracket4);
                 player.wishlist.bracketLess = getIdsFromBracket(req.body.wishlist.bracketless);
                 player.save()
-                .then(player => {
-                    res.status(200);
-                    res.set({ 'Content-Type': 'text/json' });
-                    res.json({ wishlist: player.wishlist });
-                    res.end();
-                }).catch(err => {
-                    return next(createError(500, 'Failed to save wishlist in database (api/player postSaveWishlist()), error text: ' + err));
-                })
+                    .then(player => {
+                        res.status(200);
+                        res.set({ 'Content-Type': 'text/json' });
+                        res.json({ wishlist: player.wishlist });
+                        res.end();
+                    }).catch(err => {
+                        return next(createError(500, 'Failed to save wishlist in database (api/player postSaveWishlist()), error text: ' + err));
+                    })
             }
         })
         .catch(err => {
@@ -153,22 +153,23 @@ const checkWishlistItems = (wishlist, hunter) => {
 
         Object.keys(wishlist).forEach(bracket => {
             let allocationPoints = 0;
-            if(wishlist[bracket] === null) continue;
-            wishlist[bracket].forEach(item => {
-                if (item) {
-                    itemIds.push(item.id);
-                    if((item.itemCategory === 'Reserved') || (item.itemCategory === 'Limited'))
-                    allocationPoints++;
-                }
-                if( allocationPoints > maxAllocationPoints) {
-                    reject('bracket exceeds allocation points')
-                }
-            });
+            if (wishlist[bracket] !== null) {
+                wishlist[bracket].forEach(item => {
+                    if (item) {
+                        itemIds.push(item.id);
+                        if ((item.itemCategory === 'Reserved') || (item.itemCategory === 'Limited'))
+                            allocationPoints++;
+                    }
+                    if (allocationPoints > maxAllocationPoints) {
+                        reject('bracket exceeds allocation points')
+                    }
+                });
+            }
         })
 
         // check if all items are unique
         const unique = itemIds.filter((v, i, a) => a.indexOf(v) === i)
-        if(itemIds.length !== unique.length) {
+        if (itemIds.length !== unique.length) {
             reject('wishlist contains duplicates')
         }
 
@@ -243,11 +244,11 @@ function checkBracket(bracket, bracketLess) {
 const getIdsFromBracket = (bracket) => {
     const _bracket = [];
     bracket.forEach(item => {
-        if(item) {
+        if (item) {
             _bracket.push(item.id);
         }
     });
-    if(_bracket.length === 0) {
+    if (_bracket.length === 0) {
         return null;
     } else {
         return _bracket;
