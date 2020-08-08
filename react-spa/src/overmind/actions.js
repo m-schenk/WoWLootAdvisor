@@ -53,8 +53,8 @@ export const dragHandler = pipe( //just for now, will become an effect I guess..
                     (state.wishlist[sourceBracketId][sourceSlotId].item.itemCategory === "Limited")) {
                     state.wishlist[sourceBracketId]['points']++;
                 }
-                console.log(state.wishlist[sourceBracketId][sourceSlotId].item.id)
-                console.log(state.wishlist.filterList.indexOf(state.wishlist[sourceBracketId][sourceSlotId].item.id))
+                //console.log(state.wishlist[sourceBracketId][sourceSlotId].item.id)
+                //console.log(state.wishlist.filterList.indexOf(state.wishlist[sourceBracketId][sourceSlotId].item.id))
                 const sliceid = state.wishlist.filterList.indexOf(state.wishlist[sourceBracketId][sourceSlotId].item.id)
                 state.wishlist.filterList.splice(sliceid, 1)
                 state.wishlist[sourceBracketId][sourceSlotId].item = null;
