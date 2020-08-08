@@ -69,6 +69,10 @@ export const api = {
             if (response.data.player.permissions) {
                 state.player.permissions = response.data.player.permissions
             }
+            if (response.data.wishlist.bracket1) state.profile.debug.bracket1 = response.data.wishlist.bracket1
+            if (response.data.wishlist.bracket2) state.profile.debug.bracket2 = response.data.wishlist.bracket2
+            if (response.data.wishlist.bracket3) state.profile.debug.bracket3 = response.data.wishlist.bracket3
+            if (response.data.wishlist.bracket4) state.profile.debug.bracket4 = response.data.wishlist.bracket4
         }).catch(error => {
             console.log(error);
         })
