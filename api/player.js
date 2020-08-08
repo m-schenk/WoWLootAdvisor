@@ -244,6 +244,7 @@ function checkBracket(bracket, bracketLess) {
 
 const getIdsFromBracket = (bracket) => {
     const _bracket = [];
+    if(bracket === 'null') return null;
     bracket.forEach(item => {
         if (item) {
             _bracket.push(item.id);
