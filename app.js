@@ -18,7 +18,7 @@ const playerRouter = require('./routes/player');
 const itemsRouter = require('./routes/items');
 
 const corsOptions = {
-    origin: 'Access-Control-Allow-Origin: '+ ADDR 
+    origin: 'Access-Control-Allow-Origin: '+ process.env.ADDR
 }
 
 const app = express();
