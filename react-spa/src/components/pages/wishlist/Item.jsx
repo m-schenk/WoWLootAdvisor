@@ -19,7 +19,7 @@ const ItemContainer = styled.div`
 const BASE_URL = "https://classic.wowhead.com/item=";
 
 class Item extends React.Component {
-    componentDidMount() {
+    componentDidUpdate() {
         window.$WowheadPower.refreshLinks();
     }
 

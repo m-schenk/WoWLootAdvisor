@@ -21,7 +21,6 @@ class MainContent extends React.Component {
 
     onDragEnd = (result) => {
         this.props.overmind.actions.dragHandler(result);
-        window.$WowheadPower.refreshLinks();
     };
 
     render() {
