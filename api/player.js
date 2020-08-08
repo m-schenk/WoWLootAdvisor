@@ -153,11 +153,16 @@ const checkWishlistItems = (wishlist, hunter) => {
 
         Object.keys(wishlist).forEach(bracket => {
             let allocationPoints = 0;
+            let itemTypes = new Set();
             console.log(wishlist[bracket])
             if (wishlist[bracket] !== null) {
                 wishlist[bracket].forEach(item => {
                     if (item) {
                         itemIds.push(item.id);
+                        if(itemTypes.has(item.itemType)) {
+                            reject('bracket has duplicate item type');
+                        }
+                        itemTypes.add(item.itemType)
                         if ((item.itemCategory === 'Reserved') || (item.itemCategory === 'Limited'))
                             allocationPoints++;
                     }
@@ -201,7 +206,6 @@ function checkBracket(bracket, bracketLess) {
                         reject('Bracket has duplicate item types');
                     }
                 }
-
                 if (items[i].id && !bracketLess) {
                     occupiedSlots++;
                 }
