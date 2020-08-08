@@ -112,7 +112,7 @@ app.use(function (err, req, res, next) {
 
     if (err.statusCode === 403) {
         res.redirect('http://raegae.maarten.ch:3000/forbbiden')
-    } else if (err.statusCode === 123123) {
+    } else if (err.statusCode === 404) {
         res.redirect('http://raegae.maarten.ch:3000/pagenotfound')
     } else {
         // render the error page
