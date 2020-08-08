@@ -159,14 +159,13 @@ const checkWishlistItems = (wishlist, hunter) => {
                 wishlist[bracket].forEach(item => {
                     if (item) {
                         itemIds.push(item.id);
-                        if(itemTypes.has(item.itemType)) {
+                        
+                        const itemType = ["Mace", "Fist Weapon", "Sword"].includes(item.itemType) ? "Weapon" : item.itemType;
+                        if(itemTypes.has(itemType)) {
                             reject('bracket has duplicate item type');
                         }
-                        if(['Mace', 'Fist Weapon', 'Sword'].includes(item.itemType)) {
-                            itemTypes.add('Weapon')
-                        } else {
-                            itemTypes.add(item.itemType)
-                        }
+                        itemTypes.add(itemType);
+
                         if ((item.itemCategory === 'Reserved') || (item.itemCategory === 'Limited'))
                             allocationPoints++;
                     }
