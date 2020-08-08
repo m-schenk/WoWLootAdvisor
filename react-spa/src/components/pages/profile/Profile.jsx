@@ -171,7 +171,7 @@ class Profile extends React.Component {
                                         </Row>
                                         <Row>
                                             <Col md={2}><p>(remove $dev_bracket3)</p></Col>
-                                            <Col md={10}>{this.props.overmind.state.player.debug.bracket3 && this.props.overmind.state.player.debug.bracket3.toString(}</Col>
+                                            <Col md={10}>{this.props.overmind.state.player.debug.bracket3 && this.props.overmind.state.player.debug.bracket3.toString()}</Col>
                                         </Row>
                                         <Row>
                                             <Col md={2}><p>(remove $dev_bracket4)</p></Col>
