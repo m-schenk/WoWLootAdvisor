@@ -153,6 +153,7 @@ const checkWishlistItems = (wishlist, hunter) => {
 
         Object.keys(wishlist).forEach(bracket => {
             let allocationPoints = 0;
+            console.log(wishlist[bracket])
             if (wishlist[bracket] !== null) {
                 wishlist[bracket].forEach(item => {
                     if (item) {
