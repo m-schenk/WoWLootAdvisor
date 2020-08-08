@@ -153,8 +153,11 @@ export const dragHandler = pipe( //just for now, will become an effect I guess..
         if (((sourceItem.itemCategory === "Reserved") || (sourceItem.itemCategory === "Limited")) && (sourceBracketId === null)) {
             if (state.wishlist[destinationBracketId]['points'] === 0) {
                 return;
+            } else if((destinationItem !== null) && ((destinationItem.itemCategory === "Reserved") || (destinationItem.itemCategory === "Limited"))) {
+                return;
+            } else {
+                state.wishlist[destinationBracketId]['points']--;
             }
-            state.wishlist[destinationBracketId]['points']--;
         }
 
         /* swap reserved or limited destination item with empty slot or unlimited source item from 
@@ -188,3 +191,5 @@ export const dragHandler = pipe( //just for now, will become an effect I guess..
         }
     }),
 )
+
+// buggy case:  swap limited/reserved from live search with limited/reserved inside bracket (lose 1 allo point 4 ever)
