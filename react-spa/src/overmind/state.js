@@ -12,10 +12,10 @@ export const state = {
         loaded: false,
         isComplete: null,
         debug: {
-            bracket1: null,
-            bracket2: null,
-            bracket3: null,
-            bracket4: null,
+            bracket1: [],
+            bracket2: [],
+            bracket3: [],
+            bracket4: [],
         }
     },
     wishlist: {
