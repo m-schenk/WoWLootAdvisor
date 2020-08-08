@@ -116,8 +116,8 @@ app.use(function (err, req, res, next) {
         res.redirect('http://raegae.maarten.ch:3000/pagenotfound')
     } else {
         // render the error page
-        res.status(err.statusCode || 500);
-        res.render('error');
+        res.status(err.statusCode || 500).send({ error: err.message });
+        //res.render('error');
     }
 });
 
