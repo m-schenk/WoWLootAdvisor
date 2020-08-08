@@ -2,6 +2,7 @@ const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
+const cors = require('cors');
 
 const session = require('express-session');
 const passport = require('passport')
@@ -16,7 +17,12 @@ const discordRouter = require('./routes/discord')
 const playerRouter = require('./routes/player');
 const itemsRouter = require('./routes/items');
 
+const corsOptions = {
+    origin: 'Access-Control-Allow-Origin: '+ ADDR 
+}
+
 const app = express();
+app.options('*', cors(corsOptions));
 
 // print mode Production or Dev
 console.log(process.env.NODE_ENV);
