@@ -119,7 +119,7 @@ exports.postSaveWishlist = (req, res, next) => {
     }
     Player.findById(req.user._id)
         .then(player => {
-            if (player.wishlist.locked) {
+            if ((player.wishlist !== null) && (player.wishlist.locked)) {
                 res.status(200);
                 res.set({ 'Content-Type': 'text/json' });
                 res.json({ wishlist: player.wishlist });
