@@ -163,19 +163,19 @@ class Profile extends React.Component {
                                         </Row>
                                         <Row>
                                             <Col md={2}><p>(remove $dev_bracket1)</p></Col>
-                                            <Col md={10}>{this.props.overmind.state.player.debug.bracket1}</Col>
+                                            <Col md={10}>{this.props.overmind.state.player.debug.bracket1.values()}</Col>
                                         </Row>
                                         <Row>
                                             <Col md={2}><p>(remove $dev_bracket2)</p></Col>
-                                            <Col md={10}>{this.props.overmind.state.player.debug.bracket2}</Col>
+                                            <Col md={10}>{this.props.overmind.state.player.debug.bracket2.values()}</Col>
                                         </Row>
                                         <Row>
                                             <Col md={2}><p>(remove $dev_bracket3)</p></Col>
-                                            <Col md={10}>{this.props.overmind.state.player.debug.bracket3}</Col>
+                                            <Col md={10}>{this.props.overmind.state.player.debug.bracket3.values()}</Col>
                                         </Row>
                                         <Row>
                                             <Col md={2}><p>(remove $dev_bracket4)</p></Col>
-                                            <Col md={10}>{this.props.overmind.state.player.debug.bracket4}</Col>
+                                            <Col md={10}>{this.props.overmind.state.player.debug.bracket4.values()}</Col>
                                         </Row>
                                     </Card.Text>
                                 </Card.Body>
