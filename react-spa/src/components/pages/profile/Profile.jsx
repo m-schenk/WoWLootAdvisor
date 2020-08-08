@@ -163,19 +163,19 @@ class Profile extends React.Component {
                                         </Row>
                                         <Row>
                                             <Col md={2}><p>(remove $dev_bracket1)</p></Col>
-                                            <Col md={10}>{this.props.overmind.state.player.debug.bracket1 && this.props.overmind.state.player.debug.bracket1.values()}</Col>
+                                            <Col md={10}>{this.props.overmind.state.player.debug.bracket1 && this.props.overmind.state.player.debug.bracket1.toString();}</Col>
                                         </Row>
                                         <Row>
                                             <Col md={2}><p>(remove $dev_bracket2)</p></Col>
-                                            <Col md={10}>{this.props.overmind.state.player.debug.bracket2 && this.props.overmind.state.player.debug.bracket2.values()}</Col>
+                                            <Col md={10}>{this.props.overmind.state.player.debug.bracket2 && this.props.overmind.state.player.debug.bracket2.toString();}</Col>
                                         </Row>
                                         <Row>
                                             <Col md={2}><p>(remove $dev_bracket3)</p></Col>
-                                            <Col md={10}>{this.props.overmind.state.player.debug.bracket3 && this.props.overmind.state.player.debug.bracket3.values()}</Col>
+                                            <Col md={10}>{this.props.overmind.state.player.debug.bracket3 && this.props.overmind.state.player.debug.bracket3.toString();}</Col>
                                         </Row>
                                         <Row>
                                             <Col md={2}><p>(remove $dev_bracket4)</p></Col>
-                                            <Col md={10}>{this.props.overmind.state.player.debug.bracket4 && this.props.overmind.state.player.debug.bracket4.values()}</Col>
+                                            <Col md={10}>{this.props.overmind.state.player.debug.bracket4 && this.props.overmind.state.player.debug.bracket4.toString();}</Col>
                                         </Row>
                                     </Card.Text>
                                 </Card.Body>
