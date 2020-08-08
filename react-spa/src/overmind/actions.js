@@ -154,6 +154,7 @@ export const dragHandler = pipe( //just for now, will become an effect I guess..
             if (state.wishlist[destinationBracketId]['points'] === 0) {
                 return;
             } else if((destinationItem !== null) && ((destinationItem.itemCategory === "Reserved") || (destinationItem.itemCategory === "Limited"))) {
+                // was buggy case:  swap limited/reserved from live search with limited/reserved inside bracket (lose 1 allo point 4 ever)
                 return;
             } else {
                 state.wishlist[destinationBracketId]['points']--;
@@ -191,5 +192,3 @@ export const dragHandler = pipe( //just for now, will become an effect I guess..
         }
     }),
 )
-
-// buggy case:  swap limited/reserved from live search with limited/reserved inside bracket (lose 1 allo point 4 ever)
