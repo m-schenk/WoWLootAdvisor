@@ -162,7 +162,7 @@ const checkWishlistItems = (wishlist, hunter) => {
                             allocationPoints++;
                     }
                     if (allocationPoints > maxAllocationPoints) {
-                        reject('bracket exceeds allocation points')
+                        reject('bracket exceeds allocation points');
                     }
                 });
             }
@@ -171,9 +171,9 @@ const checkWishlistItems = (wishlist, hunter) => {
         // check if all items are unique
         const unique = itemIds.filter((v, i, a) => a.indexOf(v) === i)
         if (itemIds.length !== unique.length) {
-            reject('wishlist contains duplicates')
+            reject('wishlist contains duplicates');
         }
-
+        resolve('wishlist is valid');
     })
 }
 
