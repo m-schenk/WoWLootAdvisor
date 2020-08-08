@@ -19,6 +19,10 @@ const ItemContainer = styled.div`
 const BASE_URL = "https://classic.wowhead.com/item=";
 
 class Item extends React.Component {
+    componentDidUpdate() {
+        window.$WowheadPower.refreshLinks();
+    }
+
     render() {
         return (
             <Draggable draggableId={this.props.overmind.state.liveSearch['result'][this.props.objectId].id.toString()} index={this.props.index}>
