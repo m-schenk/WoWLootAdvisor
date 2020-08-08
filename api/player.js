@@ -248,6 +248,8 @@ const getIdsFromBracket = (bracket) => {
     bracket.forEach(item => {
         if (item) {
             _bracket.push(item.id);
+        } else {
+            _bracket.push(null)
         }
     });
     if (_bracket.length === 0) {
