@@ -101,7 +101,10 @@ export const api = {
             wishlist: wishlist
         }).then((response) => {
             if(response.ok) {
-
+                state.profile.debug.bracket1 = response.data.wishlist.bracket1
+                state.profile.debug.bracket2 = response.data.wishlist.bracket2
+                state.profile.debug.bracket3 = response.data.wishlist.bracket3
+                state.profile.debug.bracket4 = response.data.wishlist.bracket4
             } else {
                 console.log(response.data.errors);
             }

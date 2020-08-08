@@ -11,6 +11,12 @@ export const state = {
         wishlist: null,
         loaded: false,
         isComplete: null,
+        debug: {
+            bracket1: null,
+            bracket2: null,
+            bracket3: null,
+            bracket4: null,
+        }
     },
     wishlist: {
         'locked': false,
