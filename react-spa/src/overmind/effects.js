@@ -114,8 +114,6 @@ export const api = {
                 // state.player.debug.bracket2 = response.data.wishlist.bracket2
                 // state.player.debug.bracket3 = response.data.wishlist.bracket3
                 // state.player.debug.bracket4 = response.data.wishlist.bracket4
-            } else {
-                console.log(err);
             }
         }).catch(err => {
             console.log(err);
