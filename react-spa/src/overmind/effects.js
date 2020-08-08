@@ -35,10 +35,10 @@ export const api = {
             if (response.data.player.permissions) {
                 state.player.permissions = response.data.player.permissions
             }
-            if (response.data.player.wishlist.bracket1) state.player.debug.bracket1 = response.data.player.wishlist.bracket1
-            if (response.data.player.wishlist.bracket2) state.player.debug.bracket2 = response.data.player.wishlist.bracket2
-            if (response.data.player.wishlist.bracket3) state.player.debug.bracket3 = response.data.player.wishlist.bracket3
-            if (response.data.player.wishlist.bracket4) state.player.debug.bracket4 = response.data.player.wishlist.bracket4
+            if (response.data.player.wishlist.bracket1) state.player.debug.bracket1 = [...response.data.player.wishlist.bracket1]
+            if (response.data.player.wishlist.bracket2) state.player.debug.bracket2 = [...response.data.player.wishlist.bracket2]
+            if (response.data.player.wishlist.bracket3) state.player.debug.bracket3 = [...response.data.player.wishlist.bracket3]
+            if (response.data.player.wishlist.bracket4) state.player.debug.bracket4 = [...response.data.player.wishlist.bracket4]
         }).catch(error => {
             console.log(error);
         })
@@ -73,10 +73,10 @@ export const api = {
             if (response.data.player.permissions) {
                 state.player.permissions = response.data.player.permissions
             }
-            if (response.data.player.wishlist.bracket1) state.player.debug.bracket1 = response.data.player.wishlist.bracket1
-            if (response.data.player.wishlist.bracket2) state.player.debug.bracket2 = response.data.player.wishlist.bracket2
-            if (response.data.player.wishlist.bracket3) state.player.debug.bracket3 = response.data.player.wishlist.bracket3
-            if (response.data.player.wishlist.bracket4) state.player.debug.bracket4 = response.data.player.wishlist.bracket4
+            if (response.data.player.wishlist.bracket1) state.player.debug.bracket1 = [...response.data.player.wishlist.bracket1]
+            if (response.data.player.wishlist.bracket2) state.player.debug.bracket2 = [...response.data.player.wishlist.bracket2]
+            if (response.data.player.wishlist.bracket3) state.player.debug.bracket3 = [...response.data.player.wishlist.bracket3]
+            if (response.data.player.wishlist.bracket4) state.player.debug.bracket4 = [...response.data.player.wishlist.bracket4]
         }).catch(error => {
             console.log(error);
         })
@@ -110,10 +110,10 @@ export const api = {
         }).then((response) => {
             if(response.ok) {
                 console.log(response)
-                state.player.debug.bracket1 = response.data.wishlist.bracket1
-                state.player.debug.bracket2 = response.data.wishlist.bracket2
-                state.player.debug.bracket3 = response.data.wishlist.bracket3
-                state.player.debug.bracket4 = response.data.wishlist.bracket4
+                // state.player.debug.bracket1 = response.data.wishlist.bracket1
+                // state.player.debug.bracket2 = response.data.wishlist.bracket2
+                // state.player.debug.bracket3 = response.data.wishlist.bracket3
+                // state.player.debug.bracket4 = response.data.wishlist.bracket4
             } else {
                 console.log(response.data.errors);
             }
