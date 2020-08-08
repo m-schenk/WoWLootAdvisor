@@ -47,6 +47,13 @@ const ItemContainer = styled.div`
 const BASE_URL = "https://classic.wowhead.com/item=";
 
 class Wishlist extends React.Component {
+
+    componentDidMount() {
+        if(window.$WowheadPower) {
+            window.$WowheadPower.refreshLinks();
+        }
+    }
+
     onExit = () => {
         this.props.overmind.actions.tutorial();
     }
