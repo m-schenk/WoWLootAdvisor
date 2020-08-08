@@ -115,10 +115,10 @@ export const api = {
                 // state.player.debug.bracket3 = response.data.wishlist.bracket3
                 // state.player.debug.bracket4 = response.data.wishlist.bracket4
             } else {
-                console.log(response.data.errors);
+                console.log(err);
             }
         }).catch(err => {
-            console.log(err.data.errors);
+            console.log(err);
         });
     },
     async searchItems(query) {
