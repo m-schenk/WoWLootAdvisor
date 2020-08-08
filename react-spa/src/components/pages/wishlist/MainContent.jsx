@@ -14,6 +14,9 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Alert from 'react-bootstrap/Alert';
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 class MainContent extends React.Component {
 
     onDragEnd = (result) => {
@@ -33,6 +36,8 @@ class MainContent extends React.Component {
         } else {
             return (
                 <Container className="justify-content-center" id="main-content">
+                    //inject toasts here
+                    <ToastContainer />
                     <DragDropContext onDragEnd={this.onDragEnd}>
                         <Row className="row-centered">
                             <Col className="justify-content-center" sm={8}>
