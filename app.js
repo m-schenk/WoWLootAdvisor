@@ -117,7 +117,8 @@ app.use(function (err, req, res, next) {
     } else {
         // render the error page
         res.status(err.statusCode || 500);
-        res.send(err.message)
+        res.json({error: err.message});
+        res.end();
         //res.render('error');
     }
 });
