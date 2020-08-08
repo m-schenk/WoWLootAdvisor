@@ -100,9 +100,9 @@ export const api = {
         instance.post('saveWishlist', {
             wishlist: wishlist
         }).then((response) => {
-            console.log(response);
+            console.log(response.error);
         }, (error) => {
-            console.log(error.error)
+            console.log(error)
         });
     },
     async searchItems(query) {
