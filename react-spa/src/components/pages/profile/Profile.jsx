@@ -21,6 +21,8 @@ const initialFormData = Object.freeze({
     _role: null
 });
 
+const BASE_URL = "https://classic.wowhead.com/item=";
+
 function PlayerProfileForm() {
     const [formData, updateFormData] = useState(initialFormData);
     const actions = useActions();
@@ -163,19 +165,19 @@ class Profile extends React.Component {
                                         </Row>
                                         <Row>
                                             <Col md={2}><p>(remove $dev_bracket1)</p></Col>
-                                            <Col md={10}>{this.props.overmind.state.player.debug.bracket1 && this.props.overmind.state.player.debug.bracket1.toString()}</Col>
+                                            <Col md={10}><a href={BASE_URL+this.props.overmind.state.player.debug.bracket1.toString()} target="_blank" rel="noopener noreferrer">item</a></Col>
                                         </Row>
                                         <Row>
                                             <Col md={2}><p>(remove $dev_bracket2)</p></Col>
-                                            <Col md={10}>{this.props.overmind.state.player.debug.bracket2 && this.props.overmind.state.player.debug.bracket2.toString()}</Col>
+                                            <Col md={10}><a href={BASE_URL+this.props.overmind.state.player.debug.bracket2.toString()} target="_blank" rel="noopener noreferrer">item</a></Col>
                                         </Row>
                                         <Row>
                                             <Col md={2}><p>(remove $dev_bracket3)</p></Col>
-                                            <Col md={10}>{this.props.overmind.state.player.debug.bracket3 && this.props.overmind.state.player.debug.bracket3.toString()}</Col>
+                                            <Col md={10}><a href={BASE_URL+this.props.overmind.state.player.debug.bracket3.toString()} target="_blank" rel="noopener noreferrer">item</a></Col>
                                         </Row>
                                         <Row>
                                             <Col md={2}><p>(remove $dev_bracket4)</p></Col>
-                                            <Col md={10}>{this.props.overmind.state.player.debug.bracket4 && this.props.overmind.state.player.debug.bracket4.toString()}</Col>
+                                            <Col md={10}><a href={BASE_URL+this.props.overmind.state.player.debug.bracket4.toString()} target="_blank" rel="noopener noreferrer">item</a></Col>
                                         </Row>
                                     </Card.Text>
                                 </Card.Body>
