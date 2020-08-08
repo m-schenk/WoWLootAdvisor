@@ -23,10 +23,8 @@ const ItemContainerDrop = styled.div`
 `;
 
 const InvisibleSmallerDropLocation = styled.div`
-    height: 18px;
-    width: 280px;
-    vertical-align: middle;
-    border: 2px lightgreen;
+    height: 24px;
+    width: 300px;
 ` 
 
 const ItemContainer = styled.div`
@@ -126,7 +124,7 @@ const ItemDroppable = (props) => {
         <div>
             <Droppable droppableId={bracketId + '_slot-' + slotIdInt}>
                 {provided => (
-                    <ItemContainerDrop className="d-flex justify-content-center align-items-center">
+                    <ItemContainerDrop>
                         <InvisibleSmallerDropLocation ref={provided.innerRef} {...provided.droppableProps}>
                             <Item bracketId={bracketId} slotIdInt={slotIdInt} />
                             {provided.placeholder}
