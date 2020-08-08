@@ -115,7 +115,8 @@ exports.postSaveWishlist = (req, res, next) => {
     };
     const err = validationResult(req).formatWith(errorFormatter);
     if (!err.isEmpty()) {
-        return next(createError(422, 'Failed to validate wishlist (api/player postSaveWishlist()), error text: ' + err.array()));
+        return res.status(422).json({errors: err.array()});
+        //return next(createError(422, 'Failed to validate wishlist (api/player postSaveWishlist()), error text: ' + err.array()));
     }
     Player.findById(req.user._id)
         .then(player => {
