@@ -18,18 +18,16 @@ const playerRouter = require('./routes/player');
 const itemsRouter = require('./routes/items');
 
 
-const whitelist = [process.env.ADDR, 'http://raegae.maarten.ch:3000', 'http://3.121.171.111:3000/api/player/getPlayerProfile' ]
+const whitelist = [process.env.ADDR, 'http://localhost:3001']
 const corsOptions = {
-  origin: function(origin, callback) {
-    if (whitelist.indexOf(origin) !== -1) {
-      callback(null, true)
-    } else {
-      callback(new Error('Not allowed by CORS'))
-    }
-  }
+    origin: process.env.CORS,
+    credentials: true,
 }
+
 const app = express();
-app.options('*', cors(corsOptions));
+
+app.use(cors(corsOptions));
+
 
 // print mode Production or Dev
 console.log(process.env.NODE_ENV);
@@ -58,7 +56,7 @@ app.use(
         cookie: {
             secure: 'auto',
             httpOnly: true,
-            maxAge: 3600*1000*12,
+            maxAge: 3600 * 1000 * 12,
         },
         store: new MongoStore({ mongooseConnection: mongoose.connection })
     })

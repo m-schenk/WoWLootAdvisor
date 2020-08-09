@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import { Draggable } from 'react-beautiful-dnd';
 import { connect } from './../../../overmind';
 
+import { UnlimitedIcon, LimitedIcon, ReservedIcon } from './styledAssets';
+
 const ItemContainer = styled.div`
     display: flex;
     font-weight: bold;
@@ -35,13 +37,13 @@ class Item extends React.Component {
                             </a>
                         </div>
                         {this.props.overmind.state.liveSearch['result'][this.props.objectId].itemCategory === "Reserved" &&
-                            <div id={"circle-"+this.props.overmind.state.liveSearch['result'][this.props.objectId].itemCategory}></div>
+                            <ReservedIcon />
                         }
                         {this.props.overmind.state.liveSearch['result'][this.props.objectId].itemCategory === "Limited" &&
-                            <div id={"circle-"+this.props.overmind.state.liveSearch['result'][this.props.objectId].itemCategory}></div>
+                            <LimitedIcon />
                         }
                         {this.props.overmind.state.liveSearch['result'][this.props.objectId].itemCategory === "Unlimited" &&
-                            <div id={"circle-"+this.props.overmind.state.liveSearch['result'][this.props.objectId].itemCategory}></div>
+                            <UnlimitedIcon />
                         }
                     </ItemContainer>
                 )}

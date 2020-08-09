@@ -14,7 +14,7 @@ export const searchItems = pipe(
 )
 
 export const login = () => {
-    window.location = 'http://3.121.171.111:3000/api/discord/login'
+    window.location = 'http://localhost:3000/api/discord/login'
 }
 
 export const sendWishlist = pipe(

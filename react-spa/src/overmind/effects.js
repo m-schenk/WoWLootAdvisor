@@ -2,14 +2,14 @@ import axios from 'axios';
 
 const instance = axios.create({
     withCredentials: true,
-    baseURL: 'http://3.121.171.111:3000/api/player/'
+    baseURL: 'http://localhost:3000/api/player/'
 })
 
 const cache = {};
 
 export const api = {
     getPlayerProfile(state) {
-        instance.get('getPlayerProfile'
+        instance.get('getPlayerProfile',
         ).then((response) => {
             console.log(response)
             state.player._id = response.data.player._id;
@@ -136,7 +136,7 @@ export const api = {
             //create a new token
             cancel = axios.CancelToken.source();
             //send request with cancelToken
-            const response = await axios('http://3.121.171.111:3000/api/items?query=' + query, { cancelToken: cancel.token });
+            const response = await axios('http://localhost:3000/api/items?query=' + query, {  cancelToken: cancel.token });
             const result = await response.data.results;
 
             //store query for caching
