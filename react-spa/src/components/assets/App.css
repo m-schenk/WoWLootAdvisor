@@ -13,13 +13,13 @@
 }
 
 @media screen and (min-width: 1200px) {
-    .nav_wrapper {
-        width: 1200px;
-        margin: 0 auto;
-        padding-left: 35px;
-        padding-right: 35px;
-        position: relative;
-    }
+  .nav_wrapper {
+    width: 1200px;
+    margin: 0 auto;
+    padding-left: 35px;
+    padding-right: 35px;
+    position: relative;
+  }
 }
 
 #wrapper {
@@ -100,7 +100,7 @@
 }
 
 .card-footer {
-    border-bottom: 1px solid rgba(0,0,0,.125) !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125) !important;
 }
 
 .label-livesearch {
@@ -118,23 +118,37 @@
 
 /* item circles */
 #circle-Reserved {
-    background: #ff4545;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-  }
-  
-  #circle-Limited {
-    background: #674ea7;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-  }
-  
-  #circle-Unlimited {
-    background: #666666;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-  }
-  
+  background: #ff4545;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+#circle-Limited {
+  background: #674ea7;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+#circle-Unlimited {
+  background: #666666;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.drag-event-toast {
+  background-color: #ffc107;
+  color: #2a2a2a;
+  border-radius: 4px;
+}
+
+.drag-event-toast-textbody {
+    text-align: center;
+    font-weight: bold;
+}
+
+.drag-event-toast-progress-bar {
+    background: #808080;
+}

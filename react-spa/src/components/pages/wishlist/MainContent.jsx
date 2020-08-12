@@ -25,10 +25,11 @@ class MainContent extends React.Component {
             if(window.$WowheadPower) {
                 window.$WowheadPower.refreshLinks();
             }
-            toast.warning(event, {
-                className: "drag-event-response",
+            toast(event, {
+                className: 'drag-event-toast',
+                bodyClassName: 'drag-event-toast-textbody',
+                progressClassName: 'drag-event-toast-progress-bar',
                 position: toast.POSITION.TOP_CENTER,
-
             });
         });
     };

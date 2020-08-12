@@ -28,7 +28,6 @@ const app = express();
 
 app.use(cors(corsOptions));
 
-
 // print mode Production or Dev
 console.log(process.env.NODE_ENV);
 

@@ -23,7 +23,7 @@ const ItemContainerDrop = styled.div`
 `;
 
 const InvisibleSmallerDropLocation = styled.div`
-    height: 24px;
+    height: 18px;
     width: 300px;
 ` 
 
@@ -80,6 +80,7 @@ class Wishlist extends React.Component {
                     <Bracket id={2} />
                     <Bracket id={3} />
                     <Bracket id={4} />
+
                 </div>
             )
         }
@@ -95,7 +96,7 @@ const Bracket = (props) => {
     return (
         <div className={"bracket"} id={'bracket-' + props.id}>
             <div>
-                <>Remaining Allocation Points: {allocPoints}</>
+                <>Bracket {props.id} - Remaining Allocation Points: {allocPoints}</>
             </div>
             <Col>
                 <Row className="d-flex justify-content-center">

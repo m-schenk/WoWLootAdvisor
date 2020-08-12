@@ -24,11 +24,11 @@ export const sendWishlist = pipe(
 )
 
 export const loadProfile = async ({ state, effects }) => {
-    effects.api.getPlayerProfile(state);
+    await effects.api.getPlayerProfile(state);
 }
 
 export const sendProfile = async ({ state, effects }, data) => {
-    effects.api.sendProfile(state, data);
+    await effects.api.sendProfile(state, data);
 }
 
 export const dragHandler = async ({ state }, result) => {
@@ -87,7 +87,7 @@ export const dragHandler = async ({ state }, result) => {
 
     //item already in wishlist
     if (state.wishlist.filterList.includes(stateItem.id) && (source['droppableId'] === state.liveSearch['id'])) {
-        return;
+        return "This item is already inside your wishlist!";
     }
 
     //clone source item from overmind state to memory
@@ -129,11 +129,11 @@ export const dragHandler = async ({ state }, result) => {
     }
 
     //destination item is reserved => should only be able to go to front slots and if it goes to front, backslot must be clear
-    if ((destinationItem !== null) && (destinationItem.itemCategory === "Reserved") && (sourceSlotIdInt % 2 !== 1)) {
-        return;
-    } else if ((destinationItem !== null) && (destinationItem.itemCategory === "Reserved") &&
+    if ((source['droppableId'] !== state.liveSearch['id']) && (destinationItem !== null) && (destinationItem.itemCategory === "Reserved") && (sourceSlotIdInt % 2 !== 1)) {
+        return "Reserved items go only in front slots!";;
+    } else if ((source['droppableId'] !== state.liveSearch['id']) && (destinationItem !== null) && (destinationItem.itemCategory === "Reserved") &&
         (state.wishlist[sourceBracketId]['slot-' + (parseInt(sourceSlotIdInt) + 1)].item !== null)) {
-        return;
+        return "Slot behind Reserved items must be empty on drop!";
     }
 
     //ONLY wishlist to wishlist swap reserved or limited source item with empty slot or unlimited destination item from different brackets
@@ -141,7 +141,7 @@ export const dragHandler = async ({ state }, result) => {
         ((destinationItem === null) || (destinationItem.itemCategory === "Unlimited")) &&
         ((sourceBracketId !== null) && destinationBracketId !== sourceBracketId)) {
         if (state.wishlist[destinationBracketId]['points'] === 0) {
-            return;
+            return "Destination bracket has no more allocation points left";
         } else {
             state.wishlist[destinationBracketId]['points']--;
             state.wishlist[sourceBracketId]['points']++;
@@ -151,10 +151,7 @@ export const dragHandler = async ({ state }, result) => {
     /* ONLY for items from live search: item costs allocation points check if bracket has enought, if so deduce by one. */
     if (((sourceItem.itemCategory === "Reserved") || (sourceItem.itemCategory === "Limited")) && (sourceBracketId === null)) {
         if (state.wishlist[destinationBracketId]['points'] === 0) {
-            return;
-        } else if ((destinationItem !== null) && ((destinationItem.itemCategory === "Reserved") || (destinationItem.itemCategory === "Limited"))) {
-            // was buggy case:  swap limited/reserved from live search with limited/reserved inside bracket (lose 1 allo point 4 ever)
-            return;
+            return "Destination bracket has no more allocation points left";
         } else {
             state.wishlist[destinationBracketId]['points']--;
         }
@@ -163,14 +160,13 @@ export const dragHandler = async ({ state }, result) => {
     /* swap reserved or limited destination item with empty slot or unlimited source item from 
     different brackets OR live search => special case for items from live search 
     (swap out a reserved or limited item should give one allocation point back) */
-    if ((destinationItem !== null) && ((destinationItem.itemCategory === "Reserved") || (destinationItem.itemCategory === "Limited")) &&
-        (sourceItem.itemCategory === "Unlimited") &&
+    if ((destinationItem !== null) && ((destinationItem.itemCategory === "Reserved") || (destinationItem.itemCategory === "Limited"))  &&
         (destinationBracketId !== sourceBracketId)) {
         if (source['droppableId'] === state.liveSearch['id']) {
             state.wishlist[destinationBracketId]['points']++;
         } else {
             if (state.wishlist[sourceBracketId]['points'] === 0) {
-                return;
+                return "Bracket where you started the drag has no more allocation points left";
             } else {
                 state.wishlist[sourceBracketId]['points']--;
                 state.wishlist[destinationBracketId]['points']++;
