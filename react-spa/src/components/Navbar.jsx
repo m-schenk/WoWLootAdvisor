@@ -31,7 +31,7 @@ class UserNavbar extends React.Component {
                         </Nav>
                     </Navbar.Collapse>
                     <Nav>
-                        <Nav.Link className="mr-3" href="http://localhost:3000/api/player/logout">Logout</Nav.Link>
+                        <Nav.Link className="mr-3" href="https://raegae.maarten.ch/api/player/logout">Logout</Nav.Link>
                     </Nav>
                 </div>
             </Navbar>
