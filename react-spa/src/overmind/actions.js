@@ -13,10 +13,6 @@ export const searchItems = pipe(
     })
 )
 
-export const login = () => {
-    window.location = 'http://localhost:3000/api/discord/login'
-}
-
 export const sendWishlist = pipe(
     mutate(({ state, effects }) => {
         effects.api.sendWishlist(state);

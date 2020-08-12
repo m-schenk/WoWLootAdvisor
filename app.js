@@ -17,8 +17,6 @@ const discordRouter = require('./routes/discord')
 const playerRouter = require('./routes/player');
 const itemsRouter = require('./routes/items');
 
-
-const whitelist = [process.env.ADDR, 'http://localhost:3001']
 const corsOptions = {
     origin: process.env.CORS,
     credentials: true,
