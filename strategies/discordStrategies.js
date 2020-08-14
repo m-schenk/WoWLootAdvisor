@@ -22,6 +22,7 @@ passport.use(new DiscordStrategy({
 }, (accessToken, refreshToken, profile, cb) => {
     // profile is the discord profile, not ours
     if (profile.guilds.filter(entry => (entry.id === process.env.DISCORD_SERVER_ID)).length > 0) {
+        console.time('authtime')
         Player.findOne({ discordId: profile.id })
             .then(player => {
                 if (player) {
@@ -42,6 +43,9 @@ passport.use(new DiscordStrategy({
             })
             .catch(err => {
                 cb(new createError(500, 'Failed to fetch player from database (strategies/discordStrategies), error text: ' + err), null);
+            })
+            .finally(() => {
+                console.timeEnd('authtime')
             })
     } else {
         cb(new createError(403, 'Access denied, does not belong to guild!'), null);

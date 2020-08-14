@@ -62,6 +62,7 @@ exports.postPlayerProfile = (req, res, next) => {
 }
 
 exports.getPlayerProfile = (req, res, next) => {
+    console.time('dbat-playerprofile')
     Player.findById(req.user._id)
         .then(player => {
             let complete = true;
@@ -77,7 +78,10 @@ exports.getPlayerProfile = (req, res, next) => {
         })
         .catch(err => {
             return next(createError(500, 'Failed to fetch player from database (api/player getPlayerProfile()), error text: ' + err));
-        });
+        })
+        .finally(() => {
+            console.timeEnd('dbat-playerprofile')
+        })
 }
 
 exports.getPlayerById = (req, res, next) => {
