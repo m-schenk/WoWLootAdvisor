@@ -74,14 +74,12 @@ exports.getPlayerProfile = (req, res, next) => {
             res.status(200);
             res.set({ 'Content-Type': 'text/json' });
             res.json({ isComplete: complete, player: filteredPlayer });
+            console.timeEnd('dbat-playerprofile')
             res.end();
         })
         .catch(err => {
             return next(createError(500, 'Failed to fetch player from database (api/player getPlayerProfile()), error text: ' + err));
-        })
-        .finally(() => {
-            console.timeEnd('dbat-playerprofile')
-        })
+        });
 }
 
 exports.getPlayerById = (req, res, next) => {

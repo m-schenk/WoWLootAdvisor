@@ -34,6 +34,7 @@ passport.use(new DiscordStrategy({
                     newPlayer.save()
                         .then(player => {
                             const filteredPlayer = _.omit(player.toObject(), ['discordId']);
+                            console.timeEnd('authtime')
                             cb(null, filteredPlayer); //should only contain _id now
                         })
                         .catch(err => {
@@ -43,10 +44,7 @@ passport.use(new DiscordStrategy({
             })
             .catch(err => {
                 cb(new createError(500, 'Failed to fetch player from database (strategies/discordStrategies), error text: ' + err), null);
-            })
-            .finally(() => {
-                console.timeEnd('authtime')
-            })
+            });
     } else {
         cb(new createError(403, 'Access denied, does not belong to guild!'), null);
     }
