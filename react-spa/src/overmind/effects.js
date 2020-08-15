@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const instance = axios.create({
     withCredentials: true,
-    baseURL: 'https://raegae.maarten.ch/api/player/'
+    baseURL: 'http://185.224.139.180:52525/api/player/'
 })
 
 const cache = {};
@@ -136,7 +136,7 @@ export const api = {
             //create a new token
             cancel = axios.CancelToken.source();
             //send request with cancelToken
-            const response = await axios('https://raegae.maarten.ch/api/items?query=' + query, {  cancelToken: cancel.token });
+            const response = await axios('http://185.224.139.180:52525/api/items?query=' + query, {  cancelToken: cancel.token });
             const result = await response.data.results;
 
             //store query for caching
