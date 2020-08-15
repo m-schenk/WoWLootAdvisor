@@ -139,7 +139,7 @@ export const api = {
         //send request with cancelToken
         instance.get('items?query=' + query, { cancelToken: cancel.token })
             .then((response) => {
-                const result = await response.data.results;
+                const result = response.data.results;
 
                 //store query for caching
                 cache[query] = result;
