@@ -21,15 +21,11 @@ passport.use(new DiscordStrategy({
     scope: ['identify', 'guilds']
 }, (accessToken, refreshToken, profile, cb) => {
     // profile is the discord profile, not ours
-    console.time('if-time')
     if (profile.guilds.filter(entry => (entry.id === process.env.DISCORD_SERVER_ID)).length > 0) {
-        console.timeEnd('if-time')
-        console.time('authtime')
         Player.findOne({ discordId: profile.id })
             .then(player => {
                 if (player) {
                     const filteredPlayer = _.omit(player.toObject(), ['discordId']);
-                    console.timeEnd('authtime')
                     cb(null, filteredPlayer);
                 } else {
                     console.log('User doesnt exist');
@@ -37,7 +33,6 @@ passport.use(new DiscordStrategy({
                     newPlayer.save()
                         .then(player => {
                             const filteredPlayer = _.omit(player.toObject(), ['discordId']);
-                            console.timeEnd('authtime')
                             cb(null, filteredPlayer); //should only contain _id now
                         })
                         .catch(err => {

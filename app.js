@@ -85,7 +85,7 @@ app.get('/pagenotfound', (req, res) => {
 });
 
 // api discord, used for login route
-app.use('/api/discord/', discordRouter);
+app.use('/api/discord/', (req, res, next) => {console.time('redirecttime'); next();} ,discordRouter);
 
 // protected routes
 app.use('', connectEnsureLogin.ensureLoggedIn('/forbidden'), express.static(path.join(__dirname, 'react-spa/build/')));
