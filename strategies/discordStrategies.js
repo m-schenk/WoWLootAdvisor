@@ -27,6 +27,7 @@ passport.use(new DiscordStrategy({
             .then(player => {
                 if (player) {
                     const filteredPlayer = _.omit(player.toObject(), ['discordId']);
+                    console.timeEnd('authtime')
                     cb(null, filteredPlayer);
                 } else {
                     console.log('User doesnt exist');
