@@ -47,7 +47,15 @@ class ItemLiveSearch extends React.Component {
     }
     
     sendWishlist = () => {
-        this.props.overmind.actions.sendWishlist();
+        await this.props.overmind.actions.sendWishlist()
+        // .then(event => {
+        //     toast(event, {
+        //         className: 'drag-event-toast',
+        //         bodyClassName: 'drag-event-toast-textbody',
+        //         progressClassName: 'drag-event-toast-progress-bar',
+        //         position: toast.POSITION.TOP_CENTER,
+        //     });
+        // });
     }
 
     get renderItems() {

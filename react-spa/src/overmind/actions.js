@@ -13,11 +13,9 @@ export const searchItems = pipe(
     })
 )
 
-export const sendWishlist = pipe(
-    mutate(({ state, effects }) => {
-        effects.api.sendWishlist(state);
-    })
-)
+export const sendWishlist = async ({ state, effects }) => {
+    await effects.api.sendWishlist(state);
+}
 
 export const loadProfile = async ({ state, effects }) => {
     await effects.api.getPlayerProfile(state);

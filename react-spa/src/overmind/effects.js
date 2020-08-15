@@ -2,16 +2,15 @@ import axios from 'axios';
 
 const instance = axios.create({
     withCredentials: true,
-    baseURL: 'http://185.224.139.180:52525/api/player/'
+    baseURL: 'https://raegae.maarten.ch/api/'
 })
 
 const cache = {};
 
 export const api = {
     getPlayerProfile(state) {
-        instance.get('getPlayerProfile',
+        instance.get('player/getPlayerProfile',
         ).then((response) => {
-            console.log(response)
             state.player._id = response.data.player._id;
             state.player.isComplete = response.data.isComplete;
             if (response.data.player.name) {
@@ -39,12 +38,15 @@ export const api = {
             if (response.data.player.wishlist.bracket2) state.player.debug.bracket2 = [...response.data.player.wishlist.bracket2]
             if (response.data.player.wishlist.bracket3) state.player.debug.bracket3 = [...response.data.player.wishlist.bracket3]
             if (response.data.player.wishlist.bracket4) state.player.debug.bracket4 = [...response.data.player.wishlist.bracket4]
-        }).catch(error => {
-            console.log(error);
+
+            return true;
+        }).catch(err => {
+            console.error(err);
+            //return false;
         })
     },
     sendProfile(state, data) {
-        instance.post('postPlayerProfile', {
+        instance.post('player/postPlayerProfile', {
             _name: data._name,
             _race: data._race,
             _class: data._class,
@@ -77,8 +79,9 @@ export const api = {
             if (response.data.player.wishlist.bracket2) state.player.debug.bracket2 = [...response.data.player.wishlist.bracket2]
             if (response.data.player.wishlist.bracket3) state.player.debug.bracket3 = [...response.data.player.wishlist.bracket3]
             if (response.data.player.wishlist.bracket4) state.player.debug.bracket4 = [...response.data.player.wishlist.bracket4]
-        }).catch(error => {
-            console.log(error);
+        }).catch(err => {
+            console.error(err);
+            //return false;
         })
     },
     sendWishlist(state) {
@@ -105,19 +108,18 @@ export const api = {
                 state.wishlist['bracketless']['slot-3'].item, state.wishlist['bracketless']['slot-4'].item,
                 state.wishlist['bracketless']['slot-5'].item, state.wishlist['bracketless']['slot-6'].item,]
         }
-        instance.post('saveWishlist', {
+        instance.post('player/saveWishlist', {
             wishlist: wishlist
-        }).then((response) => {
-            if(response.ok) {
-                console.log(response)
-                // state.player.debug.bracket1 = response.data.wishlist.bracket1
-                // state.player.debug.bracket2 = response.data.wishlist.bracket2
-                // state.player.debug.bracket3 = response.data.wishlist.bracket3
-                // state.player.debug.bracket4 = response.data.wishlist.bracket4
-            }
-        }).catch(err => {
-            console.log(err);
-        });
+        })//.then((response) => {
+        //     if (response.ok) {
+        //         return true;
+        //     } else {
+        //         return false;
+        //     }
+        // }).catch(err => {
+        //     console.error(err);
+        //     return false;
+        // });
     },
     async searchItems(query) {
         let cancel;
@@ -127,30 +129,29 @@ export const api = {
             //cancels perv. request
             cancel.cancel()
         }
-        try {
-            //check if query was cached
-            if (cache[query]) {
-                //return cached query
-                return cache[query];
-            }
-            //create a new token
-            cancel = axios.CancelToken.source();
-            //send request with cancelToken
-            const response = await axios('http://185.224.139.180:52525/api/items?query=' + query, {  cancelToken: cancel.token });
-            const result = await response.data.results;
-
-            //store query for caching
-            cache[query] = result;
-
-            //return unpacked result
-            return result;
-
-        } catch (error) {
-            if (axios.isCancel(error)) {
-                console.error('Request cancelled', error.message);
-            } else {
-                console.error('Something went bad: ', error.message);
-            }
+        //check if query was cached
+        if (cache[query]) {
+            //return cached query
+            return cache[query];
         }
+        //create a new token
+        cancel = axios.CancelToken.source();
+        //send request with cancelToken
+        instance.get('items?query=' + query, { cancelToken: cancel.token })
+            .then((response) => {
+                const result = await response.data.results;
+
+                //store query for caching
+                cache[query] = result;
+
+                //return unpacked result
+                return result;
+            }).catch((err) => {
+                if (axios.isCancel(err)) {
+                    console.error('Request cancelled', err.message);
+                } else {
+                    console.error('Something went bad: ', err.message);
+                }
+            });
     }
 };
