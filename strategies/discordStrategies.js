@@ -21,7 +21,9 @@ passport.use(new DiscordStrategy({
     scope: ['identify', 'guilds']
 }, (accessToken, refreshToken, profile, cb) => {
     // profile is the discord profile, not ours
+    console.time('if-time')
     if (profile.guilds.filter(entry => (entry.id === process.env.DISCORD_SERVER_ID)).length > 0) {
+        console.timeEnd('if-time')
         console.time('authtime')
         Player.findOne({ discordId: profile.id })
             .then(player => {
