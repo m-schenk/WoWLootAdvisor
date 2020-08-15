@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "homepage": ".",
-  "proxy": "https://discord.com/api/oauth2/",
   "dependencies": {
     "@atlaskit/css-reset": "^5.0.12",
     "@testing-library/jest-dom": "^4.2.4",
