@@ -52,10 +52,10 @@ app.use(
         secret: process.env.SESSION_SECRET,
         resave: false,
         saveUninitialized: false,
-        sameSite: true,
         cookie: {
             secure: true,
             httpOnly: true,
+            sameSite: 'strict',
             maxAge: 3600 * 1000 * 12,
         },
         store: new MongoStore({ mongooseConnection: mongoose.connection })
