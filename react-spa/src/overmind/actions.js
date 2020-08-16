@@ -45,8 +45,10 @@ export const dragHandler = async ({ state }, result) => {
                 (state.wishlist[sourceBracketId][sourceSlotId].item.itemCategory === "Limited")) {
                 state.wishlist[sourceBracketId]['points']++;
             }
-            const sliceid = state.wishlist.filterList.indexOf(state.wishlist[sourceBracketId][sourceSlotId].item.id)
-            state.wishlist.filterList.splice(sliceid, 1)
+            const sliceid = state.wishlist.filterList.indexOf(state.wishlist[sourceBracketId][sourceSlotId].item.id);
+            state.wishlist.filterList.splice(sliceid, 1);
+            const slicetype = state.wishlist[sourceBracketId].itemTypes.indexOf(state.wishlist[sourceBracketId][sourceSlotId].item.itemType);
+            state.wishlist[sourceBracketId].splice(slicetype, 1);
             state.wishlist[sourceBracketId][sourceSlotId].item = null;
             return;
         }
@@ -81,6 +83,11 @@ export const dragHandler = async ({ state }, result) => {
         return "This item is already inside your wishlist.";
     }
 
+    //item type already in bracket when dragging from live search
+    if (state.wishlist[destinationBracketId].itemTypes.includes(stateItem.itemType) && (source['droppableId'] === state.liveSearch['id'])) {
+        return "This item type is already inside this bracket.";
+    }
+
     //clone source item from overmind state to memory
     const sourceItem = {
         id: stateItem.id,
@@ -111,6 +118,15 @@ export const dragHandler = async ({ state }, result) => {
             deName: stateItem.deName
         };
     }
+
+    if ((destinationItem !== null) && (sourceItem.itemType !== destinationItem.itemType) && (sourceBracketId !== destinationBracketId)) {
+        if(state.wishlist[destinationBracketId].itemTypes.includes(sourceItem.itemType)) {
+            return "This item type is already inside destination bracket.";
+        } else if(state.wishlist[destinationBracketId].itemTypes.includes(sourceItem.itemType)) {
+            return "This item type is already inside source bracket.";
+        }
+    }
+
 
     //source item is reserved => should only be able to go to front slots and if it goes to front, backslot must be clear
     if ((sourceItem.itemCategory === "Reserved") && (destinationSlotIdInt % 2 !== 1)) {
@@ -174,7 +190,11 @@ export const dragHandler = async ({ state }, result) => {
     }
     //set state of items
     state.wishlist[destinationBracketId][destinationSlotId].item = sourceItem;
+    state.wishlist[sourceBracketId].splice(state.wishlist[sourceBracketId].itemTypes.indexOf(sourceItem.itemType), 1);
+    state.wishlist[destinationBracketId].itemTypes.push(sourceItem.itemType);
     if (sourceBracketId !== null) {
         state.wishlist[sourceBracketId][sourceSlotId].item = destinationItem;
+        state.wishlist[sourceBracketId].itemTypes.push(destinationItem.itemType);
+        state.wishlist[destinationBracketId].splice(state.wishlist[destinationBracketId].itemTypes.indexOf(destinationItem.itemType), 1);
     }
 }
