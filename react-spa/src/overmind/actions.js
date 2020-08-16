@@ -32,6 +32,11 @@ export const dragHandler = async ({ state }, result) => {
         return;
     }
 
+    // itemtypes
+    const weapon = ["Sword", "Mace", "Polearm", "Two-Hand, Sword", "Two-Hand, Axe", "Dagger", "Axt", "Two-Hand, Mace", "Staff", "Fist Weapon"];
+    const ranged = ["Bow", "Crossbow", "Gun", "Relic", "Wand"];
+    const offhand = ["Shield", "Offhand"];
+
     /* when destination 'delete-zone' => we have to remove the item by case, if it's from the 
     live search we don't do anything, if it's from inside the wishlist we have to remove the 
     item and check for allocation points */
@@ -47,7 +52,9 @@ export const dragHandler = async ({ state }, result) => {
             }
             const sliceid = state.wishlist.filterList.indexOf(state.wishlist[sourceBracketId][sourceSlotId].item.id);
             state.wishlist.filterList.splice(sliceid, 1);
-            state.wishlist[sourceBracketId].itemTypes.splice(state.wishlist[sourceBracketId].itemTypes.indexOf(state.wishlist[sourceBracketId][sourceSlotId].item.itemType), 1);
+            const checkItemType = state.wishlist[sourceBracketId][sourceSlotId].item.itemType;
+            const itemType = weapon.includes(checkItemType) ? "Weapon" : ranged.includes(checkItemType) ? "Ranged" : offhand.includes(checkItemType) ? "Offhand" : checkItemType;
+            state.wishlist[sourceBracketId].itemTypes.splice(state.wishlist[sourceBracketId].itemTypes.indexOf(itemType), 1);
             state.wishlist[sourceBracketId][sourceSlotId].item = null;
             return;
         }
@@ -82,8 +89,10 @@ export const dragHandler = async ({ state }, result) => {
         return "This item is already inside your wishlist.";
     }
 
+    const sourceFixedItemType = weapon.includes(stateItem.itemType) ? "Weapon" : ranged.includes(stateItem.itemType) ? "Ranged" : offhand.includes(stateItem.itemType) ? "Offhand" : stateItem.itemType;
+    
     //item type already in bracket when dragging from live search
-    if (state.wishlist[destinationBracketId].itemTypes.includes(stateItem.itemType) && (source['droppableId'] === state.liveSearch['id'])) {
+    if (state.wishlist[destinationBracketId].itemTypes.includes(sourceFixedItemType) && (source['droppableId'] === state.liveSearch['id'])) {
         return "This item type is already inside this bracket.";
     }
 
@@ -118,10 +127,12 @@ export const dragHandler = async ({ state }, result) => {
         };
     }
 
-    if ((destinationItem !== null) && (sourceItem.itemType !== destinationItem.itemType) && (sourceBracketId !== destinationBracketId)) {
-        if(state.wishlist[destinationBracketId].itemTypes.includes(sourceItem.itemType)) {
+    const destinationFixedItemType = weapon.includes(destinationItem.itemType) ? "Weapon" : ranged.includes(destinationItem.itemType) ? "Ranged" : offhand.includes(destinationItem.itemType) ? "Offhand" : destinationItem.itemType;
+
+    if ((destinationItem !== null) && (sourceFixedItemType !== destinationFixedItemType) && (sourceBracketId !== destinationBracketId)) {
+        if(state.wishlist[destinationBracketId].itemTypes.includes(sourceFixedItemType)) {
             return "This item type is already inside destination bracket.";
-        } else if(state.wishlist[destinationBracketId].itemTypes.includes(sourceItem.itemType)) {
+        } else if(state.wishlist[sourceBracketId].itemTypes.includes(destinationFixedItemType)) {
             return "This item type is already inside source bracket.";
         }
     }
@@ -188,12 +199,12 @@ export const dragHandler = async ({ state }, result) => {
         state.wishlist.filterList.push(sourceItem.id);
     }
     //set state of items
-    state.wishlist[destinationBracketId][destinationSlotId].item = sourceItem;
-    state.wishlist[sourceBracketId].itemTypes.splice(state.wishlist[sourceBracketId].itemTypes.indexOf(sourceItem.itemType), 1);
-    state.wishlist[destinationBracketId].itemTypes.push(sourceItem.itemType);
     if (sourceBracketId !== null) {
+        state.wishlist[sourceBracketId].itemTypes.splice(state.wishlist[sourceBracketId].itemTypes.indexOf(sourceItem.itemType), 1);
         state.wishlist[sourceBracketId][sourceSlotId].item = destinationItem;
         state.wishlist[sourceBracketId].itemTypes.push(destinationItem.itemType);
         state.wishlist[destinationBracketId].itemTypes.splice(state.wishlist[destinationBracketId].itemTypes.indexOf(destinationItem.itemType), 1);
     }
+    state.wishlist[destinationBracketId][destinationSlotId].item = sourceItem;
+    state.wishlist[destinationBracketId].itemTypes.push(sourceItem.itemType);
 }
