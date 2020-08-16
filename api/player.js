@@ -119,6 +119,7 @@ exports.postSaveWishlist = (req, res, next) => {
     if (!err.isEmpty()) {
         return next(createError(422, 'Failed to validate wishlist (api/player postSaveWishlist()), error text: ' + err.array()));
     }
+    console.log(req.user)
     Player.findById(req.user._id)
         .then(player => {
             if ((player.wishlist !== null) && (player.wishlist.locked)) {
