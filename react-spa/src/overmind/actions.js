@@ -90,7 +90,7 @@ export const dragHandler = async ({ state }, result) => {
     }
 
     const sourceFixedItemType = weapon.includes(stateItem.itemType) ? "Weapon" : ranged.includes(stateItem.itemType) ? "Ranged" : offhand.includes(stateItem.itemType) ? "Offhand" : stateItem.itemType;
-    
+
     //item type already in bracket when dragging from live search
     if (state.wishlist[destinationBracketId].itemTypes.includes(sourceFixedItemType) && (source['droppableId'] === state.liveSearch['id'])) {
         return "This item type is already inside this bracket.";
@@ -127,16 +127,16 @@ export const dragHandler = async ({ state }, result) => {
         };
     }
 
-    const destinationFixedItemType = weapon.includes(destinationItem.itemType) ? "Weapon" : ranged.includes(destinationItem.itemType) ? "Ranged" : offhand.includes(destinationItem.itemType) ? "Offhand" : destinationItem.itemType;
-
-    if ((destinationItem !== null) && (sourceFixedItemType !== destinationFixedItemType) && (sourceBracketId !== destinationBracketId)) {
-        if(state.wishlist[destinationBracketId].itemTypes.includes(sourceFixedItemType)) {
-            return "This item type is already inside destination bracket.";
-        } else if(state.wishlist[sourceBracketId].itemTypes.includes(destinationFixedItemType)) {
-            return "This item type is already inside source bracket.";
+    if (destinationItem !== null) {
+        const destinationFixedItemType = weapon.includes(destinationItem.itemType) ? "Weapon" : ranged.includes(destinationItem.itemType) ? "Ranged" : offhand.includes(destinationItem.itemType) ? "Offhand" : destinationItem.itemType;
+        if ((sourceFixedItemType !== destinationFixedItemType) && (sourceBracketId !== destinationBracketId)) {
+            if (state.wishlist[destinationBracketId].itemTypes.includes(sourceFixedItemType)) {
+                return "This item type is already inside destination bracket.";
+            } else if (state.wishlist[sourceBracketId].itemTypes.includes(destinationFixedItemType)) {
+                return "This item type is already inside source bracket.";
+            }
         }
     }
-
 
     //source item is reserved => should only be able to go to front slots and if it goes to front, backslot must be clear
     if ((sourceItem.itemCategory === "Reserved") && (destinationSlotIdInt % 2 !== 1)) {
@@ -177,7 +177,7 @@ export const dragHandler = async ({ state }, result) => {
     /* swap reserved or limited destination item with UNLIMITED source item from 
     different brackets OR live search => special case for items from live search 
     (swap out a reserved or limited item should give one allocation point back) */
-    if ((sourceItem.itemCategory === "Unlimited") && (destinationItem !== null) && ((destinationItem.itemCategory === "Reserved") || (destinationItem.itemCategory === "Limited"))  &&
+    if ((sourceItem.itemCategory === "Unlimited") && (destinationItem !== null) && ((destinationItem.itemCategory === "Reserved") || (destinationItem.itemCategory === "Limited")) &&
         (destinationBracketId !== sourceBracketId)) {
         if (source['droppableId'] === state.liveSearch['id']) {
             state.wishlist[destinationBracketId]['points']++;

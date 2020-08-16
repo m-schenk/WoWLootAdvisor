@@ -25,7 +25,7 @@ const ItemContainerDrop = styled.div`
 const InvisibleSmallerDropLocation = styled.div`
     height: 18px;
     width: 300px;
-` 
+`
 
 const ItemContainer = styled.div`
     display: flex;
@@ -49,7 +49,7 @@ const BASE_URL = "https://classic.wowhead.com/item=";
 class Wishlist extends React.Component {
 
     componentDidMount() {
-        if(window.$WowheadPower) {
+        if (window.$WowheadPower) {
             window.$WowheadPower.refreshLinks();
         }
     }
@@ -87,10 +87,94 @@ class Wishlist extends React.Component {
     }
 }
 
+const Bracketless = (props) => {
+    const state = useState();
+
+    const bracketId = 'bracketLess';
+
+    return (
+        <div className={bracketId} id={bracketId}>
+            <div>
+                <>Bracketless - Unlimited Allocation Points</>
+            </div>
+            <Col>
+                <Row className="d-flex justify-content-center">
+                    <ItemDroppable bracketId={bracketId} slotIdInt={1} />
+                    <ItemDroppable bracketId={bracketId} slotIdInt={2} />
+                </Row>
+                <Row className="d-flex justify-content-center">
+                    <ItemDroppable bracketId={bracketId} slotIdInt={3} />
+                    <ItemDroppable bracketId={bracketId} slotIdInt={4} />
+                </Row>
+                <Row className="d-flex justify-content-center">
+                    <ItemDroppable bracketId={bracketId} slotIdInt={5} />
+                    <ItemDroppable bracketId={bracketId} slotIdInt={6} />
+                </Row>
+                <Row className="d-flex justify-content-center">
+                    <ItemDroppable bracketId={bracketId} slotIdInt={7} />
+                    <ItemDroppable bracketId={bracketId} slotIdInt={8} />
+                </Row>
+                <Row className="d-flex justify-content-center">
+                    <ItemDroppable bracketId={bracketId} slotIdInt={9} />
+                    <ItemDroppable bracketId={bracketId} slotIdInt={10} />
+                </Row>
+                <Row className="d-flex justify-content-center">
+                    <ItemDroppable bracketId={bracketId} slotIdInt={11} />
+                    <ItemDroppable bracketId={bracketId} slotIdInt={12} />
+                </Row>
+                <Row className="d-flex justify-content-center">
+                    <ItemDroppable bracketId={bracketId} slotIdInt={13} />
+                    <ItemDroppable bracketId={bracketId} slotIdInt={14} />
+                </Row>
+                <Row className="d-flex justify-content-center">
+                    <ItemDroppable bracketId={bracketId} slotIdInt={15} />
+                    <ItemDroppable bracketId={bracketId} slotIdInt={16} />
+                </Row>
+                <Row className="d-flex justify-content-center">
+                    <ItemDroppable bracketId={bracketId} slotIdInt={17} />
+                    <ItemDroppable bracketId={bracketId} slotIdInt={18} />
+                </Row>
+                <Row className="d-flex justify-content-center">
+                    <ItemDroppable bracketId={bracketId} slotIdInt={19} />
+                    <ItemDroppable bracketId={bracketId} slotIdInt={20} />
+                </Row>
+                <Row className="d-flex justify-content-center">
+                    <ItemDroppable bracketId={bracketId} slotIdInt={21} />
+                    <ItemDroppable bracketId={bracketId} slotIdInt={22} />
+                </Row>
+                <Row className="d-flex justify-content-center">
+                    <ItemDroppable bracketId={bracketId} slotIdInt={23} />
+                    <ItemDroppable bracketId={bracketId} slotIdInt={24} />
+                </Row>
+                <Row className="d-flex justify-content-center">
+                    <ItemDroppable bracketId={bracketId} slotIdInt={25} />
+                    <ItemDroppable bracketId={bracketId} slotIdInt={26} />
+                </Row>
+                <Row className="d-flex justify-content-center">
+                    <ItemDroppable bracketId={bracketId} slotIdInt={5} />
+                    <ItemDroppable bracketId={bracketId} slotIdInt={6} />
+                </Row>
+                <Row className="d-flex justify-content-center">
+                    <ItemDroppable bracketId={bracketId} slotIdInt={5} />
+                    <ItemDroppable bracketId={bracketId} slotIdInt={6} />
+                </Row>
+                <Row className="d-flex justify-content-center">
+                    <ItemDroppable bracketId={bracketId} slotIdInt={5} />
+                    <ItemDroppable bracketId={bracketId} slotIdInt={6} />
+                </Row>
+                <Row className="d-flex justify-content-center">
+                    <ItemDroppable bracketId={bracketId} slotIdInt={5} />
+                    <ItemDroppable bracketId={bracketId} slotIdInt={6} />
+                </Row>
+            </Col>
+        </div>
+    )
+}
+
 const Bracket = (props) => {
     const state = useState();
 
-    const bracketId = 'bracket-' + props.id
+    const bracketId = 'bracket-' + props.id;
     const allocPoints = state.wishlist[bracketId]['points'];
 
     return (
