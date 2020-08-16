@@ -1,4 +1,5 @@
 import { pipe, debounce, mutate } from 'overmind';
+import { UnlimitedIcon, LimitedIcon, ReservedIcon } from './styledAssets';
 
 
 export const searchItems = pipe(
@@ -63,7 +64,7 @@ export const dragHandler = async ({ state }, result) => {
     if ((destinationSlotIdInt % 2 === 0) &&
         (state.wishlist[destinationBracketId]['slot-' + (parseInt(destinationSlotIdInt) - 1)].item !== null) &&
         (state.wishlist[destinationBracketId]['slot-' + (parseInt(destinationSlotIdInt) - 1)].item.itemCategory === "Reserved")) {
-        return;
+        return "This slot is locked because of the "+ <ReservedIcon /> + " Reserved item in the front slot.";
     }
 
     let stateItem;
@@ -81,7 +82,7 @@ export const dragHandler = async ({ state }, result) => {
 
     //item already in wishlist
     if (state.wishlist.filterList.includes(stateItem.id) && (source['droppableId'] === state.liveSearch['id'])) {
-        return "This item is already inside your wishlist!";
+        return "This item is already inside your wishlist.";
     }
 
     //clone source item from overmind state to memory
@@ -133,23 +134,23 @@ export const dragHandler = async ({ state }, result) => {
     //ONLY wishlist to wishlist swap reserved or limited source item with empty slot or unlimited destination item from different brackets
     if (((sourceItem.itemCategory === "Reserved") || (sourceItem.itemCategory === "Limited")) &&
         ((destinationItem === null) || (destinationItem.itemCategory === "Unlimited")) &&
-        ((sourceBracketId !== null) && destinationBracketId !== sourceBracketId)) {
+        ((sourceBracketId !== null) && (destinationBracketId !== sourceBracketId))) {
         if (state.wishlist[destinationBracketId]['points'] === 0) {
             return "Destination bracket has no more allocation points left";
         } else {
             state.wishlist[destinationBracketId]['points']--;
             state.wishlist[sourceBracketId]['points']++;
         }
-    }
+    } // this block seams correct.
 
     /* ONLY for items from live search: item costs allocation points check if bracket has enought, if so deduce by one. */
-    if (((sourceItem.itemCategory === "Reserved") || (sourceItem.itemCategory === "Limited")) && (sourceBracketId === null)) {
+    if (((sourceItem.itemCategory === "Reserved") || (sourceItem.itemCategory === "Limited")) && (source['droppableId'] === state.liveSearch['id'])) {
         if (state.wishlist[destinationBracketId]['points'] === 0) {
             return "Destination bracket has no more allocation points left";
         } else {
             state.wishlist[destinationBracketId]['points']--;
         }
-    }
+    } // MESSY -> this part on it's own is not complete, where is the other part??
 
     /* swap reserved or limited destination item with empty slot or unlimited source item from 
     different brackets OR live search => special case for items from live search 
