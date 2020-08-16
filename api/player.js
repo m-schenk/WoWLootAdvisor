@@ -160,7 +160,7 @@ const checkWishlistItems = (wishlist, hunter) => {
 
         let bracketsDone = 0;
         let bracketless = false;
-        if(Object.keys(wishlist) === null) { reject}
+        if(Object.keys(wishlist) === null) { reject('wishlist is empty AF'); }
         Object.keys(wishlist).forEach(bracket => {
 
             if (bracketsDone > 4 || hunter && bracketsDone > 3) {
@@ -171,7 +171,7 @@ const checkWishlistItems = (wishlist, hunter) => {
             let itemTypes = new Set();
             let nextMustBeNull = false;
 
-            if (wishlist[bracket] !== null) { reject('wishlist is empty AF'); }
+            if (wishlist[bracket] !== null) {
                 wishlist[bracket].forEach(item => {
                     if(nextMustBeNull && item !== null) {
                         reject('bracket invalid, after reserved item, slot must be empty');
