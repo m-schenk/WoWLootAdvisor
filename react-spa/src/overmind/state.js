@@ -21,7 +21,7 @@ export const state = {
     wishlist: {
         'locked': false,
         'bracket-1': {
-            itemTypes: new Set(),
+            itemTypes: [],
             'slot-1': {
                 id: '1-1',
                 item: null,
@@ -50,7 +50,7 @@ export const state = {
             'prio-start': 50,
         },
         'bracket-2': {
-            itemTypes: new Set(),
+            itemTypes: [],
             'slot-1': {
                 id: '2-1',
                 item: null,
@@ -79,7 +79,7 @@ export const state = {
             'prio-start': 47,
         },
         'bracket-3': {
-            itemTypes: new Set(),
+            itemTypes: [],
             'slot-1': {
                 id: '3-1',
                 item: null,
@@ -108,7 +108,7 @@ export const state = {
             'prio-start': 44,
         },
         'bracket-4': {
-            itemTypes: new Set(),
+            itemTypes: [],
             'slot-1': {
                 id: '4-1',
                 item: null,
@@ -164,7 +164,7 @@ export const state = {
             'points': Infinity,
             'prio-start': 38,
         },
-        filterList: new Set(),
+        filterList = new Set(),
     },
     liveSearch: {
         'id': 'live-search-id',
