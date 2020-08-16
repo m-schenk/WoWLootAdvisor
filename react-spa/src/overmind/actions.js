@@ -45,7 +45,8 @@ export const dragHandler = async ({ state }, result) => {
                 (state.wishlist[sourceBracketId][sourceSlotId].item.itemCategory === "Limited")) {
                 state.wishlist[sourceBracketId]['points']++;
             }
-            state.wishlist.filterList.delete(state.wishlist[sourceBracketId][sourceSlotId].item.id)
+            const sliceid = state.wishlist.filterList.indexOf(state.wishlist[sourceBracketId][sourceSlotId].item.id)
+            state.wishlist.filterList.splice(sliceid, 1)
             state.wishlist[sourceBracketId][sourceSlotId].item = null;
             return;
         }
@@ -76,7 +77,7 @@ export const dragHandler = async ({ state }, result) => {
     }
 
     //item already in wishlist
-    if (state.wishlist.filterList.has(stateItem.id) && (source['droppableId'] === state.liveSearch['id'])) {
+    if (state.wishlist.filterList.includes(stateItem.id) && (source['droppableId'] === state.liveSearch['id'])) {
         return "This item is already inside your wishlist.";
     }
 
@@ -166,9 +167,10 @@ export const dragHandler = async ({ state }, result) => {
 
     if (source['droppableId'] === state.liveSearch['id']) {
         if (destinationItem !== null) {
-            state.wishlist.filterList.delete(state.wishlist[destinationBracketId][destinationSlotId].item.id);
+            const sliceid = state.wishlist.filterList.indexOf(state.wishlist[destinationBracketId][destinationSlotId].item.id);
+            state.wishlist.filterList.splice(sliceid, 1);
         }
-        state.wishlist.filterList.add(sourceItem.id);
+        state.wishlist.filterList.push(sourceItem.id);
     }
     //set state of items
     state.wishlist[destinationBracketId][destinationSlotId].item = sourceItem;
