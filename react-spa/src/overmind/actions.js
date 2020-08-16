@@ -1,6 +1,4 @@
 import { pipe, debounce, mutate } from 'overmind';
-import { UnlimitedIcon, LimitedIcon, ReservedIcon } from '..components/pages/wishlist/styledAssets';
-
 
 export const searchItems = pipe(
     mutate(({ state }, value) => {
@@ -64,7 +62,7 @@ export const dragHandler = async ({ state }, result) => {
     if ((destinationSlotIdInt % 2 === 0) &&
         (state.wishlist[destinationBracketId]['slot-' + (parseInt(destinationSlotIdInt) - 1)].item !== null) &&
         (state.wishlist[destinationBracketId]['slot-' + (parseInt(destinationSlotIdInt) - 1)].item.itemCategory === "Reserved")) {
-        return "This slot is locked because of the "+ <ReservedIcon /> + " Reserved item in the front slot.";
+        return "This slot is locked because of the Reserved item in the front slot.";
     }
 
     let stateItem;
@@ -118,17 +116,17 @@ export const dragHandler = async ({ state }, result) => {
 
     //source item is reserved => should only be able to go to front slots and if it goes to front, backslot must be clear
     if ((sourceItem.itemCategory === "Reserved") && (destinationSlotIdInt % 2 !== 1)) {
-        return "Reserved items go only in front slots!";
+        return "Reserved items go only in front slots.";
     } else if ((sourceItem.itemCategory === "Reserved") && (state.wishlist[destinationBracketId]['slot-' + (parseInt(destinationSlotIdInt) + 1)].item !== null)) {
-        return "Slot behind Reserved items must be empty on drop!";
+        return "Slot behind Reserved items must be empty on drop.";
     }
 
     //destination item is reserved => should only be able to go to front slots and if it goes to front, backslot must be clear
     if ((source['droppableId'] !== state.liveSearch['id']) && (destinationItem !== null) && (destinationItem.itemCategory === "Reserved") && (sourceSlotIdInt % 2 !== 1)) {
-        return "Reserved items go only in front slots!";;
+        return "Reserved items go only in front slots.";;
     } else if ((source['droppableId'] !== state.liveSearch['id']) && (destinationItem !== null) && (destinationItem.itemCategory === "Reserved") &&
         (state.wishlist[sourceBracketId]['slot-' + (parseInt(sourceSlotIdInt) + 1)].item !== null)) {
-        return "Slot behind Reserved items must be empty on drop!";
+        return "Slot behind Reserved items must be empty on drop.";
     }
 
     //ONLY wishlist to wishlist swap reserved or limited source item with empty slot or unlimited destination item from different brackets
@@ -152,10 +150,10 @@ export const dragHandler = async ({ state }, result) => {
         }
     } // MESSY -> this part on it's own is not complete, where is the other part??
 
-    /* swap reserved or limited destination item with empty slot or unlimited source item from 
+    /* swap reserved or limited destination item with unlimited source item from 
     different brackets OR live search => special case for items from live search 
     (swap out a reserved or limited item should give one allocation point back) */
-    if ((destinationItem !== null) && ((destinationItem.itemCategory === "Reserved") || (destinationItem.itemCategory === "Limited"))  &&
+    if ((sourceItem.itemCategory === "Unlimited") && (destinationItem !== null) && ((destinationItem.itemCategory === "Reserved") || (destinationItem.itemCategory === "Limited"))  &&
         (destinationBracketId !== sourceBracketId)) {
         if (source['droppableId'] === state.liveSearch['id']) {
             state.wishlist[destinationBracketId]['points']++;
@@ -168,6 +166,7 @@ export const dragHandler = async ({ state }, result) => {
             }
         }
     }
+
     if (source['droppableId'] === state.liveSearch['id']) {
         if (destinationItem !== null) {
             const sliceid = state.wishlist.filterList.indexOf(state.wishlist[destinationBracketId][destinationSlotId].item.id)
