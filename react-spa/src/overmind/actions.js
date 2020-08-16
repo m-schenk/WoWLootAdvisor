@@ -1,5 +1,5 @@
 import { pipe, debounce, mutate } from 'overmind';
-import { UnlimitedIcon, LimitedIcon, ReservedIcon } from './styledAssets';
+import { UnlimitedIcon, LimitedIcon, ReservedIcon } from '..components/pages/wishlist/styledAssets';
 
 
 export const searchItems = pipe(
