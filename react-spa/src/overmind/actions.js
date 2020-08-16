@@ -76,7 +76,7 @@ export const dragHandler = async ({ state }, result) => {
     }
 
     //item already in wishlist
-    if (state.wishlist.filterList.includes(stateItem.id) && (source['droppableId'] === state.liveSearch['id'])) {
+    if (state.wishlist.filterList.has(stateItem.id) && (source['droppableId'] === state.liveSearch['id'])) {
         return "This item is already inside your wishlist.";
     }
 
