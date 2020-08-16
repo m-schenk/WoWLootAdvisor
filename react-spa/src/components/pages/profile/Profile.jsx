@@ -77,7 +77,7 @@ function PlayerProfileForm() {
                         <option value="Tank">Tank</option>
                     </Form.Control>
                 </Form.Group>
-                <Button variant="warning" type="submit" onClick={handleSubmit}>
+                <Button variant="warning" type="submit" onClick={handleSubmit} eventKey="0">
                     Submit
                 </Button>
             </form>
