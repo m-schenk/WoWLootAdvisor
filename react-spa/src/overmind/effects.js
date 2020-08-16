@@ -137,21 +137,21 @@ export const api = {
         //create a new token
         cancel = axios.CancelToken.source();
         //send request with cancelToken
-        instance.get('items?query=' + query, { cancelToken: cancel.token })
-            .then(async (response) => {
-                const result = await response.data.results;
+        try {
+            const response = await instance.get('items?query=' + query, { cancelToken: cancel.token })
+            const result = await response.data.results;
 
-                //store query for caching
-                cache[query] = result;
+            //store query for caching
+            cache[query] = result;
 
-                //return unpacked result
-                return result;
-            }).catch((err) => {
-                if (axios.isCancel(err)) {
-                    console.error('Request cancelled', err.message);
-                } else {
-                    console.error('Something went bad: ', err.message);
-                }
-            });
+            //return unpacked result
+            return result;
+        } catch (err) {
+            if (axios.isCancel(err)) {
+                console.error('Request cancelled', err.message);
+            } else {
+                console.error('Something went bad: ', err.message);
+            }
+        };
     }
 };
