@@ -45,10 +45,7 @@ export const dragHandler = async ({ state }, result) => {
                 (state.wishlist[sourceBracketId][sourceSlotId].item.itemCategory === "Limited")) {
                 state.wishlist[sourceBracketId]['points']++;
             }
-            //console.log(state.wishlist[sourceBracketId][sourceSlotId].item.id)
-            //console.log(state.wishlist.filterList.indexOf(state.wishlist[sourceBracketId][sourceSlotId].item.id))
-            const sliceid = state.wishlist.filterList.indexOf(state.wishlist[sourceBracketId][sourceSlotId].item.id)
-            state.wishlist.filterList.splice(sliceid, 1)
+            state.wishlist.filterList.delete(state.wishlist[sourceBracketId][sourceSlotId].item.id)
             state.wishlist[sourceBracketId][sourceSlotId].item = null;
             return;
         }
@@ -139,7 +136,7 @@ export const dragHandler = async ({ state }, result) => {
             state.wishlist[destinationBracketId]['points']--;
             state.wishlist[sourceBracketId]['points']++;
         }
-    } // this block seams correct.
+    }
 
     /* ONLY for items from live search: item costs allocation points check if bracket has enought, if so deduce by one. */
     if (((sourceItem.itemCategory === "Reserved") || (sourceItem.itemCategory === "Limited")) && (source['droppableId'] === state.liveSearch['id'])) {
@@ -148,9 +145,9 @@ export const dragHandler = async ({ state }, result) => {
         } else {
             state.wishlist[destinationBracketId]['points']--;
         }
-    } // MESSY -> this part on it's own is not complete, where is the other part??
+    }
 
-    /* swap reserved or limited destination item with unlimited source item from 
+    /* swap reserved or limited destination item with UNLIMITED source item from 
     different brackets OR live search => special case for items from live search 
     (swap out a reserved or limited item should give one allocation point back) */
     if ((sourceItem.itemCategory === "Unlimited") && (destinationItem !== null) && ((destinationItem.itemCategory === "Reserved") || (destinationItem.itemCategory === "Limited"))  &&
@@ -169,15 +166,13 @@ export const dragHandler = async ({ state }, result) => {
 
     if (source['droppableId'] === state.liveSearch['id']) {
         if (destinationItem !== null) {
-            const sliceid = state.wishlist.filterList.indexOf(state.wishlist[destinationBracketId][destinationSlotId].item.id)
-            state.wishlist.filterList.splice(sliceid, 1)
+            state.wishlist.filterList.delete(state.wishlist[destinationBracketId][destinationSlotId].item.id);
         }
-        state.wishlist.filterList.push(sourceItem.id)
+        state.wishlist.filterList.add(sourceItem.id);
     }
     //set state of items
     state.wishlist[destinationBracketId][destinationSlotId].item = sourceItem;
     if (sourceBracketId !== null) {
         state.wishlist[sourceBracketId][sourceSlotId].item = destinationItem;
     }
-
 }
