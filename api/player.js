@@ -217,7 +217,7 @@ const checkWishlistItems = (wishlist, hunter) => {
 
 const getIdsFromBracket = (bracket) => {
     const _bracket = [];
-    if (bracket === 'null') return null;
+    if (bracket === null) return null;
     bracket.forEach(item => {
         if (item) {
             _bracket.push(item.id);
