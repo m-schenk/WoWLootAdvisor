@@ -329,7 +329,7 @@ export const dragHandler = async ({ state }, result) => {
         // swap inside bracket
         if (destinationBracketId === sourceBracketId) {
 
-            let stateItem = state.wishlist[sourceBracketId][sourceSlotId].item;
+            const stateItem = state.wishlist[sourceBracketId][sourceSlotId].item;
 
             // clone source item from overmind state to memory
             const sourceItem = {
@@ -343,20 +343,38 @@ export const dragHandler = async ({ state }, result) => {
                 deName: stateItem.deName,
             };
 
-            stateItem = state.wishlist[destinationBracketId][destinationSlotId].item;
+            //source item is reserved => should only be able to go to front slots and if it goes to front, backslot must be clear
+            if (sourceItem.itemCategory === "Reserved") {
+                if (destinationSlotIdInt % 2 === 0) {
+                    return "Reserved items go only in front slots.";
+                } else if ((state.wishlist[destinationBracketId]['slot-' + (parseInt(destinationSlotIdInt) + 1)].item !== null)) {
+                    return "Slot behind Reserved items must be empty on drop.";
+                }
+            }
 
-            // if there is a item at destination swap else set source null
-            if (stateItem !== null) {
+            if (state.wishlist[destinationBracketId][destinationSlotId].item !== null) {
+                const stateItem2 = state.wishlist[destinationBracketId][destinationSlotId].item;
+
                 const destinationItem = {
-                    id: stateItem.id,
-                    name: stateItem.name,
-                    itemType: stateItem.itemType,
-                    itemCategory: stateItem.itemCategory,
-                    raid: stateItem.raid,
-                    encounters: stateItem.encounters,
-                    priority: stateItem.priority,
-                    deName: stateItem.deName,
+                    id: stateItem2.id,
+                    name: stateItem2.name,
+                    itemType: stateItem2.itemType,
+                    itemCategory: stateItem2.itemCategory,
+                    raid: stateItem2.raid,
+                    encounters: stateItem2.encounters,
+                    priority: stateItem2.priority,
+                    deName: stateItem2.deName,
                 };
+
+                //destination item is reserved => should only be able to go to front slots and if it goes to front, backslot must be clear
+                if (destinationItem.itemCategory === "Reserved") {
+                    if (sourceSlotIdInt % 2 === 0) {
+                        return "Reserved items go only in front slots.";
+                    } else if (state.wishlist[sourceBracketId]['slot-' + (parseInt(sourceSlotIdInt) + 1)].item !== null) {
+                        return "Slot behind Reserved items must be empty on drop.";
+                    }
+                }
+
                 state.wishlist[sourceBracketId][sourceSlotId] = destinationItem;
             } else {
                 state.wishlist[sourceBracketId][sourceSlotId] = null;
