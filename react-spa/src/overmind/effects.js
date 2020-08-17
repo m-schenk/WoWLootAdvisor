@@ -40,7 +40,7 @@ export const api = {
             if (response.data.player.wishlist.bracket4) state.player.debug.bracket4 = [...response.data.player.wishlist.bracket4]
             if (response.data.player.wishlist.bracketless) state.player.debug.bracketless = [...response.data.player.wishlist.bracketless]
 
-            if (response.player.class === 'Hunter') {
+            if (response.data.player.class === 'Hunter') {
                 if(state.wishlist['bracket-1'].points === 3) {
                     state.wishlist['bracket-1'].points = 2;
                 }
@@ -94,7 +94,7 @@ export const api = {
             if (response.data.player.wishlist.bracket4) state.player.debug.bracket4 = [...response.data.player.wishlist.bracket4]
             if (response.data.player.wishlist.bracketless) state.player.debug.bracketless = [...response.data.player.wishlist.bracketless]
 
-            if (response.player.class === 'Hunter') {
+            if (response.data.player.class === 'Hunter') {
                 if(state.wishlist['bracket-1'].points === 3) {
                     state.wishlist['bracket-1'].points = 2;
                 }
