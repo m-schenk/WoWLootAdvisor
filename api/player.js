@@ -132,7 +132,7 @@ exports.postSaveWishlist = (req, res, next) => {
                 player.wishlist.bracket2 = getIdsFromBracket(req.body.wishlist.bracket2);
                 player.wishlist.bracket3 = getIdsFromBracket(req.body.wishlist.bracket3);
                 player.wishlist.bracket4 = getIdsFromBracket(req.body.wishlist.bracket4);
-                player.wishlist.bracketLess = getIdsFromBracket(req.body.wishlist.bracketless);
+                player.wishlist.bracketless = getIdsFromBracket(req.body.wishlist.bracketless);
                 player.save()
                     .then(player => {
                         res.status(200);
