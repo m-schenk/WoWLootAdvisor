@@ -12,17 +12,17 @@ import 'shepherd.js/dist/css/shepherd.css'
 
 const tourOptions = {
     defaultStepOptions: {
-      cancelIcon: {
-        enabled: true
-      }
+        cancelIcon: {
+            enabled: true
+        }
     },
     useModalOverlay: true
-  };
+};
 
 function TButton() {
     const tour = React.useContext(ShepherdTourContext)
-    return(
-        <Button variant="warning" as="input" type="button" value="Tutorial" onClick={tour.start}/>
+    return (
+        <Button variant="warning" as="input" type="button" value="Tutorial" onClick={tour.start} />
     )
 }
 
@@ -37,7 +37,7 @@ class ItemLiveSearch extends React.Component {
     }
 
     componentDidUpdate() {
-        if(window.$WowheadPower) {
+        if (window.$WowheadPower) {
             window.$WowheadPower.refreshLinks();
         }
     }
@@ -45,36 +45,45 @@ class ItemLiveSearch extends React.Component {
     triggerTutorial = () => {
         this.props.overmind.actions.tutorial();
     }
-    
+
     sendWishlist = () => {
         this.props.overmind.actions.sendWishlist()
-        // .then(event => {
-        //     toast(event, {
-        //         className: 'drag-event-toast',
-        //         bodyClassName: 'drag-event-toast-textbody',
-        //         progressClassName: 'drag-event-toast-progress-bar',
-        //         position: toast.POSITION.TOP_CENTER,
-        //     });
-        // });
+            .then(event => {
+                if (event) {
+                    toast("Wishlist has been saved.", {
+                        className: 'drag-event-toast',
+                        bodyClassName: 'drag-event-toast-textbody',
+                        progressClassName: 'drag-event-toast-progress-bar',
+                        position: toast.POSITION.TOP_CENTER,
+                    });
+                } else {
+                    toast("Wishlist could not be saved.", {
+                        className: 'drag-event-toast',
+                        bodyClassName: 'drag-event-toast-textbody',
+                        progressClassName: 'drag-event-toast-progress-bar',
+                        position: toast.POSITION.TOP_CENTER,
+                    });
+                }
+            });
     }
 
     get renderItems() {
         let itemList = <h3>0 Items found.</h3>;
-        if(this.props.overmind.state.liveSearch['isSearching']) {
+        if (this.props.overmind.state.liveSearch['isSearching']) {
             itemList = <Spinner animation="border" size="sm" />;
         }
-        if(this.props.overmind.state.liveSearch['result']) {
+        if (this.props.overmind.state.liveSearch['result']) {
             itemList = <ItemListContainer id={this.props.id} />;
         }
         return itemList;
     };
-    
+
     render() {
         return (
             <div className="live-search">
                 <div className="control">
-                    <Button variant="warning" as="input" type="submit" value="Submit" onClick={ () => { this.sendWishlist() } } />
-                    <Button variant="warning" as="input" type="reset" value="Reset" />  
+                    <Button variant="warning" as="input" type="submit" value="Submit" onClick={() => { this.sendWishlist() }} />
+                    <Button variant="warning" as="input" type="reset" value="Reset" />
                     <ShepherdTour steps={tutorialSteps} tourOptions={tourOptions}>
                         <TButton />
                     </ShepherdTour>

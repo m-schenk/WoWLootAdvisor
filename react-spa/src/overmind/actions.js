@@ -13,7 +13,7 @@ export const searchItems = pipe(
 )
 
 export const sendWishlist = async ({ state, effects }) => {
-    await effects.api.sendWishlist(state);
+    return await effects.api.sendWishlist(state);
 }
 
 export const loadProfile = async ({ state, effects }) => {

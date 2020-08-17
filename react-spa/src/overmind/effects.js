@@ -106,20 +106,33 @@ export const api = {
             bracketless:
                 [state.wishlist['bracketless']['slot-1'].item, state.wishlist['bracketless']['slot-2'].item,
                 state.wishlist['bracketless']['slot-3'].item, state.wishlist['bracketless']['slot-4'].item,
-                state.wishlist['bracketless']['slot-5'].item, state.wishlist['bracketless']['slot-6'].item,]
+                state.wishlist['bracketless']['slot-5'].item, state.wishlist['bracketless']['slot-6'].item,
+                state.wishlist['bracketless']['slot-7'].item, state.wishlist['bracketless']['slot-8'].item,
+                state.wishlist['bracketless']['slot-9'].item, state.wishlist['bracketless']['slot-10'].item,
+                state.wishlist['bracketless']['slot-11'].item, state.wishlist['bracketless']['slot-12'].item,
+                state.wishlist['bracketless']['slot-13'].item, state.wishlist['bracketless']['slot-14'].item,
+                state.wishlist['bracketless']['slot-15'].item, state.wishlist['bracketless']['slot-16'].item,
+                state.wishlist['bracketless']['slot-17'].item, state.wishlist['bracketless']['slot-18'].item,
+                state.wishlist['bracketless']['slot-19'].item, state.wishlist['bracketless']['slot-20'].item,
+                state.wishlist['bracketless']['slot-21'].item, state.wishlist['bracketless']['slot-22'].item,
+                state.wishlist['bracketless']['slot-23'].item, state.wishlist['bracketless']['slot-24'].item,
+                state.wishlist['bracketless']['slot-25'].item, state.wishlist['bracketless']['slot-26'].item,
+                state.wishlist['bracketless']['slot-27'].item, state.wishlist['bracketless']['slot-28'].item,
+                state.wishlist['bracketless']['slot-29'].item, state.wishlist['bracketless']['slot-30'].item,
+                state.wishlist['bracketless']['slot-31'].item, state.wishlist['bracketless']['slot-32'].item,]
         }
         instance.post('player/saveWishlist', {
             wishlist: wishlist
-        })//.then((response) => {
-        //     if (response.ok) {
-        //         return true;
-        //     } else {
-        //         return false;
-        //     }
-        // }).catch(err => {
-        //     console.error(err);
-        //     return false;
-        // });
+        }).then((response) => {
+            if (response.ok) {
+                return true;
+            } else {
+                return false;
+            }
+        }).catch(err => {
+            console.error(err);
+            return false;
+        });
     },
     async searchItems(query) {
         let cancel;
