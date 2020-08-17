@@ -546,7 +546,6 @@ export const dragHandler = async ({ state }, result) => {
     if (source['droppableId'].includes('bracketless')) {
         // get source bracket or bracketless slot id
         const [sourceBracketId, sourceSlotId] = source['droppableId'].split("_");
-        const [, sourceSlotIdInt] = sourceSlotId.split("-");
 
         // from bracketless to remove
         if (destination['droppableId'] === 'delete-zone') {
