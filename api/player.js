@@ -183,7 +183,9 @@ const checkWishlistItems = (wishlist, hunter) => {
                         itemIds.push(item.id);
 
                         if (item.itemCategory === 'Reserved') {
-                            nextMustBeNull = true;
+                            if(!bracketless) {
+                                nextMustBeNull = true;
+                            }
                         }
 
                         const itemType = weapon.includes(item.itemType) ? "Weapon" : ranged.includes(itemTypes) ? "Ranged" : offhand.includes(item.itemTyped) ? "Offhand" : item.itemType;

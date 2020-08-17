@@ -51,7 +51,6 @@ class ItemLiveSearch extends React.Component {
 
     sendWishlist = async () => {
         const event = await this.props.overmind.actions.sendWishlist()
-        console.log(event);
         if (event) {
             toast("Wishlist has been saved.", {
                 className: 'drag-event-toast',
