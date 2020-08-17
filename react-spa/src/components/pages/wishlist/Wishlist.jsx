@@ -221,16 +221,13 @@ const Item = (props) => {
     const bracketId = props.bracketId;
     const slotIdInt = parseInt(props.slotIdInt);
 
-    if (bracketId !== 'bracketless') {
-        console.log(slotIdInt);
-        if ((slotIdInt % 2 === 0 ) && state.wishlist[bracketId]['slot-' + (slotIdInt - 1)].item !== null &&
-            state.wishlist[bracketId]['slot-' + (slotIdInt - 1)].item.itemCategory === "Reserved") {
-            return (
-                <ItemContainer>
-                    <p>Locked</p>
-                </ItemContainer>
-            )
-        }
+    if ((bracketId !== 'bracketless') && (slotIdInt % 2 === 0) && (state.wishlist[bracketId]['slot-' + (slotIdInt - 1)].item !== null) &&
+        (state.wishlist[bracketId]['slot-' + (slotIdInt - 1)].item.itemCategory === "Reserved")) {
+        return (
+            <ItemContainer>
+                <p>Locked</p>
+            </ItemContainer>
+        )
     } else if (state.wishlist[bracketId][slotId].item === null) {
         return (<></>)
     } else {
