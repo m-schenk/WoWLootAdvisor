@@ -129,14 +129,6 @@ class Profile extends React.Component {
                                 <Card.Header>Player Profile</Card.Header>
                                 <Card.Body>
                                     <Row>
-                                        <Col md={6}><label>(remove $dev) _id:</label></Col>
-                                        <Col md={6}><p>{this.props.overmind.state.player._id}</p></Col>
-                                    </Row>
-                                    <Row>
-                                        <Col md={6}><label>(remove $dev) permissions:</label></Col>
-                                        <Col md={6}><p>{this.props.overmind.state.player.permissions}</p></Col>
-                                    </Row>
-                                    <Row>
                                         <Col md={6}><label>Character Name:</label></Col>
                                         <Col md={6}><b>{this.props.overmind.state.player.name}</b></Col>
                                     </Row>
