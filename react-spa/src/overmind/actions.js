@@ -158,7 +158,7 @@ export const dragHandler = async ({ state }, result) => {
                         if (state.wishlist[destinationBracketId].points === 0) {
                             return "Destination bracket has no more allocation points left";
                         } else {
-                            state.wishlist[destinationBracketId]['points']--;
+                            state.wishlist[destinationBracketId].points--;
                         }
                     }
                 }
@@ -188,7 +188,7 @@ export const dragHandler = async ({ state }, result) => {
                         return "Destination bracket has no more allocation points left";
                     } else {
                         // reduce alloc point
-                        state.wishlist[destinationBracketId]['points']--;
+                        state.wishlist[destinationBracketId].points--;
                     }
                 }
                 // push new item type to bracket
@@ -294,7 +294,7 @@ export const dragHandler = async ({ state }, result) => {
                         if (state.wishlist[sourceBracketId].points === 0) {
                             return "Destination bracket has no more allocation points left";
                         } else {
-                            state.wishlist[sourceBracketId]['points']--;
+                            state.wishlist[sourceBracketId].points--;
                         }
                     }
                 }
@@ -313,7 +313,7 @@ export const dragHandler = async ({ state }, result) => {
 
                 // check allocation points
                 if ((sourceItem.itemCategory === "Reserved") || (sourceItem.itemCategory === "Limited")) {
-                    state.wishlist[sourceBracketId]['points']++;
+                    state.wishlist[sourceBracketId].points++;
                 }
 
                 // set null at source because there was no swap item
@@ -469,10 +469,10 @@ export const dragHandler = async ({ state }, result) => {
 
                 // swap item types only when there not the same
                 if (destinationFixedItemType !== sourceFixedItemType) {
-                    // remove soure item type from source bracket
-                    state.wishlist[sourceBracketId].splice(state.wishlist[sourceBracketId].itemTypes.indexOf(sourceFixedItemType), 1);
+                    // remove source item type from source bracket
+                    state.wishlist[sourceBracketId].itemTypes.splice(state.wishlist[sourceBracketId].itemTypes.indexOf(sourceFixedItemType), 1);
                     // remove destination item type from destination bracket
-                    state.wishlist[destinationBracketId].splice(state.wishlist[destinationBracketId].itemTypes.indexOf(destinationFixedItemType), 1);
+                    state.wishlist[destinationBracketId].itemTypes.splice(state.wishlist[destinationBracketId].itemTypes.indexOf(destinationFixedItemType), 1);
                     // push source item type to destination bracket
                     state.wishlist[destinationBracketId].itemTypes.push(sourceFixedItemType);
                     // push destination item type to source bracket
@@ -493,12 +493,17 @@ export const dragHandler = async ({ state }, result) => {
                     // check if bracket has points remaining
                     if (state.wishlist[destinationBracketId].points > 0) {
                         // reduce alloc point
-                        state.wishlist[destinationBracketId]['points']--;
+                        state.wishlist[destinationBracketId].points--;
+                        state.wishlist[sourceBracketId].points++;
                     } else {
                         return "Destination bracket has no more allocation points left";
                     }
                 }
-                // push new item type to bracket
+
+                // remove item type from old bracket
+                state.wishlist[sourceBracketId].itemTypes.splice(state.wishlist[sourceBracketId].itemTypes.indexOf(sourceFixedItemType), 1);
+
+                // push item type to new bracket
                 state.wishlist[destinationBracketId].itemTypes.push(sourceFixedItemType);
                 // set null at source because there was no swap item
                 state.wishlist[sourceBracketId][sourceSlotId].item = null;
@@ -605,7 +610,7 @@ export const dragHandler = async ({ state }, result) => {
                         if (state.wishlist[destinationBracketId].points === 0) {
                             return "Destination bracket has no more allocation points left";
                         } else {
-                            state.wishlist[destinationBracketId]['points']--;
+                            state.wishlist[destinationBracketId].points--;
                         }
                     }
                 }
@@ -632,7 +637,7 @@ export const dragHandler = async ({ state }, result) => {
                     // check if bracket has points remaining
                     if (state.wishlist[destinationBracketId].points > 0) {
                         // reduce alloc point
-                        state.wishlist[destinationBracketId]['points']--;
+                        state.wishlist[destinationBracketId].points--;
                     } else {
                         return "Destination bracket has no more allocation points left";
                     }
