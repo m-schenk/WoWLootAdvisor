@@ -702,11 +702,11 @@ export const dragHandler = async ({ state }, result) => {
                     priority: stateItem.priority,
                     deName: stateItem.deName,
                 };
-                state.wishlist[sourceBracketId][sourceSlotId] = destinationItem;
+                state.wishlist[sourceBracketId][sourceSlotId].item = destinationItem;
             } else {
-                state.wishlist[sourceBracketId][sourceSlotId] = null;
+                state.wishlist[sourceBracketId][sourceSlotId].item = null;
             }
-            state.wishlist[destinationBracketId][destinationSlotId] = sourceItem;
+            state.wishlist[destinationBracketId][destinationSlotId].item = sourceItem;
 
             return "DEBUG: Items have been swapped (inside bracketless)"
         }
