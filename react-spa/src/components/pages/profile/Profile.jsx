@@ -176,6 +176,10 @@ class Profile extends React.Component {
                                         <Col md={2}><p>(remove $dev_bracket4)</p></Col>
                                         <Col md={10}>{this.props.overmind.state.player.debug.bracket4 && this.props.overmind.state.player.debug.bracket4.toString()}</Col>
                                     </Row>
+                                    <Row>
+                                        <Col md={2}><p>(remove $dev_bracketless)</p></Col>
+                                        <Col md={10}>{this.props.overmind.state.player.debug.bracketless && this.props.overmind.state.player.debug.bracketless.toString()}</Col>
+                                    </Row>
                                 </Card.Body>
                                 <Accordion>
                                     <Card.Footer>
