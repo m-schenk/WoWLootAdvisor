@@ -159,49 +159,54 @@ const checkWishlistItems = (wishlist, hunter) => {
         const offhand = ["Shield", "Offhand"];
 
         let bracketsDone = 0;
-        let bracketless = false;
-        if(Object.keys(wishlist) === null) { reject('wishlist is empty AF'); }
+        if (Object.keys(wishlist) === null) { reject('wishlist is empty AF'); }
         Object.keys(wishlist).forEach(bracket => {
-
-            if (bracketsDone >= 4 || hunter && bracketsDone >= 3) {
-                bracketless = true;
-            }
 
             let allocationPoints, count = 0;
             let itemTypes = new Set();
             let nextMustBeNull = false;
 
             if (wishlist[bracket] !== null) {
+                
                 wishlist[bracket].forEach(item => {
-                    if(nextMustBeNull && item !== null) {
-                        reject('bracket invalid, after reserved item, slot must be empty');
-                    } else {
-                        nextMustBeNull = false;
-                    }
-                    count++;
-                    if (item) {
-                        itemIds.push(item.id);
 
-                        if (item.itemCategory === 'Reserved') {
-                            if(!bracketless) {
+                    if (bracketsDone >= 4 || hunter && bracketsDone >= 3) {
+                        if (item) {
+                            itemIds.push(item.id);
+                        }
+                    } else {
+
+                        if (nextMustBeNull && item !== null) {
+                            reject('bracket invalid, after reserved item, slot must be empty');
+                        } else {
+                            nextMustBeNull = false;
+                        }
+
+                        count++;
+                        if (item) {
+
+                            itemIds.push(item.id);
+
+                            if (item.itemCategory === 'Reserved') {
                                 nextMustBeNull = true;
                             }
-                        }
 
-                        const itemType = weapon.includes(item.itemType) ? "Weapon" : ranged.includes(itemTypes) ? "Ranged" : offhand.includes(item.itemTyped) ? "Offhand" : item.itemType;
-                        if (itemTypes.has(itemType)) {
-                            reject('bracket has duplicate item type');
-                        }
-                        itemTypes.add(itemType);
+                            const itemType = weapon.includes(item.itemType) ? "Weapon" : ranged.includes(itemTypes) ? "Ranged" : offhand.includes(item.itemTyped) ? "Offhand" : item.itemType;
+                            if (itemTypes.has(itemType)) {
+                                reject('bracket has duplicate item type');
+                            }
+                            itemTypes.add(itemType);
 
-                        if ((item.itemCategory === 'Reserved') || (item.itemCategory === 'Limited'))
-                            allocationPoints++;
-                    }
-                    if (allocationPoints > maxAllocationPoints) {
-                        reject('bracket exceeds allocation points');
-                    }
-                    if (!bracketless && count > 6) {
-                        reject('bracket has more than 6 items');
+                            if ((item.itemCategory === 'Reserved') || (item.itemCategory === 'Limited')) {
+                                allocationPoints++;
+                            }
+                        }
+                        if (allocationPoints > maxAllocationPoints) {
+                            reject('bracket exceeds allocation points');
+                        }
+                        if (count > 6) {
+                            reject('bracket has more than 6 items');
+                        }
                     }
                 });
                 bracketsDone++;
