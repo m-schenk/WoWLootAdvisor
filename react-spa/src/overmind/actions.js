@@ -208,9 +208,7 @@ export const dragHandler = async ({ state }, result) => {
     /*********************************** BRACKETS ==> ANYWHERE ************************************/
     /**********************************************************************************************/
     if (source['droppableId'].includes('bracket-')) {
-        // get the bracket or bracketless slot id
-        const [destinationBracketId, destinationSlotId] = destination['droppableId'].split("_");
-        const [, destinationSlotIdInt] = destinationSlotId.split("-");
+        // get source bracket or bracketless slot id
         const [sourceBracketId, sourceSlotId] = source['droppableId'].split("_");
         const [, sourceSlotIdInt] = sourceSlotId.split("-");
 
@@ -234,6 +232,10 @@ export const dragHandler = async ({ state }, result) => {
             state.wishlist[sourceBracketId][sourceSlotId].item = null;
             return "Item was been removed from wishlist.";
         }
+
+        // get destination bracket or bracketless slot id
+        const [destinationBracketId, destinationSlotId] = destination['droppableId'].split("_");
+        const [, destinationSlotIdInt] = destinationSlotId.split("-");
 
         // from bracket to bracketless
         if (destination['droppableId'].includes('bracketless')) {
@@ -542,9 +544,7 @@ export const dragHandler = async ({ state }, result) => {
     /********************************** BRACKETLESS ==> ANYWHERE **********************************/
     /**********************************************************************************************/
     if (source['droppableId'].includes('bracketless')) {
-        // get the bracket or bracketless slot id
-        const [destinationBracketId, destinationSlotId] = destination['droppableId'].split("_");
-        const [, destinationSlotIdInt] = destinationSlotId.split("-");
+        // get source bracket or bracketless slot id
         const [sourceBracketId, sourceSlotId] = source['droppableId'].split("_");
         const [, sourceSlotIdInt] = sourceSlotId.split("-");
 
@@ -558,6 +558,11 @@ export const dragHandler = async ({ state }, result) => {
             state.wishlist[sourceBracketId][sourceSlotId].item = null;
             return "Item was been removed from wishlist.";
         }
+
+        // get destination bracket or bracketless slot id
+        const [destinationBracketId, destinationSlotId] = destination['droppableId'].split("_");
+        const [, destinationSlotIdInt] = destinationSlotId.split("-");
+
         // from bracketless to bracket
         if (destination['droppableId'].includes('bracket-')) {
 
