@@ -16,6 +16,7 @@ export const state = {
             bracket2: [],
             bracket3: [],
             bracket4: [],
+            bracketless: [],
         }
     },
     wishlist: {
@@ -40,7 +41,7 @@ export const state = {
             'slot-6': {
                 item: null,
             },
-            points: player.class === 'hunter' ? 2 : 3,
+            points: 3
         },
         'bracket-2': {
             itemTypes: [],
@@ -62,7 +63,7 @@ export const state = {
             'slot-6': {
                 item: null,
             },
-            points: player.class === 'hunter' ? 2 : 3,
+            points: 3
         },
         'bracket-3': {
             itemTypes: [],
@@ -84,7 +85,7 @@ export const state = {
             'slot-6': {
                 item: null,
             },
-            points: player.class === 'hunter' ? 2 : 3,
+            points: 3
         },
         'bracket-4': {
             itemTypes: [],
