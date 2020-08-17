@@ -71,6 +71,7 @@ class Wishlist extends React.Component {
                     <Bracket id={1} />
                     <Bracket id={2} />
                     <Bracket id={3} />
+                    <Bracketless isHunter={true}/>
                 </div>
             )
         } else {
@@ -80,7 +81,7 @@ class Wishlist extends React.Component {
                     <Bracket id={2} />
                     <Bracket id={3} />
                     <Bracket id={4} />
-                    <Bracketless />
+                    <Bracketless isHunter={false}/>
                 </div>
             )
         }
@@ -148,6 +149,7 @@ const Bracketless = (props) => {
                     <ItemDroppable bracketId={bracketId} slotIdInt={25} />
                     <ItemDroppable bracketId={bracketId} slotIdInt={26} />
                 </Row>
+                { props.isHunter && <>
                 <Row className="d-flex justify-content-center">
                     <ItemDroppable bracketId={bracketId} slotIdInt={27} />
                     <ItemDroppable bracketId={bracketId} slotIdInt={28} />
@@ -160,6 +162,7 @@ const Bracketless = (props) => {
                     <ItemDroppable bracketId={bracketId} slotIdInt={31} />
                     <ItemDroppable bracketId={bracketId} slotIdInt={32} />
                 </Row>
+                </>}
             </Col>
         </div>
     )
