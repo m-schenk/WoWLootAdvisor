@@ -649,7 +649,7 @@ export const dragHandler = async ({ state }, result) => {
             return "DEBUG: Item was swapped inside your wishlist (bracketless to bracket)";
         }
         // swaps inside bracketless
-        if (destination['droppableId'] === 'bracketless') {
+        if (destination['droppableId'].includes('bracketless')) {
 
             let stateItem = state.wishlist[sourceBracketId][sourceSlotId].item;
 
