@@ -124,8 +124,8 @@ export const api = {
         instance.post('player/saveWishlist', {
             wishlist: wishlist
         }).then((response) => {
-            console.log(response.ok)
-            if (response.ok) {
+            console.log(response)
+            if (response) {
                 return true;
             } else {
                 return false;
