@@ -10,6 +10,9 @@ import { tutorialSteps } from '../../tutorialSteps'
 
 import 'shepherd.js/dist/css/shepherd.css'
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const tourOptions = {
     defaultStepOptions: {
         cancelIcon: {
