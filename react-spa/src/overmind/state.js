@@ -40,7 +40,7 @@ export const state = {
             'slot-6': {
                 item: null,
             },
-            points: 3,
+            points: state.player.class === 'hunter' ? 2 : 3,
         },
         'bracket-2': {
             itemTypes: [],
@@ -62,7 +62,7 @@ export const state = {
             'slot-6': {
                 item: null,
             },
-            points: 3,
+            points: state.player.class === 'hunter' ? 2 : 3,
         },
         'bracket-3': {
             itemTypes: [],
@@ -84,7 +84,7 @@ export const state = {
             'slot-6': {
                 item: null,
             },
-            points: 3,
+            points: state.player.class === 'hunter' ? 2 : 3,
         },
         'bracket-4': {
             itemTypes: [],
@@ -106,7 +106,7 @@ export const state = {
             'slot-6': {
                 item: null,
             },
-            points: 3,
+            points: 3
         },
         'bracketless': {
             'slot-1': {
