@@ -170,7 +170,7 @@ export const dragHandler = async ({ state }, result) => {
                 // swap item types only when there not the same
                 if (destinationFixedItemType !== sourceFixedItemType) {
                     // remove old item type from bracket
-                    state.wishlist[destinationBracketId].splice(state.wishlist[destinationBracketId].itemTypes.indexOf(destinationFixedItemType), 1);
+                    state.wishlist[destinationBracketId].itemTypes.splice(state.wishlist[destinationBracketId].itemTypes.indexOf(destinationFixedItemType), 1);
                     // push new item type to bracket
                     state.wishlist[destinationBracketId].itemTypes.push(sourceFixedItemType);
                 }
@@ -302,7 +302,7 @@ export const dragHandler = async ({ state }, result) => {
                 // swap item types only when there not the same
                 if (destinationFixedItemType !== sourceFixedItemType) {
                     // remove old item type from bracket
-                    state.wishlist[sourceBracketId].splice(state.wishlist[sourceBracketId].itemTypes.indexOf(sourceFixedItemType), 1);
+                    state.wishlist[sourceBracketId].itemTypes.splice(state.wishlist[sourceBracketId].itemTypes.indexOf(sourceFixedItemType), 1);
                     // push new item type to bracket
                     state.wishlist[sourceBracketId].itemTypes.push(destinationFixedItemType);
                 }
@@ -618,7 +618,7 @@ export const dragHandler = async ({ state }, result) => {
                 // swap item types only when there not the same
                 if (destinationFixedItemType !== sourceFixedItemType) {
                     // remove old item type from bracket
-                    state.wishlist[destinationBracketId].splice(state.wishlist[destinationBracketId].itemTypes.indexOf(destinationFixedItemType), 1);
+                    state.wishlist[destinationBracketId].itemTypes.splice(state.wishlist[destinationBracketId].itemTypes.indexOf(destinationFixedItemType), 1);
                     // push new item type to bracket
                     state.wishlist[destinationBracketId].itemTypes.push(sourceFixedItemType);
                 }
