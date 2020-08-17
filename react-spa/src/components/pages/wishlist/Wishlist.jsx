@@ -80,7 +80,7 @@ class Wishlist extends React.Component {
                     <Bracket id={2} />
                     <Bracket id={3} />
                     <Bracket id={4} />
-
+                    <Bracketless />
                 </div>
             )
         }
@@ -90,10 +90,10 @@ class Wishlist extends React.Component {
 const Bracketless = (props) => {
     const state = useState();
 
-    const bracketId = 'bracketLess';
+    const bracketId = 'bracketless';
 
     return (
-        <div className={bracketId} id={bracketId}>
+        <div className="bracket" id={bracketId}>
             <div>
                 <>Bracketless - Unlimited Allocation Points</>
             </div>
@@ -151,20 +151,16 @@ const Bracketless = (props) => {
                     <ItemDroppable bracketId={bracketId} slotIdInt={26} />
                 </Row>
                 <Row className="d-flex justify-content-center">
-                    <ItemDroppable bracketId={bracketId} slotIdInt={5} />
-                    <ItemDroppable bracketId={bracketId} slotIdInt={6} />
+                    <ItemDroppable bracketId={bracketId} slotIdInt={27} />
+                    <ItemDroppable bracketId={bracketId} slotIdInt={28} />
                 </Row>
                 <Row className="d-flex justify-content-center">
-                    <ItemDroppable bracketId={bracketId} slotIdInt={5} />
-                    <ItemDroppable bracketId={bracketId} slotIdInt={6} />
+                    <ItemDroppable bracketId={bracketId} slotIdInt={29} />
+                    <ItemDroppable bracketId={bracketId} slotIdInt={30} />
                 </Row>
                 <Row className="d-flex justify-content-center">
-                    <ItemDroppable bracketId={bracketId} slotIdInt={5} />
-                    <ItemDroppable bracketId={bracketId} slotIdInt={6} />
-                </Row>
-                <Row className="d-flex justify-content-center">
-                    <ItemDroppable bracketId={bracketId} slotIdInt={5} />
-                    <ItemDroppable bracketId={bracketId} slotIdInt={6} />
+                    <ItemDroppable bracketId={bracketId} slotIdInt={31} />
+                    <ItemDroppable bracketId={bracketId} slotIdInt={32} />
                 </Row>
             </Col>
         </div>
@@ -178,7 +174,7 @@ const Bracket = (props) => {
     const allocPoints = state.wishlist[bracketId]['points'];
 
     return (
-        <div className={"bracket"} id={'bracket-' + props.id}>
+        <div className="bracket" id={'bracket-' + props.id}>
             <div>
                 <>Bracket {props.id} - Remaining Allocation Points: {allocPoints}</>
             </div>
@@ -227,7 +223,8 @@ const Item = (props) => {
     const bracketId = props.bracketId;
     const slotIdInt = parseInt(props.slotIdInt);
 
-    if ((slotIdInt > 1) && state.wishlist[bracketId]['slot-' + (slotIdInt - 1)].item !== null &&
+    if ((slotIdInt > 1) && bracketId !== 'bracketless' &&
+        state.wishlist[bracketId]['slot-' + (slotIdInt - 1)].item !== null &&
         state.wishlist[bracketId]['slot-' + (slotIdInt - 1)].item.itemCategory === "Reserved") {
         return (
             <ItemContainer>
@@ -252,15 +249,9 @@ const Item = (props) => {
                                     {state.wishlist[bracketId][slotId].item.name}
                                 </a>
                             </div>
-                            {state.wishlist[bracketId][slotId].item.itemCategory === "Reserved" &&
-                                <ReservedIcon />
-                            }
-                            {state.wishlist[bracketId][slotId].item.itemCategory === "Limited" &&
-                                <LimitedIcon />
-                            }
-                            {state.wishlist[bracketId][slotId].item.itemCategory === "Unlimited" &&
-                                <UnlimitedIcon />
-                            }
+                            { state.wishlist[bracketId][slotId].item.itemCategory === "Reserved" && <ReservedIcon /> }
+                            { state.wishlist[bracketId][slotId].item.itemCategory === "Limited" && <LimitedIcon /> }
+                            { state.wishlist[bracketId][slotId].item.itemCategory === "Unlimited" && <UnlimitedIcon /> }
                         </ItemContainer>
                     )}
                 </Draggable>

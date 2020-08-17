@@ -23,146 +23,189 @@ export const state = {
         'bracket-1': {
             itemTypes: [],
             'slot-1': {
-                id: '1-1',
                 item: null,
             },
             'slot-2': {
-                id: '1-2',
                 item: null,
             },
             'slot-3': {
-                id: '1-3',
                 item: null,
             },
             'slot-4': {
-                id: '1-4',
                 item: null,
             },
             'slot-5': {
-                id: '1-5',
                 item: null,
             },
             'slot-6': {
-                id: '1-6',
                 item: null,
             },
-            'points': 3,
-            'prio-start': 50,
+            points: 3,
         },
         'bracket-2': {
             itemTypes: [],
             'slot-1': {
-                id: '2-1',
                 item: null,
             },
             'slot-2': {
-                id: '2-2',
                 item: null,
             },
             'slot-3': {
-                id: '2-3',
                 item: null,
             },
             'slot-4': {
-                id: '2-4',
                 item: null,
             },
             'slot-5': {
-                id: '2-5',
                 item: null,
             },
             'slot-6': {
-                id: '2-6',
                 item: null,
             },
-            'points': 3,
-            'prio-start': 47,
+            points: 3,
         },
         'bracket-3': {
             itemTypes: [],
             'slot-1': {
-                id: '3-1',
                 item: null,
             },
             'slot-2': {
-                id: '3-2',
                 item: null,
             },
             'slot-3': {
-                id: '3-3',
                 item: null,
             },
             'slot-4': {
-                id: '3-4',
                 item: null,
             },
             'slot-5': {
-                id: '3-5',
                 item: null,
             },
             'slot-6': {
-                id: '3-6',
                 item: null,
             },
-            'points': 3,
-            'prio-start': 44,
+            points: 3,
         },
         'bracket-4': {
             itemTypes: [],
             'slot-1': {
-                id: '4-1',
                 item: null,
             },
             'slot-2': {
-                id: '4-2',
                 item: null,
             },
             'slot-3': {
-                id: '4-3',
                 item: null,
             },
             'slot-4': {
-                id: '4-4',
                 item: null,
             },
             'slot-5': {
-                id: '4-5',
                 item: null,
             },
             'slot-6': {
-                id: '4-6',
                 item: null,
             },
-            'points': 3,
-            'prio-start': 41,
+            points: 3,
         },
         'bracketless': {
             'slot-1': {
-                id: '5-1',
                 item: null,
             },
             'slot-2': {
-                id: '5-2',
                 item: null,
             },
             'slot-3': {
-                id: '5-3',
                 item: null,
             },
             'slot-4': {
-                id: '5-4',
                 item: null,
             },
             'slot-5': {
-                id: '5-5',
                 item: null,
             },
             'slot-6': {
-                id: '5-6',
                 item: null,
             },
-            'points': Infinity,
-            'prio-start': 38,
+            'slot-7': {
+                item: null,
+            },
+            'slot-8': {
+                item: null,
+            },
+            'slot-9': {
+                item: null,
+            },
+            'slot-10': {
+                item: null,
+            },
+            'slot-11': {
+                item: null,
+            },
+            'slot-12': {
+                item: null,
+            },
+            'slot-13': {
+                item: null,
+            },
+            'slot-14': {
+                item: null,
+            },
+            'slot-15': {
+                item: null,
+            },
+            'slot-16': {
+                item: null,
+            },
+            'slot-17': {
+                item: null,
+            },
+            'slot-18': {
+                item: null,
+            },
+            'slot-19': {
+                item: null,
+            },
+            'slot-20': {
+                item: null,
+            },
+            'slot-21': {
+                item: null,
+            },
+            'slot-22': {
+                item: null,
+            },
+            'slot-23': {
+                item: null,
+            },
+            'slot-24': {
+                item: null,
+            },
+            'slot-25': {
+                item: null,
+            },
+            'slot-26': {
+                item: null,
+            },
+            'slot-27': {
+                item: null,
+            },
+            'slot-28': {
+                item: null,
+            },
+            'slot-29': {
+                item: null,
+            },
+            'slot-30': {
+                item: null,
+            },
+            'slot-31': {
+                item: null,
+            },
+            'slot-32': {
+                item: null,
+            },
+            points: Infinity,
         },
         filterList: [],
     },
