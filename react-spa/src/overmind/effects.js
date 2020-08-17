@@ -40,18 +40,6 @@ export const api = {
             if (response.data.player.wishlist.bracket4) state.player.debug.bracket4 = [...response.data.player.wishlist.bracket4]
             if (response.data.player.wishlist.bracketless) state.player.debug.bracketless = [...response.data.player.wishlist.bracketless]
 
-            if (response.data.player.class === 'Hunter') {
-                if(state.wishlist['bracket-1'].points === 3) {
-                    state.wishlist['bracket-1'].points = 2;
-                }
-                if(state.wishlist['bracket-2'].points === 3) {
-                    state.wishlist['bracket-2'].points = 2;
-                }
-                if(state.wishlist['bracket-3'].points === 3) {
-                    state.wishlist['bracket-3'].points = 2;
-                }
-            }
-
             return true;
         }).catch(err => {
             console.error(err);
@@ -93,18 +81,6 @@ export const api = {
             if (response.data.player.wishlist.bracket3) state.player.debug.bracket3 = [...response.data.player.wishlist.bracket3]
             if (response.data.player.wishlist.bracket4) state.player.debug.bracket4 = [...response.data.player.wishlist.bracket4]
             if (response.data.player.wishlist.bracketless) state.player.debug.bracketless = [...response.data.player.wishlist.bracketless]
-
-            if (response.data.player.class === 'Hunter') {
-                if(state.wishlist['bracket-1'].points === 3) {
-                    state.wishlist['bracket-1'].points = 2;
-                }
-                if(state.wishlist['bracket-2'].points === 3) {
-                    state.wishlist['bracket-2'].points = 2;
-                }
-                if(state.wishlist['bracket-3'].points === 3) {
-                    state.wishlist['bracket-3'].points = 2;
-                }
-            }
 
         }).catch(err => {
             console.error(err);

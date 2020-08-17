@@ -23,7 +23,7 @@ const PlayerSchema = new mongoose.Schema({
         bracket4: [{
             type: Number,
         }],
-        bracketLess: [{
+        bracketless: [{
             type: Number,
         }]
     },
