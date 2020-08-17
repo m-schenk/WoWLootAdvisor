@@ -49,8 +49,8 @@ class ItemLiveSearch extends React.Component {
         this.props.overmind.actions.tutorial();
     }
 
-    sendWishlist = () => {
-        this.props.overmind.actions.sendWishlist()
+    sendWishlist = async () => {
+        await this.props.overmind.actions.sendWishlist()
             .then(event => {
                 if (event) {
                     toast("Wishlist has been saved.", {
