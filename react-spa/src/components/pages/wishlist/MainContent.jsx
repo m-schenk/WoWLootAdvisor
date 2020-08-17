@@ -12,29 +12,54 @@ import ItemLiveSearch from './ItemLiveSearch';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Alert from 'react-bootstrap/Alert';
+
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 class MainContent extends React.Component {
 
-    onDragEnd = (result) => {
-        this.props.overmind.actions.dragHandler(result);
-        window.$WowheadPower.refreshLinks();
+    onDragEnd = async(result) => {
+        await this.props.overmind.actions.dragHandler(result)
+        .then(event => {
+            if(window.$WowheadPower) {
+                window.$WowheadPower.refreshLinks();
+            }
+            toast(event, {
+                className: 'drag-event-toast',
+                bodyClassName: 'drag-event-toast-textbody',
+                progressClassName: 'drag-event-toast-progress-bar',
+                position: toast.POSITION.TOP_CENTER,
+            });
+        });
     };
 
     render() {
-        return(
-            <Container className="justify-content-center" id="main-content">
-                <DragDropContext onDragEnd={this.onDragEnd}>
-                    <Row className="row-centered">
-                        <Col className="justify-content-center" sm={8}>
-                            <Wishlist />
-                        </Col>
-                        <Col className="justify-content-center" sm={4}>
-                            <ItemLiveSearch id={this.props.overmind.state.liveSearch['id']} />
-                        </Col>
-                    </Row>
-                </DragDropContext>
-            </Container>
-        )
+        if (!this.props.overmind.state.player.isComplete) {
+            return (
+                <Container className="justify-content-center" id="main-content">
+                    <Alert variant={'danger'}>
+                        Your profile is not loaded, please check the profile tab before you start creating a wishlist!
+                    </Alert>
+                </Container>
+            )
+        } else {
+            return (
+                <Container className="justify-content-center" id="main-content">
+                    <ToastContainer draggable={false} autoClose={5000} />
+                    <DragDropContext onDragEnd={this.onDragEnd}>
+                        <Row className="row-centered">
+                            <Col className="justify-content-center" sm={8}>
+                                <Wishlist />
+                            </Col>
+                            <Col className="justify-content-center" sm={4}>
+                                <ItemLiveSearch id={this.props.overmind.state.liveSearch['id']} />
+                            </Col>
+                        </Row>
+                    </DragDropContext>
+                </Container>
+            )
+        }
     }
 }
 

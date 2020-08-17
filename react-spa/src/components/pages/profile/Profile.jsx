@@ -23,7 +23,7 @@ const initialFormData = Object.freeze({
 
 function PlayerProfileForm() {
     const [formData, updateFormData] = useState(initialFormData);
-    const actions = useActions()
+    const actions = useActions();
 
     const handleChange = (e) => {
         updateFormData({
@@ -59,7 +59,7 @@ function PlayerProfileForm() {
                     </Form.Control>
                 </Form.Group>
                 <Form.Group>
-                    <Form.Label>Select your role:</Form.Label>
+                    <Form.Label>Select your race:</Form.Label>
                     <Form.Control as="select" name="_race" onChange={handleChange}>
                         <option>select race..</option>
                         <option value="Dwarf">Dwarf</option>
@@ -77,7 +77,7 @@ function PlayerProfileForm() {
                         <option value="Tank">Tank</option>
                     </Form.Control>
                 </Form.Group>
-                <Button variant="warning" type="submit" onClick={handleSubmit}>
+                <Button variant="warning" type="submit" onClick={handleSubmit} eventKey="0">
                     Submit
                 </Button>
             </form>
@@ -128,40 +128,50 @@ class Profile extends React.Component {
                             <Card>
                                 <Card.Header>Player Profile</Card.Header>
                                 <Card.Body>
-                                    <Card.Text>
-                                        <Row>
-                                            <Col md={6}><label>(remove $dev) _id:</label></Col>
-                                            <Col md={6}><p>{this.props.overmind.state.player._id}</p></Col>
-                                        </Row>
-                                        <Row>
-                                            <Col md={6}><label>(remove $dev) permissions:</label></Col>
-                                            <Col md={6}><p>{this.props.overmind.state.player.permissions}</p></Col>
-                                        </Row>
-                                        <Row>
-                                            <Col md={6}><label>Character Name:</label></Col>
-                                            <Col md={6}><b>{this.props.overmind.state.player.name}</b></Col>
-                                        </Row>
-                                        <Row>
-                                            <Col md={6}><label>Race:</label></Col>
-                                            <Col md={6}><b>{this.props.overmind.state.player.race}</b></Col>
-                                        </Row>
-                                        <Row>
-                                            <Col md={6}><label>Class:</label></Col>
-                                            <Col md={6}><b>{this.props.overmind.state.player.class}</b></Col>
-                                        </Row>
-                                        <Row>
-                                            <Col md={6}><label>Role:</label></Col>
-                                            <Col md={6}><b>{this.props.overmind.state.player.role}</b></Col>
-                                        </Row>
-                                        <Row>
-                                            <Col md={6}><label>AQ40 Attendance:</label></Col>
-                                            <Col md={6}><b>{this.props.overmind.state.player.aq_attendance}</b></Col>
-                                        </Row>
-                                        <Row>
-                                            <Col md={6}><label>Naxxramas Attendance:</label></Col>
-                                            <Col md={6}><b>{this.props.overmind.state.player.naxx_attendance}</b></Col>
-                                        </Row>
-                                    </Card.Text>
+                                    <Row>
+                                        <Col md={6}><label>Character Name:</label></Col>
+                                        <Col md={6}><b>{this.props.overmind.state.player.name}</b></Col>
+                                    </Row>
+                                    <Row>
+                                        <Col md={6}><label>Race:</label></Col>
+                                        <Col md={6}><b>{this.props.overmind.state.player.race}</b></Col>
+                                    </Row>
+                                    <Row>
+                                        <Col md={6}><label>Class:</label></Col>
+                                        <Col md={6}><b>{this.props.overmind.state.player.class}</b></Col>
+                                    </Row>
+                                    <Row>
+                                        <Col md={6}><label>Role:</label></Col>
+                                        <Col md={6}><b>{this.props.overmind.state.player.role}</b></Col>
+                                    </Row>
+                                    <Row>
+                                        <Col md={6}><label>AQ40 Attendance:</label></Col>
+                                        <Col md={6}><b>{this.props.overmind.state.player.aq_attendance}</b></Col>
+                                    </Row>
+                                    <Row>
+                                        <Col md={6}><label>Naxxramas Attendance:</label></Col>
+                                        <Col md={6}><b>{this.props.overmind.state.player.naxx_attendance}</b></Col>
+                                    </Row>
+                                    <Row>
+                                        <Col md={2}><p>(remove $dev_bracket1)</p></Col>
+                                        <Col md={10}>{this.props.overmind.state.player.debug.bracket1 && this.props.overmind.state.player.debug.bracket1.toString()}</Col>
+                                    </Row>
+                                    <Row>
+                                        <Col md={2}><p>(remove $dev_bracket2)</p></Col>
+                                        <Col md={10}>{this.props.overmind.state.player.debug.bracket2 && this.props.overmind.state.player.debug.bracket2.toString()}</Col>
+                                    </Row>
+                                    <Row>
+                                        <Col md={2}><p>(remove $dev_bracket3)</p></Col>
+                                        <Col md={10}>{this.props.overmind.state.player.debug.bracket3 && this.props.overmind.state.player.debug.bracket3.toString()}</Col>
+                                    </Row>
+                                    <Row>
+                                        <Col md={2}><p>(remove $dev_bracket4)</p></Col>
+                                        <Col md={10}>{this.props.overmind.state.player.debug.bracket4 && this.props.overmind.state.player.debug.bracket4.toString()}</Col>
+                                    </Row>
+                                    <Row>
+                                        <Col md={2}><p>(remove $dev_bracketless)</p></Col>
+                                        <Col md={10}>{this.props.overmind.state.player.debug.bracketless && this.props.overmind.state.player.debug.bracketless.toString()}</Col>
+                                    </Row>
                                 </Card.Body>
                                 <Accordion>
                                     <Card.Footer>

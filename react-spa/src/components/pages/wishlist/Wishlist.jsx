@@ -1,7 +1,12 @@
 import React from 'react';
 import styled from 'styled-components'
 import { Droppable, Draggable } from 'react-beautiful-dnd';
-import { connect } from './../../../overmind';
+import { connect, useState } from './../../../overmind';
+
+import { UnlimitedIcon, LimitedIcon, ReservedIcon } from './styledAssets';
+
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 import Alert from 'react-bootstrap/Alert';
 
@@ -9,13 +14,18 @@ const ItemContainerDrop = styled.div`
     font-weight: bold;
     border: 1px solid #3d3d3d;
     border-radius: 4px;
-    margin: unset;
     background-color: #d9d9d9;
+    margin: 8px;
     width: 300px;
     height: 36px;
     box-shadow: 2px 2px 4px 0px rgba(25,25,25,1);
     vertical-align: middle;
 `;
+
+const InvisibleSmallerDropLocation = styled.div`
+    height: 18px;
+    width: 300px;
+`
 
 const ItemContainer = styled.div`
     display: flex;
@@ -38,112 +48,195 @@ const BASE_URL = "https://classic.wowhead.com/item=";
 
 class Wishlist extends React.Component {
 
-    // shouldComponentUpdate(nextProps) {
-    //     return this.props.overmind !== nextProps.overmind
-    // };
-    componentDidUpdate() {
-        if(window.$WowheadPower) {
+    componentDidMount() {
+        if (window.$WowheadPower) {
             window.$WowheadPower.refreshLinks();
         }
     }
-    componentDidUpdate() {
-        window.$WowheadPower.refreshLinks();
-    };
 
     onExit = () => {
         this.props.overmind.actions.tutorial();
     }
 
-    renderWishlist() {
+    render() {
         if (this.props.overmind.state.wishlist['locked']) {
-            return (<p>Your Wishlist is locked! No more changes for you ¯\_(ツ)_/¯</p>)
+            return (
+                <Alert variant={'danger'}>
+                    Your Wishlist is locked! No more changes for you ¯\_(ツ)_/¯
+                </Alert>
+            )
+        } else if (this.props.overmind.state.player.class === "Hunter") {
+            return (
+                <div className="bracketsContainer justify-content-center">
+                    <Bracket id={1} />
+                    <Bracket id={2} />
+                    <Bracket id={3} />
+                    <Bracketless isHunter={true}/>
+                </div>
+            )
         } else {
             return (
-                <>
-                    {this.renderBracket('bracket-1')}
-                    {this.renderBracket('bracket-2')}
-                    {this.renderBracket('bracket-3')}
-                    {this.renderBracket('bracket-4')}
-                    {this.renderBracket('bracketless')}
-                </>
+                <div className="bracketsContainer justify-content-center">
+                    <Bracket id={1} />
+                    <Bracket id={2} />
+                    <Bracket id={3} />
+                    <Bracket id={4} />
+                    <Bracketless isHunter={false}/>
+                </div>
             )
         }
     }
+}
 
-    renderBracket(bracketId) {
-        let prioStart = this.props.overmind.state.wishlist[bracketId]['prio-start'];
-        const allocPoints = this.props.overmind.state.wishlist[bracketId]['points'];
-        // const hunter = (this.props.overmind.state.player.class === "Hunter");
-        // if (hunter && bracketId === "bracket-4") return
-        // if (hunter && bracketId === "bracketless") {
-        //     prioStart = prioStart + 3;
-        // }
+const Bracketless = (props) => {
+    const bracketId = "bracketless";
+
+    return (
+        <div className="bracket" id={bracketId}>
+            <div>
+                <>Bracketless - Unlimited Allocation Points</>
+            </div>
+            <Col>
+                <Row className="d-flex justify-content-center">
+                    <ItemDroppable bracketId={bracketId} slotIdInt={1} />
+                    <ItemDroppable bracketId={bracketId} slotIdInt={2} />
+                </Row>
+                <Row className="d-flex justify-content-center">
+                    <ItemDroppable bracketId={bracketId} slotIdInt={3} />
+                    <ItemDroppable bracketId={bracketId} slotIdInt={4} />
+                </Row>
+                <Row className="d-flex justify-content-center">
+                    <ItemDroppable bracketId={bracketId} slotIdInt={5} />
+                    <ItemDroppable bracketId={bracketId} slotIdInt={6} />
+                </Row>
+                <Row className="d-flex justify-content-center">
+                    <ItemDroppable bracketId={bracketId} slotIdInt={7} />
+                    <ItemDroppable bracketId={bracketId} slotIdInt={8} />
+                </Row>
+                <Row className="d-flex justify-content-center">
+                    <ItemDroppable bracketId={bracketId} slotIdInt={9} />
+                    <ItemDroppable bracketId={bracketId} slotIdInt={10} />
+                </Row>
+                <Row className="d-flex justify-content-center">
+                    <ItemDroppable bracketId={bracketId} slotIdInt={11} />
+                    <ItemDroppable bracketId={bracketId} slotIdInt={12} />
+                </Row>
+                <Row className="d-flex justify-content-center">
+                    <ItemDroppable bracketId={bracketId} slotIdInt={13} />
+                    <ItemDroppable bracketId={bracketId} slotIdInt={14} />
+                </Row>
+                <Row className="d-flex justify-content-center">
+                    <ItemDroppable bracketId={bracketId} slotIdInt={15} />
+                    <ItemDroppable bracketId={bracketId} slotIdInt={16} />
+                </Row>
+                <Row className="d-flex justify-content-center">
+                    <ItemDroppable bracketId={bracketId} slotIdInt={17} />
+                    <ItemDroppable bracketId={bracketId} slotIdInt={18} />
+                </Row>
+                <Row className="d-flex justify-content-center">
+                    <ItemDroppable bracketId={bracketId} slotIdInt={19} />
+                    <ItemDroppable bracketId={bracketId} slotIdInt={20} />
+                </Row>
+                <Row className="d-flex justify-content-center">
+                    <ItemDroppable bracketId={bracketId} slotIdInt={21} />
+                    <ItemDroppable bracketId={bracketId} slotIdInt={22} />
+                </Row>
+                <Row className="d-flex justify-content-center">
+                    <ItemDroppable bracketId={bracketId} slotIdInt={23} />
+                    <ItemDroppable bracketId={bracketId} slotIdInt={24} />
+                </Row>
+                <Row className="d-flex justify-content-center">
+                    <ItemDroppable bracketId={bracketId} slotIdInt={25} />
+                    <ItemDroppable bracketId={bracketId} slotIdInt={26} />
+                </Row>
+                { props.isHunter && <>
+                <Row className="d-flex justify-content-center">
+                    <ItemDroppable bracketId={bracketId} slotIdInt={27} />
+                    <ItemDroppable bracketId={bracketId} slotIdInt={28} />
+                </Row>
+                <Row className="d-flex justify-content-center">
+                    <ItemDroppable bracketId={bracketId} slotIdInt={29} />
+                    <ItemDroppable bracketId={bracketId} slotIdInt={30} />
+                </Row>
+                <Row className="d-flex justify-content-center">
+                    <ItemDroppable bracketId={bracketId} slotIdInt={31} />
+                    <ItemDroppable bracketId={bracketId} slotIdInt={32} />
+                </Row>
+                </>}
+            </Col>
+        </div>
+    )
+}
+
+const Bracket = (props) => {
+    const state = useState();
+
+    const bracketId = 'bracket-' + props.id;
+    const allocPoints = state.wishlist[bracketId]['points'];
+
+    return (
+        <div className="bracket" id={'bracket-' + props.id}>
+            <div>
+                <>Bracket {props.id} - Remaining Allocation Points: {allocPoints}</>
+            </div>
+            <Col>
+                <Row className="d-flex justify-content-center">
+                    <ItemDroppable bracketId={bracketId} slotIdInt={1} />
+                    <ItemDroppable bracketId={bracketId} slotIdInt={2} />
+                </Row>
+                <Row className="d-flex justify-content-center">
+                    <ItemDroppable bracketId={bracketId} slotIdInt={3} />
+                    <ItemDroppable bracketId={bracketId} slotIdInt={4} />
+                </Row>
+                <Row className="d-flex justify-content-center">
+                    <ItemDroppable bracketId={bracketId} slotIdInt={5} />
+                    <ItemDroppable bracketId={bracketId} slotIdInt={6} />
+                </Row>
+            </Col>
+        </div>
+    )
+}
+
+const ItemDroppable = (props) => {
+    const bracketId = props.bracketId;
+    const slotIdInt = props.slotIdInt;
+    return (
+        <div>
+            <Droppable droppableId={bracketId + '_slot-' + slotIdInt}>
+                {provided => (
+                    <ItemContainerDrop>
+                        <InvisibleSmallerDropLocation ref={provided.innerRef} {...provided.droppableProps}>
+                            <Item bracketId={bracketId} slotIdInt={slotIdInt} />
+                            {provided.placeholder}
+                        </InvisibleSmallerDropLocation>
+                    </ItemContainerDrop>
+                )}
+            </Droppable>
+        </div>
+    )
+}
+
+
+const Item = (props) => {
+    const state = useState();
+
+    const slotId = 'slot-' + props.slotIdInt;
+    const bracketId = props.bracketId;
+    const slotIdInt = parseInt(props.slotIdInt);
+
+    if ((bracketId !== 'bracketless') && (slotIdInt % 2 === 0) && (state.wishlist[bracketId]['slot-' + (slotIdInt - 1)].item !== null) &&
+        (state.wishlist[bracketId]['slot-' + (slotIdInt - 1)].item.itemCategory === "Reserved")) {
         return (
-            <table className={"bracket styled-table"} id={bracketId}>
-                <thead>
-                    <tr className="styled-table">
-                        <th className="styled-table" xl={12}>Remaining Allocation Points: {allocPoints}</th>
-                    </tr>
-                </thead>
-                <tbody className="styled-table">
-                    <tr className="styled-table">
-                        <td className="styled-table" xl={12}>
-                            {this.renderBracketRow(bracketId, prioStart, 1)}
-                            {this.renderBracketRow(bracketId, prioStart - 1, 3)}
-                            {this.renderBracketRow(bracketId, prioStart - 2, 5)}
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            <ItemContainer>
+                <p>Locked</p>
+            </ItemContainer>
         )
-    }
-
-    renderBracketRow(bracketId, p, r) {
-        return (
-            <table>
-                <tbody>
-                    <tr className="styled-table">
-                        <td className="styled-table">
-                            {p}
-                        </td>
-                        <td className="styled-table justify-content-center align-items-center" xl={5} >
-                            <Droppable droppableId={bracketId + '_slot-' + r}>
-                                {provided => (
-                                    <ItemContainerDrop ref={provided.innerRef} {...provided.droppableProps}>
-                                        {this.renderItem(bracketId, 'slot-' + r)}
-                                        {provided.placeholder}
-                                    </ItemContainerDrop>
-                                )}
-                            </Droppable>
-                        </td>
-                        <td className="styled-table justify-content-center align-items-center" xl={5}>
-                            <Droppable droppableId={bracketId + '_slot-' + (r + 1)}>
-                                {provided => (
-                                    <ItemContainerDrop ref={provided.innerRef} {...provided.droppableProps}>
-                                        {this.renderItem(bracketId, 'slot-' + (r + 1))}
-                                        {provided.placeholder}
-                                    </ItemContainerDrop>
-                                )}
-                            </Droppable>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        )
-    }
-
-    renderItem(bracketId, slotId) {
-
-        const [, slotIdInt] = slotId.split('-');
-        if ((parseInt(slotIdInt) > 1) && this.props.overmind.state.wishlist[bracketId]['slot-' + (parseInt(slotIdInt) - 1)].item !== null &&
-            this.props.overmind.state.wishlist[bracketId]['slot-' + (parseInt(slotIdInt) - 1)].item.itemCategory === "Reserved") {
-            return (<ItemContainer><p>Locked</p></ItemContainer>)
-        } else if (this.props.overmind.state.wishlist[bracketId][slotId].item === null) {
-            return <></>
-        }
+    } else if (state.wishlist[bracketId][slotId].item === null) {
+        return (<></>)
+    } else {
         return (
             <>
-                <Draggable draggableId={this.props.overmind.state.wishlist[bracketId][slotId].item.id.toString() + bracketId + slotId} index={1}>
+                <Draggable draggableId={state.wishlist[bracketId][slotId].item.id.toString() + bracketId + slotId} index={1}>
                     {(provided, snapshot) => (
                         <ItemContainer
                             ref={provided.innerRef}
@@ -152,41 +245,18 @@ class Wishlist extends React.Component {
                             isDragging={snapshot.isDragging}
                         >
                             <div>
-                                <a href={BASE_URL + this.props.overmind.state.wishlist[bracketId][slotId].item.id} target="_blank" rel="noopener noreferrer">
-                                    {this.props.overmind.state.wishlist[bracketId][slotId].item.name}
+                                <a href={BASE_URL + state.wishlist[bracketId][slotId].item.id} target="_blank" rel="noopener noreferrer">
+                                    {state.wishlist[bracketId][slotId].item.name}
                                 </a>
                             </div>
-                            {this.props.overmind.state.wishlist[bracketId][slotId].item.itemCategory === "Reserved" &&
-                                <div id={"circle-" + this.props.overmind.state.wishlist[bracketId][slotId].item.itemCategory}></div>
-                            }
-                            {this.props.overmind.state.wishlist[bracketId][slotId].item.itemCategory === "Limited" &&
-                                <div id={"circle-" + this.props.overmind.state.wishlist[bracketId][slotId].item.itemCategory}></div>
-                            }
-                            {this.props.overmind.state.wishlist[bracketId][slotId].item.itemCategory === "Unlimited" &&
-                                <div id={"circle-" + this.props.overmind.state.wishlist[bracketId][slotId].item.itemCategory}></div>
-                            }
-
+                            {state.wishlist[bracketId][slotId].item.itemCategory === "Reserved" && <ReservedIcon />}
+                            {state.wishlist[bracketId][slotId].item.itemCategory === "Limited" && <LimitedIcon />}
+                            {state.wishlist[bracketId][slotId].item.itemCategory === "Unlimited" && <UnlimitedIcon />}
                         </ItemContainer>
                     )}
                 </Draggable>
             </>
         );
-    }
-
-    render() {
-        if (!this.props.overmind.state.player.isComplete) {
-            return (
-                <Alert variant={'danger'}>
-                    Your profile is not loaded, please check the profile tab before you start creating a wishlist!
-                </Alert>
-            )
-        } else {
-            return (
-                <div className="bracketsContainer justify-content-center">
-                    {this.renderWishlist()}
-                </div>
-            )
-        }
     }
 }
 

@@ -2,6 +2,7 @@ const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
+const cors = require('cors');
 
 const session = require('express-session');
 const passport = require('passport')
@@ -16,15 +17,24 @@ const discordRouter = require('./routes/discord')
 const playerRouter = require('./routes/player');
 const itemsRouter = require('./routes/items');
 
+const corsOptions = {
+    origin: process.env.CORS,
+    credentials: true,
+}
+
 const app = express();
+
+app.use(cors(corsOptions));
 
 // print mode Production or Dev
 console.log(process.env.NODE_ENV);
 
+console.time('connectdb')
 // connect to mongodb - set both mongoose major update flags
-mongoose.connect(process.env.MONGODB_URI, { useUnifiedTopology: true, useNewUrlParser: true })
+mongoose.connect('mongodb://127.0.0.1:27017/', { dbName: 'wow-loot-advisor', useUnifiedTopology: true, useNewUrlParser: true })
     .then(result => {
         console.log('successfully connected to db!');
+        console.timeEnd('connectdb')
     })
     .catch(err => {
         console.log(err);
@@ -36,15 +46,17 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
 // session & middlewares
+app.set('trust proxy', true) // trust first proxy
 app.use(
     session({
         secret: process.env.SESSION_SECRET,
         resave: false,
         saveUninitialized: false,
         cookie: {
-            secure: 'auto',
+            secure: true,
             httpOnly: true,
-            maxAge: 3600000
+            //sameSite: 'strict',
+            maxAge: 3600 * 1000 * 12,
         },
         store: new MongoStore({ mongooseConnection: mongoose.connection })
     })
@@ -111,13 +123,13 @@ app.use(function (err, req, res, next) {
     res.locals.error = req.app.get('env') === 'development' ? err : {};
 
     if (err.statusCode === 403) {
-        res.redirect('http://raegae.maarten.ch:3000/forbbiden')
+        res.redirect(process.env.ADDR + '/forbbiden');
     } else if (err.statusCode === 404) {
-        res.redirect('http://raegae.maarten.ch:3000/pagenotfound')
+        res.redirect(process.env.ADDR + '/pagenotfound');
     } else {
         // render the error page
-        res.status(err.statusCode || 500);
-        res.render('error');
+        res.status(err.statusCode || 500).send({ error: err.message });
+        //res.render('error');
     }
 });
 

@@ -12,7 +12,7 @@ class UserNavbar extends React.Component {
     render() {
         return (
             <Navbar collapseOnSelect sticky="top" bg="dark" variant="dark" expand="lg">
-                <div class="d-flex nav_wrapper align-items-center">
+                <div className="d-flex nav_wrapper align-items-center">
                     <Image src={require("./assets/logo128x64.png")} />
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <Navbar.Brand as={Link} to="/profile">{(this.props.overmind.state.player.name != null) ? this.props.overmind.state.player.name : 'Profile'}</Navbar.Brand>
@@ -31,7 +31,7 @@ class UserNavbar extends React.Component {
                         </Nav>
                     </Navbar.Collapse>
                     <Nav>
-                        <Nav.Link className="mr-3" href="http://raegae.maarten.ch:3000/api/player/logout">Logout</Nav.Link>
+                        <Nav.Link className="mr-3" href="/api/player/logout">Logout</Nav.Link>
                     </Nav>
                 </div>
             </Navbar>

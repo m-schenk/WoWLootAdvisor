@@ -2,16 +2,15 @@ import axios from 'axios';
 
 const instance = axios.create({
     withCredentials: true,
-    baseURL: 'http://raegae.maarten.ch:3000/api/player/'
+    baseURL: 'https://raegae.maarten.ch/api/'
 })
 
 const cache = {};
 
 export const api = {
     getPlayerProfile(state) {
-        instance.get('getPlayerProfile'
+        instance.get('player/getPlayerProfile',
         ).then((response) => {
-            console.log(response)
             state.player._id = response.data.player._id;
             state.player.isComplete = response.data.isComplete;
             if (response.data.player.name) {
@@ -35,13 +34,20 @@ export const api = {
             if (response.data.player.permissions) {
                 state.player.permissions = response.data.player.permissions
             }
-        }).catch(error => {
-            console.log(error);
+            if (response.data.player.wishlist.bracket1) state.player.debug.bracket1 = [...response.data.player.wishlist.bracket1]
+            if (response.data.player.wishlist.bracket2) state.player.debug.bracket2 = [...response.data.player.wishlist.bracket2]
+            if (response.data.player.wishlist.bracket3) state.player.debug.bracket3 = [...response.data.player.wishlist.bracket3]
+            if (response.data.player.wishlist.bracket4) state.player.debug.bracket4 = [...response.data.player.wishlist.bracket4]
+            if (response.data.player.wishlist.bracketless) state.player.debug.bracketless = [...response.data.player.wishlist.bracketless]
+
+            return true;
+        }).catch(err => {
+            console.error(err);
+            //return false;
         })
     },
     sendProfile(state, data) {
-        console.log(data)
-        instance.post('postPlayerProfile', {
+        instance.post('player/postPlayerProfile', {
             _name: data._name,
             _race: data._race,
             _class: data._class,
@@ -70,11 +76,18 @@ export const api = {
             if (response.data.player.permissions) {
                 state.player.permissions = response.data.player.permissions
             }
-        }).catch(error => {
-            console.log(error);
+            if (response.data.player.wishlist.bracket1) state.player.debug.bracket1 = [...response.data.player.wishlist.bracket1]
+            if (response.data.player.wishlist.bracket2) state.player.debug.bracket2 = [...response.data.player.wishlist.bracket2]
+            if (response.data.player.wishlist.bracket3) state.player.debug.bracket3 = [...response.data.player.wishlist.bracket3]
+            if (response.data.player.wishlist.bracket4) state.player.debug.bracket4 = [...response.data.player.wishlist.bracket4]
+            if (response.data.player.wishlist.bracketless) state.player.debug.bracketless = [...response.data.player.wishlist.bracketless]
+
+        }).catch(err => {
+            console.error(err);
+            //return false;
         })
     },
-    sendWishlist(state) {
+    async sendWishlist(state) {
         const wishlist = {
             bracket1:
                 [state.wishlist['bracket-1']['slot-1'].item, state.wishlist['bracket-1']['slot-2'].item,
@@ -94,17 +107,34 @@ export const api = {
                 state.wishlist['bracket-4']['slot-5'].item, state.wishlist['bracket-4']['slot-6'].item,]
             ),
             bracketless:
-                [state.wishlist['bracket-4']['slot-1'].item, state.wishlist['bracket-4']['slot-2'].item,
-                state.wishlist['bracket-4']['slot-3'].item, state.wishlist['bracket-4']['slot-4'].item,
-                state.wishlist['bracket-4']['slot-5'].item, state.wishlist['bracket-4']['slot-6'].item,]
+                [state.wishlist['bracketless']['slot-1'].item, state.wishlist['bracketless']['slot-2'].item,
+                state.wishlist['bracketless']['slot-3'].item, state.wishlist['bracketless']['slot-4'].item,
+                state.wishlist['bracketless']['slot-5'].item, state.wishlist['bracketless']['slot-6'].item,
+                state.wishlist['bracketless']['slot-7'].item, state.wishlist['bracketless']['slot-8'].item,
+                state.wishlist['bracketless']['slot-9'].item, state.wishlist['bracketless']['slot-10'].item,
+                state.wishlist['bracketless']['slot-11'].item, state.wishlist['bracketless']['slot-12'].item,
+                state.wishlist['bracketless']['slot-13'].item, state.wishlist['bracketless']['slot-14'].item,
+                state.wishlist['bracketless']['slot-15'].item, state.wishlist['bracketless']['slot-16'].item,
+                state.wishlist['bracketless']['slot-17'].item, state.wishlist['bracketless']['slot-18'].item,
+                state.wishlist['bracketless']['slot-19'].item, state.wishlist['bracketless']['slot-20'].item,
+                state.wishlist['bracketless']['slot-21'].item, state.wishlist['bracketless']['slot-22'].item,
+                state.wishlist['bracketless']['slot-23'].item, state.wishlist['bracketless']['slot-24'].item,
+                state.wishlist['bracketless']['slot-25'].item, state.wishlist['bracketless']['slot-26'].item,
+                state.wishlist['bracketless']['slot-27'].item, state.wishlist['bracketless']['slot-28'].item,
+                state.wishlist['bracketless']['slot-29'].item, state.wishlist['bracketless']['slot-30'].item,
+                state.wishlist['bracketless']['slot-31'].item, state.wishlist['bracketless']['slot-32'].item,]
         }
-        instance.post('saveWishlist', {
-            wishlist: wishlist
-        }).then((response) => {
-            console.log(response);
-        }, (error) => {
-            console.log(error);
-        });
+        try {
+            const response = await instance.post('player/saveWishlist', { wishlist: wishlist })
+            if (response.status === 200) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (err) {
+            console.error(err);
+            return false;
+        };
     },
     async searchItems(query) {
         let cancel;
@@ -114,16 +144,16 @@ export const api = {
             //cancels perv. request
             cancel.cancel()
         }
+        //check if query was cached
+        if (cache[query]) {
+            //return cached query
+            return cache[query];
+        }
+        //create a new token
+        cancel = axios.CancelToken.source();
+        //send request with cancelToken
         try {
-            //check if query was cached
-            if (cache[query]) {
-                //return cached query
-                return cache[query];
-            }
-            //create a new token
-            cancel = axios.CancelToken.source();
-            //send request with cancelToken
-            const response = await axios('http://raegae.maarten.ch:3000/api/items?query=' + query, { cancelToken: cancel.token });
+            const response = await instance.get('items?query=' + query, { cancelToken: cancel.token })
             const result = await response.data.results;
 
             //store query for caching
@@ -131,13 +161,12 @@ export const api = {
 
             //return unpacked result
             return result;
-
-        } catch (error) {
-            if (axios.isCancel(error)) {
-                console.error('Request cancelled', error.message);
+        } catch (err) {
+            if (axios.isCancel(err)) {
+                console.error('Request cancelled', err.message);
             } else {
-                console.error('Something went bad: ', error.message);
+                console.error('Something went bad: ', err.message);
             }
-        }
+        };
     }
 };

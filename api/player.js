@@ -23,13 +23,7 @@ exports.validate = (method) => {
                     if (req.user.class === 'Hunter') {
                         isHunter = true;
                     }
-
-                    //checkWishlistItems() + uniqueness
-                    checkWishlistItems(wishlist, isHunter);
-
-                    //checkAllocatedBracket()
-                    //checkBracketless()
-                    return true
+                    return checkWishlistItems(wishlist, isHunter);
                 })
             ]
         }
@@ -43,7 +37,7 @@ exports.postPlayerProfile = (req, res, next) => {
     };
     const err = validationResult(req).formatWith(errorFormatter);
     if (!err.isEmpty()) {
-        return next(createError(422, 'Failed to validate wishlist (api/player postSaveWishlist()), error text: ' + err.array()));
+        return next(createError(422, 'Failed to validate player (api/player postPlayerProfile()), error text: ' + err.array()));
     }
     Player.findById(req.user._id)
         .then(player => {
@@ -68,6 +62,7 @@ exports.postPlayerProfile = (req, res, next) => {
 }
 
 exports.getPlayerProfile = (req, res, next) => {
+    console.time('dbat-playerprofile')
     Player.findById(req.user._id)
         .then(player => {
             let complete = true;
@@ -79,6 +74,7 @@ exports.getPlayerProfile = (req, res, next) => {
             res.status(200);
             res.set({ 'Content-Type': 'text/json' });
             res.json({ isComplete: complete, player: filteredPlayer });
+            console.timeEnd('dbat-playerprofile')
             res.end();
         })
         .catch(err => {
@@ -110,7 +106,7 @@ exports.logout = (req, res, next) => {
         if (err) {
             next(createError(500, err));
         }
-        res.redirect('http://raegae.maarten.ch:3000/login');
+        res.redirect(process.env.ADDR + '/login');
     })
 }
 
@@ -123,42 +119,29 @@ exports.postSaveWishlist = (req, res, next) => {
     if (!err.isEmpty()) {
         return next(createError(422, 'Failed to validate wishlist (api/player postSaveWishlist()), error text: ' + err.array()));
     }
+    console.log(req.user)
     Player.findById(req.user._id)
         .then(player => {
-            if (player.wishlist.locked) {
+            if ((player.wishlist !== null) && (player.wishlist.locked)) {
                 res.status(200);
                 res.set({ 'Content-Type': 'text/json' });
                 res.json({ wishlist: player.wishlist });
                 res.end();
             } else {
-                let wishlistObjectId;
-
-                const wishlist = new Wishlist({
-                    bracket1: req.body.bracket1,
-                    bracket2: req.body.bracket2,
-                    bracket3: req.body.bracket3,
-                    bracket4: req.body.bracket4,
-                    bracketLess: req.body.bracketLess,
-                })
-
-                wishlist.save()
-                    .then(wishlist => {
-                        wishlistObjectId = wishlist._id;
-                        Player.findOneAndUpdate({ id: req.session.playerId }, { wishlist: wishlistObjectId }) //assign wishlist object id to player
-                            .then(player => {
-                                console.log('wishlist', wishlistObjectId, 'has been assigned to', player.name);
-                            })
-                            .catch(err => {
-                                return next(createError(500, 'Failed to update player with wishlist mongoDbId in database (controllers/wishlist saveWishlist()), error text: ' + err));
-                            });
+                player.wishlist.bracket1 = getIdsFromBracket(req.body.wishlist.bracket1);
+                player.wishlist.bracket2 = getIdsFromBracket(req.body.wishlist.bracket2);
+                player.wishlist.bracket3 = getIdsFromBracket(req.body.wishlist.bracket3);
+                player.wishlist.bracket4 = getIdsFromBracket(req.body.wishlist.bracket4);
+                player.wishlist.bracketless = getIdsFromBracket(req.body.wishlist.bracketless);
+                player.save()
+                    .then(player => {
                         res.status(200);
                         res.set({ 'Content-Type': 'text/json' });
                         res.json({ wishlist: player.wishlist });
                         res.end();
+                    }).catch(err => {
+                        return next(createError(500, 'Failed to save wishlist in database (api/player postSaveWishlist()), error text: ' + err));
                     })
-                    .catch(err => {
-                        return next(createError(500, 'Failed to save wishlist in database (controllers/wishlist saveWishlist()), error text: ' + err));
-                    });
             }
         })
         .catch(err => {
@@ -168,86 +151,90 @@ exports.postSaveWishlist = (req, res, next) => {
 
 const checkWishlistItems = (wishlist, hunter) => {
     return new Promise((resolve, reject) => {
-        let itemIds = []
-        //get all item id's from ever bracket
+        const maxAllocationPoints = hunter ? 2 : 3;
+        const itemIds = [];
 
+        const weapon = ["Sword", "Mace", "Polearm", "Two-Hand, Sword", "Two-Hand, Axe", "Dagger", "Axt", "Two-Hand, Mace", "Staff", "Fist Weapon"];
+        const ranged = ["Bow", "Crossbow", "Gun", "Relic", "Wand"];
+        const offhand = ["Shield", "Offhand"];
+
+        let bracketsDone = 0;
+        if (Object.keys(wishlist) === null) { reject('wishlist is empty AF'); }
         Object.keys(wishlist).forEach(bracket => {
-            wishlist[bracket].forEach(item => {
-                if (item) {
-                    itemIds.push(item.id)
-                }
-            });
-        })
-        console.log(itemIds);
-    })
-    //call unique or something compare lengths?
-}
 
-const checktAllocatedBracket = (bracket) => {
+            let allocationPoints, count = 0;
+            let itemTypes = new Set();
+            let nextMustBeNull = false;
 
-}
+            if (wishlist[bracket] !== null) {
+                
+                wishlist[bracket].forEach(item => {
 
-//validationm helper function
-function checkBracket(bracket, bracketLess) {
-    console.log(bracket)
-    return new Promise((resolve, reject) => {
-        Item.find({
-            'id': {
-                $in: [
-                    ...bracket
-                ]
-            }
-        }).then(items => {
-            console.log(items)
-            let allocationPoints = 0;   // should not exceed 3
-            let itemSlots = 0;          // should not exceed 2
-            let occupiedSlots = 0;      // should not exceed 6
+                    if (bracketsDone >= 4 || hunter && bracketsDone >= 3) {
+                        if (item) {
+                            itemIds.push(item.id);
+                        }
+                    } else {
 
-            for (i = 0; i < items.length; i++) {
-                for (j = 0; j < i; j++) {
-                    if (i == j) continue;
-                    if (items[i].itemType == items[j].itemType) {
-                        // console.log(result[i].itemType, '==', result[j].itemType);
-                        reject('Bracket has duplicate item types');
-                    }
-                }
+                        if (nextMustBeNull && item !== null) {
+                            reject('bracket invalid, after reserved item, slot must be empty');
+                        } else {
+                            nextMustBeNull = false;
+                        }
 
-                if (items[i].id && !bracketLess) {
-                    occupiedSlots++;
-                }
-                if (items[i].itemCategory == 'Reserved' || items[i].itemCategory == 'Limited') {
-                    allocationPoints++;
-                    if (items[i].itemCategory == 'Reserved') {
-                        itemSlots++;
-                        if (itemSlots > 2) {
-                            reject('Maximum amount of reserved items(2) exceeded');
+                        count++;
+                        if (item) {
+
+                            itemIds.push(item.id);
+
+                            if (item.itemCategory === 'Reserved') {
+                                nextMustBeNull = true;
+                            }
+
+                            const itemType = weapon.includes(item.itemType) ? "Weapon" : ranged.includes(itemTypes) ? "Ranged" : offhand.includes(item.itemTyped) ? "Offhand" : item.itemType;
+                            if (itemTypes.has(itemType)) {
+                                reject('bracket has duplicate item type');
+                            }
+                            itemTypes.add(itemType);
+
+                            if ((item.itemCategory === 'Reserved') || (item.itemCategory === 'Limited')) {
+                                allocationPoints++;
+                            }
+                        }
+                        if (allocationPoints > maxAllocationPoints) {
+                            reject('bracket exceeds allocation points');
+                        }
+                        if (count > 6) {
+                            reject('bracket has more than 6 items');
                         }
                     }
-                    //   if (allocationPoints > 2 && isHunter) {
-                    //     console.log('HUNTER SHITS');
-                    //     reject('Maximum allocation points(2) exceeded -> hunter class penalty');
-                    //   }
-                    if (allocationPoints > 3) {
-                        reject('Maximum allocation points(3) exceeded');
-                    }
-                }
-                if (occupiedSlots > 6) {
-                    reject('Maximum item slots(6) exceeded')
-                }
-                if (items[i].itemCategory == 'Unlockable') {
-                    reject('Might of the Scourge, Power of the Storm and Splinter of Atiesh are forbidden items');
-                }
+                });
+                bracketsDone++;
             }
-            resolve('Wishlist is valid!');
-        }).catch(err => {
-            return new Error('Failed to fetch one or more items from the submitted wishlist brackets (routes/wishlist checkBracket()), error text: ' + err);
-        });
+        })
+
+        // check if all items are unique
+        const unique = itemIds.filter((v, i, a) => a.indexOf(v) === i)
+        if (itemIds.length !== unique.length) {
+            reject('wishlist contains duplicates');
+        }
+        resolve('wishlist is valid');
     })
 }
 
-// if item is unlimited
-// dont allow unlockable items (itemCategory == 'Unlockable')
-// no duplicate item types
-// allow only 3 allocation points per bracket
-// reserved items use two items slots
-// check maxiumum bracket size -> 6
+const getIdsFromBracket = (bracket) => {
+    const _bracket = [];
+    if (bracket === null) return null;
+    bracket.forEach(item => {
+        if (item) {
+            _bracket.push(item.id);
+        } else {
+            _bracket.push(null)
+        }
+    });
+    if (_bracket.length === 0) {
+        return null;
+    } else {
+        return _bracket;
+    }
+}

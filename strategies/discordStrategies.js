@@ -29,7 +29,7 @@ passport.use(new DiscordStrategy({
                     cb(null, filteredPlayer);
                 } else {
                     console.log('User doesnt exist');
-                    const newPlayer = new Player({ discordId: profile.id, permissions: 'member' });
+                    const newPlayer = new Player({ discordId: profile.id, permissions: 'member', wishlist: { locked: false } });
                     newPlayer.save()
                         .then(player => {
                             const filteredPlayer = _.omit(player.toObject(), ['discordId']);
@@ -42,7 +42,7 @@ passport.use(new DiscordStrategy({
             })
             .catch(err => {
                 cb(new createError(500, 'Failed to fetch player from database (strategies/discordStrategies), error text: ' + err), null);
-            })
+            });
     } else {
         cb(new createError(403, 'Access denied, does not belong to guild!'), null);
     }

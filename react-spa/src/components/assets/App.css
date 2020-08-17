@@ -13,15 +13,14 @@
 }
 
 @media screen and (min-width: 1200px) {
-    .nav_wrapper {
-        width: 1200px;
-        margin: 0 auto;
-        padding-left: 35px;
-        padding-right: 35px;
-        position: relative;
-    }
+  .nav_wrapper {
+    width: 1200px;
+    margin: 0 auto;
+    padding-left: 35px;
+    padding-right: 35px;
+    position: relative;
+  }
 }
-
 
 #wrapper {
   min-height: 100%;
@@ -82,50 +81,6 @@
   box-shadow: 2px 2px 3px 1px rgb(30, 30, 30);
 }
 
-
-
-table.styled-table {
-  border-collapse: separate;
-  border: solid #252525 1px;
-  border-radius: 4px;
-}
-
-td.styled-table,
-th.styled-table {
-  border-left: solid #252525 1px;
-  border-top: solid #252525 1px;
-}
-
-th.styled-table {
-  border-top: none;
-  text-align: center;
-}
-
-td.styled-table:first-child,
-th.styled-table:first-child {
-  border-left: none;
-}
-
-td {
-  padding: 12px;
-}
-
-tbody {
-  border: none;
-  padding: none;
-}
-
-tbody.styled-table {
-  border: none;
-  padding: none;
-  margin-bottom: -6px;
-}
-
-table {
-  padding: none;
-  margin: unset;
-}
-
 .delete-item-zone {
   font-weight: bold;
   border: 1px solid #3d3d3d;
@@ -145,7 +100,7 @@ table {
 }
 
 .card-footer {
-    border-bottom: 1px solid rgba(0,0,0,.125) !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125) !important;
 }
 
 .label-livesearch {
@@ -163,22 +118,37 @@ table {
 
 /* item circles */
 #circle-Reserved {
-    background: #ff4545;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-  }
-  
-  #circle-Limited {
-    background: #674ea7;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-  }
-  
-  #circle-Unlimited {
-    background: #666666;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-  }
+  background: #ff4545;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+#circle-Limited {
+  background: #674ea7;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+#circle-Unlimited {
+  background: #666666;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.drag-event-toast {
+  background-color: #ffc107;
+  color: #2a2a2a;
+  border-radius: 4px;
+}
+
+.drag-event-toast-textbody {
+    text-align: center;
+    font-weight: bold;
+}
+
+.drag-event-toast-progress-bar {
+    background: #808080;
+}
