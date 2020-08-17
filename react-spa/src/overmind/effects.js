@@ -125,7 +125,7 @@ export const api = {
             wishlist: wishlist
         }).then((response) => {
             console.log(response)
-            console.log(response.status === '200')
+            console.log(response.status === 200)
             if (response) {
                 return true;
             } else {
