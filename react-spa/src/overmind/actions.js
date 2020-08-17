@@ -202,7 +202,9 @@ export const dragHandler = async ({ state }, result) => {
     if (sourceBracketId !== null) {
         state.wishlist[sourceBracketId].itemTypes.splice(state.wishlist[sourceBracketId].itemTypes.indexOf(sourceItem.itemType), 1);
         state.wishlist[sourceBracketId][sourceSlotId].item = destinationItem;
-        state.wishlist[sourceBracketId].itemTypes.push(destinationItem.itemType);
+        if(destinationItem !== null) {
+            state.wishlist[sourceBracketId].itemTypes.push(destinationItem.itemType);
+        }
         state.wishlist[destinationBracketId].itemTypes.splice(state.wishlist[destinationBracketId].itemTypes.indexOf(destinationItem.itemType), 1);
     }
     state.wishlist[destinationBracketId][destinationSlotId].item = sourceItem;
