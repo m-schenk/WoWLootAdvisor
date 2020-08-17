@@ -121,18 +121,17 @@ export const api = {
                 state.wishlist['bracketless']['slot-29'].item, state.wishlist['bracketless']['slot-30'].item,
                 state.wishlist['bracketless']['slot-31'].item, state.wishlist['bracketless']['slot-32'].item,]
         }
-        await instance.post('player/saveWishlist', {
-            wishlist: wishlist
-        }).then((response) => {
+        try {
+            const response = await instance.post('player/saveWishlist', { wishlist: wishlist })
             if (response.status === 200) {
                 return true;
             } else {
                 return false;
             }
-        }).catch(err => {
+        } catch (err) {
             console.error(err);
             return false;
-        });
+        };
     },
     async searchItems(query) {
         let cancel;
