@@ -88,9 +88,7 @@ class Wishlist extends React.Component {
 }
 
 const Bracketless = (props) => {
-    const state = useState();
-
-    const bracketId = 'bracketless';
+    const bracketId = "bracketless";
 
     return (
         <div className="bracket" id={bracketId}>
@@ -222,15 +220,17 @@ const Item = (props) => {
     const slotId = 'slot-' + props.slotIdInt;
     const bracketId = props.bracketId;
     const slotIdInt = parseInt(props.slotIdInt);
-    console.log(state.wishlist[bracketId]['slot-' + (slotIdInt - 1)].item);
-    if ((slotIdInt > 1) && bracketId !== 'bracketless' &&
-        state.wishlist[bracketId]['slot-' + (slotIdInt - 1)].item !== null &&
-        state.wishlist[bracketId]['slot-' + (slotIdInt - 1)].item.itemCategory === "Reserved") {
-        return (
-            <ItemContainer>
-                <p>Locked</p>
-            </ItemContainer>
-        )
+
+    if (bracketId !== 'bracketless') {
+        console.log(slotIdInt);
+        if ((slotIdInt % 2 === 0 ) && state.wishlist[bracketId]['slot-' + (slotIdInt - 1)].item !== null &&
+            state.wishlist[bracketId]['slot-' + (slotIdInt - 1)].item.itemCategory === "Reserved") {
+            return (
+                <ItemContainer>
+                    <p>Locked</p>
+                </ItemContainer>
+            )
+        }
     } else if (state.wishlist[bracketId][slotId].item === null) {
         return (<></>)
     } else {
@@ -249,9 +249,9 @@ const Item = (props) => {
                                     {state.wishlist[bracketId][slotId].item.name}
                                 </a>
                             </div>
-                            { state.wishlist[bracketId][slotId].item.itemCategory === "Reserved" && <ReservedIcon /> }
-                            { state.wishlist[bracketId][slotId].item.itemCategory === "Limited" && <LimitedIcon /> }
-                            { state.wishlist[bracketId][slotId].item.itemCategory === "Unlimited" && <UnlimitedIcon /> }
+                            {state.wishlist[bracketId][slotId].item.itemCategory === "Reserved" && <ReservedIcon />}
+                            {state.wishlist[bracketId][slotId].item.itemCategory === "Limited" && <LimitedIcon />}
+                            {state.wishlist[bracketId][slotId].item.itemCategory === "Unlimited" && <UnlimitedIcon />}
                         </ItemContainer>
                     )}
                 </Draggable>
