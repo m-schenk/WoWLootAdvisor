@@ -316,6 +316,9 @@ export const dragHandler = async ({ state }, result) => {
                     state.wishlist[sourceBracketId].points++;
                 }
 
+                // remove old item type from source bracket
+                state.wishlist[sourceBracketId].itemTypes.splice(state.wishlist[sourceBracketId].itemTypes.indexOf(sourceFixedItemType), 1);
+
                 // set null at source because there was no swap item
                 state.wishlist[sourceBracketId][sourceSlotId].item = null;
             }
