@@ -222,7 +222,7 @@ const Item = (props) => {
     const slotId = 'slot-' + props.slotIdInt;
     const bracketId = props.bracketId;
     const slotIdInt = parseInt(props.slotIdInt);
-
+    console.log(state.wishlist[bracketId]['slot-' + (slotIdInt - 1)].item);
     if ((slotIdInt > 1) && bracketId !== 'bracketless' &&
         state.wishlist[bracketId]['slot-' + (slotIdInt - 1)].item !== null &&
         state.wishlist[bracketId]['slot-' + (slotIdInt - 1)].item.itemCategory === "Reserved") {
