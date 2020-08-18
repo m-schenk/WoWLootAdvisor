@@ -24,8 +24,8 @@ export const loadProfile = async ({ state, effects }) => {
     await effects.api.loadProfile(state);
 }
 
-export const sendProfile = async ({ state, effects }, data) => {
-    await effects.api.sendProfile(state, data);
+export const saveProfile = async ({ state, effects }, data) => {
+    await effects.api.saveProfile(state, data);
 }
 
 export const dragHandler = async ({ state }, result) => {
