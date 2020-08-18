@@ -141,7 +141,7 @@ export const api = {
             const response = await instance.get('player/loadWishlist');
             const brackets = response.data.wishlist;
             if(brackets === null) return false;
-            Object.keys(brackets).forEach(bracket, index => {
+            Object.keys(brackets).forEach((bracket, index) => {
                 console.log(index)
             })
 
