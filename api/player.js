@@ -186,7 +186,7 @@ const checkWishlistItems = (wishlist, hunter) => {
             if (bracket === 'locked') return;
             if (bracket === 'filterList') return;
 
-            let allocationPoints, count = 0;
+            let allocationPoints = 0, count = 0;
             let itemTypes = new Set();
             let nextMustBeNull = false;
 
