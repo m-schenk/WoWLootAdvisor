@@ -1,4 +1,5 @@
 import { pipe, debounce, mutate } from 'overmind';
+import _ from 'lodash';
 
 export const searchItems = pipe(
     mutate(({ state }, value) => {
@@ -78,7 +79,7 @@ export const dragHandler = async ({ state }, result) => {
             };
 
             // check if there is a item at destination, if so remove it from filterlist
-            if (state.wishlist[destinationBracketId][destinationSlotId].item !== null) {
+            if (_.has(state.wishlist[destinationBracketId][destinationSlotId].item, 'id')) {
                 // remove item at destination from filterlist
                 const sliceid = state.wishlist.filterList.indexOf(state.wishlist[destinationBracketId][destinationSlotId].item.id);
                 state.wishlist.filterList.splice(sliceid, 1);
@@ -101,7 +102,7 @@ export const dragHandler = async ({ state }, result) => {
 
             // when dropping to back slot, checking if front slot is occupied by reserved item
             if ((destinationSlotIdInt % 2 === 0) &&
-                (state.wishlist[destinationBracketId]['slot-' + (parseInt(destinationSlotIdInt) - 1)].item !== null) &&
+                (_.has(state.wishlist[destinationBracketId]['slot-' + (parseInt(destinationSlotIdInt) - 1)].item, 'id')) &&
                 (state.wishlist[destinationBracketId]['slot-' + (parseInt(destinationSlotIdInt) - 1)].item.itemCategory === "Reserved")) {
                 return "This slot is locked because of the Reserved item in the front slot.";
             }
@@ -132,12 +133,12 @@ export const dragHandler = async ({ state }, result) => {
             //source item is reserved => should only be able to go to front slots and if it goes to front, backslot must be clear
             if ((sourceItem.itemCategory === "Reserved") && (destinationSlotIdInt % 2 !== 1)) {
                 return "Reserved items go only in front slots.";
-            } else if ((sourceItem.itemCategory === "Reserved") && (state.wishlist[destinationBracketId]['slot-' + (parseInt(destinationSlotIdInt) + 1)].item !== null)) {
+            } else if ((sourceItem.itemCategory === "Reserved") && (_.has(state.wishlist[destinationBracketId]['slot-' + (parseInt(destinationSlotIdInt) + 1)].item, 'id'))) {
                 return "Slot behind Reserved items must be empty on drop.";
             }
 
             // check if there is a item at destination
-            if (state.wishlist[destinationBracketId][destinationSlotId].item !== null) {
+            if (_.has(state.wishlist[destinationBracketId][destinationSlotId].item, 'id')) {
 
                 // no need to clone it, will only be removed, ref is enough
                 const destinationItem = state.wishlist[destinationBracketId][destinationSlotId].item
@@ -264,7 +265,7 @@ export const dragHandler = async ({ state }, result) => {
             };
 
             // check if there is a item at destination
-            if (state.wishlist[destinationBracketId][destinationSlotId].item !== null) {
+            if (_.has(state.wishlist[destinationBracketId][destinationSlotId].item, 'id')) {
 
                 // item must be cloned, it's a swap
                 stateItem = state.wishlist[destinationBracketId][destinationSlotId].item;
@@ -357,12 +358,12 @@ export const dragHandler = async ({ state }, result) => {
             if (sourceItem.itemCategory === "Reserved") {
                 if (destinationSlotIdInt % 2 === 0) {
                     return "Reserved items go only in front slots.";
-                } else if ((state.wishlist[destinationBracketId]['slot-' + (parseInt(destinationSlotIdInt) + 1)].item !== null)) {
+                } else if (_.has(state.wishlist[destinationBracketId]['slot-' + (parseInt(destinationSlotIdInt) + 1)].item, 'id')) {
                     return "Slot behind Reserved items must be empty on drop.";
                 }
             }
 
-            if (state.wishlist[destinationBracketId][destinationSlotId].item !== null) {
+            if (_.has(state.wishlist[destinationBracketId][destinationSlotId].item, 'id')) {
                 const stateItem2 = state.wishlist[destinationBracketId][destinationSlotId].item;
 
                 const destinationItem = {
@@ -380,7 +381,7 @@ export const dragHandler = async ({ state }, result) => {
                 if (destinationItem.itemCategory === "Reserved") {
                     if (sourceSlotIdInt % 2 === 0) {
                         return "Reserved items go only in front slots.";
-                    } else if (state.wishlist[sourceBracketId]['slot-' + (parseInt(sourceSlotIdInt) + 1)].item !== null) {
+                    } else if (_.has(state.wishlist[sourceBracketId]['slot-' + (parseInt(sourceSlotIdInt) + 1)].item, 'id')) {
                         return "Slot behind Reserved items must be empty on drop.";
                     }
                 }
@@ -399,7 +400,7 @@ export const dragHandler = async ({ state }, result) => {
 
             // when dropping to back slot, checking if front slot is occupied by reserved item
             if ((destinationSlotIdInt % 2 === 0) &&
-                (state.wishlist[destinationBracketId]['slot-' + (parseInt(destinationSlotIdInt) - 1)].item !== null) &&
+                (_.has(state.wishlist[destinationBracketId]['slot-' + (parseInt(destinationSlotIdInt) - 1)].item, 'id')) &&
                 (state.wishlist[destinationBracketId]['slot-' + (parseInt(destinationSlotIdInt) - 1)].item.itemCategory === "Reserved")) {
                 return "This slot is locked because of the Reserved item in the front slot.";
             }
@@ -426,13 +427,13 @@ export const dragHandler = async ({ state }, result) => {
             if (sourceItem.itemCategory === "Reserved") {
                 if (destinationSlotIdInt % 2 !== 1) {
                     return "Reserved items go only in front slots.";
-                } else if ((state.wishlist[destinationBracketId]['slot-' + (parseInt(destinationSlotIdInt) + 1)].item !== null)) {
+                } else if (_.has(state.wishlist[destinationBracketId]['slot-' + (parseInt(destinationSlotIdInt) + 1)].item, 'id')) {
                     return "Slot behind Reserved items must be empty on drop.";
                 }
             }
 
             // check if there is a item at destination
-            if (state.wishlist[destinationBracketId][destinationSlotId].item !== null) {
+            if (_.has(state.wishlist[destinationBracketId][destinationSlotId].item, 'id')) {
 
                 // item must be cloned, it's a swap
                 stateItem = state.wishlist[destinationBracketId][destinationSlotId].item;
@@ -452,7 +453,7 @@ export const dragHandler = async ({ state }, result) => {
                 if (destinationItem.itemCategory === "Reserved") {
                     if (sourceSlotIdInt % 2 !== 1) {
                         return "Reserved items go only in front slots.";
-                    } else if (state.wishlist[sourceBracketId]['slot-' + (parseInt(sourceSlotIdInt) + 1)].item !== null) {
+                    } else if (_.has(state.wishlist[sourceBracketId]['slot-' + (parseInt(sourceSlotIdInt) + 1)].item, 'id')) {
                         return "Slot behind Reserved items must be empty on drop.";
                     }
                 }
@@ -572,8 +573,8 @@ export const dragHandler = async ({ state }, result) => {
 
             // when dropping to back slot, checking if front slot is occupied by reserved item
             if ((destinationSlotIdInt % 2 === 0) &&
-                (state.wishlist[destinationBracketId]['slot-' + (parseInt(destinationSlotIdInt) - 1)].item !== null) &&
-                (state.wishlist[destinationBracketId]['slot-' + (parseInt(destinationSlotIdInt) - 1)].item.itemCategory === "Reserved")) {
+                (_.has(state.wishlist[destinationBracketId]['slot-' + (parseInt(destinationSlotIdInt) - 1)].item, 'id') &&
+                    (state.wishlist[destinationBracketId]['slot-' + (parseInt(destinationSlotIdInt) - 1)].item.itemCategory === "Reserved")) {
                 return "This slot is locked because of the Reserved item in the front slot.";
             }
 
@@ -598,12 +599,13 @@ export const dragHandler = async ({ state }, result) => {
             //source item is reserved => should only be able to go to front slots and if it goes to front, backslot must be clear
             if ((sourceItem.itemCategory === "Reserved") && (destinationSlotIdInt % 2 !== 1)) {
                 return "Reserved items go only in front slots.";
-            } else if ((sourceItem.itemCategory === "Reserved") && (state.wishlist[destinationBracketId]['slot-' + (parseInt(destinationSlotIdInt) + 1)].item !== null)) {
+            } else if ((sourceItem.itemCategory === "Reserved") &&
+                (_.has(state.wishlist[destinationBracketId]['slot-' + (parseInt(destinationSlotIdInt) + 1)].item, 'id'))) {
                 return "Slot behind Reserved items must be empty on drop.";
             }
 
             // check if there is a item at destination
-            if (state.wishlist[destinationBracketId][destinationSlotId].item !== null) {
+            if (_.has(state.wishlist[destinationBracketId][destinationSlotId].item, 'id')) {
 
                 // item must be cloned, it's a swap
                 stateItem = state.wishlist[destinationBracketId][destinationSlotId].item;
@@ -703,7 +705,7 @@ export const dragHandler = async ({ state }, result) => {
             stateItem = state.wishlist[destinationBracketId][destinationSlotId].item;
 
             // if there is a item at destination swap else set source null
-            if (stateItem !== null) {
+            if (_.has(stateItem, 'id')) {
                 const destinationItem = {
                     id: stateItem.id,
                     name: stateItem.name,
