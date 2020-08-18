@@ -194,7 +194,7 @@ const checkWishlistItems = (wishlist, hunter) => {
 
             if (wishlist[bracket] !== null) {
 
-                wishlist[bracket].forEach(item => {
+                Object.keys(wishlist[bracket]).forEach(item => {
 
                     if (bracketsDone >= 4 || hunter && bracketsDone >= 3) {
                         if (item) {
