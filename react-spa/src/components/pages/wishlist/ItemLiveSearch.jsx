@@ -1,14 +1,14 @@
 import React from 'react';
 import ItemListContainer from './ItemListContainer';
-import Spinner from 'react-bootstrap/Spinner'
-import Form from 'react-bootstrap/Form'
-import Button from 'react-bootstrap/Button'
+import Spinner from 'react-bootstrap/Spinner';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
 import { Droppable } from 'react-beautiful-dnd';
 import { connect } from './../../../overmind';
-import { ShepherdTour, ShepherdTourContext } from 'react-shepherd'
-import { tutorialSteps } from '../../tutorialSteps'
+import { ShepherdTour, ShepherdTourContext } from 'react-shepherd';
+import { tutorialSteps } from '../../tutorialSteps';
 
-import 'shepherd.js/dist/css/shepherd.css'
+import 'shepherd.js/dist/css/shepherd.css';
 
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -32,11 +32,11 @@ function TButton() {
 class ItemLiveSearch extends React.Component {
 
     shouldComponentUpdate(nextProps) {
-        return this.props.overmind !== nextProps.overmind
+        return this.props.overmind !== nextProps.overmind;
     }
 
     onChangeHandler = async e => {
-        this.props.overmind.actions.searchItems(e.target.value)
+        this.props.overmind.actions.searchItems(e.target.value);
     }
 
     componentDidUpdate() {
@@ -50,7 +50,7 @@ class ItemLiveSearch extends React.Component {
     }
 
     saveWishlist = async () => {
-        const event = await this.props.overmind.actions.saveWishlist()
+        const event = await this.props.overmind.actions.saveWishlist();
         if (event) {
             toast("Wishlist has been saved.", {
                 className: 'drag-event-toast',
@@ -69,18 +69,12 @@ class ItemLiveSearch extends React.Component {
     }
 
     loadWishlist = async () => {
-        await this.props.overmind.actions.loadWishlist()
-        .then(event => {
-            if(window.$WowheadPower) {
-                console.log('hello')
-                window.$WowheadPower.refreshLinks();
-            }
-            toast(event, {
-                className: 'drag-event-toast',
-                bodyClassName: 'drag-event-toast-textbody',
-                progressClassName: 'drag-event-toast-progress-bar',
-                position: toast.POSITION.TOP_CENTER,
-            });
+        const event = await this.props.overmind.actions.loadWishlist();
+        toast(event, {
+            className: 'drag-event-toast',
+            bodyClassName: 'drag-event-toast-textbody',
+            progressClassName: 'drag-event-toast-progress-bar',
+            position: toast.POSITION.TOP_CENTER,
         });
     }
 
@@ -121,7 +115,6 @@ class ItemLiveSearch extends React.Component {
                     placeholder="Enter Item Name"
                 />
                 {this.renderItems}
-
             </div>
         );
     }
