@@ -171,7 +171,7 @@ exports.loadWistlist = (req, res, next) => {
 
 const checkWishlistItems = (wishlist, hunter) => {
     return new Promise((resolve, reject) => {
-        console.log("Logging new wishlist format: " + wishlist.json())
+        console.log("Logging new wishlist format: " + JSON.stringify(wishlist))
 
         const maxAllocationPoints = hunter ? 2 : 3;
         const itemIds = [];
