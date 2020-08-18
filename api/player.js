@@ -15,7 +15,7 @@ exports.validate = (method) => {
                 body('_role', 'error on role validation').exists().isIn(['DPS', 'Heal', 'Tank']).trim().escape()
             ]
         }
-        case 'postSaveWishlist': {
+        case 'saveWishlist': {
             return [
                 body('wishlist').custom((wishlist, { req }) => {
                     // hunter rule
@@ -110,16 +110,16 @@ exports.logout = (req, res, next) => {
     })
 }
 
-exports.postSaveWishlist = (req, res, next) => {
+exports.saveWishlist = (req, res, next) => {
     const errorFormatter = ({ location, msg, param, value, nestedErrors }) => {
         // Build your resulting errors however you want! String, object, whatever - it works!
         return `${location}[${param}]: ${msg}`;
     };
     const err = validationResult(req).formatWith(errorFormatter);
     if (!err.isEmpty()) {
-        return next(createError(422, 'Failed to validate wishlist (api/player postSaveWishlist()), error text: ' + err.array()));
+        return next(createError(422, 'Failed to validate wishlist (api/player saveWishlist()), error text: ' + err.array()));
     }
-    console.log(req.user)
+    console.log(req.user.name)
     Player.findById(req.user._id)
         .then(player => {
             if ((player.wishlist !== null) && (player.wishlist.locked)) {
@@ -140,12 +140,32 @@ exports.postSaveWishlist = (req, res, next) => {
                         res.json({ wishlist: player.wishlist });
                         res.end();
                     }).catch(err => {
-                        return next(createError(500, 'Failed to save wishlist in database (api/player postSaveWishlist()), error text: ' + err));
+                        return next(createError(500, 'Failed to save wishlist in database (api/player saveWishlist()), error text: ' + err));
                     })
             }
         })
         .catch(err => {
-            return next(createError(500, 'Failed to fetch player from database, probably because player was not authenticated at the time the wishlist was submitted (controllers/wishlist saveWishlist()), error text: ' + err));
+            return next(createError(500, 'Failed to fetch player from database, probably because player was not authenticated at the time the wishlist was submitted (controllers/player saveWishlist()), error text: ' + err));
+        });
+}
+
+exports.loadWistlist = (req, res, next) => {
+    console.log(req.user.name + ": is trying to load wishlist.")
+    Player.findById(req.user._id)
+        .then(player => {
+            if ((player.wishlist !== null)) {
+                res.status(200);
+                res.set({ 'Content-Type': 'text/json' });
+                res.json({ wishlist: player.wishlist });
+                res.end();
+            } else {
+                res.status(200);
+                res.set({ 'Content-Type': 'text/json' });
+                res.json({ wishlist: null });
+                res.end();
+            }
+        }).catch(err => {
+            return next(createError(500, 'Failed to fetch player from database, probably because player was not authenticated at the time the wishlist was loaded (controllers/player loadWishlist()), error text: ' + err));
         });
 }
 
@@ -167,7 +187,7 @@ const checkWishlistItems = (wishlist, hunter) => {
             let nextMustBeNull = false;
 
             if (wishlist[bracket] !== null) {
-                
+
                 wishlist[bracket].forEach(item => {
 
                     if (bracketsDone >= 4 || hunter && bracketsDone >= 3) {
