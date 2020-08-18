@@ -83,7 +83,7 @@ function PlayerProfileForm() {
                     variant="warning"
                     type="submit"
                     eventKey="0"
-                    onClick={(e) => { decoratedOnClick(); handleSubmit(e); }}
+                    onClick={(e) => { decoratedOnClick(e); handleSubmit(e); }}
                     
                 >
                     Submit
