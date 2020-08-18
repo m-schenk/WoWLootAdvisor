@@ -24,7 +24,7 @@ const initialFormData = Object.freeze({
 
 function PlayerProfileForm() {
     const [formData, updateFormData] = useState(initialFormData);
-    const decoratedOnClick = useAccordionToggle(eventKey);
+    const decoratedOnClick = useAccordionToggle("0");
     const actions = useActions();
 
     const handleChange = (e) => {
@@ -82,8 +82,9 @@ function PlayerProfileForm() {
                 <Button
                     variant="warning"
                     type="submit"
-                    onClick={(e) => { decoratedOnClick(); handleSubmit(e); }}
                     eventKey="0"
+                    onClick={(e) => { decoratedOnClick(); handleSubmit(e); }}
+                    
                 >
                     Submit
                 </Button>
