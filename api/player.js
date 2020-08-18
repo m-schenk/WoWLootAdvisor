@@ -215,6 +215,7 @@ const checkWishlistItems = (wishlist, hunter) => {
                         count++;
                         if (item !== null) {
 
+                            console.log("hier")
                             itemIds.push(item.id);
 
                             if (item.itemCategory === 'Reserved') {
