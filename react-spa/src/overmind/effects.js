@@ -93,7 +93,7 @@ export const api = {
     async loadWishlist(state) {
         try {
             const response = await instance.get('player/loadWishlist');
-            console.log(JSON.stringify(state.wishlist))
+            console.log(JSON.stringify(response.data.wishlist))
             if (response.status === 200) {
                 if(response.data.wishlist === null) {
                     return "You have no saved wishlist.";
