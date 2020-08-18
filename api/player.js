@@ -186,8 +186,6 @@ const checkWishlistItems = (wishlist, hunter) => {
             if (bracket === 'locked') return;
             if (bracket === 'filterList') return;
 
-            console.log(JSON.stringify(bracket));
-
             let allocationPoints, count = 0;
             let itemTypes = new Set();
             let nextMustBeNull = false;
@@ -198,7 +196,6 @@ const checkWishlistItems = (wishlist, hunter) => {
                     if (slot === 'itemTypes') return;
                     if (slot === 'points') return;
                     let item = wishlist[bracket][slot].item;
-                    console.log(JSON.stringify(item));
 
                     if (bracketsDone >= 4 || hunter && bracketsDone >= 3) {
                         if (item !== null) {
@@ -215,7 +212,6 @@ const checkWishlistItems = (wishlist, hunter) => {
                         count++;
                         if (item !== null) {
 
-                            console.log("hier")
                             itemIds.push(item.id);
 
                             if (item.itemCategory === 'Reserved') {
@@ -226,7 +222,7 @@ const checkWishlistItems = (wishlist, hunter) => {
                             if (itemTypes.has(itemType)) {
                                 reject('bracket has duplicate item type');
                             }
-                            itemTypes.add(itemType);
+                            itemTypes.add(item.itemType);
 
                             if ((item.itemCategory === 'Reserved') || (item.itemCategory === 'Limited')) {
                                 allocationPoints++;
