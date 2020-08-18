@@ -43,10 +43,10 @@ export const api = {
     },
     saveProfile(state, data) {
         instance.post('player/saveProfile', {
-            _name: data._name,
-            _race: data._race,
-            _class: data._class,
-            _role: data._role
+            name: data._name,
+            race: data._race,
+            class: data._class,
+            role: data._role
         }).then((response) => {
             state.player._id = response.data.player._id;
             state.player.isComplete = response.data.isComplete;

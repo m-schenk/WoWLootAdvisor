@@ -23,6 +23,7 @@ passport.use(new DiscordStrategy({
     // profile is the discord profile, not ours
     if (profile.guilds.filter(entry => (entry.id === process.env.DISCORD_SERVER_ID)).length > 0) {
         Player.findOne({ discordId: profile.id })
+            .populate('wishlist')
             .then(player => {
                 if (player) {
                     const filteredPlayer = _.omit(player.toObject(), ['discordId']);

@@ -9,10 +9,10 @@ exports.validate = (method) => {
     switch (method) {
         case 'saveProfile': {
             return [
-                body('_name', 'error on name validation').exists().notEmpty().trim().escape(),
-                body('_class', 'error on class validation').exists().isIn(['Druid', 'Hunter', 'Mage', 'Paladin', 'Priest', 'Rogue', 'Warlock', 'Warrior']).trim().escape(),
-                body('_race', 'error on race validation').exists().isIn(['Dwarf', 'Gnome', 'Human', 'Night Elf']).trim().escape(),
-                body('_role', 'error on role validation').exists().isIn(['DPS', 'Heal', 'Tank']).trim().escape()
+                body('name', 'error on name validation').exists().notEmpty().trim().escape(),
+                body('class', 'error on class validation').exists().isIn(['Druid', 'Hunter', 'Mage', 'Paladin', 'Priest', 'Rogue', 'Warlock', 'Warrior']).trim().escape(),
+                body('race', 'error on race validation').exists().isIn(['Dwarf', 'Gnome', 'Human', 'Night Elf']).trim().escape(),
+                body('role', 'error on role validation').exists().isIn(['DPS', 'Heal', 'Tank']).trim().escape()
             ]
         }
         case 'saveWishlist': {
@@ -42,10 +42,10 @@ exports.saveProfile = (req, res, next) => {
     }
     Player.findById(req.user._id)
         .then(player => {
-            player.name = req.body._name;
-            player.class = req.body._class;
-            player.race = req.body._race;
-            player.role = req.body._role;
+            player.name = req.body.name;
+            player.class = req.body.class;
+            player.race = req.body.race;
+            player.role = req.body.role;
             player.save()
                 .then(player => {
                     const filteredPlayer = _.omit(player.toObject(), ['discordId', 'wishlist'])
@@ -56,7 +56,7 @@ exports.saveProfile = (req, res, next) => {
                     res.end();
                 })
                 .catch(err => {
-                    return next(createError(500, 'Failed to save player profile in database (api/player postPlayerProfile()), error text: ' + err));
+                    return next(createError(500, 'Failed to save player profile in database (api/player saveProfile()), error text: ' + err));
                 });
         }).catch(err => {
             return next(createError(500, 'Failed to fetch player from database (api/player postPlayerProfile()), error text: ' + err));
