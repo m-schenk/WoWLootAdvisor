@@ -235,7 +235,7 @@ export const dragHandler = async ({ state }, result) => {
             state.wishlist[sourceBracketId].itemTypes.splice(state.wishlist[sourceBracketId].itemTypes.indexOf(itemType), 1);
 
             // remove item from bracket state
-            state.wishlist[sourceBracketId][sourceSlotId].item = null;
+            state.wishlist[sourceBracketId][sourceSlotId].item = {};
             return "Item was been removed from wishlist.";
         }
 
@@ -328,7 +328,7 @@ export const dragHandler = async ({ state }, result) => {
                 state.wishlist[sourceBracketId].itemTypes.splice(state.wishlist[sourceBracketId].itemTypes.indexOf(sourceFixedItemType), 1);
 
                 // set null at source because there was no swap item
-                state.wishlist[sourceBracketId][sourceSlotId].item = null;
+                state.wishlist[sourceBracketId][sourceSlotId].item = {};
             }
 
             // set source item into state
@@ -388,7 +388,7 @@ export const dragHandler = async ({ state }, result) => {
 
                 state.wishlist[sourceBracketId][sourceSlotId].item = destinationItem;
             } else {
-                state.wishlist[sourceBracketId][sourceSlotId].item = null;
+                state.wishlist[sourceBracketId][sourceSlotId].item = {};
             }
             state.wishlist[destinationBracketId][destinationSlotId].item = sourceItem;
 
@@ -535,7 +535,7 @@ export const dragHandler = async ({ state }, result) => {
                 // push item type to new bracket
                 state.wishlist[destinationBracketId].itemTypes.push(sourceFixedItemType);
                 // set null at source because there was no swap item
-                state.wishlist[sourceBracketId][sourceSlotId].item = null;
+                state.wishlist[sourceBracketId][sourceSlotId].item = {};
             }
 
             // set source item into state
@@ -560,7 +560,7 @@ export const dragHandler = async ({ state }, result) => {
             state.wishlist.filterList.splice(sliceid, 1);
 
             // remove item from bracket state
-            state.wishlist[sourceBracketId][sourceSlotId].item = null;
+            state.wishlist[sourceBracketId][sourceSlotId].item = {};
             return "Item was been removed from wishlist.";
         }
 
@@ -677,7 +677,7 @@ export const dragHandler = async ({ state }, result) => {
                 // push new item type to bracket
                 state.wishlist[destinationBracketId].itemTypes.push(sourceFixedItemType);
                 // set null at source because there was no swap item
-                state.wishlist[sourceBracketId][sourceSlotId].item = null;
+                state.wishlist[sourceBracketId][sourceSlotId].item = {};
             }
 
             // set source item into state
@@ -718,7 +718,7 @@ export const dragHandler = async ({ state }, result) => {
                 };
                 state.wishlist[sourceBracketId][sourceSlotId].item = destinationItem;
             } else {
-                state.wishlist[sourceBracketId][sourceSlotId].item = null;
+                state.wishlist[sourceBracketId][sourceSlotId].item = {};
             }
             state.wishlist[destinationBracketId][destinationSlotId].item = sourceItem;
 
