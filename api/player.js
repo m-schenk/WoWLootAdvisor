@@ -171,7 +171,7 @@ exports.loadWistlist = (req, res, next) => {
 
 const checkWishlistItems = (wishlist, hunter) => {
     return new Promise((resolve, reject) => {
-        console.log("Logging new wishlist format: " + JSON.stringify(wishlist))
+        console.log("Wishlist is being validated: " + JSON.stringify(wishlist));
 
         const maxAllocationPoints = hunter ? 2 : 3;
         const itemIds = [];
@@ -219,7 +219,6 @@ const checkWishlistItems = (wishlist, hunter) => {
                             }
 
                             const itemType = weapon.includes(item.itemType) ? "Weapon" : (ranged.includes(item.itemType) ? "Ranged" : (offhand.includes(item.itemType) ? "Offhand" : item.itemType));
-                            console.log(itemType)
                             if (itemTypes.has(itemType)) {
                                 reject('bracket has duplicate item type');
                             }
@@ -237,10 +236,6 @@ const checkWishlistItems = (wishlist, hunter) => {
                         }
                     }
                 });
-                let str = "";
-                for (type of itemTypes.values())
-                    str += '"' + type + '" ';
-                console.log(JSON.stringify(bracket) + " itemTypes: " + str);
                 bracketsDone++;
             }
         })
