@@ -210,6 +210,7 @@ const checkWishlistItems = (wishlist, hunter) => {
 
                         count++;
                         if (item !== null) {
+                            console.log(JSON.stringify(item))
 
                             itemIds.push(item.id);
 
