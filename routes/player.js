@@ -9,7 +9,7 @@ router.post('/saveProfile', playerApi.validate('saveProfile'), playerApi.savePro
 router.get('/loadProfile', playerApi.loadProfile);
 router.get('/logout', playerApi.logout);
 router.post('/saveWishlist', playerApi.validate('saveWishlist'), playerApi.saveWishlist);
-router.get('/loadWishlist', playerApi.loadWistlist);
+router.get('/loadWishlist', playerApi.loadWishlist);
 
 router.get('/id::id', playerApi.getPlayerById);
 
