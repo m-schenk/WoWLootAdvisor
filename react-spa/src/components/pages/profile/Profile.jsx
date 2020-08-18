@@ -22,14 +22,6 @@ const initialFormData = Object.freeze({
     _role: null
 });
 
-function SpecialButton({ children, eventKey }) {
-
-
-    return (
-
-    );
-}
-
 function PlayerProfileForm() {
     const [formData, updateFormData] = useState(initialFormData);
     const decoratedOnClick = useAccordionToggle(eventKey);
