@@ -183,6 +183,8 @@ const checkWishlistItems = (wishlist, hunter) => {
         let bracketsDone = 0;
         if (Object.keys(wishlist) === null) { reject('wishlist is empty AF'); }
         Object.keys(wishlist).forEach(bracket => {
+            if(bracket === 'locked') continue;
+            if(bracket === 'filterList') continue;
 
             let allocationPoints, count = 0;
             let itemTypes = new Set();
