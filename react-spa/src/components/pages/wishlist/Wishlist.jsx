@@ -231,7 +231,7 @@ const Item = (props) => {
                 <p>Locked</p>
             </ItemContainer>
         )
-    } else if (state.wishlist[bracketId][slotId].item === null) {
+    } else if (state.wishlist[bracketId][slotId].item === null || state.wishlist[bracketId][slotId].item.id === null) {
         return (<></>)
     } else {
         return (
