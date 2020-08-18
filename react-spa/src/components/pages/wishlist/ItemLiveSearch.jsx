@@ -68,6 +68,25 @@ class ItemLiveSearch extends React.Component {
         }
     }
 
+    loadWishlist = async () => {
+        const event = await this.props.overmind.actions.loadWishlist()
+        if (event) {
+            toast("Wishlist has been loaded.", {
+                className: 'drag-event-toast',
+                bodyClassName: 'drag-event-toast-textbody',
+                progressClassName: 'drag-event-toast-progress-bar',
+                position: toast.POSITION.TOP_CENTER,
+            });
+        } else {
+            toast("Wishlist could not be loaded.", {
+                className: 'drag-event-toast',
+                bodyClassName: 'drag-event-toast-textbody',
+                progressClassName: 'drag-event-toast-progress-bar',
+                position: toast.POSITION.TOP_CENTER,
+            });
+        }
+    }
+
     get renderItems() {
         let itemList = <h3>0 Items found.</h3>;
         if (this.props.overmind.state.liveSearch['isSearching']) {
@@ -83,8 +102,8 @@ class ItemLiveSearch extends React.Component {
         return (
             <div className="live-search">
                 <div className="control">
-                    <Button variant="warning" as="input" type="save" value="Save" onClick={() => { this.saveWishlist() }} />
-                    <Button variant="warning" as="input" type="load" value="Load" onClick={() => { this.loadWihslist() }}/>
+                    <Button variant="warning" as="input" type="submit" value="Save" onClick={() => { this.saveWishlist() }} />
+                    <Button variant="warning" as="input" type="submit" value="Load" onClick={() => { this.loadWihslist() }}/>
                     <ShepherdTour steps={tutorialSteps} tourOptions={tourOptions}>
                         <TButton />
                     </ShepherdTour>
