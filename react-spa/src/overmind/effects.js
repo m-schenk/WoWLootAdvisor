@@ -87,7 +87,7 @@ export const api = {
             //return false;
         })
     },
-    async sendWishlist(state) {
+    async saveWishlist(state) {
         const wishlist = {
             bracket1:
                 [state.wishlist['bracket-1']['slot-1'].item, state.wishlist['bracket-1']['slot-2'].item,
@@ -125,7 +125,28 @@ export const api = {
                 state.wishlist['bracketless']['slot-31'].item, state.wishlist['bracketless']['slot-32'].item,]
         }
         try {
-            const response = await instance.post('player/saveWishlist', { wishlist: wishlist })
+            const response = await instance.post('player/saveWishlist', { wishlist: wishlist });
+            if (response.status === 200) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (err) {
+            console.error(err);
+            return false;
+        };
+    },
+    async loadWishlist(state) {
+        try {
+            const response = await instance.get('player/loadWishlist');
+            const brackets = response.data.wishlist;
+            if(brackets === null) return false;
+            Object.keys(brackets).forEach(bracket, key => {
+                console.log(key)
+            })
+
+            //load stuff...
+
             if (response.status === 200) {
                 return true;
             } else {

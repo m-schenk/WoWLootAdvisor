@@ -49,8 +49,8 @@ class ItemLiveSearch extends React.Component {
         this.props.overmind.actions.tutorial();
     }
 
-    sendWishlist = async () => {
-        const event = await this.props.overmind.actions.sendWishlist()
+    saveWishlist = async () => {
+        const event = await this.props.overmind.actions.saveWishlist()
         if (event) {
             toast("Wishlist has been saved.", {
                 className: 'drag-event-toast',
@@ -83,8 +83,8 @@ class ItemLiveSearch extends React.Component {
         return (
             <div className="live-search">
                 <div className="control">
-                    <Button variant="warning" as="input" type="submit" value="Submit" onClick={() => { this.sendWishlist() }} />
-                    <Button variant="warning" as="input" type="reset" value="Reset" />
+                    <Button variant="warning" as="input" type="save" value="Save" onClick={() => { this.saveWishlist() }} />
+                    <Button variant="warning" as="input" type="load" value="Load" onClick={() => { this.loadWihslist() }}/>
                     <ShepherdTour steps={tutorialSteps} tourOptions={tourOptions}>
                         <TButton />
                     </ShepherdTour>

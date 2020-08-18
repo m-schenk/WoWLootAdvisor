@@ -12,8 +12,12 @@ export const searchItems = pipe(
     })
 )
 
-export const sendWishlist = async ({ state, effects }) => {
-    return await effects.api.sendWishlist(state);
+export const saveWishlist = async ({ state, effects }) => {
+    return await effects.api.saveWishlist(state);
+}
+
+export const loadWishlist = async ({ state, effects }) => {
+    return await effects.api.loadWishlist(state);
 }
 
 export const loadProfile = async ({ state, effects }) => {
@@ -23,6 +27,7 @@ export const loadProfile = async ({ state, effects }) => {
 export const sendProfile = async ({ state, effects }, data) => {
     await effects.api.sendProfile(state, data);
 }
+
 export const dragHandler = async ({ state }, result) => {
     const { destination, source } = result;
 
