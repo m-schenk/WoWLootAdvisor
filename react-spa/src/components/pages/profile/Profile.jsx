@@ -34,7 +34,7 @@ function PlayerProfileForm() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        actions.sendProfile(formData);
+        actions.saveProfile(formData);
     };
 
     return (
