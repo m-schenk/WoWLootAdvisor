@@ -102,7 +102,7 @@ exports.logout = (req, res, next) => {
         if (err) {
             next(createError(500, err));
         }
-        console.log(req.user.name + ": is has logged out.")
+        console.log(req.user.name + ": has logged out.")
         res.redirect(process.env.ADDR + '/login');
     })
 }
