@@ -198,9 +198,10 @@ const checkWishlistItems = (wishlist, hunter) => {
                     if (slot === 'itemTypes') return;
                     if (slot === 'points') return;
                     let item = wishlist[bracket][slot].item;
+                    console.log(JSON.stringify(item)):
 
                     if (bracketsDone >= 4 || hunter && bracketsDone >= 3) {
-                        if (item) {
+                        if (item !== null) {
                             itemIds.push(item.id);
                         }
                     } else {
@@ -213,7 +214,6 @@ const checkWishlistItems = (wishlist, hunter) => {
 
                         count++;
                         if (item !== null) {
-                            console.log(JSON.stringify(item))
 
                             itemIds.push(item.id);
 
