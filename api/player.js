@@ -128,11 +128,11 @@ exports.saveWishlist = (req, res, next) => {
                 res.json({ wishlist: player.wishlist });
                 res.end();
             } else {
-                console.log("Wishlist reg.body: " + JSON.stringify(req.body.wishlist, null, 4));
+                //console.log("Wishlist reg.body: " + JSON.stringify(req.body.wishlist, null, 4));
                 player.wishlist = req.body.wishlist;
                 player.save()
                     .then(player => {
-                        console.log("Wishlist player.wishlist: " + JSON.stringify(req.body.wishlist, null, 4));
+                        console.log("Wishlist player.wishlist: " + JSON.stringify(req.body.wishlist, null, 2));
                         console.log(req.user.name + ": has saved wishlist.")
                         res.status(200);
                         res.set({ 'Content-Type': 'text/json' });
@@ -152,7 +152,7 @@ exports.loadWishlist = (req, res, next) => {
     console.log(req.user.name + ": is trying to load wishlist.")
     Player.findById(req.user._id)
         .then(player => {
-            console.log(JSON.stringify(player, null, 4));
+            //console.log(JSON.stringify(player, null, 4));
             if (player.wishlist !== null) {
                 console.log(req.user.name + ": has loaded wishlist.")
                 res.status(200);
@@ -173,7 +173,7 @@ exports.loadWishlist = (req, res, next) => {
 
 const checkWishlistItems = (wishlist, hunter) => {
     return new Promise((resolve, reject) => {
-        console.log("Wishlist is being validated: " + JSON.stringify(wishlist, null, 4));
+        //console.log("Wishlist is being validated: " + JSON.stringify(wishlist, null, 4));
 
         const maxAllocationPoints = hunter ? 2 : 3;
         const itemIds = [];
