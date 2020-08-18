@@ -103,7 +103,7 @@ class ItemLiveSearch extends React.Component {
             <div className="live-search">
                 <div className="control">
                     <Button variant="warning" as="input" type="submit" value="Save" onClick={() => { this.saveWishlist() }} />
-                    <Button variant="warning" as="input" type="submit" value="Load" onClick={() => { this.loadWihslist() }}/>
+                    <Button variant="warning" as="input" type="submit" value="Load" onClick={() => { this.loadWishlist() }}/>
                     <ShepherdTour steps={tutorialSteps} tourOptions={tourOptions}>
                         <TButton />
                     </ShepherdTour>
