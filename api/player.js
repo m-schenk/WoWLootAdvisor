@@ -132,7 +132,7 @@ exports.saveWishlist = (req, res, next) => {
                 player.wishlist = req.body.wishlist;
                 player.save()
                     .then(player => {
-                        console.log(req.user.name + ": is has saved wishlist.")
+                        console.log(req.user.name + ": has saved wishlist.")
                         res.status(200);
                         res.set({ 'Content-Type': 'text/json' });
                         res.json({ wishlist: player.wishlist });

@@ -98,6 +98,7 @@ export const api = {
                     return "You have no saved wishlist.";
                 } else {
                     state.wishlist = response.data.wishlist;
+                    console.log(JSON.stringify(state.wishlist))
                     return "Your wishlist has been loaded.";
                 }
             } else {
