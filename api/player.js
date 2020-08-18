@@ -153,7 +153,7 @@ exports.loadWishlist = (req, res, next) => {
         .populate('wishlist')
         .populate('item')
         .then(player => {
-            console.log(JSON.stringify(player))
+            console.log(JSON.stringify(player), null, 4)
             if ((player.wishlist !== null)) {
                 console.log(req.user.name + ": is has loaded wishlist.")
                 res.status(200);
