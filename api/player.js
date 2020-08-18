@@ -217,7 +217,7 @@ const checkWishlistItems = (wishlist, hunter) => {
                                 nextMustBeNull = true;
                             }
 
-                            const itemType = weapon.includes(item.itemType) ? "Weapon" : ranged.includes(itemTypes) ? "Ranged" : offhand.includes(item.itemTyped) ? "Offhand" : item.itemType;
+                            const itemType = weapon.includes(item.itemType) ? "Weapon" : ranged.includes(item.itemType) ? "Ranged" : offhand.includes(item.itemType) ? "Offhand" : item.itemType;
                             if (itemTypes.has(itemType)) {
                                 reject('bracket has duplicate item type');
                             }
