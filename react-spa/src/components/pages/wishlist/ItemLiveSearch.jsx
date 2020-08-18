@@ -69,16 +69,18 @@ class ItemLiveSearch extends React.Component {
     }
 
     loadWishlist = async () => {
-        const event = await this.props.overmind.actions.loadWishlist()
-        toast(event, {
-            className: 'drag-event-toast',
-            bodyClassName: 'drag-event-toast-textbody',
-            progressClassName: 'drag-event-toast-progress-bar',
-            position: toast.POSITION.TOP_CENTER,
+        await this.props.overmind.actions.loadWishlist()
+        .then(event => {
+            if(window.$WowheadPower) {
+                window.$WowheadPower.refreshLinks();
+            }
+            toast(event, {
+                className: 'drag-event-toast',
+                bodyClassName: 'drag-event-toast-textbody',
+                progressClassName: 'drag-event-toast-progress-bar',
+                position: toast.POSITION.TOP_CENTER,
+            });
         });
-        if (window.$WowheadPower) {
-            window.$WowheadPower.refreshLinks();
-        }
     }
 
     get renderItems() {
