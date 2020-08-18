@@ -138,23 +138,23 @@ export const api = {
     },
     async loadWishlist(state) {
         try {
-            const response = await instance.get('player/loadWishlist');
-            const brackets = response.data.wishlist;
-            if(brackets === null) return false;
-            Object.keys(brackets).forEach((bracket, index) => {
-                console.log(index)
-            })
-
-            //load stuff...
-
             if (response.status === 200) {
-                return true;
+                const response = await instance.get('player/loadWishlist');
+                if(response.data.wishlist === null) {
+                    return "You have no saved wishlist.";
+                }
+                const brackets = response.data.wishlist;
+                Object.keys(brackets).forEach((bracket, index) => {
+                    console.log(index)
+                })
+
+                return "Your wishlist has been loaded.";
             } else {
-                return false;
+                return "This should not have happend. Malvida is sowwyy =(.";
             }
         } catch (err) {
             console.error(err);
-            return false;
+            return "There was an error loading your wishlist.";
         };
     },
     async searchItems(query) {
