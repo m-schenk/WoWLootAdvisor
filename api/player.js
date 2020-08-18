@@ -46,7 +46,7 @@ exports.saveProfile = (req, res, next) => {
             player.save()
                 .then(player => {
                     const filteredPlayer = _.omit(player.toObject(), ['discordId', 'wishlist'])
-                    console.log(req.user.name + ": is has saved profile.")
+                    console.log(req.user.name + ": has saved profile.")
                     res.status(200);
                     res.set({ 'Content-Type': 'text/json' });
                     res.json({ isComplete: true, player: filteredPlayer });
@@ -66,7 +66,7 @@ exports.loadProfile = (req, res, next) => {
         .then(player => {
             const complete = (!player.name || !player.class || !player.race || !player.role) ? false : true;
             const filteredPlayer = _.omit(player.toObject(), ['discordId', 'wishlist'])
-            console.log(req.user.name + ": is has got profile.")
+            console.log(req.user.name + ": has got profile.")
             res.status(200);
             res.set({ 'Content-Type': 'text/json' });
             res.json({ isComplete: complete, player: filteredPlayer });
