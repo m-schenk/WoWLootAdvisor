@@ -131,7 +131,7 @@ exports.saveWishlist = (req, res, next) => {
             } else {
                 console.log("Wishlist reg.body: " + JSON.stringify(req.body.wishlist, null, 4));
                 const newWishlist = new Wishlist(req.body.wishlist);
-                newWishlist.save()
+                newWishlist.save();
                 player.wishlist = newWishlist;
                 player.save()
                     .then(player => {
