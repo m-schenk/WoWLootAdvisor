@@ -3,8 +3,6 @@ const router = express.Router();
 
 const playerApi = require('../api/player');
 
-const Item = require('../models/Item');
-
 router.post('/saveProfile', playerApi.validate('saveProfile'), playerApi.saveProfile);
 router.get('/loadProfile', playerApi.loadProfile);
 router.get('/logout', playerApi.logout);

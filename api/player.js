@@ -3,8 +3,6 @@ const _ = require('lodash');
 const { validationResult, body } = require('express-validator')
 
 const Player = require('../models/Player');
-const Wishlist = require('../models/Wishlist');
-const Item = require('../models/Item');
 
 exports.validate = (method) => {
     switch (method) {
