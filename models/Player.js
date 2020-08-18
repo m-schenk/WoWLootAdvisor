@@ -2,17 +2,17 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const ItemSchema = new mongoose.Schema({
-    id: { type: Number, required: true},
-    name: { type: String, required: true },
-    itemType: { type: String, required: true },
-    itemCategory: { type: String, required: true },
-    raid: { type: String, required: true },
-    encounters: [{ type: String, required: true }],
+    id: { type: Number, required: false},
+    name: { type: String, required: false },
+    itemType: { type: String, required: false },
+    itemCategory: { type: String, required: false },
+    raid: { type: String, required: false },
+    encounters: [{ type: String, required: false }],
     priority: [{
         _id : false,
-        classes: [{ type: String, require: true }],
+        classes: [{ type: String, require: false }],
     }],
-    deName: { type: String, required: true }
+    deName: { type: String, required: false }
 });
 
 const WishlistSchema = new Schema({
