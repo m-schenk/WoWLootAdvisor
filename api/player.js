@@ -48,7 +48,7 @@ exports.postPlayerProfile = (req, res, next) => {
             player.role = req.body._role;
             player.save()
                 .then(player => {
-                    const filteredPlayer = _.omit(player.toObject(), ['discordId'])
+                    const filteredPlayer = _.omit(player.toObject(), ['discordId', 'wishlist'])
                     console.log(req.user.name + ": is has saved profile.")
                     res.status(200);
                     res.set({ 'Content-Type': 'text/json' });
@@ -67,12 +67,8 @@ exports.getPlayerProfile = (req, res, next) => {
     console.log(req.user.name + ": is trying to get profile.")
     Player.findById(req.user._id)
         .then(player => {
-            let complete = true;
-            if (!player.name) { complete = false; }
-            if (!player.class) { complete = false; }
-            if (!player.race) { complete = false; }
-            if (!player.role) { complete = false; }
-            const filteredPlayer = _.omit(player.toObject(), ['discordId'])
+            const complete = (!player.name || !player.class || !player.race || !player.role) ? false : true;
+            const filteredPlayer = _.omit(player.toObject(), ['discordId', 'wishlist'])
             console.log(req.user.name + ": is has got profile.")
             res.status(200);
             res.set({ 'Content-Type': 'text/json' });

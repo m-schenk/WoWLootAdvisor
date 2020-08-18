@@ -152,26 +152,6 @@ class Profile extends React.Component {
                                         <Col md={6}><label>Naxxramas Attendance:</label></Col>
                                         <Col md={6}><b>{this.props.overmind.state.player.naxx_attendance}</b></Col>
                                     </Row>
-                                    <Row>
-                                        <Col md={2}><p>(remove $dev_bracket1)</p></Col>
-                                        <Col md={10}>{this.props.overmind.state.player.debug.bracket1 && this.props.overmind.state.player.debug.bracket1.toString()}</Col>
-                                    </Row>
-                                    <Row>
-                                        <Col md={2}><p>(remove $dev_bracket2)</p></Col>
-                                        <Col md={10}>{this.props.overmind.state.player.debug.bracket2 && this.props.overmind.state.player.debug.bracket2.toString()}</Col>
-                                    </Row>
-                                    <Row>
-                                        <Col md={2}><p>(remove $dev_bracket3)</p></Col>
-                                        <Col md={10}>{this.props.overmind.state.player.debug.bracket3 && this.props.overmind.state.player.debug.bracket3.toString()}</Col>
-                                    </Row>
-                                    <Row>
-                                        <Col md={2}><p>(remove $dev_bracket4)</p></Col>
-                                        <Col md={10}>{this.props.overmind.state.player.debug.bracket4 && this.props.overmind.state.player.debug.bracket4.toString()}</Col>
-                                    </Row>
-                                    <Row>
-                                        <Col md={2}><p>(remove $dev_bracketless)</p></Col>
-                                        <Col md={10}>{this.props.overmind.state.player.debug.bracketless && this.props.overmind.state.player.debug.bracketless.toString()}</Col>
-                                    </Row>
                                 </Card.Body>
                                 <Accordion>
                                     <Card.Footer>
