@@ -30,8 +30,10 @@ passport.use(new DiscordStrategy({
                     const filteredPlayer = _.omit(player.toObject(), ['discordId']);
                     cb(null, filteredPlayer);
                 } else {
+                    const newWishlist = new Wishlist({ 'locked': false });
+                    newWishlist.save()
                     console.log('User doesnt exist');
-                    const newPlayer = new Player({ discordId: profile.id, permissions: 'member', wishlist: new Wishlist({ 'locked': false }) });
+                    const newPlayer = new Player({ discordId: profile.id, permissions: 'member', wishlist: newWishlist});
                     newPlayer.save()
                         .then(player => {
                             const filteredPlayer = _.omit(player.toObject(), ['discordId']);

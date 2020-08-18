@@ -130,7 +130,9 @@ exports.saveWishlist = (req, res, next) => {
                 res.end();
             } else {
                 console.log("Wishlist reg.body: " + JSON.stringify(req.body.wishlist, null, 4));
-                player.wishlist = new Wishlist(req.body.wishlist);
+                const newWishlist = new Wishlist(req.body.wishlist);
+                newWishlist.save()
+                player.wishlist = newWishlist;
                 player.save()
                     .then(player => {
                         console.log("Wishlist player.wishlist: " + JSON.stringify(req.body.wishlist, null, 4));
@@ -155,14 +157,14 @@ exports.loadWishlist = (req, res, next) => {
         .populate('wishlist')
         .then(player => {
             console.log(JSON.stringify(player, null, 4));
-            if ((player.wishlist !== null)) {
-                console.log(req.user.name + ": is has loaded wishlist.")
+            if (player.wishlist !== null) {
+                console.log(req.user.name + ": has loaded wishlist.")
                 res.status(200);
                 res.set({ 'Content-Type': 'text/json' });
                 res.json({ wishlist: player.wishlist });
                 res.end();
             } else {
-                console.log(req.user.name + ": is has loaded empty wishlist.")
+                console.log(req.user.name + ": has loaded empty wishlist.")
                 res.status(200);
                 res.set({ 'Content-Type': 'text/json' });
                 res.json({ wishlist: null });
