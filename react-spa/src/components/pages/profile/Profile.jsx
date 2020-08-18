@@ -21,6 +21,20 @@ const initialFormData = Object.freeze({
     _role: null
 });
 
+function SpecialButton({ children, eventKey }) {
+    const decoratedOnClick = useAccordionToggle(eventKey);
+    
+    return (
+      <Button
+        variant="warning"
+        type="submit"
+        onClick={() => {decoratedOnClick(); handleSubmit(e);}}
+      >
+        {children}
+      </Button>
+    );
+  }
+  
 function PlayerProfileForm() {
     const [formData, updateFormData] = useState(initialFormData);
     const actions = useActions();
@@ -77,9 +91,9 @@ function PlayerProfileForm() {
                         <option value="Tank">Tank</option>
                     </Form.Control>
                 </Form.Group>
-                <Button variant="warning" type="submit" onClick={handleSubmit} eventKey="0">
+                <SpecialButton eventKey="0">
                     Submit
-                </Button>
+                </SpecialButton>
             </form>
         </>
     )
