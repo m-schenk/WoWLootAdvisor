@@ -147,12 +147,13 @@ exports.saveWishlist = (req, res, next) => {
         });
 }
 
-exports.loadWistlist = (req, res, next) => {
+exports.loadWishlist = (req, res, next) => {
     console.log(req.user.name + ": is trying to load wishlist.")
     Player.findById(req.user._id)
         .populate('wishlist')
         .populate('item')
         .then(player => {
+            console.log(JSON.stringify(player))
             if ((player.wishlist !== null)) {
                 console.log(req.user.name + ": is has loaded wishlist.")
                 res.status(200);
