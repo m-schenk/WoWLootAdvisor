@@ -84,7 +84,6 @@ function PlayerProfileForm() {
                     type="submit"
                     eventKey="0"
                     onClick={(e) => { decoratedOnClick(e); handleSubmit(e); }}
-                    
                 >
                     Submit
                 </Button>

@@ -34,6 +34,17 @@ export const api = {
             if (response.data.player.permissions) {
                 state.player.permissions = response.data.player.permissions
             }
+            if (response.data.player.class === 'Hunter') {
+                if (state.wishlist['bracket-1'].points > 2) {
+                    state.wishlist['bracket-1'].points = 2;
+                }
+                if (state.wishlist['bracket-2'].points > 2) {
+                    state.wishlist['bracket-2'].points = 2;
+                }
+                if (state.wishlist['bracket-3'].points > 2) {
+                    state.wishlist['bracket-3'].points = 2;
+                }
+            }
             // does intentionally NOT load the wishlist from the server, this should be a joice.
             return true;
         }).catch(err => {
@@ -71,6 +82,17 @@ export const api = {
             if (response.data.player.permissions) {
                 state.player.permissions = response.data.player.permissions
             }
+            if (response.data.player.class === 'Hunter') {
+                if (state.wishlist['bracket-1'].points > 2) {
+                    state.wishlist['bracket-1'].points = 2;
+                }
+                if (state.wishlist['bracket-2'].points > 2) {
+                    state.wishlist['bracket-2'].points = 2;
+                }
+                if (state.wishlist['bracket-3'].points > 2) {
+                    state.wishlist['bracket-3'].points = 2;
+                }
+            }
             // does intentionally NOT load the wishlist from the server, this should be a joice.
         }).catch(err => {
             console.error(err);
@@ -95,7 +117,7 @@ export const api = {
             const response = await instance.get('player/loadWishlist');
             console.log(JSON.stringify(response.data.wishlist))
             if (response.status === 200) {
-                if(response.data.wishlist === null) {
+                if (response.data.wishlist === null) {
                     return "You have no saved wishlist.";
                 } else {
                     state.wishlist = response.data.wishlist;
