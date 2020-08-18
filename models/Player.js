@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-const PlayerSchema = new mongoose.Schema({
+const PlayerSchema = new Schema({
     discordId: { type: Number, required: false },
     name: { type: String, required: false },
     class: { type: String, required: false },

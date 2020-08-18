@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-const WishlistSchema = new mongoose.Schema({
+const WishlistSchema = new Schema({
     'locked': { type: Boolean, required: false },
     'bracket-1': {
         itemTypes: [{ type: String, required: false }],
