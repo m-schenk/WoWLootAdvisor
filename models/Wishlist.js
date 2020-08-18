@@ -76,7 +76,8 @@ const WishlistSchema = new Schema({
         'slot-30': { item: { type: Schema.Types.ObjectId, ref: 'Item', required: false } },
         'slot-31': { item: { type: Schema.Types.ObjectId, ref: 'Item', required: false } },
         'slot-32': { item: { type: Schema.Types.ObjectId, ref: 'Item', required: false } },
-    }
+    },
+    filterList: [{ type: String, required: false }],
 });
 
 module.exports = mongoose.model('Wishlist', WishlistSchema);

@@ -3,7 +3,8 @@ const _ = require('lodash');
 const { validationResult, body } = require('express-validator')
 
 const Player = require('../models/Player');
-const Item = require('../models/Item')
+const Wishlist = require('../models/Wishlist');
+const Item = require('../models/Item');
 
 exports.validate = (method) => {
     switch (method) {
@@ -19,10 +20,8 @@ exports.validate = (method) => {
             return [
                 body('wishlist').custom((wishlist, { req }) => {
                     // hunter rule
-                    let isHunter = false;
-                    if (req.user.class === 'Hunter') {
-                        isHunter = true;
-                    }
+                    const isHunter = (req.user.class === 'Hunter') ? true : false;
+                    // check brackets
                     return checkWishlistItems(wishlist, isHunter);
                 })
             ]
@@ -38,7 +37,7 @@ exports.saveProfile = (req, res, next) => {
     };
     const err = validationResult(req).formatWith(errorFormatter);
     if (!err.isEmpty()) {
-        return next(createError(422, 'Failed to validate player (api/player postPlayerProfile()), error text: ' + err.array()));
+        return next(createError(422, 'Failed to validate player (api/player saveProfile()), error text: ' + err.array()));
     }
     Player.findById(req.user._id)
         .then(player => {
@@ -59,7 +58,7 @@ exports.saveProfile = (req, res, next) => {
                     return next(createError(500, 'Failed to save player profile in database (api/player saveProfile()), error text: ' + err));
                 });
         }).catch(err => {
-            return next(createError(500, 'Failed to fetch player from database (api/player postPlayerProfile()), error text: ' + err));
+            return next(createError(500, 'Failed to fetch player from database (api/player saveProfile()), error text: ' + err));
         });
 }
 
@@ -76,7 +75,7 @@ exports.loadProfile = (req, res, next) => {
             res.end();
         })
         .catch(err => {
-            return next(createError(500, 'Failed to fetch player from database (api/player getPlayerProfile()), error text: ' + err));
+            return next(createError(500, 'Failed to fetch player from database (api/player loadProfile()), error text: ' + err));
         });
 }
 
@@ -120,8 +119,9 @@ exports.saveWishlist = (req, res, next) => {
     if (!err.isEmpty()) {
         return next(createError(422, 'Failed to validate wishlist (api/player saveWishlist()), error text: ' + err.array()));
     }
-    
+
     Player.findById(req.user._id)
+        .populate('wishlist')
         .then(player => {
             if ((player.wishlist !== null) && (player.wishlist.locked)) {
                 res.status(200);
@@ -129,11 +129,7 @@ exports.saveWishlist = (req, res, next) => {
                 res.json({ wishlist: player.wishlist });
                 res.end();
             } else {
-                player.wishlist.bracket1 = getIdsFromBracket(req.body.wishlist.bracket1);
-                player.wishlist.bracket2 = getIdsFromBracket(req.body.wishlist.bracket2);
-                player.wishlist.bracket3 = getIdsFromBracket(req.body.wishlist.bracket3);
-                player.wishlist.bracket4 = getIdsFromBracket(req.body.wishlist.bracket4);
-                player.wishlist.bracketless = getIdsFromBracket(req.body.wishlist.bracketless);
+                player.wishlist = req.body.wishlist;
                 player.save()
                     .then(player => {
                         console.log(req.user.name + ": is has saved wishlist.")
@@ -175,7 +171,7 @@ exports.loadWistlist = (req, res, next) => {
 
 const checkWishlistItems = (wishlist, hunter) => {
     return new Promise((resolve, reject) => {
-        console.log("Logging new wishlist format: "+ wishlist)
+        console.log("Logging new wishlist format: " + wishlist.json())
 
         const maxAllocationPoints = hunter ? 2 : 3;
         const itemIds = [];
@@ -246,21 +242,4 @@ const checkWishlistItems = (wishlist, hunter) => {
         }
         resolve('wishlist is valid');
     })
-}
-
-const getIdsFromBracket = (bracket) => {
-    const _bracket = [];
-    if (bracket === null) return null;
-    bracket.forEach(item => {
-        if (item) {
-            _bracket.push(item.id);
-        } else {
-            _bracket.push(null)
-        }
-    });
-    if (_bracket.length === 0) {
-        return null;
-    } else {
-        return _bracket;
-    }
 }
