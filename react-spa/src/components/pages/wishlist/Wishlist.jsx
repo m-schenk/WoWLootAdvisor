@@ -1,5 +1,6 @@
 import React from 'react';
-import styled from 'styled-components'
+import _ from 'lodash';
+import styled from 'styled-components';
 import { Droppable, Draggable } from 'react-beautiful-dnd';
 import { connect, useState } from './../../../overmind';
 
@@ -231,7 +232,7 @@ const Item = (props) => {
                 <p>Locked</p>
             </ItemContainer>
         )
-    } else if (!state.wishlist[bracketId][slotId].item.hasOwnProperty('id')) {
+    } else if (!_.has(state.wishlist[bracketId][slotId].item, 'id')) {
         return (<></>)
     } else {
         return (
