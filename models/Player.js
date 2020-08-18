@@ -91,7 +91,7 @@ const WishlistSchema = new Schema({
         'slot-31': { item: { type: ItemSchema, default: {} } },
         'slot-32': { item: { type: ItemSchema, default: {} } },
     },
-    filterList: [{ type: String, required: false }],
+    filterList: [{ type: Number, required: false }],
 }, { _id: false });
 
 const PlayerSchema = new Schema({
