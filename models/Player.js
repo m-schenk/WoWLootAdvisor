@@ -9,24 +9,7 @@ const PlayerSchema = new mongoose.Schema({
     permissions: { type: String, required: false },
     aq_attendance: { type: Number, required: false },
     naxx_attendance: { type: Number, required: false },
-    wishlist: {
-        locked: { type: Boolean },
-        bracket1: [{
-            type: Number,
-        }],
-        bracket2: [{
-            type: Number,
-        }],
-        bracket3: [{
-            type: Number,
-        }],
-        bracket4: [{
-            type: Number,
-        }],
-        bracketless: [{
-            type: Number,
-        }]
-    },
+    wishlist: { type: Schema.Types.ObjectId, ref: 'Wishlist', required: false }
 });
 
 module.exports = mongoose.model('Player', PlayerSchema);
