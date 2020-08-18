@@ -153,7 +153,7 @@ exports.loadWishlist = (req, res, next) => {
         .populate('wishlist')
         .populate('item')
         .then(player => {
-            console.log(JSON.stringify(player), null, 4)
+            console.log(JSON.stringify(player, null, 4));
             if ((player.wishlist !== null)) {
                 console.log(req.user.name + ": is has loaded wishlist.")
                 res.status(200);
@@ -174,7 +174,7 @@ exports.loadWishlist = (req, res, next) => {
 
 const checkWishlistItems = (wishlist, hunter) => {
     return new Promise((resolve, reject) => {
-        console.log("Wishlist is being validated: " + JSON.stringify(wishlist));
+        console.log("Wishlist is being validated: " + JSON.stringify(wishlist, null, 4));
 
         const maxAllocationPoints = hunter ? 2 : 3;
         const itemIds = [];
