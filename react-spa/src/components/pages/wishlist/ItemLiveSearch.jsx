@@ -72,6 +72,7 @@ class ItemLiveSearch extends React.Component {
         await this.props.overmind.actions.loadWishlist()
         .then(event => {
             if(window.$WowheadPower) {
+                console.log('hello')
                 window.$WowheadPower.refreshLinks();
             }
             toast(event, {
