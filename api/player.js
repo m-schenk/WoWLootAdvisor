@@ -186,6 +186,8 @@ const checkWishlistItems = (wishlist, hunter) => {
             if(bracket === 'locked') return;
             if(bracket === 'filterList') return;
 
+            console.log(JSON.stringify(bracket));
+
             let allocationPoints, count = 0;
             let itemTypes = new Set();
             let nextMustBeNull = false;
