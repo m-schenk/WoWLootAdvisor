@@ -194,7 +194,10 @@ const checkWishlistItems = (wishlist, hunter) => {
 
             if (wishlist[bracket] !== null) {
 
-                Object.keys(wishlist[bracket]).forEach(item => {
+                Object.keys(wishlist[bracket]).forEach(slot => {
+                    if (slot === 'itemTypes') return;
+                    if (slot === 'points') return;
+                    let item = wishlist[bracket][slot].item;
 
                     if (bracketsDone >= 4 || hunter && bracketsDone >= 3) {
                         if (item) {
