@@ -131,19 +131,24 @@ exports.saveWishlist = (req, res, next) => {
             } else {
                 console.log("Wishlist reg.body: " + JSON.stringify(req.body.wishlist, null, 4));
                 const newWishlist = new Wishlist(req.body.wishlist);
-                newWishlist.save();
-                player.wishlist = newWishlist;
-                player.save()
-                    .then(player => {
-                        console.log("Wishlist player.wishlist: " + JSON.stringify(req.body.wishlist, null, 4));
-                        console.log(req.user.name + ": has saved wishlist.")
-                        res.status(200);
-                        res.set({ 'Content-Type': 'text/json' });
-                        res.json({ wishlist: player.wishlist });
-                        res.end();
+                newWishlist.save()
+                    .then(wishlist => {
+                        player.wishlist = wishlist;
+                        player.save()
+                            .then(player => {
+                                console.log("Wishlist player.wishlist: " + JSON.stringify(req.body.wishlist, null, 4));
+                                console.log(req.user.name + ": has saved wishlist.")
+                                res.status(200);
+                                res.set({ 'Content-Type': 'text/json' });
+                                res.json({ wishlist: player.wishlist });
+                                res.end();
+                            }).catch(err => {
+                                return next(createError(500, 'Failed to save wishlist in database (api/player saveWishlist()), error text: ' + err));
+                            })
                     }).catch(err => {
                         return next(createError(500, 'Failed to save wishlist in database (api/player saveWishlist()), error text: ' + err));
                     })
+
             }
         })
         .catch(err => {
