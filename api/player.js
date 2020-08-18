@@ -132,7 +132,9 @@ exports.saveWishlist = (req, res, next) => {
                 console.log("Wishlist reg.body: " + JSON.stringify(req.body.wishlist, null, 4));
                 player.wishlist = new Wishlist(req.body.wishlist);
                 player.save()
+                    .populate('wishlist')
                     .then(player => {
+                        console.log("Wishlist player.wishlist: " + JSON.stringify(req.body.wishlist, null, 4));
                         console.log(req.user.name + ": has saved wishlist.")
                         res.status(200);
                         res.set({ 'Content-Type': 'text/json' });
