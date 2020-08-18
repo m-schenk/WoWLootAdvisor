@@ -21,7 +21,7 @@ export const loadWishlist = async ({ state, effects }) => {
 }
 
 export const loadProfile = async ({ state, effects }) => {
-    await effects.api.getPlayerProfile(state);
+    await effects.api.loadProfile(state);
 }
 
 export const sendProfile = async ({ state, effects }, data) => {

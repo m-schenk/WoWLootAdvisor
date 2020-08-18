@@ -8,7 +8,7 @@ const instance = axios.create({
 const cache = {};
 
 export const api = {
-    getPlayerProfile(state) {
+    loadProfile(state) {
         instance.get('player/getPlayerProfile',
         ).then((response) => {
             state.player._id = response.data.player._id;
@@ -41,7 +41,7 @@ export const api = {
             //return false;
         })
     },
-    sendProfile(state, data) {
+    saveProfile(state, data) {
         instance.post('player/postPlayerProfile', {
             _name: data._name,
             _race: data._race,
