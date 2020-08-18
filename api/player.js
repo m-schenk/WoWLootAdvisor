@@ -235,7 +235,7 @@ const checkWishlistItems = (wishlist, hunter) => {
                         }
                     }
                 });
-                console.log(new Array(...itemTypes).join(' '));
+                console.log(JSON.stringify(bracket)+" itemTypes: "+ new Array(...itemTypes).join(' '));
                 bracketsDone++;
             }
         })
