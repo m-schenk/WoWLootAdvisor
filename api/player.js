@@ -198,19 +198,19 @@ const checkWishlistItems = (wishlist, hunter) => {
                     let item = wishlist[bracket][slot].item;
 
                     if (bracketsDone >= 4 || hunter && bracketsDone >= 3) {
-                        if (item !== null) {
+                        if (_.has(item, 'id')) {
                             itemIds.push(item.id);
                         }
                     } else {
 
-                        if (nextMustBeNull && item !== null) {
+                        if (nextMustBeNull && _.has(item, 'id')) {
                             reject('bracket invalid, after reserved item, slot must be empty');
                         } else {
                             nextMustBeNull = false;
                         }
 
                         count++;
-                        if (item !== null) {
+                        if (_.has(item, 'id')) {
 
                             itemIds.push(item.id);
 
