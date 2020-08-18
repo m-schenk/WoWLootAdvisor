@@ -153,7 +153,6 @@ exports.loadWishlist = (req, res, next) => {
     console.log(req.user.name + ": is trying to load wishlist.")
     Player.findById(req.user._id)
         .populate('wishlist')
-        .populate('item')
         .then(player => {
             console.log(JSON.stringify(player, null, 4));
             if ((player.wishlist !== null)) {
