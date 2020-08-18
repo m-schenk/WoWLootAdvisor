@@ -183,8 +183,8 @@ const checkWishlistItems = (wishlist, hunter) => {
         let bracketsDone = 0;
         if (Object.keys(wishlist) === null) { reject('wishlist is empty AF'); }
         Object.keys(wishlist).forEach(bracket => {
-            if(bracket === 'locked') return;
-            if(bracket === 'filterList') return;
+            if (bracket === 'locked') return;
+            if (bracket === 'filterList') return;
 
             console.log(JSON.stringify(bracket));
 
@@ -235,7 +235,10 @@ const checkWishlistItems = (wishlist, hunter) => {
                         }
                     }
                 });
-                console.log(JSON.stringify(bracket)+" itemTypes: "+ new Array(...itemTypes).join(' '));
+                let str;
+                for (type in itemTypes.values())
+                    str += '"' + type + '" ';
+                console.log(JSON.stringify(bracket) + " itemTypes: " + str);
                 bracketsDone++;
             }
         })
