@@ -209,7 +209,7 @@ const checkWishlistItems = (wishlist, hunter) => {
                         }
 
                         count++;
-                        if (item) {
+                        if (item !== null) {
 
                             itemIds.push(item.id);
 
