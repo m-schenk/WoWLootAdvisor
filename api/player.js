@@ -7,7 +7,7 @@ const Item = require('../models/Item')
 
 exports.validate = (method) => {
     switch (method) {
-        case 'postPlayerProfile': {
+        case 'saveProfile': {
             return [
                 body('_name', 'error on name validation').exists().notEmpty().trim().escape(),
                 body('_class', 'error on class validation').exists().isIn(['Druid', 'Hunter', 'Mage', 'Paladin', 'Priest', 'Rogue', 'Warlock', 'Warrior']).trim().escape(),
@@ -30,7 +30,7 @@ exports.validate = (method) => {
     }
 }
 
-exports.postPlayerProfile = (req, res, next) => {
+exports.saveProfile = (req, res, next) => {
     console.log(req.user.name + ": is trying to save profile.")
     const errorFormatter = ({ location, msg, param, value, nestedErrors }) => {
         // Build your resulting errors however you want! String, object, whatever - it works!
@@ -63,7 +63,7 @@ exports.postPlayerProfile = (req, res, next) => {
         });
 }
 
-exports.getPlayerProfile = (req, res, next) => {
+exports.loadProfile = (req, res, next) => {
     console.log(req.user.name + ": is trying to get profile.")
     Player.findById(req.user._id)
         .then(player => {

@@ -9,7 +9,7 @@ const cache = {};
 
 export const api = {
     loadProfile(state) {
-        instance.get('player/getPlayerProfile',
+        instance.get('player/loadProfile',
         ).then((response) => {
             state.player._id = response.data.player._id;
             state.player.isComplete = response.data.isComplete;
@@ -42,7 +42,7 @@ export const api = {
         })
     },
     saveProfile(state, data) {
-        instance.post('player/postPlayerProfile', {
+        instance.post('player/saveProfile', {
             _name: data._name,
             _race: data._race,
             _class: data._class,
