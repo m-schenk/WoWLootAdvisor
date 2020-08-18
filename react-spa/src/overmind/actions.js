@@ -573,7 +573,7 @@ export const dragHandler = async ({ state }, result) => {
 
             // when dropping to back slot, checking if front slot is occupied by reserved item
             if ((destinationSlotIdInt % 2 === 0) &&
-                (_.has(state.wishlist[destinationBracketId]['slot-' + (parseInt(destinationSlotIdInt) - 1)].item, 'id') &&
+                (_.has(state.wishlist[destinationBracketId]['slot-' + (parseInt(destinationSlotIdInt) - 1)].item, 'id')) &&
                     (state.wishlist[destinationBracketId]['slot-' + (parseInt(destinationSlotIdInt) - 1)].item.itemCategory === "Reserved")) {
                 return "This slot is locked because of the Reserved item in the front slot.";
             }
