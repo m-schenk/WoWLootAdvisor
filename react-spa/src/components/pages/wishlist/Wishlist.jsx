@@ -49,6 +49,16 @@ const BASE_URL = "https://classic.wowhead.com/item=";
 
 class Wishlist extends React.Component {
 
+    shouldComponentUpdate(nextProps) {
+        return this.props.overmind !== nextProps.overmind;
+    }
+
+    componentDidUpdate() {
+        if (window.$WowheadPower) {
+            window.$WowheadPower.refreshLinks();
+        }
+    }
+
     componentDidMount() {
         if (window.$WowheadPower) {
             window.$WowheadPower.refreshLinks();
