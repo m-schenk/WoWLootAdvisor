@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 import { connect, useActions } from './../../../overmind';
+import { useAccordionToggle } from 'react-bootstrap/AccordionToggle';
 
 import '@atlaskit/css-reset';
 import './../../assets/App.css';
@@ -22,21 +23,16 @@ const initialFormData = Object.freeze({
 });
 
 function SpecialButton({ children, eventKey }) {
-    const decoratedOnClick = useAccordionToggle(eventKey);
-    
+
+
     return (
-      <Button
-        variant="warning"
-        type="submit"
-        onClick={() => {decoratedOnClick(); handleSubmit(e);}}
-      >
-        {children}
-      </Button>
+
     );
-  }
-  
+}
+
 function PlayerProfileForm() {
     const [formData, updateFormData] = useState(initialFormData);
+    const decoratedOnClick = useAccordionToggle(eventKey);
     const actions = useActions();
 
     const handleChange = (e) => {
@@ -91,9 +87,14 @@ function PlayerProfileForm() {
                         <option value="Tank">Tank</option>
                     </Form.Control>
                 </Form.Group>
-                <SpecialButton eventKey="0">
+                <Button
+                    variant="warning"
+                    type="submit"
+                    onClick={(e) => { decoratedOnClick(); handleSubmit(e); }}
+                    eventKey="0"
+                >
                     Submit
-                </SpecialButton>
+                </Button>
             </form>
         </>
     )
