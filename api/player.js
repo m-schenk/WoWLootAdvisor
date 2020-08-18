@@ -18,7 +18,7 @@ exports.validate = (method) => {
             return [
                 body('wishlist').custom((wishlist, { req }) => {
                     // hunter rule
-                    const isHunter = (req.user.class === 'Hunter') ? true : false;
+                    const isHunter = (req.user.class === 'Hunter');
                     console.log("isHunter: " + isHunter);
                     // check brackets
                     return checkWishlistItems(wishlist, isHunter);
