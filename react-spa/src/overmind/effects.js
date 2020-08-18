@@ -143,6 +143,7 @@ export const api = {
                 if(response.data.wishlist === null) {
                     return "You have no saved wishlist.";
                 }
+                console.log(response.data.wishlist);
                 const brackets = response.data.wishlist;
                 Object.keys(brackets).forEach((bracket, index) => {
                     console.log(index)
