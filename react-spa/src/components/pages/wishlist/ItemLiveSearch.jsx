@@ -76,7 +76,9 @@ class ItemLiveSearch extends React.Component {
             progressClassName: 'drag-event-toast-progress-bar',
             position: toast.POSITION.TOP_CENTER,
         });
-
+        if (window.$WowheadPower) {
+            window.$WowheadPower.refreshLinks();
+        }
     }
 
     get renderItems() {

@@ -235,7 +235,6 @@ const Item = (props) => {
     } else if (!_.has(state.wishlist[bracketId][slotId].item, 'id')) {
         return (<></>)
     } else {
-        console.log(JSON.stringify(state.wishlist[bracketId][slotId].item));
         return (
             <>
                 <Draggable draggableId={state.wishlist[bracketId][slotId].item.id.toString() + bracketId + slotId} index={1}>
