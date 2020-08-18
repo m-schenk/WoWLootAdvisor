@@ -238,7 +238,7 @@ const checkWishlistItems = (wishlist, hunter) => {
                     }
                 });
                 let str = "";
-                for (type in itemTypes.values())
+                for (type of itemTypes.values())
                     str += '"' + type + '" ';
                 console.log(JSON.stringify(bracket) + " itemTypes: " + str);
                 bracketsDone++;
