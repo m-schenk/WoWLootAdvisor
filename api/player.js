@@ -129,8 +129,8 @@ exports.saveWishlist = (req, res, next) => {
                 res.json({ wishlist: player.wishlist });
                 res.end();
             } else {
-                console.log("Wishlist is being validated: " + JSON.stringify(req.body.wishlist, null, 4));
-                player.wishlist = req.body.wishlist;
+                console.log("Wishlist reg.body: " + JSON.stringify(req.body.wishlist, null, 4));
+                player.wishlist = new Wishlist(req.body.wishlist);
                 player.save()
                     .then(player => {
                         console.log(req.user.name + ": has saved wishlist.")
