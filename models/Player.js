@@ -1,6 +1,98 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+const ItemSchema = new mongoose.Schema({
+    id: { type: Number, required: true},
+    name: { type: String, required: true },
+    itemType: { type: String, required: true },
+    itemCategory: { type: String, required: true },
+    raid: { type: String, required: true },
+    encounters: [{ type: String, required: true }],
+    priority: [{
+        _id : false,
+        classes: [{ type: String, require: true }],
+    }],
+    deName: { type: String, required: true }
+});
+
+const WishlistSchema = new Schema({
+    'locked': { type: Boolean, required: false },
+    'bracket-1': {
+        itemTypes: [{ type: String, required: false }],
+        'slot-1': ItemSchema,
+        'slot-2': ItemSchema,
+        'slot-3': ItemSchema,
+        'slot-4': ItemSchema,
+        'slot-5': ItemSchema,
+        'slot-6': ItemSchema,
+        points: { type: Number, required: false },
+    },
+    'bracket-2': {
+        itemTypes: [{ type: String, required: false }],
+        'slot-1': ItemSchema,
+        'slot-2': ItemSchema,
+        'slot-3': ItemSchema,
+        'slot-4': ItemSchema,
+        'slot-5': ItemSchema,
+        'slot-6': ItemSchema,
+        points: { type: Number, required: false },
+    },
+    'bracket-3': {
+        itemTypes: [{ type: String, required: false }],
+        'slot-1': ItemSchema,
+        'slot-2': ItemSchema,
+        'slot-3': ItemSchema,
+        'slot-4': ItemSchema,
+        'slot-5': ItemSchema,
+        'slot-6': ItemSchema,
+        points: { type: Number, required: false },
+    },
+    'bracket-4': {
+        itemTypes: [{ type: String, required: false }],
+        'slot-1': ItemSchema,
+        'slot-2': ItemSchema,
+        'slot-3': ItemSchema,
+        'slot-4': ItemSchema,
+        'slot-5': ItemSchema,
+        'slot-6': ItemSchema,
+        points: { type: Number, required: false },
+    },
+    'bracketless': {
+        'slot-1': ItemSchema,
+        'slot-2': ItemSchema,
+        'slot-3': ItemSchema,
+        'slot-4': ItemSchema,
+        'slot-5': ItemSchema,
+        'slot-6': ItemSchema,
+        'slot-7': ItemSchema,
+        'slot-8': ItemSchema,
+        'slot-9': ItemSchema,
+        'slot-10': ItemSchema,
+        'slot-11': ItemSchema,
+        'slot-12': ItemSchema,
+        'slot-13': ItemSchema,
+        'slot-14': ItemSchema,
+        'slot-15': ItemSchema,
+        'slot-16': ItemSchema,
+        'slot-17': ItemSchema,
+        'slot-18': ItemSchema,
+        'slot-19': ItemSchema,
+        'slot-20': ItemSchema,
+        'slot-21': ItemSchema,
+        'slot-22': ItemSchema,
+        'slot-23': ItemSchema,
+        'slot-24': ItemSchema,
+        'slot-25': ItemSchema,
+        'slot-26': ItemSchema,
+        'slot-27': ItemSchema,
+        'slot-28': ItemSchema,
+        'slot-29': ItemSchema,
+        'slot-30': ItemSchema,
+        'slot-31': ItemSchema,
+        'slot-32': ItemSchema,
+    },
+    filterList: [{ type: String, required: false }],
+});
 const PlayerSchema = new Schema({
     discordId: { type: Number, required: false },
     name: { type: String, required: false },
@@ -10,7 +102,7 @@ const PlayerSchema = new Schema({
     permissions: { type: String, required: false },
     aq_attendance: { type: Number, required: false },
     naxx_attendance: { type: Number, required: false },
-    wishlist: { type: Schema.Types.ObjectId, ref: 'Wishlist', required: false }
+    wishlist: WishlistSchema,
 });
 
 module.exports = mongoose.model('Player', PlayerSchema);

@@ -1,7 +1,6 @@
 const DiscordStrategy = require('passport-discord').Strategy;
 const passport = require('passport');
 const Player = require('../models/Player');
-const Wishlist = require('../models/Wishlist');
 const createError = require('http-errors');
 const _ = require('lodash');
 
@@ -30,10 +29,8 @@ passport.use(new DiscordStrategy({
                     const filteredPlayer = _.omit(player.toObject(), ['discordId']);
                     cb(null, filteredPlayer);
                 } else {
-                    const newWishlist = new Wishlist({ 'locked': false });
-                    newWishlist.save()
                     console.log('User doesnt exist');
-                    const newPlayer = new Player({ discordId: profile.id, permissions: 'member', wishlist: newWishlist});
+                    const newPlayer = new Player({ discordId: profile.id, permissions: 'member', wishlist: { 'locked': false } });
                     newPlayer.save()
                         .then(player => {
                             const filteredPlayer = _.omit(player.toObject(), ['discordId']);

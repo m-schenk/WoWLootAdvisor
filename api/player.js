@@ -121,7 +121,6 @@ exports.saveWishlist = (req, res, next) => {
     }
 
     Player.findById(req.user._id)
-        .populate('wishlist')
         .then(player => {
             if ((player.wishlist !== null) && (player.wishlist.locked)) {
                 res.status(200);
@@ -130,25 +129,18 @@ exports.saveWishlist = (req, res, next) => {
                 res.end();
             } else {
                 console.log("Wishlist reg.body: " + JSON.stringify(req.body.wishlist, null, 4));
-                const newWishlist = new Wishlist(req.body.wishlist);
-                newWishlist.save()
-                    .then(wishlist => {
-                        player.wishlist = wishlist;
-                        player.save()
-                            .then(player => {
-                                console.log("Wishlist player.wishlist: " + JSON.stringify(req.body.wishlist, null, 4));
-                                console.log(req.user.name + ": has saved wishlist.")
-                                res.status(200);
-                                res.set({ 'Content-Type': 'text/json' });
-                                res.json({ wishlist: player.wishlist });
-                                res.end();
-                            }).catch(err => {
-                                return next(createError(500, 'Failed to save wishlist in database (api/player saveWishlist()), error text: ' + err));
-                            })
+                player.wishlist = req.body.wishlist;
+                player.save()
+                    .then(player => {
+                        console.log("Wishlist player.wishlist: " + JSON.stringify(req.body.wishlist, null, 4));
+                        console.log(req.user.name + ": has saved wishlist.")
+                        res.status(200);
+                        res.set({ 'Content-Type': 'text/json' });
+                        res.json({ wishlist: player.wishlist });
+                        res.end();
                     }).catch(err => {
                         return next(createError(500, 'Failed to save wishlist in database (api/player saveWishlist()), error text: ' + err));
                     })
-
             }
         })
         .catch(err => {
@@ -159,7 +151,6 @@ exports.saveWishlist = (req, res, next) => {
 exports.loadWishlist = (req, res, next) => {
     console.log(req.user.name + ": is trying to load wishlist.")
     Player.findById(req.user._id)
-        .populate('wishlist')
         .then(player => {
             console.log(JSON.stringify(player, null, 4));
             if (player.wishlist !== null) {
