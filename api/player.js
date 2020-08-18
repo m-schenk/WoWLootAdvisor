@@ -31,6 +31,7 @@ exports.validate = (method) => {
 }
 
 exports.postPlayerProfile = (req, res, next) => {
+    console.log(req.user.name + ": is trying to save profile.")
     const errorFormatter = ({ location, msg, param, value, nestedErrors }) => {
         // Build your resulting errors however you want! String, object, whatever - it works!
         return `${location}[${param}]: ${msg}`;
@@ -48,6 +49,7 @@ exports.postPlayerProfile = (req, res, next) => {
             player.save()
                 .then(player => {
                     const filteredPlayer = _.omit(player.toObject(), ['discordId'])
+                    console.log(req.user.name + ": is has saved profile.")
                     res.status(200);
                     res.set({ 'Content-Type': 'text/json' });
                     res.json({ isComplete: true, player: filteredPlayer });
@@ -62,7 +64,7 @@ exports.postPlayerProfile = (req, res, next) => {
 }
 
 exports.getPlayerProfile = (req, res, next) => {
-    console.time('dbat-playerprofile')
+    console.log(req.user.name + ": is trying to get profile.")
     Player.findById(req.user._id)
         .then(player => {
             let complete = true;
@@ -71,10 +73,10 @@ exports.getPlayerProfile = (req, res, next) => {
             if (!player.race) { complete = false; }
             if (!player.role) { complete = false; }
             const filteredPlayer = _.omit(player.toObject(), ['discordId'])
+            console.log(req.user.name + ": is has got profile.")
             res.status(200);
             res.set({ 'Content-Type': 'text/json' });
             res.json({ isComplete: complete, player: filteredPlayer });
-            console.timeEnd('dbat-playerprofile')
             res.end();
         })
         .catch(err => {
@@ -102,15 +104,18 @@ exports.getPlayerById = (req, res, next) => {
 }
 
 exports.logout = (req, res, next) => {
+    console.log(req.user.name + ": is trying to log out.")
     req.session.destroy((err) => {
         if (err) {
             next(createError(500, err));
         }
+        console.log(req.user.name + ": is has logged out.")
         res.redirect(process.env.ADDR + '/login');
     })
 }
 
 exports.saveWishlist = (req, res, next) => {
+    console.log(req.user.name + ": is trying to save wishlist.")
     const errorFormatter = ({ location, msg, param, value, nestedErrors }) => {
         // Build your resulting errors however you want! String, object, whatever - it works!
         return `${location}[${param}]: ${msg}`;
@@ -119,7 +124,7 @@ exports.saveWishlist = (req, res, next) => {
     if (!err.isEmpty()) {
         return next(createError(422, 'Failed to validate wishlist (api/player saveWishlist()), error text: ' + err.array()));
     }
-    console.log(req.user.name)
+    
     Player.findById(req.user._id)
         .then(player => {
             if ((player.wishlist !== null) && (player.wishlist.locked)) {
@@ -135,6 +140,7 @@ exports.saveWishlist = (req, res, next) => {
                 player.wishlist.bracketless = getIdsFromBracket(req.body.wishlist.bracketless);
                 player.save()
                     .then(player => {
+                        console.log(req.user.name + ": is has saved wishlist.")
                         res.status(200);
                         res.set({ 'Content-Type': 'text/json' });
                         res.json({ wishlist: player.wishlist });
@@ -154,11 +160,13 @@ exports.loadWistlist = (req, res, next) => {
     Player.findById(req.user._id)
         .then(player => {
             if ((player.wishlist !== null)) {
+                console.log(req.user.name + ": is has loaded wishlist.")
                 res.status(200);
                 res.set({ 'Content-Type': 'text/json' });
                 res.json({ wishlist: player.wishlist });
                 res.end();
             } else {
+                console.log(req.user.name + ": is has loaded empty wishlist.")
                 res.status(200);
                 res.set({ 'Content-Type': 'text/json' });
                 res.json({ wishlist: null });

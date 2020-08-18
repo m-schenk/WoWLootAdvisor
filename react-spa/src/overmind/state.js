@@ -206,7 +206,6 @@ export const state = {
             'slot-32': {
                 item: null,
             },
-            points: Infinity,
         },
         filterList: [],
     },
