@@ -2,18 +2,18 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const ItemSchema = new mongoose.Schema({
-    id: { type: Number, required: false},
+    id: { type: Number, required: false },
     name: { type: String, required: false },
     itemType: { type: String, required: false },
     itemCategory: { type: String, required: false },
     raid: { type: String, required: false },
     encounters: [{ type: String, required: false }],
     priority: [{
-        _id : false,
+        _id: false,
         classes: [{ type: String, require: false }],
     }],
     deName: { type: String, required: false }
-});
+}, { _id: false });
 
 const WishlistSchema = new Schema({
     'locked': { type: Boolean, required: false },
@@ -92,7 +92,7 @@ const WishlistSchema = new Schema({
         'slot-32': { type: ItemSchema, default: null },
     },
     filterList: [{ type: String, required: false }],
-});
+}, { _id: false });
 const PlayerSchema = new Schema({
     discordId: { type: Number, required: false },
     name: { type: String, required: false },
