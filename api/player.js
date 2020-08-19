@@ -61,12 +61,9 @@ exports.saveProfile = (req, res, next) => {
 }
 
 exports.loadProfile = (req, res, next) => {
-    if(_.has(player, 'name')) {
-        console.log(player.name + ": is trying to get profile.")
-    } else {
-        console.log(player.disordId + "")
-    }
-    
+
+    console.log(req.user.name + ": is trying to get profile.")
+
     Player.findById(req.user._id)
         .then(player => {
             const complete = (!player.name || !player.class || !player.race || !player.role) ? false : true;
