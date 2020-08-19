@@ -61,12 +61,17 @@ exports.saveProfile = (req, res, next) => {
 }
 
 exports.loadProfile = (req, res, next) => {
-    console.log(req.user.name + ": is trying to get profile.")
+    if(_.has(player, 'name')) {
+        console.log(player.name + ": is trying to get profile.")
+    } else {
+        console.log(player.disordId + "")
+    }
+    
     Player.findById(req.user._id)
         .then(player => {
             const complete = (!player.name || !player.class || !player.race || !player.role) ? false : true;
             const filteredPlayer = _.omit(player.toObject(), ['discordId', 'wishlist'])
-            console.log(req.user.name + ": has got profile.")
+            console.log(player.name + ": has got profile.")
             res.status(200);
             res.set({ 'Content-Type': 'text/json' });
             res.json({ isComplete: complete, player: filteredPlayer });

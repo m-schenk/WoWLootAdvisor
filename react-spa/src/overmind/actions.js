@@ -486,7 +486,7 @@ export const dragHandler = async ({ state }, result) => {
                 }
 
                 if (((sourceItem.itemCategory === "Reserved") || (sourceItem.itemCategory === "Limited"))
-                    && (destination.itemCategory === "Unlimited")) {
+                    && (destinationItem.itemCategory === "Unlimited")) {
                     // source item was costing alloc points, destination does not cost
                     if (state.wishlist[destinationBracketId].points > 0) {
                         state.wishlist[destinationBracketId].points--;
