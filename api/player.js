@@ -8,7 +8,7 @@ exports.validate = (method) => {
     switch (method) {
         case 'saveProfile': {
             return [
-                body('name', 'error on name validation').exists().notEmpty().trim().escape(),
+                body('name', 'error on name validation').exists().isLength({ max: 25 }).notEmpty().trim().escape(),
                 body('class', 'error on class validation').exists().isIn(['Druid', 'Hunter', 'Mage', 'Paladin', 'Priest', 'Rogue', 'Warlock', 'Warrior']).trim().escape(),
                 body('race', 'error on race validation').exists().isIn(['Dwarf', 'Gnome', 'Human', 'Night Elf']).trim().escape(),
                 body('role', 'error on role validation').exists().isIn(['DPS', 'Heal', 'Tank']).trim().escape()
