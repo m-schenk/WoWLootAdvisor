@@ -45,7 +45,7 @@ exports.getQuery = (req, res, next) => {
     let regex = new RegExp(req.query.query, "i");
 
     Item.find({ name: regex })
-        .sort({ name: 1 }) //sort items that startswith is stronger than alphabetical
+        .sort({ name: 1 }) //sort items that startswith is stronger than alphabetical //remove class locked items
         .limit(15)
         .or([{ itemCategory: 'Reserved' }, { itemCategory: 'Limited' }, { itemCategory: 'Unlimited' }]) //dumb way to filter "Unlockable" itemCategory but couldn't find a "not" function
         .then(items => {
