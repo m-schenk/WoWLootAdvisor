@@ -72,7 +72,9 @@ exports.getQuery = (req, res, next) => {
             items.sort((a, b) => {
                 return (a.name.search(regex) - b.name.search(regex));
             })
-            items = items.slice(0, 15); //limit on my own, cause I have to sort first an limit after.
+            if(items.length > 15) {
+                items = items.slice(0, 15); //limit on my own, cause I have to sort first an limit after.
+            }
             res.status(200);
             res.set({ 'Content-Type': 'text/json' });
             res.json({ results: items });
