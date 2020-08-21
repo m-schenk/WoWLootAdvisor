@@ -62,15 +62,33 @@ exports.getQuery = (req, res, next) => {
         return next(createError(422, 'Failed to validate query (api/items getQuery()), error text: ' + err.array()));
     }
     //db.items.ensureIndex( { 'name' : 'text' } ,{ score: {$meta:'textScore'}}) 
-    let regex = new RegExp(req.query.query, "i");
+    const query = req.query.query;
+    const regex = new RegExp(query, "i");
 
     // Item.find({ name: regex })
     //     .sort({ name: 1 }) //sort items that startswith is stronger than alphabetical //remove class locked items
-    Item.find({ $text: { $search: regex } },
-        { score: { $meta: "textScore" } }
-    ).sort({ score: { $meta: "textScore" } })
-        .limit(15)
+    Item.aggregate(
+        {
+            $match: {
+                name: regex
+            }
+        },
+        {
+            $project: {
+                name: true,
+                regex_match: {
+                    $eq: [
+                        regex,
+                        { $substr: [{ $toLower: "$name" }, 0, query.length] }
+                    ]
+                }
+            }
+        },
+        {
+            $sort: { regex_match: -1 }
+        })
         .or([{ itemCategory: 'Reserved' }, { itemCategory: 'Limited' }, { itemCategory: 'Unlimited' }]) //dumb way to filter "Unlockable" itemCategory but couldn't find a "not" function
+        .limit(15)
         .then(items => {
             res.status(200);
             res.set({ 'Content-Type': 'text/json' });
