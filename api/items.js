@@ -67,8 +67,7 @@ exports.getQuery = (req, res, next) => {
 
     // Item.find({ name: regex })
     //     .sort({ name: 1 }) //sort items that startswith is stronger than alphabetical //remove class locked items
-    Item.aggregate([
-        {
+    Item.aggregate({
             $match: {
                 name: regex
             }
@@ -86,7 +85,7 @@ exports.getQuery = (req, res, next) => {
         },
         {
             $sort: { regex_match: -1 }
-        }])
+        })
         .or([{ itemCategory: 'Reserved' }, { itemCategory: 'Limited' }, { itemCategory: 'Unlimited' }]) //dumb way to filter "Unlockable" itemCategory but couldn't find a "not" function
         .limit(15)
         .then(items => {
