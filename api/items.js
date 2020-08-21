@@ -66,12 +66,14 @@ exports.getQuery = (req, res, next) => {
     const regex = new RegExp(query, "i");
 
     Item.find({ name: regex })
-        //.sort({ name: 1 }) //sort items that startswith is stronger than alphabetical //remove class locked items
+        .sort({ name: 1 }) //sort items that startswith is stronger than alphabetical //remove class locked items
         .or([{ itemCategory: 'Reserved' }, { itemCategory: 'Limited' }, { itemCategory: 'Unlimited' }]) //dumb way to filter "Unlockable" itemCategory but couldn't find a "not" function
         .limit(15)
         .then(items => {
             items.sort((a, b) => {
-                return regex.exec(a).index - regex.exec(b).index;
+                console.log("aname: " + a.name +", ascore: "+regex.exec(a).index )
+                console.log("bname: " + b.name +", bscore: "+regex.exec(b).index )
+                return (regex.exec(a).index - regex.exec(b).index);
             })
             res.status(200);
             res.set({ 'Content-Type': 'text/json' });
