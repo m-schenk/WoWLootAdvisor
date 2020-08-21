@@ -71,9 +71,9 @@ exports.getQuery = (req, res, next) => {
         .limit(15)
         .then(items => {
             items.sort((a, b) => {
-                console.log("aname: " + a.name +", ascore: "+a.search(regex) )
+                console.log("aname: " + a.name +", ascore: "+a.name.search(regex) )
                 console.log("bname: " + b.name +", bscore: "+b.search(regex) )
-                return (a.search(regex) - b.search(regex));
+                return (a.name.search(regex) - b.name.search(regex));
             })
             res.status(200);
             res.set({ 'Content-Type': 'text/json' });
