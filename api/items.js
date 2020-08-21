@@ -1,6 +1,7 @@
 const createError = require('http-errors');
 
 const Item = require('../models/Item');
+const { validationResult, query } = require('express-validator')
 
 exports.validate = (method) => {
     switch (method) {
@@ -52,6 +53,14 @@ exports.modify = (req, res, next) => {
 }
 
 exports.getQuery = (req, res, next) => {
+    const errorFormatter = ({ location, msg, param, value, nestedErrors }) => {
+        // Build your resulting errors however you want! String, object, whatever - it works!
+        return `${location}[${param}]: ${msg}`;
+    };
+    const err = validationResult(req).formatWith(errorFormatter);
+    if (!err.isEmpty()) {
+        return next(createError(422, 'Failed to validate query (api/items getQuery()), error text: ' + err.array()));
+    }
     //db.items.ensureIndex( { 'name' : 'text' } ,{ score: {$meta:'textScore'}}) 
     let regex = new RegExp(req.query.query, "i");
 
