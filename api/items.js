@@ -69,12 +69,7 @@ exports.getQuery = (req, res, next) => {
         .sort({ name: 1 }) //sort items that startswith is stronger than alphabetical //remove class locked items
         .or([{ itemCategory: 'Reserved' }, { itemCategory: 'Limited' }, { itemCategory: 'Unlimited' }]) //dumb way to filter "Unlockable" itemCategory but couldn't find a "not" function
         .then(items => {
-            items = items.filter(item => {
-                if (item.classLock.includes("null") || item.classLock.includes(req.user.class)) {
-                    return true;
-                }
-                return false;
-            })
+            items = items.filter(item => (item.classLock.includes("null") || item.classLock.includes(req.user.class)));
             items.sort((a, b) => {
                 return (a.name.search(regex) - b.name.search(regex));
             })
