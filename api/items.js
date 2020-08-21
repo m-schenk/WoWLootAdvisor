@@ -70,7 +70,7 @@ exports.getQuery = (req, res, next) => {
         .or([{ itemCategory: 'Reserved' }, { itemCategory: 'Limited' }, { itemCategory: 'Unlimited' }]) //dumb way to filter "Unlockable" itemCategory but couldn't find a "not" function
         .then(items => {
             items.filter(item => {
-                return item.classLock.includes("null") || item.classLock.includes(req.user.class);
+                return item.classLock.includes(req.user.class);
             })
             items.sort((a, b) => {
                 return (a.name.search(regex) - b.name.search(regex));
