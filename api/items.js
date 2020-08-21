@@ -86,6 +86,7 @@ exports.getQuery = (req, res, next) => {
         { $sort: { regex_match: -1 } },
         { $limit: 15 }
     ]).then(items => {
+        console.log(items)
         res.status(200);
         res.set({ 'Content-Type': 'text/json' });
         res.json({ results: items });
