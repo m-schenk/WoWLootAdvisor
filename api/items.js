@@ -66,19 +66,13 @@ exports.getQuery = (req, res, next) => {
     const regex = new RegExp(query, "i");
 
     Item.find({ name: regex })
+        .sort({ name: 1 }) //sort items that startswith is stronger than alphabetical //remove class locked items
+        .or([{ itemCategory: 'Reserved' }, { itemCategory: 'Limited' }, { itemCategory: 'Unlimited' }]) //dumb way to filter "Unlockable" itemCategory but couldn't find a "not" function
         .then(items => {
-            ((a, b) => {
+            items.sort((a, b) => {
                 return (a.name.search(regex) - b.name.search(regex));
             })
-            return items;
-        })
-        //.sort({ name: 1 }) //sort items that startswith is stronger than alphabetical //remove class locked items
-        .or([{ itemCategory: 'Reserved' }, { itemCategory: 'Limited' }, { itemCategory: 'Unlimited' }]) //dumb way to filter "Unlockable" itemCategory but couldn't find a "not" function
-        .limit(15)
-        .then(items => {
-            // items.sort((a, b) => {
-            //     return (a.name.search(regex) - b.name.search(regex));
-            // })
+            items = items.slice(0, 15); //limit on my own, cause I have to sort first an limit after.
             res.status(200);
             res.set({ 'Content-Type': 'text/json' });
             res.json({ results: items });
