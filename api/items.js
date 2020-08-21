@@ -61,7 +61,7 @@ exports.getQuery = (req, res, next) => {
     if (!err.isEmpty()) {
         return next(createError(422, 'Failed to validate query (api/items getQuery()), error text: ' + err.array()));
     }
-    //db.items.ensureIndex( { 'name' : 'text' } ,{ score: {$meta:'textScore'}}) 
+
     const query = req.query.query;
     const regex = new RegExp(query, "i");
 
@@ -69,7 +69,7 @@ exports.getQuery = (req, res, next) => {
         .sort({ name: 1 }) //sort items that startswith is stronger than alphabetical //remove class locked items
         .or([{ itemCategory: 'Reserved' }, { itemCategory: 'Limited' }, { itemCategory: 'Unlimited' }]) //dumb way to filter "Unlockable" itemCategory but couldn't find a "not" function
         .then(items => {
-            items.filter(item => {
+            items = items.filter(item => {
                 if (item.classLock.includes("null") || item.classLock.includes(req.user.class)) {
                     return true;
                 }
