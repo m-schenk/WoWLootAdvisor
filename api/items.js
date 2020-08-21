@@ -65,35 +65,21 @@ exports.getQuery = (req, res, next) => {
     const query = req.query.query;
     const regex = new RegExp(query, "i");
 
-    // Item.find({ name: regex })
-    //     .sort({ name: 1 }) //sort items that startswith is stronger than alphabetical //remove class locked items
-    Item.aggregate([
-        {
-            $match: {
-                name: regex,
-                $or: [{ itemCategory: 'Reserved' }, { itemCategory: 'Limited' }, { itemCategory: 'Unlimited' }] //dumb way to filter "Unlockable" itemCategory but couldn't find a "not" function
-            }
-        },
-        {
-            $project: {
-                name: true, regex_match: {
-                    $eq: [regex,
-                        { $substr: [{ $toLower: "$name" }, 0, query.length] }
-                    ]
-                }
-            }
-        },
-        { $sort: { regex_match: -1 } },
-        { $limit: 15 }
-    ]).then(items => {
-        console.log(items)
-        res.status(200);
-        res.set({ 'Content-Type': 'text/json' });
-        res.json({ results: items });
-        res.end();
-    }).catch(err => {
-        return next(createError(500, 'Failed to resolve item query (api/items getQuery()), error text: ' + err));
-    });
+    Item.find({ name: regex })
+        //.sort({ name: 1 }) //sort items that startswith is stronger than alphabetical //remove class locked items
+        .or([{ itemCategory: 'Reserved' }, { itemCategory: 'Limited' }, { itemCategory: 'Unlimited' }]) //dumb way to filter "Unlockable" itemCategory but couldn't find a "not" function
+        .limit(15)
+        .then(items => {
+            items.sort((a, b) => {
+                return regex.exec(a).index - regex.exec(b).index;
+            })
+            res.status(200);
+            res.set({ 'Content-Type': 'text/json' });
+            res.json({ results: items });
+            res.end();
+        }).catch(err => {
+            return next(createError(500, 'Failed to resolve item query (api/items getQuery()), error text: ' + err));
+        });
 }
 
 exports.getItemById = (req, res, next) => {
