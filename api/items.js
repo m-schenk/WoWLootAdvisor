@@ -2,6 +2,16 @@ const createError = require('http-errors');
 
 const Item = require('../models/Item');
 
+exports.validate = (method) => {
+    switch (method) {
+        case 'getQuery': {
+            return [
+                query('query', 'error on query validation').exists().isLength({ max: 50 }).notEmpty().trim().escape(),
+            ]
+        }
+    }
+}
+
 exports.modify = (req, res, next) => {
     const item = req.body; //prob. not working like this.. but function is not needed anywhere right now
 
@@ -42,10 +52,14 @@ exports.modify = (req, res, next) => {
 }
 
 exports.getQuery = (req, res, next) => {
+    //db.items.ensureIndex( { 'name' : 'text' } ,{ score: {$meta:'textScore'}}) 
     let regex = new RegExp(req.query.query, "i");
 
-    Item.find({ name: regex })
-        .sort({ name: 1 }) //sort items that startswith is stronger than alphabetical //remove class locked items
+    // Item.find({ name: regex })
+    //     .sort({ name: 1 }) //sort items that startswith is stronger than alphabetical //remove class locked items
+    Item.find({ $text: { $search: req.query.query } },
+        { score: { $meta: "textScore" } }
+    ).sort({ score: { $meta: "textScore" } })
         .limit(15)
         .or([{ itemCategory: 'Reserved' }, { itemCategory: 'Limited' }, { itemCategory: 'Unlimited' }]) //dumb way to filter "Unlockable" itemCategory but couldn't find a "not" function
         .then(items => {
