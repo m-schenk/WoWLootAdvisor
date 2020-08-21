@@ -69,10 +69,13 @@ exports.getQuery = (req, res, next) => {
         .sort({ name: 1 }) //sort items that startswith is stronger than alphabetical //remove class locked items
         .or([{ itemCategory: 'Reserved' }, { itemCategory: 'Limited' }, { itemCategory: 'Unlimited' }]) //dumb way to filter "Unlockable" itemCategory but couldn't find a "not" function
         .then(items => {
+            items.filter(item => {
+                return item.classLock[0] === 'null' || item.classLock.includes(req.user.class);
+            })
             items.sort((a, b) => {
                 return (a.name.search(regex) - b.name.search(regex));
             })
-            if(items.length > 15) {
+            if (items.length > 15) {
                 items = items.slice(0, 15); //limit on my own, cause I have to sort first an limit after.
             }
             res.status(200);

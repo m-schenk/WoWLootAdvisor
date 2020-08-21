@@ -12,7 +12,8 @@ const ItemSchema = new Schema({
         _id: false,
         classes: [{ type: String, require: false }],
     }],
-    deName: { type: String, required: false }
+    deName: { type: String, required: false },
+    classLock: [{ type: String, default: null }]
 }, { _id: false });
 
 const WishlistSchema = new Schema({
