@@ -247,7 +247,7 @@ const checkWishlistItems = (wishlist, hunter) => {
         if (itemIds.length !== unique.length) {
             reject('wishlist contains duplicates');
         }
-        console.log("Wishlist has been validated.")
+        console.log("Wishlist has been validated.");
         resolve('wishlist is valid');
     })
 }

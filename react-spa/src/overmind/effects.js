@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const instance = axios.create({
     withCredentials: true,
-    baseURL: 'https://raegae.maarten.ch/api/'
+    baseURL: 'https://raegae.xyz/api/'
 })
 
 const cache = {};
