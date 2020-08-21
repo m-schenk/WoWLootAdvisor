@@ -7,7 +7,7 @@ exports.validate = (method) => {
     switch (method) {
         case 'getQuery': {
             return [
-                query('query', 'error on query validation').exists().isLength({ max: 50 }).notEmpty().trim().escape(),
+                query('query', 'error on query validation').isLength({ max: 50 }).trim().escape(),
             ]
         }
     }
