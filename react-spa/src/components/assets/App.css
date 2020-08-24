@@ -12,6 +12,10 @@
   color: white;
 }
 
+.pos-fixed {
+  position: fixed;
+}
+
 @media screen and (min-width: 1200px) {
   .nav_wrapper {
     width: 1200px;
