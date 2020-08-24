@@ -53,7 +53,7 @@ class MainContent extends React.Component {
                                 <Wishlist />
                             </Col>
                             <Col className="justify-content-center" sm={4}>
-                                <ItemLiveSearch className="pos-sticky" id={this.props.overmind.state.liveSearch['id']} />
+                                <ItemLiveSearch id={this.props.overmind.state.liveSearch['id']} />
                             </Col>
                         </Row>
                     </DragDropContext>
