@@ -77,6 +77,14 @@ app.get('/login', (req, res) => {
     res.sendFile(path.join(__dirname + '/public/login.html'))
 })
 
+app.get('/forbidden', (req, res) => {
+    res.sendFile(path.join(__dirname + '/public/forbidden.html'))
+});
+
+app.get('/pagenotfound', (req, res) => {
+    res.sendFile(path.join(__dirname + '/public/pagenotfound.html'))
+});
+
 // api discord, used for login route
 app.use('/api/discord/', discordRouter);
 
