@@ -43,31 +43,37 @@ function PlayerProfileForm() {
         switch (formData._class) {
             case 'Druid':
                 return (<>
+                    <option value="null">select race..</option>
                     <option value="Night Elf">Night Elf</option>
                 </>);
             case 'Hunter':
                 return (<>
+                    <option value="null">select race..</option>
                     <option value="Dwarf">Dwarf</option>
                     <option value="Night Elf">Night Elf</option>
                 </>);
             case 'Mage':
                 return (<>
+                    <option value="null">select race..</option>
                     <option value="Gnome">Gnome</option>
                     <option value="Human">Human</option>
                 </>);
             case 'Paladin':
                 return (<>
+                    <option value="null">select race..</option>
                     <option value="Dwarf">Dwarf</option>
                     <option value="Human">Human</option>
                 </>);
             case 'Priest':
                 return (<>
+                    <option value="null">select race..</option>
                     <option value="Dwarf">Dwarf</option>
                     <option value="Human">Human</option>
                     <option value="Night Elf">Night Elf</option>
                 </>);
             case 'Rogue':
                 return (<>
+                    <option value="null">select race..</option>
                     <option value="Dwarf">Dwarf</option>
                     <option value="Gnome">Gnome</option>
                     <option value="Human">Human</option>
@@ -75,11 +81,13 @@ function PlayerProfileForm() {
                 </>);
             case 'Warlock':
                 return (<>
+                    <option value="null">select race..</option>
                     <option value="Gnome">Gnome</option>
                     <option value="Human">Human</option>
                 </>);
             case 'Warrior':
                 return (<>
+                    <option value="null">select race..</option>
                     <option value="Dwarf">Dwarf</option>
                     <option value="Gnome">Gnome</option>
                     <option value="Human">Human</option>
@@ -96,24 +104,29 @@ function PlayerProfileForm() {
         switch (formData._class) {
             case 'Druid':
                 return (<>
+                    <option value="null">select role..</option>
                     <option value="DPS">DPS</option>
                     <option value="Heal">Heal</option>
                     <option value="Tank">Tank</option>
                 </>);
             case 'Hunter':
                 return (<>
+                    <option value="null">select role..</option>
                     <option value="DPS">DPS</option>
                 </>);
             case 'Mage':
                 return (<>
+                    <option value="null">select role..</option>
                     <option value="DPS">DPS</option>
                 </>);
             case 'Paladin':
                 return (<>
+                    <option value="null">select role..</option>
                     <option value="Heal">Heal</option>
                 </>);
             case 'Priest':
                 return (<>
+                    <option value="null">select role..</option>
                     <option value="DPS">DPS</option>
                     <option value="Heal">Heal</option>
                 </>);
@@ -123,10 +136,12 @@ function PlayerProfileForm() {
                 </>);
             case 'Warlock':
                 return (<>
+                    <option value="null">select role..</option>
                     <option value="DPS">DPS</option>
                 </>);
             case 'Warrior':
                 return (<>
+                    <option value="null">select role..</option>
                     <option value="DPS">DPS</option>
                     <option value="Tank">Tank</option>
                 </>);
