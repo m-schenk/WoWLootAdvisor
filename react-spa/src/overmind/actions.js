@@ -334,7 +334,7 @@ export const dragHandler = async ({ state }, result) => {
             // set source item into state
             state.wishlist[destinationBracketId][destinationSlotId].item = sourceItem;
 
-            return "DEBUG: Item was swapped inside your wishlist (bracket to bracketless)";
+            //return "DEBUG: Item was swapped inside your wishlist (bracket to bracketless)";
         }
 
         // swap inside bracket
@@ -399,7 +399,7 @@ export const dragHandler = async ({ state }, result) => {
             }
             state.wishlist[destinationBracketId][destinationSlotId].item = sourceItem;
 
-            return "DEBUG: Items have been swapped (inside bracket)"
+            //return "DEBUG: Items have been swapped (inside bracket)"
         }
 
         // swap inside brackets
@@ -548,7 +548,7 @@ export const dragHandler = async ({ state }, result) => {
             // set source item into state
             state.wishlist[destinationBracketId][destinationSlotId].item = sourceItem;
 
-            return "DEBUG: Item was swapped inside your wishlist (bracket to bracket)";
+            //return "DEBUG: Item was swapped inside your wishlist (bracket to bracket)";
         }
         return "Error: Report this to Malvida immediately if you see this msg."
     }
@@ -690,7 +690,7 @@ export const dragHandler = async ({ state }, result) => {
             // set source item into state
             state.wishlist[destinationBracketId][destinationSlotId].item = sourceItem;
 
-            return "DEBUG: Item was swapped inside your wishlist (bracketless to bracket)";
+            //return "DEBUG: Item was swapped inside your wishlist (bracketless to bracket)";
         }
         // swaps inside bracketless
         if (destination['droppableId'].includes('bracketless')) {
@@ -729,7 +729,7 @@ export const dragHandler = async ({ state }, result) => {
             }
             state.wishlist[destinationBracketId][destinationSlotId].item = sourceItem;
 
-            return "DEBUG: Items have been swapped (inside bracketless)"
+            //return "DEBUG: Items have been swapped (inside bracketless)"
         }
         return "ERROR: Report this to Malvida immediately if you see this msg."
     }
