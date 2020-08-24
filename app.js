@@ -77,33 +77,25 @@ app.get('/login', (req, res) => {
     res.sendFile(path.join(__dirname + '/public/login.html'))
 })
 
-app.get('/forbidden', (req, res) => {
-    res.sendFile(path.join(__dirname + '/public/forbidden.html'))
-});
-
-app.get('/pagenotfound', (req, res) => {
-    res.sendFile(path.join(__dirname + '/public/pagenotfound.html'))
-});
-
 // api discord, used for login route
 app.use('/api/discord/', discordRouter);
 
 // protected routes
-app.use('', connectEnsureLogin.ensureLoggedIn('/forbidden'), express.static(path.join(__dirname, 'react-spa/build/')));
-app.use('', connectEnsureLogin.ensureLoggedIn('/forbidden'), express.static(path.join(__dirname, 'react-spa/build/static')));
+app.use('', connectEnsureLogin.ensureLoggedIn('/login'), express.static(path.join(__dirname, 'react-spa/build/')));
+app.use('', connectEnsureLogin.ensureLoggedIn('/login'), express.static(path.join(__dirname, 'react-spa/build/static')));
 
 //api routes
-app.use('/api/player', connectEnsureLogin.ensureLoggedIn('/forbidden'), playerRouter);
-app.use('/api/items', connectEnsureLogin.ensureLoggedIn('/forbidden'), itemsRouter);
+app.use('/api/player', connectEnsureLogin.ensureLoggedIn('/login'), playerRouter);
+app.use('/api/items', connectEnsureLogin.ensureLoggedIn('/login'), itemsRouter);
 
 // front-end route, every request should be resovled in react router if call is not to api endpoint
-app.get('/profile', connectEnsureLogin.ensureLoggedIn('/forbidden'), (req, res) => {
+app.get('/profile', connectEnsureLogin.ensureLoggedIn('/login'), (req, res) => {
     res.sendFile(path.join(__dirname + '/react-spa/build/index.html'));
 });
-app.get('/wishlist', connectEnsureLogin.ensureLoggedIn('/forbidden'), (req, res) => {
+app.get('/wishlist', connectEnsureLogin.ensureLoggedIn('/login'), (req, res) => {
     res.sendFile(path.join(__dirname + '/react-spa/build/index.html'));
 });
-app.get('/council/*', connectEnsureLogin.ensureLoggedIn('/forbidden'), (req, res) => {
+app.get('/council/*', connectEnsureLogin.ensureLoggedIn('/login'), (req, res) => {
     res.sendFile(path.join(__dirname + '/react-spa/build/index.html'));
 });
 
@@ -123,9 +115,9 @@ app.use(function (err, req, res, next) {
     res.locals.error = req.app.get('env') === 'development' ? err : {};
 
     if (err.statusCode === 403) {
-        res.redirect(process.env.ADDR + '/forbbiden');
+        res.redirect(process.env.ADDR + '/login');
     } else if (err.statusCode === 404) {
-        res.redirect(process.env.ADDR + '/pagenotfound');
+        res.redirect(process.env.ADDR + '/login');
     } else {
         // render the error page
         res.status(err.statusCode || 500).send({ error: err.message });

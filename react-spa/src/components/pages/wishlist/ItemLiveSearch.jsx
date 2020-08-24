@@ -5,29 +5,9 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { Droppable } from 'react-beautiful-dnd';
 import { connect } from './../../../overmind';
-import { ShepherdTour, ShepherdTourContext } from 'react-shepherd';
-import { tutorialSteps } from '../../tutorialSteps';
-
-import 'shepherd.js/dist/css/shepherd.css';
 
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
-const tourOptions = {
-    defaultStepOptions: {
-        cancelIcon: {
-            enabled: true
-        }
-    },
-    useModalOverlay: true
-};
-
-function TButton() {
-    const tour = React.useContext(ShepherdTourContext)
-    return (
-        <Button variant="warning" as="input" type="button" value="Tutorial" onClick={tour.start} />
-    )
-}
 
 class ItemLiveSearch extends React.Component {
 
@@ -95,9 +75,6 @@ class ItemLiveSearch extends React.Component {
                 <div className="control">
                     <Button variant="warning" as="input" type="submit" value="Save" onClick={() => { this.saveWishlist() }} />
                     <Button variant="warning" as="input" type="submit" value="Load" onClick={() => { this.loadWishlist() }} />
-                    <ShepherdTour steps={tutorialSteps} tourOptions={tourOptions}>
-                        <TButton />
-                    </ShepherdTour>
                 </div>
                 <label className="label-livesearch">Remove Item:</label>
                 <Droppable droppableId="delete-zone">
