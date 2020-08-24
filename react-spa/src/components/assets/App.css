@@ -12,8 +12,10 @@
   color: white;
 }
 
-.pos-fixed {
-  position: fixed;
+.pos-sticky {
+    position: -webkit-sticky; /* Safari */
+    position: sticky;
+    top: 20px;
 }
 
 @media screen and (min-width: 1200px) {
