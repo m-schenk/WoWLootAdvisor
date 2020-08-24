@@ -132,6 +132,7 @@ function PlayerProfileForm() {
                 </>);
             case 'Rogue':
                 return (<>
+                    <option value="null">select role..</option>
                     <option value="DPS">DPS</option>
                 </>);
             case 'Warlock':
@@ -176,13 +177,13 @@ function PlayerProfileForm() {
                 <Form.Group>
                     <Form.Label>Select your race:</Form.Label>
                     <Form.Control as="select" name="_race" onChange={handleChange}>
-                        {renderRaceOptions()}
+                        {renderRaceOptions}
                     </Form.Control>
                 </Form.Group>
                 <Form.Group>
                     <Form.Label>Select your role:</Form.Label>
                     <Form.Control as="select" name="_role" onChange={handleChange}>
-                        {renderRoleOptions()}
+                        {renderRoleOptions}
                     </Form.Control>
                 </Form.Group>
                 <Button
