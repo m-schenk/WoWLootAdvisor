@@ -67,26 +67,26 @@ function PlayerProfileForm() {
                     <option value="Night Elf">Night Elf</option>
                 </>);
             case 'Rogue':
-                (<>
+                return (<>
                     <option value="Dwarf">Dwarf</option>
                     <option value="Gnome">Gnome</option>
                     <option value="Human">Human</option>
                     <option value="Night Elf">Night Elf</option>
                 </>);
             case 'Warlock':
-                (<>
+                return (<>
                     <option value="Gnome">Gnome</option>
                     <option value="Human">Human</option>
                 </>);
             case 'Warrior':
-                (<>
+                return (<>
                     <option value="Dwarf">Dwarf</option>
                     <option value="Gnome">Gnome</option>
                     <option value="Human">Human</option>
                     <option value="Night Elf">Night Elf</option>
                 </>);
             default:
-                (<>
+                return (<>
                     <option value="null">select class first.</option>
                 </>)
         }
