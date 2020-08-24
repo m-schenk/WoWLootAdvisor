@@ -335,6 +335,7 @@ export const dragHandler = async ({ state }, result) => {
             state.wishlist[destinationBracketId][destinationSlotId].item = sourceItem;
 
             //return "DEBUG: Item was swapped inside your wishlist (bracket to bracketless)";
+            return;
         }
 
         // swap inside bracket
@@ -399,7 +400,8 @@ export const dragHandler = async ({ state }, result) => {
             }
             state.wishlist[destinationBracketId][destinationSlotId].item = sourceItem;
 
-            //return "DEBUG: Items have been swapped (inside bracket)"
+            //return "DEBUG: Items have been swapped (inside bracket)";
+            return;
         }
 
         // swap inside brackets
@@ -549,8 +551,9 @@ export const dragHandler = async ({ state }, result) => {
             state.wishlist[destinationBracketId][destinationSlotId].item = sourceItem;
 
             //return "DEBUG: Item was swapped inside your wishlist (bracket to bracket)";
+            return;
         }
-        return "Error: Report this to Malvida immediately if you see this msg."
+        return "Error: Report this to Malvida immediately if you see this msg.";
     }
 
     /**********************************************************************************************/
@@ -691,6 +694,7 @@ export const dragHandler = async ({ state }, result) => {
             state.wishlist[destinationBracketId][destinationSlotId].item = sourceItem;
 
             //return "DEBUG: Item was swapped inside your wishlist (bracketless to bracket)";
+            return;
         }
         // swaps inside bracketless
         if (destination['droppableId'].includes('bracketless')) {
@@ -729,8 +733,9 @@ export const dragHandler = async ({ state }, result) => {
             }
             state.wishlist[destinationBracketId][destinationSlotId].item = sourceItem;
 
-            //return "DEBUG: Items have been swapped (inside bracketless)"
+            //return "DEBUG: Items have been swapped (inside bracketless)";
+            return;
         }
-        return "ERROR: Report this to Malvida immediately if you see this msg."
+        return "ERROR: Report this to Malvida immediately if you see this msg.";
     }
 }
