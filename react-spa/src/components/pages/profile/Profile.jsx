@@ -92,6 +92,51 @@ function PlayerProfileForm() {
         }
     }
 
+    const renderRoleOptions = () => {
+        switch (formData._class) {
+            case 'Druid':
+                return (<>
+                    <option value="DPS">DPS</option>
+                    <option value="Heal">Heal</option>
+                    <option value="Tank">Tank</option>
+                </>);
+            case 'Hunter':
+                return (<>
+                    <option value="DPS">DPS</option>
+                </>);
+            case 'Mage':
+                return (<>
+                    <option value="DPS">DPS</option>
+                </>);
+            case 'Paladin':
+                return (<>
+                    <option value="Heal">Heal</option>
+                </>);
+            case 'Priest':
+                return (<>
+                    <option value="DPS">DPS</option>
+                    <option value="Heal">Heal</option>
+                </>);
+            case 'Rogue':
+                return (<>
+                    <option value="DPS">DPS</option>
+                </>);
+            case 'Warlock':
+                return (<>
+                    <option value="DPS">DPS</option>
+                </>);
+            case 'Warrior':
+                return (<>
+                    <option value="DPS">DPS</option>
+                    <option value="Tank">Tank</option>
+                </>);
+            default:
+                return (<>
+                    <option value="null">select class first.</option>
+                </>)
+        }
+    }
+
     return (
         <>
             <form>
@@ -122,10 +167,7 @@ function PlayerProfileForm() {
                 <Form.Group>
                     <Form.Label>Select your role:</Form.Label>
                     <Form.Control as="select" name="_role" onChange={handleChange}>
-                        <option>select role..</option>
-                        <option value="DPS">DPS</option>
-                        <option value="Heal">Heal</option>
-                        <option value="Tank">Tank</option>
+                        {renderRoleOptions()}
                     </Form.Control>
                 </Form.Group>
                 <Button
