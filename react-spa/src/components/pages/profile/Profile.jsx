@@ -42,55 +42,31 @@ function PlayerProfileForm() {
     const renderRaceOptions = () => {
         switch (formData._class) {
             case 'Druid':
-                updateFormData({
-                    ...formData,
-                    _race: "Night Elf"
-                });
                 return (<>
                     <option value="Night Elf">Night Elf</option>
                 </>);
             case 'Hunter':
-                updateFormData({
-                    ...formData,
-                    _race: "Dwarf"
-                });
                 return (<>
                     <option value="Dwarf">Dwarf</option>
                     <option value="Night Elf">Night Elf</option>
                 </>);
             case 'Mage':
-                updateFormData({
-                    ...formData,
-                    _race: "Gnome"
-                });
                 return (<>
                     <option value="Gnome">Gnome</option>
                     <option value="Human">Human</option>
                 </>);
             case 'Paladin':
-                updateFormData({
-                    ...formData,
-                    _race: "Dwarf"
-                });
                 return (<>
                     <option value="Dwarf">Dwarf</option>
                     <option value="Human">Human</option>
                 </>);
             case 'Priest':
-                updateFormData({
-                    ...formData,
-                    _race: "Dwarf"
-                });
                 return (<>
                     <option value="Dwarf">Dwarf</option>
                     <option value="Human">Human</option>
                     <option value="Night Elf">Night Elf</option>
                 </>);
             case 'Rogue':
-                updateFormData({
-                    ...formData,
-                    _race: "Dwarf"
-                });
                 return (<>
                     <option value="Dwarf">Dwarf</option>
                     <option value="Gnome">Gnome</option>
@@ -98,19 +74,11 @@ function PlayerProfileForm() {
                     <option value="Night Elf">Night Elf</option>
                 </>);
             case 'Warlock':
-                updateFormData({
-                    ...formData,
-                    _race: "Gnome"
-                });
                 return (<>
                     <option value="Gnome">Gnome</option>
                     <option value="Human">Human</option>
                 </>);
             case 'Warrior':
-                updateFormData({
-                    ...formData,
-                    _race: "Dwarf"
-                });
                 return (<>
                     <option value="Dwarf">Dwarf</option>
                     <option value="Gnome">Gnome</option>
@@ -127,69 +95,37 @@ function PlayerProfileForm() {
     const renderRoleOptions = () => {
         switch (formData._class) {
             case 'Druid':
-                updateFormData({
-                    ...formData,
-                    _role: "DPS"
-                });
                 return (<>
                     <option value="DPS">DPS</option>
                     <option value="Heal">Heal</option>
                     <option value="Tank">Tank</option>
                 </>);
             case 'Hunter':
-                updateFormData({
-                    ...formData,
-                    _role: "DPS"
-                });
                 return (<>
                     <option value="DPS">DPS</option>
                 </>);
             case 'Mage':
-                updateFormData({
-                    ...formData,
-                    _role: "DPS"
-                });
                 return (<>
                     <option value="DPS">DPS</option>
                 </>);
             case 'Paladin':
-                updateFormData({
-                    ...formData,
-                    _role: "Heal"
-                });
                 return (<>
                     <option value="Heal">Heal</option>
                 </>);
             case 'Priest':
-                updateFormData({
-                    ...formData,
-                    _role: "DPS"
-                });
                 return (<>
                     <option value="DPS">DPS</option>
                     <option value="Heal">Heal</option>
                 </>);
             case 'Rogue':
-                updateFormData({
-                    ...formData,
-                    _role: "DPS"
-                });
                 return (<>
                     <option value="DPS">DPS</option>
                 </>);
             case 'Warlock':
-                updateFormData({
-                    ...formData,
-                    _role: "DPS"
-                });
                 return (<>
                     <option value="DPS">DPS</option>
                 </>);
             case 'Warrior':
-                updateFormData({
-                    ...formData,
-                    _role: "DPS"
-                });
                 return (<>
                     <option value="DPS">DPS</option>
                     <option value="Tank">Tank</option>
