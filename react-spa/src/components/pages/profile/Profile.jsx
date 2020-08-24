@@ -22,30 +22,24 @@ const initialFormData = Object.freeze({
     _role: null
 });
 
-class PlayerProfileForm extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            formData
-        };
-    }
+function PlayerProfileForm() {
     const [formData, updateFormData] = useState(initialFormData);
-    decoratedOnClick = useAccordionToggle("0");
-    actions = useActions();
+    const decoratedOnClick = useAccordionToggle("0");
+    const actions = useActions();
 
-    handleChange = (e) => {
+    const handleChange = (e) => {
         updateFormData({
             ...formData,
             [e.target.name]: e.target.value
         });
     };
 
-    handleSubmit = (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
         actions.saveProfile(formData);
     };
 
-    renderRaceOptions = () => {
+    const renderRaceOptions = () => {
         switch (formData._class) {
             case 'Druid':
                 return (<>
@@ -98,7 +92,7 @@ class PlayerProfileForm extends React.Component {
         }
     }
 
-    renderRoleOptions = () => {
+    const renderRoleOptions = () => {
         switch (formData._class) {
             case 'Druid':
                 return (<>
@@ -143,52 +137,50 @@ class PlayerProfileForm extends React.Component {
         }
     }
 
-    render() {
-        return (
-            <>
-                <form>
-                    <Form.Group controlId="profile.name">
-                        <Form.Label>Character name:</Form.Label>
-                        <Form.Control name="_name" type="text" onChange={handleChange} />
-                    </Form.Group>
-                    <Form.Group controlId="profile.class">
-                        <Form.Label>Select class:</Form.Label>
-                        <Form.Control as="select" name="_class" onChange={handleChange}>
-                            <option>select class..</option>
-                            <option value="Druid">Druid</option>
-                            <option value="Hunter">Hunter</option>
-                            <option value="Mage">Mage</option>
-                            <option value="Paladin">Paladin</option>
-                            <option value="Priest">Priest</option>
-                            <option value="Rogue">Rogue</option>
-                            <option value="Warlock">Warlock</option>
-                            <option value="Warrior">Warrior</option>
-                        </Form.Control>
-                    </Form.Group>
-                    <Form.Group>
-                        <Form.Label>Select your race:</Form.Label>
-                        <Form.Control as="select" name="_race" onChange={handleChange}>
-                            {this.renderRaceOptions()}
-                        </Form.Control>
-                    </Form.Group>
-                    <Form.Group>
-                        <Form.Label>Select your role:</Form.Label>
-                        <Form.Control as="select" name="_role" onChange={handleChange}>
-                            {this.renderRoleOptions()}
-                        </Form.Control>
-                    </Form.Group>
-                    <Button
-                        variant="warning"
-                        type="submit"
-                        eventKey="0"
-                        onClick={(e) => { this.decoratedOnClick(e); this.handleSubmit(e); }}
-                    >
-                        Submit
+    return (
+        <>
+            <form>
+                <Form.Group controlId="profile.name">
+                    <Form.Label>Character name:</Form.Label>
+                    <Form.Control name="_name" type="text" onChange={handleChange} />
+                </Form.Group>
+                <Form.Group controlId="profile.class">
+                    <Form.Label>Select class:</Form.Label>
+                    <Form.Control as="select" name="_class" onChange={handleChange}>
+                        <option>select class..</option>
+                        <option value="Druid">Druid</option>
+                        <option value="Hunter">Hunter</option>
+                        <option value="Mage">Mage</option>
+                        <option value="Paladin">Paladin</option>
+                        <option value="Priest">Priest</option>
+                        <option value="Rogue">Rogue</option>
+                        <option value="Warlock">Warlock</option>
+                        <option value="Warrior">Warrior</option>
+                    </Form.Control>
+                </Form.Group>
+                <Form.Group>
+                    <Form.Label>Select your race:</Form.Label>
+                    <Form.Control as="select" name="_race" onChange={handleChange}>
+                        {renderRaceOptions()}
+                    </Form.Control>
+                </Form.Group>
+                <Form.Group>
+                    <Form.Label>Select your role:</Form.Label>
+                    <Form.Control as="select" name="_role" onChange={handleChange}>
+                        {renderRoleOptions()}
+                    </Form.Control>
+                </Form.Group>
+                <Button
+                    variant="warning"
+                    type="submit"
+                    eventKey="0"
+                    onClick={(e) => { decoratedOnClick(e); handleSubmit(e); }}
+                >
+                    Submit
                 </Button>
-                </form>
-            </>
-        )
-    }
+            </form>
+        </>
+    )
 }
 
 class Profile extends React.Component {
