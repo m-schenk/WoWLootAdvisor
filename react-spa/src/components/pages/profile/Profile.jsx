@@ -116,7 +116,7 @@ function PlayerProfileForm() {
                 <Form.Group>
                     <Form.Label>Select your race:</Form.Label>
                     <Form.Control as="select" name="_race" onChange={handleChange}>
-                        {this.renderRaceOptions()}
+                        {renderRaceOptions()}
                     </Form.Control>
                 </Form.Group>
                 <Form.Group>
