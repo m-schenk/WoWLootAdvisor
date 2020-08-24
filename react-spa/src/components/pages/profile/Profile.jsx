@@ -39,6 +39,59 @@ function PlayerProfileForm() {
         actions.saveProfile(formData);
     };
 
+    const renderRaceOptions = () => {
+        switch (formData._class) {
+            case 'Druid':
+                return (<>
+                    <option value="Night Elf">Night Elf</option>
+                </>);
+            case 'Hunter':
+                return (<>
+                    <option value="Dwarf">Dwarf</option>
+                    <option value="Night Elf">Night Elf</option>
+                </>);
+            case 'Mage':
+                return (<>
+                    <option value="Gnome">Gnome</option>
+                    <option value="Human">Human</option>
+                </>);
+            case 'Paladin':
+                return (<>
+                    <option value="Dwarf">Dwarf</option>
+                    <option value="Human">Human</option>
+                </>);
+            case 'Priest':
+                return (<>
+                    <option value="Dwarf">Dwarf</option>
+                    <option value="Human">Human</option>
+                    <option value="Night Elf">Night Elf</option>
+                </>);
+            case 'Rogue':
+                (<>
+                    <option value="Dwarf">Dwarf</option>
+                    <option value="Gnome">Gnome</option>
+                    <option value="Human">Human</option>
+                    <option value="Night Elf">Night Elf</option>
+                </>);
+            case 'Warlock':
+                (<>
+                    <option value="Gnome">Gnome</option>
+                    <option value="Human">Human</option>
+                </>);
+            case 'Warrior':
+                (<>
+                    <option value="Dwarf">Dwarf</option>
+                    <option value="Gnome">Gnome</option>
+                    <option value="Human">Human</option>
+                    <option value="Night Elf">Night Elf</option>
+                </>);
+            default:
+                (<>
+                    <option value="null">select class first.</option>
+                </>)
+        }
+    }
+
     return (
         <>
             <form>
@@ -63,11 +116,7 @@ function PlayerProfileForm() {
                 <Form.Group>
                     <Form.Label>Select your race:</Form.Label>
                     <Form.Control as="select" name="_race" onChange={handleChange}>
-                        <option>select race..</option>
-                        <option value="Dwarf">Dwarf</option>
-                        <option value="Gnome">Gnome</option>
-                        <option value="Human">Human</option>
-                        <option value="Night Elf">Night Elf</option>
+                        {this.renderRaceOptions()}
                     </Form.Control>
                 </Form.Group>
                 <Form.Group>
