@@ -236,7 +236,7 @@ export const dragHandler = async ({ state }, result) => {
 
             // remove item from bracket state
             state.wishlist[sourceBracketId][sourceSlotId].item = {};
-            return "Item was been removed from wishlist.";
+            return "Item has been removed from wishlist.";
         }
 
         // get destination bracket or bracketless slot id
@@ -571,7 +571,7 @@ export const dragHandler = async ({ state }, result) => {
 
             // remove item from bracket state
             state.wishlist[sourceBracketId][sourceSlotId].item = {};
-            return "Item was been removed from wishlist.";
+            return "Item has been removed from wishlist.";
         }
 
         // get destination bracket or bracketless slot id
