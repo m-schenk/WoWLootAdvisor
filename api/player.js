@@ -177,6 +177,7 @@ const checkWishlistItems = (wishlist, hunter) => {
 
         const maxAllocationPoints = hunter ? 2 : 3;
         const itemIds = [];
+        let imperialQirajiArmaments = 0, qirajiBindingsOfCommand = 0, qirajiBindingsOfDominance = 0;
 
         const weapon = ["Sword", "Mace", "Polearm", "Two-Hand, Sword", "Two-Hand, Axe", "Dagger", "Axt", "Two-Hand, Mace", "Staff", "Fist Weapon"];
         const ranged = ["Bow", "Crossbow", "Gun", "Relic", "Wand"];
@@ -202,6 +203,15 @@ const checkWishlistItems = (wishlist, hunter) => {
                     if (bracketsDone >= 4 || hunter && bracketsDone >= 3) {
                         if (_.has(item, 'id')) {
                             itemIds.push(item.id);
+                            if (item.id === '21232') {
+                                imperialQirajiArmaments++;
+                            }
+                            if (item.id === '20928') {
+                                qirajiBindingsOfCommand++;
+                            }
+                            if (item.id === '20932') {
+                                qirajiBindingsOfDominance++;
+                            }
                         }
                     } else {
 
@@ -215,6 +225,16 @@ const checkWishlistItems = (wishlist, hunter) => {
                         if (_.has(item, 'id')) {
 
                             itemIds.push(item.id);
+
+                            if (item.id === '21232') {
+                                imperialQirajiArmaments++;
+                            }
+                            if (item.id === '20928') {
+                                qirajiBindingsOfCommand++;
+                            }
+                            if (item.id === '20932') {
+                                qirajiBindingsOfDominance++;
+                            }
 
                             if (item.itemCategory === 'Reserved') {
                                 nextMustBeNull = true;
@@ -242,10 +262,31 @@ const checkWishlistItems = (wishlist, hunter) => {
             }
         })
 
+        let reducer = 0;
+
+        if (imperialQirajiArmaments > 2) {
+            reject('Imperial Qiraji Armaments can only be added twice at maximum');
+        } else if (imperialQirajiArmaments === 2) {
+            reducer++;
+        }
+
+        if (qirajiBindingsOfCommand > 2) {
+            reject('Qiraji Bindings of Command can only be added twice at maximum');
+        } else if (qirajiBindingsOfCommand === 2) {
+            reducer++;
+        }
+
+        if (qirajiBindingsOfDominance > 2) {
+            reject('Qiraji Bindings of Dominace can only be added twice at maximum');
+        } else if (qirajiBindingsOfDominance === 2) {
+            reducer++;
+        }
+
         // check if all items are unique
         const unique = itemIds.filter((v, i, a) => a.indexOf(v) === i)
-        if (itemIds.length !== unique.length) {
+        if (itemIds.length - reducer !== unique.length) {
             reject('wishlist contains duplicates');
+
         }
         console.log("Wishlist has been validated.");
         resolve('wishlist is valid');
