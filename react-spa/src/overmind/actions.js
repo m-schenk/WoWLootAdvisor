@@ -64,8 +64,8 @@ export const dragHandler = async ({ state }, result) => {
             // check if item is already inside the wishlist
             if (state.wishlist.filterList.includes(stateItem.id)) {
                 console.log(stateItem.id)
-                if (stateItem.id === '21232' || stateItem.id === '20928' || stateItem.id === '20932') {
-                    if (stateItem.id === '21232') {
+                if (stateItem.id === 21232 || stateItem.id === 20928 || stateItem.id === 20932) {
+                    if (stateItem.id === 21232) {
                         let count = 0;
                         state.wishlist.filterList.forEach(item => {
                             if (item === stateItem.id) {
@@ -75,7 +75,7 @@ export const dragHandler = async ({ state }, result) => {
                         if (count > 2) {
                             return "Imperial Qiraji Armaments can only be added twice at maximum.";
                         }
-                    } else if (stateItem.id === '20928') {
+                    } else if (stateItem.id === 20928) {
                         let count = 0;
                         state.wishlist.filterList.forEach(item => {
                             if (item === stateItem.id) {
@@ -85,7 +85,7 @@ export const dragHandler = async ({ state }, result) => {
                         if (count > 2) {
                             return "Qiraji Bindings of Command can only be added twice at maximum.";
                         }
-                    } else if (stateItem.id === '20932') {
+                    } else if (stateItem.id === 20932) {
                         let count = 0;
                         state.wishlist.filterList.forEach(item => {
                             if (item === stateItem.id) {
@@ -148,8 +148,8 @@ export const dragHandler = async ({ state }, result) => {
             // check if item is already inside the wishlist
             if (state.wishlist.filterList.includes(stateItem.id)) {
                 console.log(stateItem.id)
-                if (stateItem.id === '21232' || stateItem.id === '20928' || stateItem.id === '20932') {
-                    if (stateItem.id === '21232') {
+                if (stateItem.id === 21232 || stateItem.id === 20928 || stateItem.id === 20932) {
+                    if (stateItem.id === 21232) {
                         let count = 0;
                         state.wishlist.filterList.array.forEach(item => {
                             if (item === stateItem.id) {
@@ -159,7 +159,7 @@ export const dragHandler = async ({ state }, result) => {
                         if (count > 2) {
                             return "Imperial Qiraji Armaments can only be added twice at maximum.";
                         }
-                    } else if (stateItem.id === '20928') {
+                    } else if (stateItem.id === 20928) {
                         let count = 0;
                         state.wishlist.filterList.array.forEach(item => {
                             if (item === stateItem.id) {
@@ -169,7 +169,7 @@ export const dragHandler = async ({ state }, result) => {
                         if (count > 2) {
                             return "Qiraji Bindings of Command can only be added twice at maximum.";
                         }
-                    } else if (stateItem.id === '20932') {
+                    } else if (stateItem.id === 20932) {
                         let count = 0;
                         state.wishlist.filterList.array.forEach(item => {
                             if (item === stateItem.id) {
