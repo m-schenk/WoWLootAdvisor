@@ -30,6 +30,7 @@ app.use(cors(corsOptions));
 console.log(process.env.NODE_ENV);
 
 console.time('connectdb')
+console.log(process.env.MONGODB_URI);
 // connect to mongodb - set both mongoose major update flags
 mongoose.connect(process.env.MONGODB_URI, { useUnifiedTopology: true, useNewUrlParser: true })
     .then(result => {
