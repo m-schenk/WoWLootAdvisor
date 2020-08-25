@@ -72,7 +72,7 @@ export const dragHandler = async ({ state }, result) => {
                                 count++;
                             }
                         });
-                        if (count > 2) {
+                        if (count >= 2) {
                             return "Imperial Qiraji Armaments can only be added twice at maximum.";
                         }
                     } else if (stateItem.id === 20928) {
@@ -82,7 +82,7 @@ export const dragHandler = async ({ state }, result) => {
                                 count++;
                             }
                         });
-                        if (count > 2) {
+                        if (count >= 2) {
                             return "Qiraji Bindings of Command can only be added twice at maximum.";
                         }
                     } else if (stateItem.id === 20932) {
@@ -92,7 +92,7 @@ export const dragHandler = async ({ state }, result) => {
                                 count++;
                             }
                         });
-                        if (count > 2) {
+                        if (count >= 2) {
                             return "Qiraji Bindings of Dominace can only be added twice at maximum.";
                         }
                     }
@@ -156,7 +156,7 @@ export const dragHandler = async ({ state }, result) => {
                                 count++;
                             }
                         });
-                        if (count > 2) {
+                        if (count >= 2) {
                             return "Imperial Qiraji Armaments can only be added twice at maximum.";
                         }
                     } else if (stateItem.id === 20928) {
@@ -166,7 +166,7 @@ export const dragHandler = async ({ state }, result) => {
                                 count++;
                             }
                         });
-                        if (count > 2) {
+                        if (count >= 2) {
                             return "Qiraji Bindings of Command can only be added twice at maximum.";
                         }
                     } else if (stateItem.id === 20932) {
@@ -176,7 +176,7 @@ export const dragHandler = async ({ state }, result) => {
                                 count++;
                             }
                         });
-                        if (count > 2) {
+                        if (count >= 2) {
                             return "Qiraji Bindings of Dominace can only be added twice at maximum.";
                         }
                     }
