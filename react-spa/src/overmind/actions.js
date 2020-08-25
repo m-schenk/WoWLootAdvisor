@@ -63,10 +63,11 @@ export const dragHandler = async ({ state }, result) => {
 
             // check if item is already inside the wishlist
             if (state.wishlist.filterList.includes(stateItem.id)) {
+                console.log(stateItem.id)
                 if (stateItem.id === '21232' || stateItem.id === '20928' || stateItem.id === '20932') {
                     if (stateItem.id === '21232') {
                         let count = 0;
-                        state.wishlist.filterList.array.forEach(item => {
+                        state.wishlist.filterList.forEach(item => {
                             if (item === stateItem.id) {
                                 count++;
                             }
@@ -76,7 +77,7 @@ export const dragHandler = async ({ state }, result) => {
                         }
                     } else if (stateItem.id === '20928') {
                         let count = 0;
-                        state.wishlist.filterList.array.forEach(item => {
+                        state.wishlist.filterList.forEach(item => {
                             if (item === stateItem.id) {
                                 count++;
                             }
@@ -86,7 +87,7 @@ export const dragHandler = async ({ state }, result) => {
                         }
                     } else if (stateItem.id === '20932') {
                         let count = 0;
-                        state.wishlist.filterList.array.forEach(item => {
+                        state.wishlist.filterList.forEach(item => {
                             if (item === stateItem.id) {
                                 count++;
                             }
@@ -146,6 +147,7 @@ export const dragHandler = async ({ state }, result) => {
 
             // check if item is already inside the wishlist
             if (state.wishlist.filterList.includes(stateItem.id)) {
+                console.log(stateItem.id)
                 if (stateItem.id === '21232' || stateItem.id === '20928' || stateItem.id === '20932') {
                     if (stateItem.id === '21232') {
                         let count = 0;
