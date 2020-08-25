@@ -63,7 +63,6 @@ export const dragHandler = async ({ state }, result) => {
 
             // check if item is already inside the wishlist
             if (state.wishlist.filterList.includes(stateItem.id)) {
-                console.log(stateItem.id)
                 if (stateItem.id === 21232 || stateItem.id === 20928 || stateItem.id === 20932) {
                     if (stateItem.id === 21232) {
                         let count = 0;
@@ -147,7 +146,6 @@ export const dragHandler = async ({ state }, result) => {
 
             // check if item is already inside the wishlist
             if (state.wishlist.filterList.includes(stateItem.id)) {
-                console.log(stateItem.id)
                 if (stateItem.id === 21232 || stateItem.id === 20928 || stateItem.id === 20932) {
                     if (stateItem.id === 21232) {
                         let count = 0;

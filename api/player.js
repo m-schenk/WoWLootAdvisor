@@ -281,7 +281,6 @@ const checkWishlistItems = (wishlist, hunter) => {
         } else if (qirajiBindingsOfDominance === 2) {
             reducer++;
         }
-        console.log("reducer: " + reducer)
         // check if all items are unique
         const unique = itemIds.filter((v, i, a) => a.indexOf(v) === i)
         if ((itemIds.length - reducer) !== unique.length) {
