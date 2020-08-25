@@ -63,7 +63,39 @@ export const dragHandler = async ({ state }, result) => {
 
             // check if item is already inside the wishlist
             if (state.wishlist.filterList.includes(stateItem.id)) {
-                return "This item is already inside your wishlist.";
+                if(stateItem.id === '21232') {
+                    let count = 0;
+                    state.wishlist.filterList.array.forEach(item => {
+                        if(item.id === stateItem.id) {
+                            count++;
+                        }
+                    });
+                    if(count > 2) {
+                        return "Imperial Qiraji Armaments can only be added twice at maximum.";
+                    }
+                } else if(stateItem.id === '20928') {
+                    let count = 0;
+                    state.wishlist.filterList.array.forEach(item => {
+                        if(item.id === stateItem.id) {
+                            count++;
+                        }
+                    });
+                    if(count > 2) {
+                        return "Qiraji Bindings of Command can only be added twice at maximum.";
+                    }
+                } else if(stateItem.id === '20932') {
+                    let count = 0;
+                    state.wishlist.filterList.array.forEach(item => {
+                        if(item.id === stateItem.id) {
+                            count++;
+                        }
+                    });
+                    if(count > 2) {
+                        return "Qiraji Bindings of Dominace can only be added twice at maximum.";
+                    }
+                } else {
+                    return "This item is already inside your wishlist.";
+                }
             }
 
             // clone source item from overmind state to memory
@@ -112,7 +144,39 @@ export const dragHandler = async ({ state }, result) => {
 
             // check if item is already inside the wishlist
             if (state.wishlist.filterList.includes(stateItem.id)) {
-                return "This item is already inside your wishlist.";
+                if(stateItem.id === '21232') {
+                    let count = 0;
+                    state.wishlist.filterList.array.forEach(item => {
+                        if(item.id === stateItem.id) {
+                            count++;
+                        }
+                    });
+                    if(count > 2) {
+                        return "Imperial Qiraji Armaments can only be added twice at maximum.";
+                    }
+                } else if(stateItem.id === '20928') {
+                    let count = 0;
+                    state.wishlist.filterList.array.forEach(item => {
+                        if(item.id === stateItem.id) {
+                            count++;
+                        }
+                    });
+                    if(count > 2) {
+                        return "Qiraji Bindings of Command can only be added twice at maximum.";
+                    }
+                } else if(stateItem.id === '20932') {
+                    let count = 0;
+                    state.wishlist.filterList.array.forEach(item => {
+                        if(item.id === stateItem.id) {
+                            count++;
+                        }
+                    });
+                    if(count > 2) {
+                        return "Qiraji Bindings of Dominace can only be added twice at maximum.";
+                    }
+                } else {
+                    return "This item is already inside your wishlist.";
+                }
             }
 
             // modify item type to overclassed
