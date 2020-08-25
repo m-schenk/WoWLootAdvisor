@@ -284,7 +284,7 @@ const checkWishlistItems = (wishlist, hunter) => {
 
         // check if all items are unique
         const unique = itemIds.filter((v, i, a) => a.indexOf(v) === i)
-        if (itemIds.length - reducer !== unique.length) {
+        if ((itemIds.length - reducer) !== unique.length) {
             reject('wishlist contains duplicates');
 
         }
