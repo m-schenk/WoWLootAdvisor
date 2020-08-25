@@ -31,7 +31,7 @@ console.log(process.env.NODE_ENV);
 
 console.time('connectdb')
 // connect to mongodb - set both mongoose major update flags
-mongoose.connect(process.env.MONGODB_URI, { dbName: 'wow-loot-advisor', useUnifiedTopology: true, useNewUrlParser: true })
+mongoose.connect(process.env.MONGODB_URI, { useUnifiedTopology: true, useNewUrlParser: true })
     .then(result => {
         console.log('successfully connected to db!');
         console.timeEnd('connectdb')
