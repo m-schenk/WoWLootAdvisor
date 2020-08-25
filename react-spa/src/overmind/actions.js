@@ -63,35 +63,37 @@ export const dragHandler = async ({ state }, result) => {
 
             // check if item is already inside the wishlist
             if (state.wishlist.filterList.includes(stateItem.id)) {
-                if(stateItem.id === '21232') {
-                    let count = 0;
-                    state.wishlist.filterList.array.forEach(item => {
-                        if(item === stateItem.id) {
-                            count++;
+                if (stateItem.id === '21232' || stateItem.id === '20928' || stateItem.id === '20932') {
+                    if (stateItem.id === '21232') {
+                        let count = 0;
+                        state.wishlist.filterList.array.forEach(item => {
+                            if (item === stateItem.id) {
+                                count++;
+                            }
+                        });
+                        if (count > 2) {
+                            return "Imperial Qiraji Armaments can only be added twice at maximum.";
                         }
-                    });
-                    if(count > 2) {
-                        return "Imperial Qiraji Armaments can only be added twice at maximum.";
-                    }
-                } else if(stateItem.id === '20928') {
-                    let count = 0;
-                    state.wishlist.filterList.array.forEach(item => {
-                        if(item === stateItem.id) {
-                            count++;
+                    } else if (stateItem.id === '20928') {
+                        let count = 0;
+                        state.wishlist.filterList.array.forEach(item => {
+                            if (item === stateItem.id) {
+                                count++;
+                            }
+                        });
+                        if (count > 2) {
+                            return "Qiraji Bindings of Command can only be added twice at maximum.";
                         }
-                    });
-                    if(count > 2) {
-                        return "Qiraji Bindings of Command can only be added twice at maximum.";
-                    }
-                } else if(stateItem.id === '20932') {
-                    let count = 0;
-                    state.wishlist.filterList.array.forEach(item => {
-                        if(item === stateItem.id) {
-                            count++;
+                    } else if (stateItem.id === '20932') {
+                        let count = 0;
+                        state.wishlist.filterList.array.forEach(item => {
+                            if (item === stateItem.id) {
+                                count++;
+                            }
+                        });
+                        if (count > 2) {
+                            return "Qiraji Bindings of Dominace can only be added twice at maximum.";
                         }
-                    });
-                    if(count > 2) {
-                        return "Qiraji Bindings of Dominace can only be added twice at maximum.";
                     }
                 } else {
                     return "This item is already inside your wishlist.";
@@ -144,35 +146,37 @@ export const dragHandler = async ({ state }, result) => {
 
             // check if item is already inside the wishlist
             if (state.wishlist.filterList.includes(stateItem.id)) {
-                if(stateItem.id === '21232') {
-                    let count = 0;
-                    state.wishlist.filterList.array.forEach(item => {
-                        if(item === stateItem.id) {
-                            count++;
+                if (stateItem.id === '21232' || stateItem.id === '20928' || stateItem.id === '20932') {
+                    if (stateItem.id === '21232') {
+                        let count = 0;
+                        state.wishlist.filterList.array.forEach(item => {
+                            if (item === stateItem.id) {
+                                count++;
+                            }
+                        });
+                        if (count > 2) {
+                            return "Imperial Qiraji Armaments can only be added twice at maximum.";
                         }
-                    });
-                    if(count > 2) {
-                        return "Imperial Qiraji Armaments can only be added twice at maximum.";
-                    }
-                } else if(stateItem.id === '20928') {
-                    let count = 0;
-                    state.wishlist.filterList.array.forEach(item => {
-                        if(item === stateItem.id) {
-                            count++;
+                    } else if (stateItem.id === '20928') {
+                        let count = 0;
+                        state.wishlist.filterList.array.forEach(item => {
+                            if (item === stateItem.id) {
+                                count++;
+                            }
+                        });
+                        if (count > 2) {
+                            return "Qiraji Bindings of Command can only be added twice at maximum.";
                         }
-                    });
-                    if(count > 2) {
-                        return "Qiraji Bindings of Command can only be added twice at maximum.";
-                    }
-                } else if(stateItem.id === '20932') {
-                    let count = 0;
-                    state.wishlist.filterList.array.forEach(item => {
-                        if(item === stateItem.id) {
-                            count++;
+                    } else if (stateItem.id === '20932') {
+                        let count = 0;
+                        state.wishlist.filterList.array.forEach(item => {
+                            if (item === stateItem.id) {
+                                count++;
+                            }
+                        });
+                        if (count > 2) {
+                            return "Qiraji Bindings of Dominace can only be added twice at maximum.";
                         }
-                    });
-                    if(count > 2) {
-                        return "Qiraji Bindings of Dominace can only be added twice at maximum.";
                     }
                 } else {
                     return "This item is already inside your wishlist.";
