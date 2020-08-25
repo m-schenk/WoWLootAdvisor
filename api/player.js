@@ -203,13 +203,13 @@ const checkWishlistItems = (wishlist, hunter) => {
                     if (bracketsDone >= 4 || hunter && bracketsDone >= 3) {
                         if (_.has(item, 'id')) {
                             itemIds.push(item.id);
-                            if (item.id === '21232') {
+                            if (item.id === 21232) {
                                 imperialQirajiArmaments++;
                             }
-                            if (item.id === '20928') {
+                            if (item.id === 20928) {
                                 qirajiBindingsOfCommand++;
                             }
-                            if (item.id === '20932') {
+                            if (item.id === 20932) {
                                 qirajiBindingsOfDominance++;
                             }
                         }
@@ -226,13 +226,13 @@ const checkWishlistItems = (wishlist, hunter) => {
 
                             itemIds.push(item.id);
 
-                            if (item.id === '21232') {
+                            if (item.id === 21232) {
                                 imperialQirajiArmaments++;
                             }
-                            if (item.id === '20928') {
+                            if (item.id === 20928) {
                                 qirajiBindingsOfCommand++;
                             }
-                            if (item.id === '20932') {
+                            if (item.id === 20932) {
                                 qirajiBindingsOfDominance++;
                             }
 
@@ -281,7 +281,7 @@ const checkWishlistItems = (wishlist, hunter) => {
         } else if (qirajiBindingsOfDominance === 2) {
             reducer++;
         }
-        console.log("reducer:  "+reducer)
+        console.log("reducer: " + reducer)
         // check if all items are unique
         const unique = itemIds.filter((v, i, a) => a.indexOf(v) === i)
         if ((itemIds.length - reducer) !== unique.length) {
