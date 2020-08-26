@@ -713,14 +713,14 @@ export const dragHandler = async ({ state }, result) => {
                     && (sourceItem.itemCategory === "Unlimited")) {
                     // old item was costing alloc points, new does not cost
                     state.wishlist[destinationBracketId].points++;
-
                 } else {
-                    if ((sourceItem.itemCategory === "Reserved") || (sourceItem.itemCategory === "Limited")) {
-                        // old item does not cost alloc points, new does cost
-                        if (state.wishlist[destinationBracketId].points === 0) {
-                            return "Destination bracket has no more allocation points left";
-                        } else {
+                    if (((sourceItem.itemCategory === "Reserved") || (sourceItem.itemCategory === "Limited"))
+                        && (destinationItem.itemCategory === "Unlimited")) {
+                        // new item does cost alloc points, old one does not
+                        if (state.wishlist[destinationBracketId].points > 0) {
                             state.wishlist[destinationBracketId].points--;
+                        } else {
+                            return "Destination bracket has no more allocation points left";
                         }
                     }
                 }
