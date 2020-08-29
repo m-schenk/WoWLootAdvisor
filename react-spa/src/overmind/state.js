@@ -13,7 +13,7 @@ export const state = {
         isComplete: null,
     },
     wishlist: {
-        'locked': false,
+        'locked': true,
         'bracket-1': {
             itemTypes: [],
             'slot-1': { item: {} },
@@ -96,4 +96,7 @@ export const state = {
         'query': '',
         'isSearching': false,
     },
+    council: {
+        members: {}
+    }
 }

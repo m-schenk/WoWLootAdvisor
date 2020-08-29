@@ -122,7 +122,7 @@ exports.saveWishlist = (req, res, next) => {
 
     Player.findById(req.user._id)
         .then(player => {
-            if ((player.wishlist !== null) && (player.wishlist.locked)) {
+            if (true || player.wishlist.locked) { //temp fix, nobody can update wishlist for now
                 res.status(200);
                 res.set({ 'Content-Type': 'text/json' });
                 res.json({ wishlist: player.wishlist });

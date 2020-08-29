@@ -130,6 +130,20 @@ export const api = {
             return "There was an error loading your wishlist.";
         };
     },
+    async loadMembers(state) {
+        try {
+            const response = await instance.get('council/loadMembers');
+            if (response.status === 200) {
+                state.council.members = response.data.members;
+                return "Members loaded.";
+            } else {
+                return "This should not have happend. Malvida is sowwyy =(.";
+            }
+        } catch (err) {
+            console.err(err);
+            return "There was an error loading the members.";
+        }
+    },
     async searchItems(query) {
         let cancel;
 
