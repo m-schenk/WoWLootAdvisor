@@ -125,7 +125,7 @@ exports.saveWishlist = (req, res, next) => {
             if (true || player.wishlist.locked) { //temp fix, nobody can update wishlist for now
                 res.status(200);
                 res.set({ 'Content-Type': 'text/json' });
-                res.json({ wishlist: player.wishlist });
+                res.json({ status: "locked", wishlist: player.wishlist });
                 res.end();
             } else {
                 //console.log("Wishlist reg.body: " + JSON.stringify(req.body.wishlist, null, 4));
@@ -136,7 +136,7 @@ exports.saveWishlist = (req, res, next) => {
                         console.log(req.user.name + ": has saved wishlist.")
                         res.status(200);
                         res.set({ 'Content-Type': 'text/json' });
-                        res.json({ wishlist: player.wishlist });
+                        res.json({ status: "saved", wishlist: player.wishlist });
                         res.end();
                     }).catch(err => {
                         return next(createError(500, 'Failed to save wishlist in database (api/player saveWishlist()), error text: ' + err));

@@ -31,21 +31,12 @@ class ItemLiveSearch extends React.Component {
 
     saveWishlist = async () => {
         const event = await this.props.overmind.actions.saveWishlist();
-        if (event) {
-            toast("Wishlist has been saved.", {
-                className: 'drag-event-toast',
-                bodyClassName: 'drag-event-toast-textbody',
-                progressClassName: 'drag-event-toast-progress-bar',
-                position: toast.POSITION.TOP_CENTER,
-            });
-        } else {
-            toast("Wishlist could not be saved.", {
-                className: 'drag-event-toast',
-                bodyClassName: 'drag-event-toast-textbody',
-                progressClassName: 'drag-event-toast-progress-bar',
-                position: toast.POSITION.TOP_CENTER,
-            });
-        }
+        toast(event, {
+            className: 'drag-event-toast',
+            bodyClassName: 'drag-event-toast-textbody',
+            progressClassName: 'drag-event-toast-progress-bar',
+            position: toast.POSITION.TOP_CENTER,
+        });
     }
 
     loadWishlist = async () => {

@@ -103,13 +103,17 @@ export const api = {
         try {
             const response = await instance.post('player/saveWishlist', { wishlist: state.wishlist });
             if (response.status === 200) {
-                return true;
+                if(response.data.succes === "locked") {
+                    return "Wishlist could not be saved because it's locked.";
+                } else {
+                    return "Wishlist has been saved.";
+                }
             } else {
-                return false;
+                return "Wishlist could not be saved.";
             }
         } catch (err) {
             console.error(err);
-            return false;
+            return "Wishlist could not be saved.";
         };
     },
     async loadWishlist(state) {
