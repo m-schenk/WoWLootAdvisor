@@ -1,6 +1,6 @@
 const createError = require('http-errors');
 const _ = require('lodash');
-const { validationResult, body } = require('express-validator')
+//const { validationResult, body } = require('express-validator')
 
 const Player = require('../models/Player');
 
@@ -36,7 +36,7 @@ exports.lockMember = (req, res, next) => {
                     console.log(req.user.name + " has locked " + player.name + "'s wishlist.");
                     res.status(200);
                     res.set({ 'Content-Type': 'text/json' });
-                    res.json({ succes: true });
+                    res.json({ success: true });
                     res.end();
                 }).catch(err => {
                     return next(createError(500, 'Failed to save player to database (api/council lockMember()), error text: ' + err));
@@ -69,7 +69,7 @@ exports.unlockMember = (req, res, next) => {
                     console.log(req.user.name + " has unlocked " + player.name + "'s wishlist.");
                     res.status(200);
                     res.set({ 'Content-Type': 'text/json' });
-                    res.json({ succes: true });
+                    res.json({ success: true });
                     res.end();
                 }).catch(err => {
                     return next(createError(500, 'Failed to save player to database (api/council unlockMember()), error text: ' + err));
