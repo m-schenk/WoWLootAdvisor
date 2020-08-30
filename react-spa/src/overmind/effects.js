@@ -144,6 +144,19 @@ export const api = {
             return "There was an error loading the members.";
         }
     },
+    async lockMember(state, data) {
+        try {
+            const response = await instance.post('council/lockMember', { player: data.player });
+            if (response.status === 200) {
+                return response.data.succes;
+            } else {
+                return "Could not lock " + data.player.name + "'s wishlist.";
+            }
+        } catch (err) {
+            console.err(err);
+            return "There was an error sending the request to lock " + data.player.name + "'s wishlist.";
+        }
+    },
     async searchItems(query) {
         let cancel;
 

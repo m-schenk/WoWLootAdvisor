@@ -96,6 +96,7 @@ app.use('', connectEnsureLogin.ensureLoggedIn('/login'), express.static(path.joi
 //api routes
 app.use('/api/player', connectEnsureLogin.ensureLoggedIn('/login'), playerRouter);
 app.use('/api/items', connectEnsureLogin.ensureLoggedIn('/login'), itemsRouter);
+app.use('/api/council', connectEnsureLogin.ensureLoggedIn('/login'), itemsRouter);
 
 // front-end route, every request should be resovled in react router if call is not to api endpoint
 app.get('/profile', connectEnsureLogin.ensureLoggedIn('/login'), (req, res) => {
