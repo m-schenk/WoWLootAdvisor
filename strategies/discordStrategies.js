@@ -17,7 +17,7 @@ passport.deserializeUser((id, done) => {
 passport.use(new DiscordStrategy({
     clientID: process.env.CLIENT_ID,
     clientSecret: process.env.CLIENT_SECRET,
-    callbackURL: process.env.CLIENT_REDIRECT,
+    callbackURL: process.env.PTR_CLIENT_REDIRECT,
     scope: ['identify', 'guilds']
 }, (accessToken, refreshToken, profile, cb) => {
     // profile is the discord profile, not ours

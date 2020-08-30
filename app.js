@@ -32,7 +32,7 @@ console.log(process.env.NODE_ENV);
 console.time('connectdb')
 console.log(process.env.MONGODB_URI);
 // connect to mongodb - set both mongoose major update flags
-mongoose.connect(process.env.MONGODB_URI, { useUnifiedTopology: true, useNewUrlParser: true })
+mongoose.connect(process.env.PTR_MONGODB_URI, { useUnifiedTopology: true, useNewUrlParser: true })
     .then(result => {
         console.log('successfully connected to db!');
         console.timeEnd('connectdb')
@@ -125,9 +125,9 @@ app.use(function (err, req, res, next) {
     res.locals.error = req.app.get('env') === 'development' ? err : {};
 
     if (err.statusCode === 403) {
-        res.redirect(process.env.ADDR + '/login');
+        res.redirect(process.env.PTR_ADDR + '/login');
     } else if (err.statusCode === 404) {
-        res.redirect(process.env.ADDR + '/login');
+        res.redirect(process.env.PTR_ADDR + '/login');
     } else {
         // render the error page
         res.status(err.statusCode || 500).send({ error: err.message });
