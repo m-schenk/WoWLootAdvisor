@@ -11,7 +11,7 @@ const MongoStore = require('connect-mongo')(session);
 
 const discordStrategy = require('./strategies/discordStrategies');
 
-require("dotenv").config();
+//require("dotenv").config();
 
 const discordRouter = require('./routes/discord')
 const playerRouter = require('./routes/player');
@@ -31,7 +31,6 @@ app.use(cors(corsOptions));
 console.log(process.env.NODE_ENV);
 
 console.time('connectdb')
-console.log(process.env.MONGODB_URI);
 // connect to mongodb - set both mongoose major update flags
 mongoose.connect(process.env.PTR_MONGODB_URI, { useUnifiedTopology: true, useNewUrlParser: true })
     .then(result => {
@@ -58,7 +57,7 @@ app.use(
             secure: true,
             httpOnly: true,
             //sameSite: 'strict',
-            maxAge: 3600 * 1000 * 12,
+            maxAge: 3600 * 1000 * 24,
         },
         store: new MongoStore({ mongooseConnection: mongoose.connection })
     })

@@ -1,6 +1,6 @@
 const createError = require('http-errors');
 const _ = require('lodash');
-const { validationResult, body } = require('express-validator')
+const { validationResult, param } = require('express-validator')
 
 const Player = require('../models/Player');
 
