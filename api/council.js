@@ -90,14 +90,23 @@ exports.player = (req, res, next) => {
         return next(createError(403, 'no access'));
     }
 
-    Player.findOne({ name: req.param.name })
-        .populate('wishlist')
-        .then(player => {
+    Player.findOne({ name: req.param.name }, (err, player) => {
+        if (err) {
+            return next(createError(500, 'Failed to fetch player from database (api/council player()), error text: ' + err));
+        } else {
             res.status(200);
             res.set({ 'Content-Type': 'text/json' });
             res.json({ wishlist: player.wishlist });
             res.end();
-        }).catch(err => {
-            return next(createError(500, 'Failed to fetch player from database (api/council player()), error text: ' + err));
-        })
+        }
+    })
+        // .populate('wishlist')
+        // .then(player => {
+        //     res.status(200);
+        //     res.set({ 'Content-Type': 'text/json' });
+        //     res.json({ wishlist: player.wishlist });
+        //     res.end();
+        // }).catch(err => {
+        //     return next(createError(500, 'Failed to fetch player from database (api/council player()), error text: ' + err));
+        // })
 }
