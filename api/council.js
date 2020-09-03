@@ -89,8 +89,8 @@ exports.player = (req, res, next) => {
     if (req.user.discordId !== 220455564231049216) {
         return next(createError(403, 'no access'));
     }
-    console.log(req.param.name)
-    Player.findOne({ name: + '"'+req.param.name + '"' }, (err, player) => {
+    
+    Player.findOne({ name: req.params.name }, (err, player) => {
         if (err) {
             return next(createError(500, 'Failed to fetch player from database (api/council player()), error text: ' + err));
         } else {
@@ -100,13 +100,13 @@ exports.player = (req, res, next) => {
             res.end();
         }
     })
-        // .populate('wishlist')
-        // .then(player => {
-        //     res.status(200);
-        //     res.set({ 'Content-Type': 'text/json' });
-        //     res.json({ wishlist: player.wishlist });
-        //     res.end();
-        // }).catch(err => {
-        //     return next(createError(500, 'Failed to fetch player from database (api/council player()), error text: ' + err));
-        // })
+    // .populate('wishlist')
+    // .then(player => {
+    //     res.status(200);
+    //     res.set({ 'Content-Type': 'text/json' });
+    //     res.json({ wishlist: player.wishlist });
+    //     res.end();
+    // }).catch(err => {
+    //     return next(createError(500, 'Failed to fetch player from database (api/council player()), error text: ' + err));
+    // })
 }
