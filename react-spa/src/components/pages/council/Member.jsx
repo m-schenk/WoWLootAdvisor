@@ -55,7 +55,8 @@ class Member extends React.Component {
                     </Row>
                     <Row>
                         <Col>
-                            <p>{this.state.data}</p>
+                            <p>Bracket 1</p>
+                            <p>{this.state["bracket-1"]["slot-1"].item.name}</p>
                         </Col>
                     </Row>
                 </Container>
