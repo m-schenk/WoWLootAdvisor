@@ -33,6 +33,10 @@ export const loadMembers = async ({ state, effects}) => {
     await effects.api.loadMembers(state);
 }
 
+export const loadMember = async ({effects}, player) => {
+    return await effects.api.loadMember(player)
+}
+
 export const lockMember = async ({state, effects }, data) => {
     await effects.api.lockMember(state, data);
 }

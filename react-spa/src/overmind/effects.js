@@ -103,7 +103,7 @@ export const api = {
         try {
             const response = await instance.post('player/saveWishlist', { wishlist: state.wishlist });
             if (response.status === 200) {
-                if(response.data.status === "locked") {
+                if (response.data.status === "locked") {
                     return "Wishlist could not be saved because it's locked.";
                 } else {
                     return "Wishlist has been saved.";
@@ -146,6 +146,19 @@ export const api = {
         } catch (err) {
             console.err(err);
             return "There was an error loading the members.";
+        }
+    },
+    async loadMember(player) {
+        try {
+            const response = await instance.get('council/player/' + player);
+            if (response.status === 200) {
+                return response.data.wishlist;
+            } else {
+                return -1;
+            }
+        } catch (err) {
+            console.err("There was an error loading the member: " + player + ". Err: " + err);
+            return -1;
         }
     },
     async lockMember(state, data) {

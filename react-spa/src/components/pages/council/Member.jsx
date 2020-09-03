@@ -11,20 +11,22 @@ import Col from 'react-bootstrap/Col';
 
 
 
-class Members extends React.Component {
+class Member extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            data: null,
             error: null,
             isLoaded: false,
         };
     }
 
     componentDidMount() {
-        this.props.overmind.actions.loadMembers()
+        this.props.overmind.actions.loadMember(this.props.member)
             .then(
-                (result) => {
+                (data) => {
                     this.setState({
+                        data: data,
                         isLoaded: true,
                     });
                 },
@@ -48,12 +50,12 @@ class Members extends React.Component {
                 <Container className="justify-content-center align-items-center" id="main-content">
                     <Row className="row-centered">
                         <Col className="col-centered" sm={12}>
-                            <p>Council Members Page</p>
+                            <p>{this.props.member}</p>
                         </Col>
                     </Row>
                     <Row>
                         <Col>
-                            <Member member={"Malvida"} />
+                            <p>{this.state.data}</p>
                         </Col>
                     </Row>
                 </Container>
@@ -62,4 +64,4 @@ class Members extends React.Component {
     }
 }
 
-export default connect(Members);
+export default connect(Member);
