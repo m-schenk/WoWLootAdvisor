@@ -90,7 +90,7 @@ exports.player = (req, res, next) => {
         return next(createError(403, 'no access'));
     }
 
-    Player.findOne({name: req.param.name})
+    Player.find({name: req.param.name})
         .then(player => {
             res.status(200);
             res.set({ 'Content-Type': 'text/json' });
