@@ -1,21 +1,18 @@
 const createError = require('http-errors');
 const _ = require('lodash');
-//const { validationResult, body } = require('express-validator')
+const { validationResult, body } = require('express-validator')
 
 const Player = require('../models/Player');
 
-// exports.validate = (method) => {
-//     switch (method) {
-//         case 'saveMembers': {
-//             return [
-//                 body('name', 'error on name validation').exists().isLength({ max: 25 }).notEmpty().trim().escape(),
-//                 body('class', 'error on class validation').exists().isIn(['Druid', 'Hunter', 'Mage', 'Paladin', 'Priest', 'Rogue', 'Warlock', 'Warrior']).trim().escape(),
-//                 body('race', 'error on race validation').exists().isIn(['Dwarf', 'Gnome', 'Human', 'Night Elf']).trim().escape(),
-//                 body('role', 'error on role validation').exists().isIn(['DPS', 'Heal', 'Tank']).trim().escape()
-//             ]
-//         }
-//     }
-// }
+exports.validate = (method) => {
+    switch (method) {
+        case 'player': {
+            return [
+                param('name', 'error on name validation').exists().isLength({ max: 25 }).notEmpty().trim().escape(),
+            ]
+        }
+    }
+}
 
 exports.lockMember = (req, res, next) => {
     console.log(req.user.name + " is trying to locked " + req.body.member.name + " wishlist.");
@@ -57,7 +54,7 @@ exports.unlockMember = (req, res, next) => {
     //     return next(createError(422, 'Failed to validate request (api/council unlockMember()), error text: ' + err.array()));
     // }
 
-    if(req.user.discordId !== 220455564231049216) {
+    if (req.user.discordId !== 220455564231049216) {
         return next(createError(500, 'Nice try u fucks, gilt auch für euch, WISHLISTS bleiben locked xd (api/council unlockMember())'));
     }
 
@@ -76,5 +73,30 @@ exports.unlockMember = (req, res, next) => {
                 })
         }).catch(err => {
             return next(createError(500, 'Failed to fetch player from database (api/council unlockMember()), error text: ' + err));
+        })
+}
+
+exports.player = (req, res, next) => {
+    console.log(req.user.name + " is trying to look at " + req.params.name + " wishlist.");
+    const errorFormatter = ({ location, msg, param, value, nestedErrors }) => {
+        // Build your resulting errors however you want! String, object, whatever - it works!
+        return `${location}[${param}]: ${msg}`;
+    };
+    const err = validationResult(req).formatWith(errorFormatter);
+    if (!err.isEmpty()) {
+        return next(createError(422, 'Failed to validate request (api/council lockMember()), error text: ' + err.array()));
+    }
+    if (req.user.discordId !== 220455564231049216) {
+        return next(createError(403, 'no access'));
+    }
+
+    Player.findOne(req.param.name)
+        .then(player => {
+            res.status(200);
+            res.set({ 'Content-Type': 'text/json' });
+            res.json({wishlist: player.wishlist });
+            res.end();
+        }).catch(err => {
+            return next(createError(500, 'Failed to fetch player from database (api/council player()), error text: ' + err));
         })
 }
