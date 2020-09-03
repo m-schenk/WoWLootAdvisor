@@ -15,7 +15,7 @@ class Member extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            data: null,
+            player_wishlist: null,
             error: null,
             isLoaded: false,
         };
@@ -26,7 +26,7 @@ class Member extends React.Component {
             .then(
                 (data) => {
                     this.setState({
-                        data: data,
+                        player_wishlist: data,
                         isLoaded: true,
                     });
                 },
@@ -56,7 +56,7 @@ class Member extends React.Component {
                     <Row>
                         <Col>
                             <p>Bracket 1</p>
-                            <p>{this.state["bracket-1"]["slot-1"].item.name}</p>
+                            <p>{this.state.player_wishlist["bracket-1"]["slot-1"].item.name}</p>
                         </Col>
                     </Row>
                 </Container>
