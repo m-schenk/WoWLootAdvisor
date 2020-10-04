@@ -2,6 +2,9 @@
   text-align: center;
 }
 
+p {
+    color: white;
+}
 .smallText {
   font-size: 10px;
   color: white;
