@@ -62,6 +62,39 @@ class Member extends React.Component {
                             <p>{this.state.player_wishlist["bracket-1"]["slot-6"].item.name}</p>
                         </Col>
                     </Row>
+                    <Row>
+                        <Col>
+                            <p>Bracket 2</p>
+                            <p>{this.state.player_wishlist["bracket-2"]["slot-1"].item.name}</p>
+                            <p>{this.state.player_wishlist["bracket-2"]["slot-2"].item.name}</p>
+                            <p>{this.state.player_wishlist["bracket-2"]["slot-3"].item.name}</p>
+                            <p>{this.state.player_wishlist["bracket-2"]["slot-4"].item.name}</p>
+                            <p>{this.state.player_wishlist["bracket-2"]["slot-5"].item.name}</p>
+                            <p>{this.state.player_wishlist["bracket-2"]["slot-6"].item.name}</p>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col>
+                            <p>Bracket 3</p>
+                            <p>{this.state.player_wishlist["bracket-3"]["slot-1"].item.name}</p>
+                            <p>{this.state.player_wishlist["bracket-3"]["slot-2"].item.name}</p>
+                            <p>{this.state.player_wishlist["bracket-3"]["slot-3"].item.name}</p>
+                            <p>{this.state.player_wishlist["bracket-3"]["slot-4"].item.name}</p>
+                            <p>{this.state.player_wishlist["bracket-3"]["slot-5"].item.name}</p>
+                            <p>{this.state.player_wishlist["bracket-3"]["slot-6"].item.name}</p>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col>
+                            <p>Bracket 4</p>
+                            <p>{this.state.player_wishlist["bracket-4"]["slot-1"].item.name}</p>
+                            <p>{this.state.player_wishlist["bracket-4"]["slot-2"].item.name}</p>
+                            <p>{this.state.player_wishlist["bracket-4"]["slot-3"].item.name}</p>
+                            <p>{this.state.player_wishlist["bracket-4"]["slot-4"].item.name}</p>
+                            <p>{this.state.player_wishlist["bracket-4"]["slot-5"].item.name}</p>
+                            <p>{this.state.player_wishlist["bracket-4"]["slot-6"].item.name}</p>
+                        </Col>
+                    </Row>
                 </Container>
             )
         }
