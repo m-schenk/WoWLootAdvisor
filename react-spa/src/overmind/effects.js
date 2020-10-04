@@ -144,7 +144,7 @@ export const api = {
                 return "This should not have happend. Malvida is sowwyy =(.";
             }
         } catch (err) {
-            console.err(err);
+            console.error(err);
             return "There was an error loading the members.";
         }
     },
@@ -157,7 +157,7 @@ export const api = {
                 return -1;
             }
         } catch (err) {
-            console.err("There was an error loading the member: " + player + ". Err: " + err);
+            console.error("There was an error loading the member: " + player + ". Err: " + err);
             return -1;
         }
     },
@@ -170,7 +170,7 @@ export const api = {
                 return "Could not lock " + data.player.name + "'s wishlist.";
             }
         } catch (err) {
-            console.err(err);
+            console.error(err);
             return "There was an error sending the request to lock " + data.player.name + "'s wishlist.";
         }
     },
