@@ -45,6 +45,7 @@ const CouncilView = () => {
                     <Route path="/council/members" component={Members} />
                     <Route path="/council/raidhistory" component={RaidHistory} />
                     <Route path="/council/livesession" component={LiveSession} />
+                    <Route path="/council/member/:member" component={Member} />
                     <div className="justify-content-center align-items-center" id="footer"><Footer /></div>
                 </Container>
             </Switch>
