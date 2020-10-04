@@ -57,7 +57,7 @@ class Members extends React.Component {
                     </Row>
                     <Row>
                         <Col>
-                            <Link component={Member} member={"Malvida"}></Link> 
+                            <Link component={Member} member={"Fabix"}></Link> 
                         </Col>
                     </Row>
                 </Container>
