@@ -89,7 +89,7 @@ exports.player = (req, res, next) => {
     if (req.user.discordId !== 220455564231049216) {
         return next(createError(403, 'no access'));
     }
-    
+
     Player.findOne({ name: req.params.name }, (err, player) => {
         if (err) {
             return next(createError(500, 'Failed to fetch player from database (api/council player()), error text: ' + err));

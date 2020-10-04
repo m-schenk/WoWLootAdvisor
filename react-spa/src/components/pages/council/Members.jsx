@@ -11,6 +11,8 @@ import Col from 'react-bootstrap/Col';
 
 import Member from './Member';
 
+import { Link } from 'react-router-dom';
+
 
 
 class Members extends React.Component {
@@ -55,7 +57,7 @@ class Members extends React.Component {
                     </Row>
                     <Row>
                         <Col>
-                            <Member member={"Malvida"} />
+                            <Link component={Member} ></Link> <Member member={"Malvida"} />
                         </Col>
                     </Row>
                 </Container>
