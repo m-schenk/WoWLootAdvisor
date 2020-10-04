@@ -5,6 +5,7 @@ import { connect } from './../overmind';
 import MainContent from './pages/wishlist/MainContent';
 import Profile from './pages/profile/Profile';
 import Members from './pages/council/Members';
+import Member from './pages/council/Member';
 import RaidHistory from './pages/council/RaidHistory';
 import LiveSession from './pages/council/LiveSession';
 
