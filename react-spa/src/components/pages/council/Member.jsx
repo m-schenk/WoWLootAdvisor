@@ -57,6 +57,11 @@ class Member extends React.Component {
                         <Col>
                             <p>Bracket 1</p>
                             <p>{this.state.player_wishlist["bracket-1"]["slot-1"].item.name}</p>
+                            <p>{this.state.player_wishlist["bracket-1"]["slot-2"].item.name}</p>
+                            <p>{this.state.player_wishlist["bracket-1"]["slot-3"].item.name}</p>
+                            <p>{this.state.player_wishlist["bracket-1"]["slot-4"].item.name}</p>
+                            <p>{this.state.player_wishlist["bracket-1"]["slot-5"].item.name}</p>
+                            <p>{this.state.player_wishlist["bracket-1"]["slot-6"].item.name}</p>
                         </Col>
                     </Row>
                 </Container>
