@@ -19,7 +19,7 @@
     "express-validator": "^6.6.0",
     "fetch": "^1.1.0",
     "http-errors": "^1.8.0",
-    "lodash": "^4.17.19",
+    "lodash": "^4.17.21",
     "mongoose": "^5.9.26",
     "node-fetch": "^2.6.0",
     "passport": "^0.4.1",
